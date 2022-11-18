@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "hotkeys-js": "^3.9.3",
+    "js-cookie": "^3.0.1",
+    "uniq": "^1.0.1"
+  }
+}

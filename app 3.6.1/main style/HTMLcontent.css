@@ -1,0 +1,15 @@
+/*htmlコンテンツ*/
+.html-content{
+  user-select:none;
+}
+.html-content p {
+  padding-left: 10px;
+  font-size: 1em;
+}
+.html-content li {
+  list-style: inside;
+  padding-left: 20px;
+}
+.html-content img{
+  padding-left:15px;
+}

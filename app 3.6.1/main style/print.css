@@ -1,0 +1,18 @@
+@media print {
+  .output,output h1,.output p{
+    display:block!important
+  }
+  header,.input,#loader_main,#announces,#help,#keybord_shortcut,#file_contents,#mobile_menu{
+    display: none!important
+  }
+
+  html,body{
+    height: fit-content!important;
+    width: fit-content!important;
+        background: white;
+    color: black;
+  }
+  .file{
+      filter: unset;
+  }
+}

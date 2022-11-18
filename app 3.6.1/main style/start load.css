@@ -1,0 +1,25 @@
+/*最初にこれとheader.cssを読み込む*/
+/*mainの読み込み中の画面*/
+*:focus{
+    border-width: 1px;
+  border-style: double;
+  border-color: black;
+}
+#loader_main{
+    margin: 10px;
+}
+#loader_main h1{
+  font-size: 30px;
+}
+#loader_main h2{
+  font-size:15px;
+}
+#loader_main p{
+  font-size:10px
+}
+#loader_main a{
+    text-decoration: underline;
+}
+.main,#help,#keybord_shortcut{
+  display:none;
+}

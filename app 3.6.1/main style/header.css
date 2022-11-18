@@ -1,0 +1,103 @@
+/*#header*/
+#header {
+  -webkit-app-region: drag;
+  app-region: drag;
+  height: env(titlebar-area-height, 33px);
+  background: var(--main-color);
+  user-select: none;
+}
+
+#header a {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
+.version {
+  padding-left: 5px;
+}
+
+.tool-bar {
+  background-color: var(--main-color);
+  display: flex;
+  width: env(titlebar-area-width, 100%);
+  height: env(titlebar-area-height, 33px);
+  -webkit-app- }
+
+.tool-bar-file {
+  display: none;
+}
+
+.tool-bar-button {
+  /*display: inline-block;*/
+  border-radius: 5%;
+  font-size: 8pt;
+  text-align: center;
+  cursor: pointer;
+  padding: 2px 19px;
+  transition: .3s;
+  height: 100%;
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+  color: black;
+  background-color: var(--main-color);
+  height: 100%;
+  width: auto;
+  user-select: none;
+}
+
+.tool-bar-button:hover {
+  background: #0288d1;
+}
+
+button,input[type="button"] {
+  cursor: pointer;
+}
+
+#file_contents {
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: env(titlebar-area-height, 33px);
+  width: auto;
+  height: auto;
+  z-index: 20;
+  background-color: rgba(2,135,207,0.8);
+  backdrop-filter: blur(2px);
+  padding: 1px;
+}
+
+#file_contents li {
+  cursor: pointer;
+  user-select: none;
+}
+
+/*tab機能*/
+.tabs {
+  display: flex;
+  padding: 3px 10px;
+  background: var(--tab-color);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  user-select: none;
+  align-items: center;
+}
+
+#tab_left::-webkit-scrollbar {
+  display: none;
+}
+
+#tab_left {
+  max-width: calc(100vw - 35px);
+  display: flex;
+  overflow-x: scroll;
+  height: 20px;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+.tab {
+  display: flex;
+  padding: 0px 5px;
+  flex-shrink: 0;
+}
