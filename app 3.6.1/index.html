@@ -6,7 +6,65 @@
   <title>和訳表示サイト</title>
   <style id="startLoadCss">
     /*mainの読み込み中の画面*/
-*:focus{border-width:1px;border-style:double;border-color:black}body{margin:0}#header{-webkit-app-region:drag;app-region:drag;height:env(titlebar-area-height,33px);background:#7aa1d6;user-select:none}.tool-bar{background-color:#7aa1d6;display:flex;width:env(titlebar-area-width,100%);height:env(titlebar-area-height,33px);-webkit-app-region:drag;app-region:drag}.tool-bar button{appearance:none;border:0;border-radius:0;background:#7aa1d6}#loader_main {margin:10px}#loader_main h1{font-size:30px}#loader_main h2{font-size:15px}#loader_main p{font-size:10px}#loader_main a{text-decoration:underline}.main,#mobile_menu,#file_contents{display:none}
+    *:focus {
+      border-width: 1px;
+      border-style: double;
+      border-color: black
+    }
+
+    body {
+      margin: 0
+    }
+
+    #header {
+      -webkit-app-region: drag;
+      app-region: drag;
+      height: env(titlebar-area-height, 33px);
+      background: #7aa1d6;
+      user-select: none
+    }
+
+    .tool-bar {
+      background-color: #7aa1d6;
+      display: flex;
+      width: env(titlebar-area-width, 100%);
+      height: env(titlebar-area-height, 33px);
+      -webkit-app-region: drag;
+      app-region: drag
+    }
+
+    .tool-bar button {
+      appearance: none;
+      border: 0;
+      border-radius: 0;
+      background: #7aa1d6
+    }
+
+    #loader_main {
+      margin: 10px
+    }
+
+    #loader_main h1 {
+      font-size: 30px
+    }
+
+    #loader_main h2 {
+      font-size: 15px
+    }
+
+    #loader_main p {
+      font-size: 10px
+    }
+
+    #loader_main a {
+      text-decoration: underline
+    }
+
+    .main,
+    #mobile_menu,
+    #file_contents {
+      display: none
+    }
   </style>
   <link href="../reset.css" rel="stylesheet" media="print" onload="this.media='all'">
   <link href="main style/root.css" rel="stylesheet" media="print" onload="this.media='all'">
@@ -31,7 +89,8 @@
   <header>
     <div id="header">
       <div class="tool-bar">
-        <button type="button" class="tool-bar-button pc-hide" id="mobile_menu_button" onclick="view_mobile_menu()">メニュー</button>
+        <button type="button" class="tool-bar-button pc-hide" id="mobile_menu_button"
+          onclick="view_mobile_menu()">メニュー</button>
         <button type="button" class="tool-bar-button mobile-hide" id="file_button">ファイル</button>
         <button type="button" class="tool-bar-button mobile-hide" onclick="window.print();">印刷</button>
         <button type="button" class="tool-bar-button            " onclick="change_style();">表示切り替え</button>
@@ -111,7 +170,7 @@
   <script src="script/script.js" defer></script>
   <script src="script/key_shortcut.js" defer></script>
   <!--sw.js登録=======================-->
-    <!--<script>
+  <!--<script>
     document.getElementById('loader_js_message').innerText = "";
   </script>-->
   <script>
