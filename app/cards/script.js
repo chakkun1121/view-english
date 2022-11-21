@@ -3,7 +3,7 @@ let mode = ""
 //読み込み時
 function init() {
   changeColorMode()
-  const file=getParam('file')
+  const file = getParam('file')
   if (!file) {
     alert('もう一度フラッシュカードを開いてください。')
     window.close()

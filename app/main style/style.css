@@ -1,0 +1,76 @@
+:root {
+  --tab-color: #ccc;
+  --tab-hoverd-color: #bbb;
+  --header-button-color: var(--main-color);
+  --content-size: 1fr 5px 10px;
+  --contents-size-change-bar-color: #bdbdbd;
+}
+
+body,
+div {
+  margin: 0;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  height: 100vh
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#headerButtons {
+  display: flex;
+  background: var(--header-button-color);
+  width: env(titlebar-area-width, 100%);
+  height: env(titlebar-area-height, 33px);
+}
+
+#headerButtons button {
+  all: unset;
+  font-size: 8pt;
+  text-align: center;
+  cursor: pointer;
+  padding: 2px 19px;
+  height: 100%;
+  app-region: no-drag;
+  color: #000;
+  background-color: var(--main-color);
+  height: 100%;
+  width: auto;
+  user-select: none;
+  border: 0;
+}
+
+#tabs {
+  background: var(--tab-color);
+  display: grid;
+  grid-template-columns: var(--content-size);
+  grid-template-rows: auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . .";
+}
+
+#tabs div:hover {
+  background: var(--tab-hoverd-color)
+}
+
+.ContentsSizeChangeBar {
+  background: var(--contents-size-change-bar-color);
+}
+
+#mainContents {
+  display: grid;
+  grid-template-columns: var(--content-size);
+  grid-template-rows: auto;
+  gap: 0px 0px;
+  grid-template-areas: ". . .";
+}
+
+#ContentsSizeChangeBar {
+  cursor: col-resize;
+}
