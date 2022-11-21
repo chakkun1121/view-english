@@ -4,7 +4,7 @@ function open_settings() {
   if (open_setting_tab) {
     close_tab(open_setting_tab);
   }
-  openURLasNewtab('https://view-english.chakkun1121haru.repl.co/settings/settings.html',"setitings",null,function(){
+  openURLasNewtab('https://view-english.chakkun1121haru.repl.co/settings/settings.html', "setitings", null, function () {
     console.log('a')
     let settings_json = JSON.parse(localStorage.getItem('settings'));
     if (!settings_json) {
@@ -21,35 +21,6 @@ function open_settings() {
       document.getElementById('ja_color').value = settings_json.ja_color;
     }
   })
-  /*
-  new_tab();
-  open_setting_tab = resent_tab;
-  change_tab_name(resent_tab, '設定')
-  document.getElementById('content' + resent_tab).innerHTML = `
-  <div class="settings">
-    <div id="settings${resent_tab}" >
-      <div class="settings-header">
-        <h3>設定</h3>
-        <button class="setting-filish" onclick="set_settings()">設定内容を保存</button>
-      </div>
-    </div>
-    <div class="settings-main">
-      <!--カスタム表示設定-->
-      <div class="settings-custom settting">
-        <p>カスタム表示時の設定</p>
-        <ul>
-          <li>英文<input type="color" id="en_color"></li>
-          <li>日本語訳<input type="color" id="ja_color"></li>
-        <ul>
-      </div>
-      <div class="settings-color-mode setting">
-        <input type="checkbox" id="isDarkMode"><label for="isBarkMode"><spen></spen></label>
-        <div id="swImg"></div>
-      </div>
-      ダークモードを有効にする(beta)
-    </div>
-  </div>`*/
-
 }
 
 function set_en_color() {
@@ -93,7 +64,11 @@ function set_settings() {
 }
 function changeColorMode(color) {
   if (!color) {
-    color = JSON.parse(localStorage.getItem('settings')).darkmode
+    if ((localStorage.getItem('settings'){
+      color = JSON.parse(localStorage.getItem('settings')).darkmode
+    } else {
+      color = "white"
+    }
   }
   if (color == "black" || color === true) {
     document.getElementById("darkModeCss").href = "main style/darkmode.css"
