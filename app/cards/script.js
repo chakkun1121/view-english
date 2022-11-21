@@ -3,12 +3,14 @@ let mode = ""
 //読み込み時
 function init() {
   changeColorMode()
-  if (!window.opener.document.getElementById('send_to_cards_window').innerTEXT) {
+  const file=getParam('file')
+  if (!file) {
+    alert('もう一度フラッシュカードを開いてください。')
     window.close()
     return;
   }
-  cards_arr = wayaku_to_arr(window.opener.document.getElementById('send_to_cards_window').innerTEXT)
-  cards_arr = cards_arr.filter(function(s) { return s !== ''; })
+  cards_arr = wayaku_to_arr(file)
+  cards_arr = cards_arr.filter(function (s) { return s !== ''; })
   if (cards_arr.length == 0) {
     window.close()
     return;
@@ -110,21 +112,21 @@ function setSwipe(elem) {
   let dist = 100;	// スワイプを感知する最低距離（ピクセル単位）
 
   // タッチ開始時： xy座標を取得
-  t.addEventListener("touchstart", function(e) {
+  t.addEventListener("touchstart", function (e) {
     e.preventDefault();
     startX = e.touches[0].pageX;
     startY = e.touches[0].pageY;
   });
 
   // スワイプ中： xy座標を取得
-  t.addEventListener("touchmove", function(e) {
+  t.addEventListener("touchmove", function (e) {
     e.preventDefault();
     moveX = e.changedTouches[0].pageX;
     moveY = e.changedTouches[0].pageY;
   });
 
   // タッチ終了時： スワイプした距離から左右どちらにスワイプしたかを判定する/距離が短い場合何もしない
-  t.addEventListener("touchend", function(e) {
+  t.addEventListener("touchend", function (e) {
     if (startX > moveX && startX > moveX + dist) {		// 右から左にスワイプ
       next_problem();
 
@@ -142,4 +144,14 @@ function changeColorMode(color) {
   } else {
     document.getElementById("darkModeCss").href = "404.css"//←見つからないが、問題なし
   }
+}
+/*指定したkeyに対応したvalueを返します。*/
+function getParam(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
