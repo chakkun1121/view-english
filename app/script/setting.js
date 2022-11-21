@@ -64,7 +64,7 @@ function set_settings() {
 }
 function changeColorMode(color) {
   if (!color) {
-    if ((localStorage.getItem('settings'){
+    if (localStorage.getItem('settings')) {
       color = JSON.parse(localStorage.getItem('settings')).darkmode
     } else {
       color = "white"
