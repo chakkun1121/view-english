@@ -6,6 +6,7 @@ const tab = {
     });
     tab.viewTab(tab.tabInfo.lastTabId)
     tab.tabInfo.lastTabId++
+    return tab.tabInfo.lastTabId;
   }
   , close: function (tabID) {
 

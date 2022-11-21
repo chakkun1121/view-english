@@ -21,26 +21,40 @@
     </div>
   </div>
   <div id="headerButtons">
+    <!--ここに拡張機能のボタン類も配置できるようにしたい-->
     <button type="button" class="tool-bar-button pc-hide" id="mobile_menu_button" onclick="viewMobileMenu()">
       メニュー
     </button>
     <button type="button" class="tool-bar-button mobile-hide" id="fileButton">ファイル</button>
-    <!--     <button type="button" class="tool-bar-button mobile-hide" onclick="window.print();">印刷</button> -->
-    <!--     <button type="button" class="tool-bar-button            " onclick="changeStyle();">表示切り替え</button> -->
     <button type="button" class="tool-bar-button            " onclick="openSettings();">設定</button>
   </div>
   <div id="tabs">
     <div id="tabsLeft">
-      タブの上の部分のみ入れる
+      <div id="leftTabs">
+        <!--左側に表示するタブたち-->
+      </div>
+      <div class="new-tab-button">
+        <button class="reset" onclick="tab.new(null,'left')">+</button>
+      </div>
+
     </div>
-    <div class="ContentsSizeChangeBar"></div>
+    <div class="contents-size-change-bar">
+      <!-- 左右のコンテンツの幅を変えるバー -->
+    </div>
     <div id="tabsRight">
+      <div id="rightTabs">
+
+      </div>
+      <div class="new-tab-button">
+        <button class="reset" onclick="tab.new(null,'right')">+</button>
+
+      </div>
     </div>
   </div>
   <div id="mainContents">
     <div id="mainContentsLeft">
     </div>
-    <div id="ContentsSizeChangeBar" class="ContentsSizeChangeBar"></div>
+    <div id="ContentsSizeChangeBar" class="contents-size-change-bar"></div>
     <div id="mainContentsRight">
     </div>
   </div>

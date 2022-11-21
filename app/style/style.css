@@ -1,9 +1,15 @@
 :root {
   --tab-color: #ccc;
   --tab-hoverd-color: #bbb;
-  --header-button-color: var(--main-color);
-  --content-size: 1fr 5px 10px;
+  --header-button-color:
+    var(--main-color);
+  --content-size: 1fr 5px 15px;
   --contents-size-change-bar-color: #bdbdbd;
+}
+
+.reset {
+  all: unset;
+  margin: 0;
 }
 
 body,
@@ -49,7 +55,7 @@ body {
   background: var(--tab-color);
   display: grid;
   grid-template-columns: var(--content-size);
-  grid-template-rows: auto;
+  grid-template-rows: auto 1fr;
   gap: 0px 0px;
   grid-template-areas:
     ". . .";
@@ -59,16 +65,17 @@ body {
   background: var(--tab-hoverd-color)
 }
 
-.ContentsSizeChangeBar {
+.contents-size-change-bar {
   background: var(--contents-size-change-bar-color);
 }
 
 #mainContents {
   display: grid;
   grid-template-columns: var(--content-size);
-  grid-template-rows: auto;
+  grid-template-rows: auto 1f;
   gap: 0px 0px;
-  grid-template-areas: ". . .";
+  grid-template-areas:
+    ". . .";
 }
 
 #ContentsSizeChangeBar {

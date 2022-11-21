@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v3.5.0-08';//現在バージョンを入れる
+const CACHE_VERSION = 'v4.0.0';//現在バージョンを入れる
 const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 // キャッシュするファイルをセットする
