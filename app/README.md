@@ -11,7 +11,7 @@
 |close(tabID)|指定されたタブを閉じます。|undefined|
 |getTabInfo()|タブの情報が全て入っています。|Arrey(TabInfoArrey)|
 |changeTabOrder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
-|viewTab(TabID)|指定されたタブを表示します。|undefined|
+|view(TabID)|指定されたタブを表示します。|undefined|
 
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)

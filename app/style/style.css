@@ -113,6 +113,12 @@ body {
     ". . .";
 }
 
+/* 新しいタブ */
+.new-tab {
+  padding: 5px;
+}
+
+/* wayakuファイルコンテンツ */
 .ja {
   color: var(--ja-color)
 }
