@@ -1,12 +1,14 @@
 const tab = {
-  new: function (HTMLdata, position = "left") {
+  new: function (title = "新しいタブ", HTMLdata = "", position = "left",) {
     tab.tabInfo[position].push({
-      tabId: tab.tabInfo.lastTabId++,
-      HTMLdata
+      tabID: tab.tabInfo.lastTabID++,
+      HTMLdata,
+      title
     });
-    tab.viewTab(tab.tabInfo.lastTabId)
-    tab.tabInfo.lastTabId++
-    return tab.tabInfo.lastTabId;
+    tab.changeTaborder(tab.tabInfo)
+    tab.viewTab(tab.tabInfo.lastTabID)
+    tab.tabInfo.lastTabID++
+    return tab.tabInfo.lastTabID;
   }
   , close: function (tabID) {
 
@@ -16,11 +18,21 @@ const tab = {
   }
   , changeTaborder(newTabOrderIdArrey) {
     if (!newTabOrderIdArrey) return;
+    console.log(newTabOrderIdArrey)
+    for (let i = 0; i < newTabOrderIdArrey.left.length; i++) {
+      document.getElementById('leftTabs').innerHTML += `
+        <div class="tab">
+          <button class="celect-view-tab-button reset" onclick="tab.view(${newTabOrderIdArrey.left[i].tabID})">${newTabOrderIdArrey.left[i].title}</button>
+          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.left[i].tabID})">×</button>
+        </div>
+      `
+      console.log(newTabOrderIdArrey.left[i].title)
+    }
   }
   , tabInfo: {
     left: [],
     right: [],
-    lastTabId: 0
+    lastTabID: 0
   }
   , viewTab: function (tabID) {
     if (!tabID) return;
@@ -30,5 +42,9 @@ const tab = {
   , viewedTabID: {
     left: null,
     right: null
-  }
+  },
+  newTabHTMLData: `
+    <h1>和訳表示サイト${appVersion}</h1>
+    <button onclick="openWayakuFile()">和訳ファイルを開く</button>
+  `
 }

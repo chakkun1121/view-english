@@ -4,6 +4,8 @@
   --header-button-color: var(--main-color);
   --content-size: 1fr 5px 15px;
   --contents-size-change-bar-color: #bdbdbd;
+  --ja-color: #000000;
+  --en-color: #000000;
 }
 
 .reset {
@@ -27,6 +29,7 @@ body {
   visibility: hidden;
 }
 
+/* headerのツールバーのボタン */
 #headerButtons {
   display: flex;
   background: var(--header-button-color);
@@ -50,6 +53,7 @@ body {
   border: 0;
 }
 
+/* tabのスタイル */
 #tabs {
   background: var(--tab-color);
   display: grid;
@@ -60,18 +64,46 @@ body {
     ". . .";
 }
 
+#tabsLeft,
+#tabRight {
+  display: flex;
+  padding: 10px 3px;
+}
+
+#leftTabs,
+#rightTabs {
+  display: flex;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: scroll;
+}
+
+#leftTabs::-webkit-scrollbar,
+#rightTabs::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 #tabs div>button:hover {
   background: var(--tab-hoverd-color)
 }
 
-#tabs>div {
-  padding: 10px 3px;
+
+.tab {
+  display: flex;
 }
 
+/* 左右のコンテンツの大きさを変えるバー */
 .contents-size-change-bar {
   background: var(--contents-size-change-bar-color);
 }
 
+#ContentsSizeChangeBar {
+  cursor: col-resize;
+}
+
+/* mainコンテンツ */
 #mainContents {
   display: grid;
   grid-template-columns: var(--content-size);
@@ -81,6 +113,10 @@ body {
     ". . .";
 }
 
-#ContentsSizeChangeBar {
-  cursor: col-resize;
+.ja {
+  color: var(--ja-color)
+}
+
+.en {
+  color: var(--en-color)
 }
