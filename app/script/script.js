@@ -1,4 +1,4 @@
-const now_version = "3.6.0";//<-少しでも公式バージョンにしたあとに変更があれば変える
+const now_version = "3.6.1";//<-少しでも公式バージョンにしたあとに変更があれば変える
 window.onload = init;
 //読み込み時
 function init() {
@@ -49,7 +49,7 @@ function init() {
   if (url_mode == 'help') {
     open_help();
   }
-  if(url_mode=="settings"){
+  if (url_mode == "settings") {
     open_settings()
   }
   const url_file = getParam('file')
