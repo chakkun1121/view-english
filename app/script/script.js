@@ -21,5 +21,7 @@ window.onload = function () {
   document.getElementById('loading').classList.add('loaded');
 }
 const librariesURL = [
-  "script/tab.js"
+  "script/tab.js",
+  "script/wayaku.js",
+  "script/wayakuStyle.js"
 ]
