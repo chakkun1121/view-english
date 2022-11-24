@@ -6,6 +6,14 @@ window.onload = function () {
     script.setAttribute('src', librariesURL[i]);
     document.head.appendChild(script);
   }
+  const addLibrariesList = localStorage.getItem('librariesList')
+  if (addLibrariesList) {
+    for (let i = 0; i < addLibrariesList.length; i++) {
+      const script = document.addLibrariesList('script');
+      script.setAttribute('src', librariesURL[i]);
+      document.head.appendChild(script);
+    }
+  }
   //タブ表示の拡張機能の準備
   appEvent.dispatchEvent(new Event('setTab'))
 

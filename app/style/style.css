@@ -1,8 +1,7 @@
 :root {
   --tab-color: #ccc;
   --tab-hoverd-color: #bbb;
-  --header-button-color:
-    var(--main-color);
+  --header-button-color: var(--main-color);
   --content-size: 1fr 5px 15px;
   --contents-size-change-bar-color: #bdbdbd;
 }
@@ -61,8 +60,12 @@ body {
     ". . .";
 }
 
-#tabs div:hover {
+#tabs div>button:hover {
   background: var(--tab-hoverd-color)
+}
+
+#tabs>div {
+  padding: 10px 3px;
 }
 
 .contents-size-change-bar {
