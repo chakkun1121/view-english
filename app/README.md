@@ -5,8 +5,8 @@
 準備が整い次第githubに投げ込む
 ## 標準拡張機能
 ### tabメゾット
-|関数、変数|内容|return|作成済みか
-|:--|:--|:--|:--|
+|関数、変数|内容|return|
+|:--|:--|:--|
 |new(title,HTMLdata,position)|新しいタブを開きます|number(新しいタブのID)|
 |close(tabID)|指定されたタブを閉じます。|undefined| 
 |changeTabOrder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
