@@ -118,8 +118,3 @@ function arrayToText(arrayWayakuData) {
   arrayWayakuData.shift()
   return [title, arrayWayakuData.join('\n')]
 }
-
-
-
-
-

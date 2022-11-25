@@ -24,7 +24,7 @@ wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デ
 |viewHTMLtoArray(viewHTMLwayakuData)|表示用のHTMLから配列に変換(編集後の保存時はこれを必ずやること)|Array(arrayWayakuData)|
 |textToArray(title,data)|タイトルと改行、タブで別れているtextをArrayへ変換します。|Array(arrayWayakuData)
 |arrayToText(arrayWayakuData)|arrayWayakuDataからtitle,本文データ(改行で分割済み)を出力します。|\[title,data]
-|openWayakuFile()|和訳ファイルを開きます。|undefined|
+|openWayakuFile(callback)|和訳ファイルを開きます。(読み込み完了時に第一引数にstringWayakuDataを入れて発火します。)|undefined|
 |isWayakuData(string)|和訳ファイルかを判定します|true or false|
 |isWayakuTitle(title)|拡張子が.wayakuかを確認します。|true or false|
 ### HTMLリクエスト関連(これも面倒とともにセキュリティの面から必ずこちらを使用すること)
