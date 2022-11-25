@@ -21,16 +21,16 @@
     </div>
   </div>
   <div id="headerButtons">
-    <!--ここに拡張機能のボタン類も配置できるようにしたい-->
     <button type="button" class="tool-bar-button" id="fileButton">ファイル</button>
   </div>
+  <div id="headerFileMenu"></div>
   <div id="tabs">
     <div id="tabsLeft">
-      <div id="leftTabs">
-        <!--左側に表示するタブたち-->
-      </div>
+      <div id="leftTabs"></div>
       <div class="new-tab-button">
-        <button class="reset" onclick="tab.new(undefined,undefined,'left')">+</button>
+        <button class="reset" onclick="tab.new(undefined,undefined,'left')">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </div>
 
     </div>
@@ -38,12 +38,11 @@
       <!-- 左右のコンテンツの幅を変えるバー -->
     </div>
     <div id="tabsRight">
-      <div id="rightTabs">
-
-      </div>
+      <div id="rightTabs"></div>
       <div class="new-tab-button">
-        <button class="reset" onclick="tab.new(undefined,undefined,'right')">+</button>
-
+        <button class="reset" onclick="tab.new(undefined,undefined,'right')">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </div>
     </div>
   </div>

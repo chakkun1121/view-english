@@ -53,7 +53,9 @@ const tab = {
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${newTabOrderIdArrey.left[i].tabID})">${newTabOrderIdArrey.left[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.left[i].tabID})">×</button>
+          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.left[i].tabID})">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       `
     }
@@ -62,7 +64,9 @@ const tab = {
       document.getElementById('rightTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${newTabOrderIdArrey.right[i].tabID})">${newTabOrderIdArrey.right[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.right[i].tabID})">×</button>
+          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.right[i].tabID})">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       `
     }

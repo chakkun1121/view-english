@@ -35,11 +35,12 @@ body {
   background: var(--header-button-color);
   width: env(titlebar-area-width, 100%);
   height: env(titlebar-area-height, 33px);
+  height: 50px;
+  font-size: 20px;
 }
 
 #headerButtons button {
   all: unset;
-  font-size: 8pt;
   text-align: center;
   cursor: pointer;
   padding: 2px 19px;
@@ -53,6 +54,13 @@ body {
   border: 0;
 }
 
+/* headerのファイルメニュー */
+#headerFileMenu {
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
 /* tabのスタイル */
 #tabs {
   background: var(--tab-color);
@@ -62,18 +70,21 @@ body {
   gap: 0px 0px;
   grid-template-areas:
     ". . .";
+  padding: 5px;
 }
 
 #tabsLeft,
 #tabsRight {
+  height: 25px;
+  font-size: 14px;
   display: flex;
-  height: 20px;
   align-items: center
 }
 
 #leftTabs,
 #rightTabs {
   display: flex;
+  height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-x: scroll;
@@ -87,6 +98,10 @@ body {
   scrollbar-width: none;
 }
 
+.celect-view-tab-button {
+  height: 100%;
+}
+
 #tabs div>button:hover {
   background: var(--tab-hoverd-color)
 }
@@ -94,13 +109,11 @@ body {
 
 .tab {
   display: flex;
-  padding: 3px;
-  padding-left: 10px;
+  height: 100%;
+  padding: 0 5px;
 }
 
-.new-tab-button {
-  padding: 5px
-}
+.new-tab-button {}
 
 /* 左右のコンテンツの大きさを変えるバー */
 .contents-size-change-bar {
