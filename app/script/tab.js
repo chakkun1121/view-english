@@ -1,5 +1,5 @@
 const tab = {
-  new: function (title = "新しいタブ", HTMLdata = tab.newTabHTMLData, position = "left",) {
+  new: function (title = "新しいタブ", HTMLdata = tab.newTabHTMLData, position = "left") {
     tab.tabInfo[position].push({
       tabID: tab.tabInfo.lastTabID + 1,
       HTMLdata,

@@ -118,3 +118,37 @@ function arrayToText(arrayWayakuData) {
   arrayWayakuData.shift()
   return [title, arrayWayakuData.join('\n')]
 }
+let fhList = {}
+async function openWayakuFile(callback) {
+  fhList = await window.showOpenFilePicker({
+    types: [{
+      description: 'wayakuファイル',
+      accept: {
+        "application/dxf": [".wayaku"],
+      }
+    }, {
+      description: '和訳HTMLファイル(配布終了ずみだが互換性を保つためにあります。)',
+      accept: {
+        "text/html": [".html"],
+      }
+    }],
+    excludeAcceptAllOption: true,
+    multiple: true
+  })
+  for (let i = 0; i < fhList.length; i++) {
+    let file = await fhList[i].getFile();
+    let reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => {
+      callback(reader.result, file.name);
+    }
+  }
+}
+/**
+ * 拡張子が.wayakuかを判断します。
+ * @param {String} fileTitle 
+ * @returns 
+ */
+function isWayakuTitle(fileTitle) {
+  return fileTitle.split('.').pop() == "wayaku";
+}
