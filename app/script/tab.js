@@ -92,7 +92,7 @@ const tab = {
   newTabHTMLData: `
   <div class="new-tab">
     <h1>和訳表示サイト${appVersion}</h1>
-    <button onclick="openWayakuFile()">和訳ファイルを開く</button>
+    <button onclick="openViewWayaku()">和訳ファイルを開く</button>
   </div>
   `,
   saveTabInfo: function () {
