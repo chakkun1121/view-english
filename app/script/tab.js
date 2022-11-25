@@ -8,24 +8,40 @@ const tab = {
     tab.changeTaborder(tab.tabInfo)
     tab.view(tab.tabInfo.lastTabID + 1)
     tab.tabInfo.lastTabID++
+    tab.saveTabInfo()
     return tab.tabInfo.lastTabID;
   }
   , close: function (tabID) {
+    let closedTab;
     // 閉じるタブを探してtabInfoから消去する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left.splice(i, 1)
+        tab.saveTabInfo()
+        // 変更後、それで並び替えさせる
+        tab.changeTaborder(tab.tabInfo)
+        // その後、前のタブを表示する
+        if (tab.tabInfo.left.length) {
+          tab.view(i)
+          return;
+        }
+        document.getElementById('mainContentsLeft').innerText = "タブが開かれていません。"
+        return;
       }
     }
     document.getElementById('rightTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.right.splice(i, 1)
+        tab.saveTabInfo()
+        // 変更後、それで並び替えさせる
+        tab.changeTaborder(tab.tabInfo)
+        // その後、前のタブを表示する
+        tab.view(i)
+        return;
       }
     }
-    // 変更後、それで並び替えさせる
-    tab.changeTaborder(tab.tabInfo)
-    // その後、前のタブを表示する
+    console.error('指定されたIDのタブは存在しません。もう閉じられたのかもしれません。')
   },
   getTabInfo: function () {
     return tab.tabInfo;
@@ -78,5 +94,14 @@ const tab = {
     <h1>和訳表示サイト${appVersion}</h1>
     <button onclick="openWayakuFile()">和訳ファイルを開く</button>
   </div>
-  `
+  `,
+  saveTabInfo: function () {
+    localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+  }
+}
+
+
+if (localStorage.getItem("tabInfo")) {
+  tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
+  tab.changeTaborder(tab.tabInfo)
 }

@@ -15,8 +15,8 @@ window.onload = function () {
       document.head.appendChild(script);
     }
   }
-  //タブ表示の拡張機能の準備
-  appEvent.dispatchEvent(new Event('setTab'))
+  // 拡張機能の準備
+  appEvent.dispatchEvent(new Event('init'))
 
   //いつでも使用可能になったらローミング画面を消す
   document.getElementById('loading').classList.add('loaded');

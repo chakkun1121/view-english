@@ -65,9 +65,10 @@ body {
 }
 
 #tabsLeft,
-#tabRight {
+#tabsRight {
   display: flex;
-  padding: 10px 3px;
+  height: 20px;
+  align-items: center
 }
 
 #leftTabs,
@@ -76,6 +77,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-x: scroll;
+  align-items: center
 }
 
 #leftTabs::-webkit-scrollbar,
@@ -92,6 +94,12 @@ body {
 
 .tab {
   display: flex;
+  padding: 3px;
+  padding-left: 10px;
+}
+
+.new-tab-button {
+  padding: 5px
 }
 
 /* 左右のコンテンツの大きさを変えるバー */
