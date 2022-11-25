@@ -3,6 +3,9 @@ document.getElementById('headerButtons').innerHTML += `
 `
 //英文、和訳のスタイルの変更
 let wayakuStyle = 0;
+/**
+ * 和訳ファイルのスタイルを変更します。
+ */
 function changeStyle() {
   switch (wayakuStyle) {
     case 0:
@@ -29,9 +32,13 @@ function changeStyle() {
       break;
   }
 }
+/**
+ * 指定した色に変更します。
+ * @param {String} enColor 
+ * @param {String} jaColor 
+ */
 function changeStyleAsColor(enColor = "#000000", jaColor = "#000000") {
   const root = document.querySelector(':root');
   root.style.setProperty("--en-color", enColor)
   root.style.setProperty("--ja-color", jaColor)
-  return;
 }

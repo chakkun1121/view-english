@@ -27,11 +27,11 @@ wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デ
 |isWayakuTitle(title)|拡張子が.wayakuかを確認します。|true or false|
 <!-- |isWayakuData(string)|和訳ファイルかを判定します|true or false| -->
 
-### HTMLリクエスト関連(これも面倒とともにセキュリティの面から必ずこちらを使用すること)
+<!-- ### HTMLリクエスト関連(これも面倒とともにセキュリティの面から必ずこちらを使用すること)
 HTMLrequestメゾット内
 |関数、変数|内容|return|
 |:--|:--|:--|
-|request(get or post,url,callback)|指定したURLにgetかpostします。|undefined (callback関数内に第1引数に成功時のみサイトの内容,第2引数にhttpステータスを渡す)|
+|request(get or post,url,callback)|指定したURLにgetかpostします。|undefined (callback関数内に第1引数に成功時のみサイトの内容,第2引数にhttpステータスを渡す)| -->
 ### 和訳ファイルの表示切替(拡張機能が使うことはあるのか?)
 |関数、変数|内容|返り値|
 |:--|:--|:--|
