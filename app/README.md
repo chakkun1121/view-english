@@ -17,10 +17,13 @@
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|
 |:--|:--|:--|
-|wayakuToObject(stringWayakuData)|和訳ファイルから配列に変換|object(ObjectWayakuData)|
-|objectToWayaku(objectWayakuData)|配列から和訳ファイルに変換|string(stringWayakuData)|
-|objectToViewHTML(objectWayakuData)|配列から表示用のHTMLに変換|string(viewHTMLwayakuData)|
-|viewHTMLtoObject(viewHTMLwayakuData)|表示用のHTMLから配列に変換(編集後の保存時はこれを必ずやること)|object(ObjectWayakuData)|
+|htmlToWayaku(HTMLdata)|.html->.wayaku|wayakuData|
+|wayakuToArray(stringWayakuData)|和訳ファイルから配列に変換|Array(arrayWayakuData)|
+|arrayToWayaku(arrayWayakuData)|配列から和訳ファイルに変換|string(stringWayakuData)|
+|arrayToViewHTML(arrayWayakuData)|配列から表示用のHTMLに変換|string(viewHTMLwayakuData)|
+|viewHTMLtoArray(viewHTMLwayakuData)|表示用のHTMLから配列に変換(編集後の保存時はこれを必ずやること)|Array(arrayWayakuData)|
+|textToArray(title,data)|タイトルと改行、タブで別れているtextをArrayへ変換します。|Array(arrayWayakuData)
+|arrayToText(arrayWayakuData)|arrayWayakuDataからtitle,本文データ(改行で分割済み)を出力します。|\[title,data]
 |openWayakuFile()|和訳ファイルを開きます。|undefined|
 |isWayakuData(string)|和訳ファイルかを判定します|true or false|
 |isWayakuTitle(title)|拡張子が.wayakuかを確認します。|true or false|
