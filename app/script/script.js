@@ -23,6 +23,7 @@ window.onload = function () {
 }
 const librariesURL = [
   "script/tab.js",
+  "script/header.js",
   "script/wayaku.js",
   "script/wayakuStyle.js"
 ]
