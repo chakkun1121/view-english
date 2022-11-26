@@ -1,6 +1,6 @@
 const appEvent = document.getElementById('appEvent');
 const appVersion = "4.0.0"
-window.onload = async function () {
+window.onload = function () {
   //表示の準備をする
   for (let i = 0; i < librariesURL.length; i++) {
     const script = document.createElement('script');
