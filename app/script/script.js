@@ -13,22 +13,16 @@ window.onload = function () {
       const script = document.addLibrariesList('script');
       script.setAttribute('src', librariesURL[i]);
       document.head.appendChild(script);
-      script.onload = (e) => {
-        finishedFileNumber++
-      }
-      script.onerror = (error) => {
-        console.log('読み込みに失敗しました。エラー:' + error)
-        finishedFileNumber++
-      }
     }
   }
-  setTimeout(function () {
-    if (librariesURL.length == finishedFileNumber) {
-      // 拡張機能の準備
+  const setStart = setInterval(function () {
+    if (librariesURL.length == finishedScriptNumber) {
+      // 拡張機能の準備のイベント発火
       appEvent.dispatchEvent(new Event('init'))
 
       //いつでも使用可能になったらローミング画面を消す
       document.getElementById('loading').classList.add('loaded');
+      clearInterval(setStart)
       return;
     }
   }, 100)
@@ -38,7 +32,6 @@ const librariesURL = [
   "script/tab.js",
   "script/header.js",
   "script/wayaku.js",
-  "script/wayakuStyle.js",
-  "https://kit.fontawesome.com/5f89789935.js"
+  "script/wayakuStyle.js"
 ]
-let finishedFileNumber;
+let finishedScriptNumber = 0;

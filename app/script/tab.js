@@ -109,3 +109,5 @@ if (localStorage.getItem("tabInfo")) {
   tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
   tab.changeTaborder(tab.tabInfo)
 }
+// 読み込み時の処理
+finishedScriptNumber++

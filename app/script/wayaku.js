@@ -152,3 +152,4 @@ async function openWayakuFile(callback) {
 function isWayakuTitle(fileTitle) {
   return fileTitle.split('.').pop() == "wayaku";
 }
+finishedScriptNumber++

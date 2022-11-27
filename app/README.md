@@ -43,4 +43,5 @@ HTMLrequestメゾット内
 |:--|:--|
 |init|すべての拡張機能が準備完了したときに発火します。|
 |
-
+### 諸注意
+それぞれのscriptの準備が完了したら、finishedScriptNumberを1増やしてください。

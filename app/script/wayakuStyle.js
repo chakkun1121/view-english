@@ -42,3 +42,4 @@ function changeStyleAsColor(enColor = "#000000", jaColor = "#000000") {
   root.style.setProperty("--en-color", enColor)
   root.style.setProperty("--ja-color", jaColor)
 }
+finishedScriptNumber++
