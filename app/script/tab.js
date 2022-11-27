@@ -1,5 +1,5 @@
 const tab = {
-  new: function (title = "新しいタブ", HTMLdata = tab.newTabHTMLData, position = "left") {
+  new: function (title = "新しいタブ", HTMLdata = tab.getNewTabHTMLdata(), position = "left") {
     tab.tabInfo[position].push({
       tabID: tab.tabInfo.lastTabID + 1,
       HTMLdata,
@@ -93,12 +93,14 @@ const tab = {
     }
   }
   ,
-  newTabHTMLData: `
-  <div class="new-tab">
-    <h1>和訳表示サイト${appVersion}</h1>
-    <button onclick="openViewWayaku()">和訳ファイルを開く</button>
-  </div>
-  `,
+  getNewTabHTMLdata: function () {
+    return `
+      <div class="new-tab">
+        <h1>和訳表示サイト${appVersion}</h1>
+        <button onclick="openViewWayaku(${tab.tabInfo.lastTabID + 1})">和訳ファイルを開く</button>
+      </div>
+  `
+  },
   saveTabInfo: function () {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
   }
