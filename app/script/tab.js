@@ -142,6 +142,20 @@ const tab = {
     }
   }, changeTabName: function (tabID, newName) {
 
+  }, openedTab: function (position = "left") {
+    if (position = "right") {
+      for (let i = 0; i < tab.tabInfo.right.length; i++) {
+        if (tab.tabInfo.right[i].viewed) {
+          return tab.tabInfo.right[i].tabID
+
+        }
+      }
+    }
+    for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].viewed) {
+        return tab.tabInfo.left[i].tabID
+      }
+    }
   }
 
 }

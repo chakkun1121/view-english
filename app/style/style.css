@@ -75,6 +75,7 @@ body {
 
 #tabsLeft,
 #tabsRight {
+  overflow-y: scroll;
   height: 25px;
   font-size: 14px;
   display: flex;
