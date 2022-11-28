@@ -32,6 +32,7 @@ async function openViewWayaku(tabID) {
         console.error('拡張子が違います。')
         return;
       }
+      fileData = arrayToViewHTML(wayakuToArray(fileData))
       if (i != 0) {
         // 新しいタブを開き、そこに投げ込む
         tab.new(fileName, fileData)

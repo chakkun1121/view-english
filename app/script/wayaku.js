@@ -61,18 +61,18 @@ function wayakuToArray(stringWayakuData) {
  * @returns {string} stringWayakuData
  */
 function arrayToWayaku(arrayWayakuData) {
-  arr = arr.filter(function (s) {
+  arrayWayakuData = arrayWayakuData.filter(function (s) {
     return s !== '';
   })
   let i = 0
-  let title = arr[i]
+  let title = arrayWayakuData[i]
   let wayaku = '<h1 class="title">' + title + '</h1>'
   i++
-  for (; i <= arr.length - 2; i++) {
-    let en = arr[i]
+  for (; i <= arrayWayakuData.length - 2; i++) {
+    let en = arrayWayakuData[i]
     wayaku = wayaku + '<p class="en">' + en + '</p>'
     i++
-    let ja = arr[i]
+    let ja = arrayWayakuData[i]
     wayaku = wayaku + '<p class="ja">' + ja + '</p>'
   }
   return wayaku;
@@ -83,9 +83,7 @@ function arrayToWayaku(arrayWayakuData) {
  * @returns {Array} viewHTMLwayakuData
  */
 function arrayToViewHTML(arrayWayakuData) {
-  return `
-  <div class="wayaku-content">${arrayToWayaku(arr)}</div>
-  `
+  return `<div class="wayaku-content">${arrayToWayaku(arrayWayakuData)}</div>`
 }
 /**
  * 表示用のHTMLから配列に変換
@@ -93,7 +91,6 @@ function arrayToViewHTML(arrayWayakuData) {
  * @returns {Array} arrayWayakuData
  */
 function viewHTMLtoArray(viewHTMLwayakuData) {
-
   return wayakuToArray(viewHTMLwayakuData.slice(28).slice(0, -6))
 }
 /**
