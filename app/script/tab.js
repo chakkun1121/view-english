@@ -80,13 +80,20 @@ const tab = {
     if (tabID == null) return;
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      tab.tabInfo.left[i].viewed = false
+
       if (tab.tabInfo.left[i].tabID == tabID) {
+        tab.tabInfo.left[i].viewed = true
+
         document.getElementById('mainContentsLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
         return;
       }
     }
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
+        tab.tabInfo.left[i].viewed = true
+
         document.getElementById('mainContentsRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
         return;
       }
@@ -104,16 +111,20 @@ const tab = {
   saveTabInfo: function () {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
   },
-  viewHTMLcontent: function (tabID, HTMLcontent) {
+  viewHTMLcontent: function (tabID, HTMLcontent, title) {
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].HTMLdata = HTMLcontent
+        tab.tabInfo.left[i].title = title
+        tab.changeTaborder(tab.tabInfo)
         return;
       }
     }
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.right[i].HTMLdata = HTMLcontent
+        tab.tabInfo.right[i].title = title
+        tab.changeTaborder(tab.tabInfo)
         return;
       }
     }
@@ -129,8 +140,8 @@ const tab = {
 
       }
     }
-  }, changeTabName: function (tabID,newName) {
-    
+  }, changeTabName: function (tabID, newName) {
+
   }
 
 }

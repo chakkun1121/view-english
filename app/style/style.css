@@ -132,6 +132,7 @@ body {
   gap: 0px 0px;
   grid-template-areas:
     ". . .";
+  overflow-x: scroll;
 }
 
 /* 新しいタブ */
@@ -144,10 +145,13 @@ body {
   padding: 5px;
 }
 
-.ja {
-  color: var(--ja-color)
+p.ja {
+  color: var(--ja-color);
+  margin: 0px;
 }
 
-.en {
-  color: var(--en-color)
+p.en {
+  color: var(--en-color);
+  margin: 0px;
+  padding-top: 10px;
 }
