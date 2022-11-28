@@ -83,7 +83,9 @@ function arrayToWayaku(arrayWayakuData) {
  * @returns {Array} viewHTMLwayakuData
  */
 function arrayToViewHTML(arrayWayakuData) {
-  return arrayToWayaku(arr)
+  return `
+  <div class="wayaku-content">${arrayToWayaku(arr)}</div>
+  `
 }
 /**
  * 表示用のHTMLから配列に変換
@@ -91,7 +93,8 @@ function arrayToViewHTML(arrayWayakuData) {
  * @returns {Array} arrayWayakuData
  */
 function viewHTMLtoArray(viewHTMLwayakuData) {
-  return wayakuToArray(viewHTMLtoArray)
+
+  return wayakuToArray(viewHTMLwayakuData.slice(28).slice(0, -6))
 }
 /**
  * タイトルと改行、タブで別れているtextをArrayへ変換します。
