@@ -113,8 +113,6 @@ body {
   padding: 0 5px;
 }
 
-.new-tab-button {}
-
 /* 左右のコンテンツの大きさを変えるバー */
 .contents-size-change-bar {
   background: var(--contents-size-change-bar-color);
