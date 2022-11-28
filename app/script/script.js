@@ -29,9 +29,11 @@ window.onload = function () {
 
 }
 const librariesURL = [
+  // index.htmlからのパスを書く
   "script/tab.js",
   "script/header.js",
   "script/wayaku.js",
-  "script/wayakuStyle.js"
+  "script/wayakuStyle.js",
+  "script/updata.js"
 ]
 let finishedScriptNumber = 0;
