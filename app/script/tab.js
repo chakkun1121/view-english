@@ -129,6 +129,8 @@ const tab = {
 
       }
     }
+  }, changeTabName: function (tabID,newName) {
+    
   }
 
 }
