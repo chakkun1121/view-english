@@ -103,6 +103,20 @@ const tab = {
   },
   saveTabInfo: function () {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+  },
+  viewHTMLcontent: function (tabID, HTMLcontent) {
+    for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].tabID == tabID) {
+        tab.tabInfo.left[i].HTMLdata = HTMLcontent
+        return;
+      }
+    }
+    for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      if (tab.tabInfo.right[i].tabID == tabID) {
+        tab.tabInfo.right[i].HTMLdata = HTMLcontent
+        return;
+      }
+    }
   }
 }
 

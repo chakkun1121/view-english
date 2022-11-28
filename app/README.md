@@ -11,7 +11,7 @@
 |close(tabID)|指定されたタブを閉じます。|undefined| 
 |changeTabOrder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
-|viewHTMLcontent(tabID,HTMLcontent)|htmlコンテンツを表示します。|undefined|
+|viewHTMLcontent(tabID,HTMLcontent)|htmlコンテンツを変更します。|undefined|
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|
@@ -44,4 +44,4 @@ HTMLrequestメゾット内
 |init|すべての拡張機能が準備完了したときに発火します。|
 |
 ### 諸注意
-それぞれのscriptの準備が完了したら、finishedScriptNumberを1増やしてください。忘れると本体が読み込み終わりません。
+それぞれのscriptの準備が完了したら、 finishedScriptNumber を1増やしてください。忘れると本体が読み込み終わりません。
