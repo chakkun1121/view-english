@@ -2,20 +2,8 @@ const appEvent = document.getElementById('appEvent');
 const appVersion = "4.0.0"
 window.onload = function () {
   //表示の準備をする
-  for (let i = 0; i < librariesURL.length; i++) {
-    const script = document.createElement('script');
-    script.setAttribute('src', librariesURL[i]);
-    document.head.appendChild(script);
-  }
-  const addLibrariesList = localStorage.getItem('librariesList')
-  if (addLibrariesList) {
-    for (let i = 0; i < addLibrariesList.length; i++) {
-      const script = document.addLibrariesList('script');
-      script.setAttribute('src', librariesURL[i]);
-      document.head.appendChild(script);
-    }
-  }
   const setStart = setInterval(function () {
+    scriptSetLoopNumber++
     if (librariesURL.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
       appEvent.dispatchEvent(new Event('init'))
@@ -23,7 +11,16 @@ window.onload = function () {
       //いつでも使用可能になったらローミング画面を消す
       document.getElementById('loading').classList.add('loaded');
       clearInterval(setStart)
+      scriptSetLoopNumber = 0
       return;
+    }
+    if (finishedScriptNumber != resentScriptNumber) {
+      console.log(`${librariesURL[finishedScriptNumber - 1]}の読み込み時間:約${scriptSetLoopNumber / 10}秒`)
+      const script = document.createElement('script');
+      script.setAttribute('src', librariesURL[finishedScriptNumber]);
+      document.head.appendChild(script);
+      resentScriptNumber++
+      scriptSetLoopNumber = 0
     }
   }, 100)
 
@@ -41,3 +38,5 @@ const librariesURL = [
   "script/settings.js"
 ]
 let finishedScriptNumber = 0;
+let resentScriptNumber = -1
+let scriptSetLoopNumber = 0
