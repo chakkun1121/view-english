@@ -8,18 +8,14 @@ function editFile() {
     main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)'
   }
   const editHTML =
-    `
-    <div class="edit-file">
-      <div class="edit-header">
-        <input value="${title}" class="edit-title" id="edit_title${tab.openedTab}">
-        <button class="edit-filish" onclick="edit_to_text(${tab.openedTab})">完了</button>
-      </div>
-      <textarea id="editMain" onchange="editChangeHTML" class="edit-main">
-        ${main}
-      </textarea>
-    </div>
-  `
+    `<div class="edit-file"><div class="edit-header"><input value="${title}" class="edit-title" id="editTitle${tab.openedTab()}"><button class="edit-filish" onclick="editToText(${tab.openedTab()})">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${main}</textarea></div>`
   tab.viewHTMLcontent(tab.openedTab(), editHTML, title)
-  tab.changeTabOrder(tab.tabInfo)
+  tab.changeTaborder()
+  tab.view()
+  tab.save()
+  TabInfo()
+}
+function editChangeHTML() {
+  tab.changeHTMLcontentOnlyTabInfo(tab.openedTab(), document.getElementById('editMain').value)
 }
 finishedScriptNumber++

@@ -70,13 +70,14 @@ const tab = {
         </div>
       `
     }
+    tab.saveTabInfo()
   }
   , tabInfo: {
     left: [],
     right: [],
     lastTabID: 0
   }
-  , view: function (tabID) {
+  , view: function (tabID = tab.openedTab()) {
     if (tabID == null) return;
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
@@ -84,8 +85,8 @@ const tab = {
 
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-
         document.getElementById('mainContentsLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
+        tab.saveTabInfo()
         return;
       }
     }
@@ -93,8 +94,8 @@ const tab = {
       tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-
         document.getElementById('mainContentsRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
+        tab.saveTabInfo()
         return;
       }
     }
@@ -117,6 +118,7 @@ const tab = {
         tab.tabInfo.left[i].HTMLdata = HTMLcontent
         tab.tabInfo.left[i].title = title
         tab.changeTaborder(tab.tabInfo)
+        tab.saveTabInfo()
         return;
       }
     }
@@ -125,6 +127,8 @@ const tab = {
         tab.tabInfo.right[i].HTMLdata = HTMLcontent
         tab.tabInfo.right[i].title = title
         tab.changeTaborder(tab.tabInfo)
+        tab.saveTabInfo()
+
         return;
       }
     }
@@ -156,6 +160,24 @@ const tab = {
         return tab.tabInfo.left[i].tabID
       }
     }
+  },
+  changeHTMLcontentOnlyTabInfo: function (tabID = tab.openedTab(), data) {
+    for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].tabID == tabID) {
+        tab.tabInfo.left[i].HTMLdata = data;
+        tab.saveTabInfo()
+        return;
+      }
+    }
+    for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      if (tab.tabInfo.right[i].tabID == tabID) {
+        tab.tabInfo.right[i].HTMLdata = data;
+        tab.saveTabInfo()
+        return;
+      }
+    }
+
+
   }
 
 }

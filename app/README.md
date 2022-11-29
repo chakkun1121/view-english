@@ -9,11 +9,13 @@
 |:--|:--|:--|
 |new(title,HTMLdata,position)|新しいタブを開きます|number(新しいタブのID)|
 |close(tabID)|指定されたタブを閉じます。|undefined| 
-|changeTabOrder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
+|changeTaborder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
 |viewHTMLcontent(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
 |getHTMLcontent(tabID)|今表示中のhtmlコンテンツを取得します。|
 |openedTab(position(初期はleft))|今開いているtabIDを表示します。
+|saveTabInfo()|
+|changeHTMLcontentOnlyTabInfo(tabID,data)|
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|
