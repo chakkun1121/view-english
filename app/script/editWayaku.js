@@ -16,6 +16,6 @@ function editFile() {
   TabInfo()
 }
 function editChangeHTML() {
-  tab.changeHTMLcontentOnlyTabInfo(tab.openedTab(), document.getElementById('editMain').value)
+  tab.changeHTMLcontentOnlyTabInfo(tab.openedTab(),`<div class="edit-file"><div class="edit-header"><input value="${title}" class="edit-title" id="editTitle${tab.openedTab()}"><button class="edit-filish" onclick="editToText(${tab.openedTab()})">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${document.getElementById('editMain').value}</textarea></div>`)
 }
 finishedScriptNumber++
