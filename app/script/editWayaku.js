@@ -1,7 +1,7 @@
 function editFile() {
   let title, main
   let wayakuArrary = viewHTMLtoArray(tab.getHTMLcontent(tab.openedTab()))
-  if (file) {
+  if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary)
   } else {
     title = '新しいファイル'
@@ -11,14 +11,15 @@ function editFile() {
     `
     <div class="edit-file">
       <div class="edit-header">
-        <input value="${title}" class="edit-title" id="edit_title${resent_tab}">
-        <button class="edit-filish" onclick="edit_to_text(${resent_tab})">完了</button>
+        <input value="${title}" class="edit-title" id="edit_title${tab.openedTab}">
+        <button class="edit-filish" onclick="edit_to_text(${tab.openedTab})">完了</button>
       </div>
       <textarea id="editMain" onchange="editChangeHTML" class="edit-main">
         ${main}
       </textarea>
     </div>
   `
-  viewHTMLcontent(tab.openedTab(), editHTML, title)
+  tab.viewHTMLcontent(tab.openedTab(), editHTML, title)
+  tab.changeTabOrder(tab.tabInfo)
 }
 finishedScriptNumber++
