@@ -11,7 +11,7 @@
 |close(tabID)|指定されたタブを閉じます。|undefined| 
 |changeTabOrder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
-|viewHTMLcontent(tabID,HTMLcontent)|htmlコンテンツを変更します。|undefined|
+|viewHTMLcontent(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
 |getHTMLcontent(tabID)|今表示中のhtmlコンテンツを取得します。|
 |openedTab(position(初期はleft))|今開いているtabIDを表示します。
 ### wayakuファイル操作関連
