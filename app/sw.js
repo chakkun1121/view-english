@@ -4,7 +4,10 @@ const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 // キャッシュするファイルをセットする
 const urlsToCache = [
   '.',
-  'index.html'
+  'index.html',
+  'style/startload.css',
+  'style/style.css',
+  'script/script.js'
 ];
 
 self.addEventListener('install', (event) => {

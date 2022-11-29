@@ -4,6 +4,10 @@ window.onload = function () {
   //表示の準備をする
   const setStart = setInterval(function () {
     scriptSetLoopNumber++
+    if (scriptSetLoopNumber >= 50) {
+      document.getElementById('loadErrorMessage').innerHTML = `
+        読み込みに問題がありますか？もし、ネットが遅いようでしたら和訳表示サイト軽量版をご利用ください。`
+    }
     if (librariesURL.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
       appEvent.dispatchEvent(new Event('init'))
