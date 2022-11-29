@@ -1,82 +1,93 @@
 :root {
-  --main-color:#7aa1d6;
-  --tab-color:#ccc;
+  --main-color: #7aa1d6;
+  --tab-color: #ccc;
 }
 
-*{
+* {
   box-sizing: border-box;
-  user-select:none;
+  user-select: none;
 }
 
-html,body {
+html,
+body {
   height: 100vh;
-  width:100vw;
+  width: 100vw;
   touch-action: pan-y;
 }
-body{
+
+body {
   -ms-overflow-style: none;
   scrollbar-width: none;
-} 
-a{
-  text-decoration:underline
 }
-body::-webkit-scrollbar{display: none;}
+
+a {
+  text-decoration: underline
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 /*header*/
 header {
   -webkit-app-region: no-drag;
   app-region: no-drag;
   height: env(titlebar-area-height, 33px);
-  background:var(--main-color);
-  user-select:none;
+  background: var(--main-color);
+  user-select: none;
   display: flex;
   align-items: center;
-  padding: 0 0  0 5px;
+  padding: 0 0 0 5px;
   justify-content: space-between;
 }
+
 header a {
   -webkit-app-region: no-drag;
   app-region: no-drag;
 }
-header h1{
+
+header h1 {
   font-size: x-large;
-  user-select:none;
+  user-select: none;
 }
-#header_right{
+
+#header_right {
   -webkit-app-region: no-drag;
   app-region: no-drag;
-  height:100%;
+  height: 100%;
 }
+
 #header_left {
   display: flex;
   align-items: center;
 }
-#title{
-    padding-right: 10px;
+
+#title {
+  padding-right: 10px;
 
 }
-/*main*/
-main {
-}
+
 /*最初の設定画面*/
 /*フラッシュカード本体*/
-#view_cards{
-  display:none;
+#view_cards {
+  display: none;
   padding: 10px;
   margin: auto 0px;
   height: 100%;
 
 }
+
 #problem {
   font-size: 20px;
 }
 
 #answer {
   font-size: 20px;
-  color:white;
+  color: white;
   border: solid;
   border-width: 2px;
   border-color: #000;
-    min-height: 48px;
+  min-height: 48px;
 
 }
 
@@ -90,10 +101,12 @@ main {
   height: 100%;
   text-align: center;
 }
+
 /*結果表示*/
-#view_result{
-  display:none;
+#view_result {
+  display: none;
 }
+
 input[type="checkbox" i] {
   background-color: initial;
   cursor: default;
@@ -103,17 +116,9 @@ input[type="checkbox" i] {
   padding: initial;
   border: initial;
 }
+
 input {
   writing-mode: horizontal-tb !important;
-  font-style: ;
-  font-variant-ligatures: ;
-  font-variant-caps: ;
-  font-variant-numeric: ;
-  font-variant-east-asian: ;
-  font-weight: ;
-  font-stretch: ;
-  font-size: ;
-  font-family: ;
   text-rendering: auto;
   color: fieldtext;
   letter-spacing: normal;
@@ -135,8 +140,7 @@ input {
   border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   border-image: initial;
 }
-label{
-  display:block;
+
+label {
+  display: block;
 }
-
-

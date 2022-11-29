@@ -1,29 +1,30 @@
 window.onload = init;
+let finishedScriptNumber
 let mode = ""
 //読み込み時
 function init() {
-  changeColorMode()
+  // changeColorMode()
   const file = getParam('file')
   if (!file) {
     alert('もう一度フラッシュカードを開いてください。')
     window.close()
     return;
   }
-  cards_arr = file
-  cards_arr = cards_arr.filter(function (s) { return s !== ''; })
-  if (cards_arr.length == 0) {
+  cardsArrary = JSON.parse(file)
+  cardsArrary = cardsArrary.filter(function (s) { return s !== ''; })
+  if (cardsArrary.length == 0) {
     window.close()
     return;
   }
-  let title = cards_arr[0]
+  let title = cardsArrary[0]
   document.getElementById('title').innerHTML = title
-  cards_arr.shift()
+  cardsArrary.shift()
   //for文を回して英文と日本語がセットのオブジェクト型に変更
-  cards_object = []
-  for (let i = 0; i <= cards_arr.length - 2; i += 2) {
-    cards_object.push({ 'en': cards_arr[i], 'ja': cards_arr[i + 1] })
+  cardsObject = []
+  for (let i = 0; i <= cardsArrary.length - 2; i += 2) {
+    cardsObject.push({ 'en': cardsArrary[i], 'ja': cardsArrary[i + 1] })
   }
-  console.log(cards_object)
+  console.log(cardsObject)
   mode = "home"
 }
 function start_cards() {
@@ -41,16 +42,16 @@ function start_cards() {
   document.documentElement.requestFullscreen();
   //実際に出す順番にしたobject配列をセット
   problem_sequence = []
-  for (let i = 0; i < cards_object.length; i++) {
+  for (let i = 0; i < cardsObject.length; i++) {
     problem_sequence.push(i)
   }
   if (document.getElementById('set_rondom').checked) {
     problem_sequence = arrayShuffle(problem_sequence)
   }
   resent_object = 0
-  document.getElementById('all_problem_number').innerText = cards_object.length;
+  document.getElementById('all_problem_number').innerText = cardsObject.length;
   // 1問目をview_cardに投げ飛ばす
-  view_card(cards_object[problem_sequence[0]])
+  view_card(cardsObject[problem_sequence[0]])
 }
 function view_card(input_object) {
   console.log(input_object)
@@ -61,10 +62,10 @@ function view_card(input_object) {
 function next_problem() {
   //次に問題を出すか出さないか判断
   resent_object++
-  if (cards_object[problem_sequence[resent_object]]) {
+  if (cardsObject[problem_sequence[resent_object]]) {
     //出すならview_cardに投げ飛ばす
     document.getElementById('now_problem_number').innerText = resent_object + 1
-    view_card(cards_object[problem_sequence[resent_object]])
+    view_card(cardsObject[problem_sequence[resent_object]])
     return;
   } else {
     //出さないなら結果表示

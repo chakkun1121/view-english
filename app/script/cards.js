@@ -5,7 +5,7 @@ const cards = {
   start: function (tabID = tab.openedTab()) {
     const wayakuArrary = (viewHTMLtoArray(tab.getHTMLcontent(tabID)))
     console.log(wayakuArrary)
-    window.open("https://chakkun1121.github.io/view-english/cards?file=" + JSON.stringify(wayakuArrary))
+    window.open("../cards/card.html?file=" + JSON.stringify(wayakuArrary))
   }
 }
 
