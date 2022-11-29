@@ -9,7 +9,7 @@ function init() {
     window.close()
     return;
   }
-  cards_arr = wayaku_to_arr(file)
+  cards_arr = file
   cards_arr = cards_arr.filter(function (s) { return s !== ''; })
   if (cards_arr.length == 0) {
     window.close()
