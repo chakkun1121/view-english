@@ -36,6 +36,8 @@ const librariesURL = [
   "script/wayakuStyle.js",
   "script/updata.js",
   "script/wayakuOperation.js",
-  "script/cards.js"
+  "script/cards.js",
+  "script/editWayaku.js",
+  "script/settings.js"
 ]
 let finishedScriptNumber = 0;
