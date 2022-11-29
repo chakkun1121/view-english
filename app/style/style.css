@@ -2,7 +2,7 @@
   --tab-color: #ccc;
   --tab-hoverd-color: #bbb;
   --header-button-color: var(--main-color);
-  --content-size: 1fr 5px 15px;
+  --content-size: 1fr 0px 0px;
   --contents-size-change-bar-color: #bdbdbd;
   --ja-color: #000000;
   --en-color: #000000;
