@@ -34,8 +34,7 @@ body {
   display: flex;
   background: var(--header-button-color);
   width: env(titlebar-area-width, 100%);
-  height: env(titlebar-area-height, 33px);
-  height: 50px;
+  height: env(titlebar-area-height, 40px);
   font-size: 20px;
 }
 
