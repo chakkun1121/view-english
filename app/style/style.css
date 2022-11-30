@@ -56,7 +56,7 @@ body {
 /* headerのファイルメニュー */
 #headerFileMenu {
   position: absolute;
-  bottom: 0;
+  bottom: -100px;
   left: 0;
 }
 
