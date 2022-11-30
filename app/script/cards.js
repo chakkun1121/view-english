@@ -7,7 +7,6 @@ document.getElementById('headerFileMenu').innerHTML += `
 const cards = {
   start: function (tabID = tab.openedTab()) {
     const wayakuArrary = (viewHTMLtoArray(tab.getHTMLcontent(tabID)))
-    console.log(wayakuArrary)
     window.open("../cards/card.html?file=" + JSON.stringify(wayakuArrary))
   }
 }
