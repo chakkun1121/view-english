@@ -91,6 +91,7 @@ function arrayToViewHTML(arrayWayakuData) {
  * @returns {Array} arrayWayakuData
  */
 function viewHTMLtoArray(viewHTMLwayakuData) {
+  if (!viewHTMLwayakuData) return;
   return wayakuToArray(viewHTMLwayakuData.slice(28).slice(0, -6))
 }
 /**
