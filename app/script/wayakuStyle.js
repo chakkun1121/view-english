@@ -1,5 +1,8 @@
 document.getElementById('headerButtons').innerHTML += `
-  <button type="button" class="tool-bar-button" id="changeStyleButton" onclick="changeStyle();">表示切替</button>
+  <button class="tool-bar-button" id="changeStyleButton" onclick="changeStyle();">表示切替</button>
+`
+document.getElementById('headerFileMenu').innerHTML += `
+  <button class="header-file-menu-button" onclick="changeStyle()">表示切替</button>
 `
 //英文、和訳のスタイルの変更
 let wayakuStyle = 0;

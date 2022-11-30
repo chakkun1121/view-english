@@ -15,7 +15,7 @@
 |getHTMLcontent(tabID)|今表示中のhtmlコンテンツを取得します。|
 |openedTab(position(初期はleft))|今開いているtabIDを表示します。
 |saveTabInfo()|
-|changeHTMLcontentOnlyTabInfo(tabID,data)|
+|changeHTMLcontentOnlyTabInfo(tabID,data)|tabInfoの中のHTMLcontentのみを書き換えます。|
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|
