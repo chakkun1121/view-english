@@ -55,9 +55,14 @@ body {
 
 /* headerのファイルメニュー */
 #headerFileMenu {
-  position: absolute;
-  bottom: -100px;
+  position: fixed;
+  top: -100px;
   left: 0;
+}
+
+#headerFileMenu button {
+  all: unset;
+
 }
 
 /* tabのスタイル */
