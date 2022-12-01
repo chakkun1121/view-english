@@ -1,5 +1,5 @@
 document.getElementById('headerButtons').innerHTML += `
-  <button class="tool-bar-button" id="changeStyleButton" onclick="changeStyle();">表示切替</button>
+  <button class="tool-bar-button" onclick="changeStyle();">表示切替</button>
 `
 document.getElementById('headerFileMenu').innerHTML += `
   <button class="header-file-menu-button" onclick="changeStyle()">表示切替</button>
