@@ -11,7 +11,7 @@
   <link rel="icon" href="../favicon.ico" id="favicon" async>
   <link rel="manifest" href="manifest.json" defer>
   <meta name="theme-color" content="#7aa1d6">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="description" content="ローカルに保存されている和訳ファイル(.wayakuなど)を開きます。">
 </head>
 
@@ -22,7 +22,8 @@
     <div id="loadErrorMessage"></div>
   </div>
   <div id="headerButtons">
-    <button type="button" class="tool-bar-button" id="fileButton" onclick="document.querySelector('#headerFileMenu').classList.toggle('header-file-manu-opened')">
+    <button type="button" class="tool-bar-button" id="fileButton"
+      onclick="document.querySelector('#headerFileMenu').classList.toggle('header-file-manu-opened')">
       ファイル
     </button>
   </div>
@@ -31,7 +32,7 @@
     <div id="tabsLeft">
       <div id="leftTabs"></div>
       <div class="new-tab-button">
-        <button class="reset" onclick="tab.new(undefined,undefined,'left')">
+        <button class="reset" onclick="tab.new(undefined,undefined,'left')" aria-label="新しいタブを開く">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
@@ -43,7 +44,7 @@
     <div id="tabsRight">
       <div id="rightTabs"></div>
       <div class="new-tab-button">
-        <button class="reset" onclick="tab.new(undefined,undefined,'right')">
+        <button class="reset" onclick="tab.new(undefined,undefined,'right')" aria-label="新しいタブを開く">
           <i class="fa-solid fa-plus"></i>
         </button>
       </div>
