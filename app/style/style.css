@@ -74,8 +74,8 @@ body {
 
 #headerFileMenu button {
   all: unset;
-display:block;
-padding:5px;
+  display: block;
+  padding: 5px;
 }
 
 /* tabのスタイル */
@@ -171,6 +171,19 @@ p.en {
   margin: 0px;
   padding-top: 10px;
 }
+
+/* 和訳ファイルの編集時 */
+.edit-file {
+  height: 100%;
+  display: grid;
+  grid-auto-rows: auto 1fr;
+}
+
+.edit-main {
+  resize: none;
+}
+
+/* 印刷用 */
 
 @media print {
 
