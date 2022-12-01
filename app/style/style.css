@@ -158,3 +158,13 @@ p.en {
   margin: 0px;
   padding-top: 10px;
 }
+
+@media print {
+  #loading,#headerButtons,#headerFileMenu,#tabs {
+    display: none;
+  }
+
+  .wayaku-content {
+    display: block;
+  }
+}
