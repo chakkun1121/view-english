@@ -56,13 +56,26 @@ body {
 /* headerのファイルメニュー */
 #headerFileMenu {
   position: fixed;
-  top: -100px;
+  left: 0px;
+  top: -1000px;
+  width: auto;
+  height: auto;
+  z-index: 20;
+  background-color: #0287cfcc;
+  backdrop-filter: blur(2px);
+  padding: 1px;
   left: 0;
+  z-index: 1000000000;
+}
+
+.header-file-manu-opened {
+  top: env(titlebar-area-height, 33px) !important;
 }
 
 #headerFileMenu button {
   all: unset;
-
+display:block;
+padding:5px;
 }
 
 /* tabのスタイル */
@@ -160,7 +173,11 @@ p.en {
 }
 
 @media print {
-  #loading,#headerButtons,#headerFileMenu,#tabs {
+
+  #loading,
+  #headerButtons,
+  #headerFileMenu,
+  #tabs {
     display: none;
   }
 
