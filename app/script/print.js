@@ -1,3 +1,4 @@
+// 機能しないが無視
 window.print = function (tabID = tab.openedTab()) {
   const wayakuArrary = viewHTMLtoArray(tab.getHTMLcontent(tabID))
   const title = arrayToText(viewHTMLtoArray(tab.getHTMLcontent(tabID)))[0]
