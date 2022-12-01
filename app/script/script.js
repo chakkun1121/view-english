@@ -11,7 +11,7 @@ window.onload = function () {
     if (librariesURL.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
       appEvent.dispatchEvent(new Event('init'))
-
+      startOpenFilesFromFileAPI()
       //いつでも使用可能になったらローミング画面を消す
       document.getElementById('loading').classList.add('loaded');
       clearInterval(setStart)

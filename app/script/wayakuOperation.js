@@ -43,4 +43,33 @@ async function openViewWayaku(tabID) {
     }
   }
 }
+async function startOpenFilesFromFileAPI() {
+  //fileAPIからのファイル取得
+  for (const file of files) {
+    const blob = await file.getFile();
+    blob.handle = file;
+    const fileData = await blob.text();
+    const fileName = file.name
+    let fileType = fileName.split('.').pop(); //拡張子取得
+    if (fileType == 'html') {
+      fileData = htmlToWayaku(reader.result)
+      var pos = fileName.lastIndexOf(".");
+      fileName = fileName.substr(0, pos < 0 ? file.length : pos) + ".wayaku";
+    } else if (fileType == 'wayaku') {
+      fileData = reader.result;
+    } else {
+      console.error('拡張子が違います。')
+      return;
+    }
+    fileData = arrayToViewHTML(wayakuToArray(fileData))
+    if (i != 0) {
+      // 新しいタブを開き、そこに投げ込む
+      tab.new(fileName, fileData)
+      return;
+    }
+    tab.viewHTMLcontent(tabID, fileData, fileName)
+    tab.view(tabID)
+  }
+}
+
 finishedScriptNumber++
