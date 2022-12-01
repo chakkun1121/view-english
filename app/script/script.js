@@ -11,8 +11,15 @@ window.onload = function () {
     if (librariesURL.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
       appEvent.dispatchEvent(new Event('init'))
-      startOpenFilesFromFileAPI()
-      //いつでも使用可能になったらローミング画面を消す
+      if ('launchQueue' in window && 'files' in LaunchParams.prototype) {
+        launchQueue.setConsumer((launchParams) => {
+          // Nothing to do when the queue is empty.
+          if (!launchParams.files.length) {
+            return;
+          }
+          startOpenFilesFromFileAPI(launchParams.files)
+        });
+      }      //いつでも使用可能になったらローミング画面を消す
       document.getElementById('loading').classList.add('loaded');
       clearInterval(setStart)
       scriptSetLoopNumber = 0

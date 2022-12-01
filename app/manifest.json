@@ -45,31 +45,5 @@
         }
       ]
     }
-  ],
-  "shortcuts": [
-    {
-      "name": "ヘルプ",
-      "short_name": "ヘルプ",
-      "url": "index.html?mode=help",
-      "icons": [
-        {
-          "src": "img/icon.png",
-          "sizes": "195x195",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "設定",
-      "short_name": "設定",
-      "url": "index.html?mode=settings",
-      "icons": [
-        {
-          "src": "img/settings.png",
-          "sizes": "640x640",
-          "type": "image/png"
-        }
-      ]
-    }
   ]
 }
