@@ -40,7 +40,8 @@ const librariesURL = [
   "script/cards.js",
   "script/editWayaku.js",
   "script/settings.js",
-  "script/saveWayakuFile.js"
+  "script/saveWayakuFile.js",
+  "script/print.js"
 ]
 let finishedScriptNumber = 0;
 let resentScriptNumber = -1
