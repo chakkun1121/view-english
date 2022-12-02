@@ -31,6 +31,7 @@ body {
 
 /* headerのツールバーのボタン */
 #headerButtons {
+  app-region: drag;
   display: flex;
   background: var(--header-button-color);
   width: env(titlebar-area-width, 100%);
@@ -197,4 +198,9 @@ p.en {
   .wayaku-content {
     display: block;
   }
+}
+@media  (width<450px){
+  .tool-bar-button:not(#fileButton) {
+  display: none!important;
+}
 }
