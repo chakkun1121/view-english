@@ -10,8 +10,8 @@ const tab = {
     tab.tabInfo.lastTabID++
     tab.saveTabInfo()
     return tab.tabInfo.lastTabID;
-  }
-  , close: function (tabID) {
+  },
+  close: function (tabID = tab.openedTab()) {
     let closedTab;
     // 閉じるタブを探してtabInfoから消去する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
@@ -45,8 +45,8 @@ const tab = {
   },
   getTabInfo: function () {
     return tab.tabInfo;
-  }
-  , changeTaborder(newTabOrderIdArrey) {
+  },
+  changeTaborder(newTabOrderIdArrey) {
     if (!newTabOrderIdArrey) return;
     document.getElementById('leftTabs').innerHTML = ""
     for (let i = 0; i < newTabOrderIdArrey.left.length; i++) {
@@ -71,13 +71,13 @@ const tab = {
       `
     }
     tab.saveTabInfo()
-  }
-  , tabInfo: {
+  },
+  tabInfo: {
     left: [],
     right: [],
     lastTabID: 0
-  }
-  , view: function (tabID = tab.openedTab()) {
+  },
+  view: function (tabID = tab.openedTab()) {
     if (tabID == null) return;
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
@@ -99,8 +99,7 @@ const tab = {
         return;
       }
     }
-  }
-  ,
+  },
   getNewTabHTMLdata: function () {
     return `
       <div class="new-tab">
@@ -112,7 +111,7 @@ const tab = {
   saveTabInfo: function () {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
   },
-  viewHTMLcontent: function (tabID, HTMLcontent, title) {
+  viewHTMLcontent: function (tabID = tab.openedTab(), HTMLcontent, title) {
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].HTMLdata = HTMLcontent
@@ -132,7 +131,8 @@ const tab = {
         return;
       }
     }
-  }, getHTMLcontent: function (tabID) {
+  },
+  getHTMLcontent: function (tabID = tab.openedTab()) {
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         return tab.tabInfo.left[i].HTMLdata
@@ -144,9 +144,11 @@ const tab = {
 
       }
     }
-  }, changeTabName: function (tabID, newName) {
+  },
+  changeTabName: function (tabID = tab.openedTab(), newName) {
 
-  }, openedTab: function (position = "left") {
+  },
+  openedTab: function (position = "left") {
     if (position = "right") {
       for (let i = 0; i < tab.tabInfo.right.length; i++) {
         if (tab.tabInfo.right[i].viewed) {
@@ -179,7 +181,6 @@ const tab = {
 
 
   }
-
 }
 
 

@@ -4,6 +4,7 @@
  * @returns {string} wayakuData
  */
 function htmlToWayaku(HTMLdata) {
+  if (!HTMLdata) return;
   //改行を消す
   HTMLdata = HTMLdata.replace(/\r?\n/g, '');
   let start = HTMLdata.indexOf('<h1 class="title">')
@@ -18,6 +19,7 @@ function htmlToWayaku(HTMLdata) {
  * @returns {Array} arrayWayakuData
  */
 function wayakuToArray(stringWayakuData) {
+  if (!stringWayakuData) return;
   //改行を消す
   stringWayakuData = stringWayakuData.replace(/\r?\n/g, '');
   //titleを取得
@@ -61,6 +63,7 @@ function wayakuToArray(stringWayakuData) {
  * @returns {string} stringWayakuData
  */
 function arrayToWayaku(arrayWayakuData) {
+  if (!arrayWayakuData) return;
   arrayWayakuData = arrayWayakuData.filter(function (s) {
     return s !== '';
   })
@@ -83,6 +86,7 @@ function arrayToWayaku(arrayWayakuData) {
  * @returns {Array} viewHTMLwayakuData
  */
 function arrayToViewHTML(arrayWayakuData) {
+  if (!arrayWayakuData) return;
   return `<div class="wayaku-content">${arrayToWayaku(arrayWayakuData)}</div>`
 }
 /**
@@ -101,6 +105,7 @@ function viewHTMLtoArray(viewHTMLwayakuData) {
  * @returns {Array} arrayWayakuData
  */
 function textToArray(title, text) {
+  if (!title || !text) return;
   let arr = [title]
   //textを改行をもとに配列へ押し込む
   let push_arr = text.split(/[\n\t]/).filter(function (s) {
@@ -115,6 +120,7 @@ function textToArray(title, text) {
  * @returns {Array} [title,textWayakuData]
  */
 function arrayToText(arrayWayakuData) {
+  if (!arrayWayakuData) return;
   let title = arrayWayakuData[0]
   arrayWayakuData.shift()
   return [title, arrayWayakuData.join('\n')]
@@ -151,6 +157,7 @@ async function openWayakuFile(callback) {
  * @returns 
  */
 function isWayakuTitle(fileTitle) {
+  if (!fileTitle) return;
   return fileTitle.split('.').pop() == "wayaku";
 }
 finishedScriptNumber++

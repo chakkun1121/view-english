@@ -1,6 +1,9 @@
-function editFile() {
+/**
+ * ファイルを編集します。
+ */
+function editFile(tabID = tab.openedTab()) {
   let title, main
-  let wayakuArrary = viewHTMLtoArray(tab.getHTMLcontent(tab.openedTab()))
+  let wayakuArrary = viewHTMLtoArray(tab.getHTMLcontent(tabID))
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary)
   } else {
@@ -26,6 +29,11 @@ function finishEdit(tabID = tab.openedTab()) {
   tab.saveTabInfo();
   tab.changeTaborder()
   tab.view(tabID)
+}
+function newFile() {
+  tab.new()
+  tab.view()
+  editFile()
 }
 document.getElementById('headerFileMenu').innerHTML += `
   <button class="header-file-menu-button" onclick="editFile()">編集</button>

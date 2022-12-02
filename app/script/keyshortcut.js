@@ -12,7 +12,7 @@ const shortcutList = [
   {
     key: "f5",
     function: "最新の状態に更新",
-    callback: tab.changeTaborder
+    callback: function () { tab.changeTaborder() }
   },
   {
     key: "ctrl+1",
@@ -20,14 +20,44 @@ const shortcutList = [
     callback: function () { tab.view(1) }
   },
   {
+    key: "ctrl+2",
+    function: "2番目のタブを表示します。",
+    callback:function(){tab.view(2)}
+  },
+  {
+    key: "ctrl+e",
+    function: "ファイルを編集します",
+    callback: function () { editFile() }
+  },
+  {
     key: "ctrl+r",
     function: "最新の状態に更新",
-    callback: tab.changeTaborder
+    callback: function () { tab.changeTaborder() }
+  },
+  {
+    key: "ctrl+n",
+    function: "新しいタブファイルの作成",
+    callback: function () { newFile() }
   },
   {
     key: "ctrl+s",
     function: "保存",
-    callback: saveWayaku
+    callback: function () { saveWayaku() }
+  },
+  {
+    key: "ctrl+t",
+    function: "新しいタブを開く",
+    callback: function () { tab.new() }
+  },
+  {
+    key: "ctrl+w",
+    function: "タブを閉じる",
+    callback: function () { tab.close() }
+  },
+  {
+    key: "alt+f",
+    function: "フラッシュカードを開始する",
+    callback: function () { cards.start() }
   }
 ]
 for (let i = 0; i < shortcutList.length; i++) {
