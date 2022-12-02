@@ -8,11 +8,11 @@ const urlsToCache = [
   'style/startload.css',
   'style/style.css',
   'script/script.js',
-  '../card/card.html',
-  '../card/card.css',
-  '../card/darkmode.css',
-  '../card/script.js',
-  '../card/key_shortcut.js',
+  '../cards/card.html',
+  '../cards/card.css',
+  '../cards/darkmode.css',
+  '../cards/script.js',
+  '../cards/key_shortcut.js',
   'manifest.json'
 ];
 
