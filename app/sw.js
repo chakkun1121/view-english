@@ -7,7 +7,13 @@ const urlsToCache = [
   'index.html',
   'style/startload.css',
   'style/style.css',
-  'script/script.js'
+  'script/script.js',
+  '../card/card.html',
+  '../card/card.css',
+  '../card/darkmode.css',
+  '../card/script.js',
+  '../card/key_shortcut.js',
+  'manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -66,7 +72,6 @@ self.addEventListener('fetch', (event) => {
               .then((cache) => {
                 cache.put(event.request, responseToCache);
               });
-
             return response;
           });
       })
