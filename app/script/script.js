@@ -48,7 +48,8 @@ const librariesURL = [
   "script/editWayaku.js",
   "script/settings.js",
   "script/saveWayakuFile.js",
-  "script/print.js"
+  "script/print.js",
+  "script/keyshortcut.js"
 ]
 let finishedScriptNumber = 0;
 let resentScriptNumber = -1
