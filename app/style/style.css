@@ -173,6 +173,10 @@ p.en {
   padding-top: 10px;
 }
 
+.wayaku-content h1 {
+  margin-bottom: 0;
+}
+
 /* 和訳ファイルの編集時 */
 .edit-file {
   height: 100%;
@@ -199,8 +203,9 @@ p.en {
     display: block;
   }
 }
-@media  (width<450px){
+
+@media (width<450px) {
   .tool-bar-button:not(#fileButton) {
-  display: none!important;
-}
+    display: none !important;
+  }
 }
