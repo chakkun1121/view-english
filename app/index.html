@@ -4,175 +4,64 @@
 <head>
   <meta charset="utf-8" />
   <title>和訳表示サイト</title>
-  <style id="startLoadCss">
-    /*mainの読み込み中の画面*/
-    *:focus {
-      border-width: 1px;
-      border-style: double;
-      border-color: black
-    }
-
-    body {
-      margin: 0
-    }
-
-    #header {
-      -webkit-app-region: drag;
-      app-region: drag;
-      height: env(titlebar-area-height, 33px);
-      background: #7aa1d6;
-      user-select: none
-    }
-
-    .tool-bar {
-      background-color: #7aa1d6;
-      display: flex;
-      width: env(titlebar-area-width, 100%);
-      height: env(titlebar-area-height, 33px);
-      -webkit-app-region: drag;
-      app-region: drag
-    }
-
-    .tool-bar button {
-      appearance: none;
-      border: 0;
-      border-radius: 0;
-      background: #7aa1d6
-    }
-
-    #loader_main {
-      margin: 10px
-    }
-
-    #loader_main h1 {
-      font-size: 30px
-    }
-
-    #loader_main h2 {
-      font-size: 15px
-    }
-
-    #loader_main p {
-      font-size: 10px
-    }
-
-    #loader_main a {
-      text-decoration: underline
-    }
-
-    .main,
-    #mobile_menu,
-    #file_contents {
-      display: none
-    }
-  </style>
-  <link href="../reset.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/root.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/style.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/mobile.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/header.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/content.css" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="main style/HTMLcontent.css" rel="stylesheet" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="" id="darkModeCss" rel="stylesheet">
-  <link href="main style/print.css" rel="stylesheet" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="style/style.css" media="print" onload="this.media='all'">
   <link rel="apple-touch-icon" href="/apple.png" async>
-  <link rel="manifest" href="manifest.json" defer>
+  <link rel="stylesheet" href="style/startload.css" />
+  <!--   <link rel="manifest" href="manifest.json" defer> -->
   <link rel="icon" href="../favicon.ico" id="favicon" async>
-
-  <meta name="theme-color" content="#7aa1d6" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <meta name="description" content="ローカルに保存されている和訳ファイル(.wayaku など)を開きます。">
+  <link rel="manifest" href="manifest.json" defer>
+  <meta name="theme-color" content="#7aa1d6">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="ローカルに保存されている和訳ファイル(.wayakuなど)を開きます。">
 </head>
 
 <body>
-  <!--header=======================-->
-  <header>
-    <div id="header">
-      <div class="tool-bar">
-        <button type="button" class="tool-bar-button pc-hide" id="mobile_menu_button"
-          onclick="view_mobile_menu()">メニュー</button>
-        <button type="button" class="tool-bar-button mobile-hide" id="file_button">ファイル</button>
-        <button type="button" class="tool-bar-button mobile-hide" onclick="window.print();">印刷</button>
-        <button type="button" class="tool-bar-button            " onclick="change_style();">表示切り替え</button>
-        <button type="button" class="tool-bar-button            " onclick="open_settings();">設定</button>
+  <div id="loading">
+    <div class="loader"></div>
+    <h1>読み込み中です。しばらくお待ち下さい。万が一このまましばらく起動しなかったら、お問い合わせください。</h1>
+    <div id="loadErrorMessage"></div>
+  </div>
+  <div id="headerButtons">
+    <button type="button" class="tool-bar-button" id="fileButton"
+      onclick="document.querySelector('#headerFileMenu').classList.toggle('header-file-manu-opened')">
+      ファイル
+    </button>
+  </div>
+  <div id="headerFileMenu"></div>
+  <div id="tabs">
+    <div id="tabsLeft">
+      <div id="leftTabs"></div>
+      <div class="new-tab-button">
+        <button class="reset" onclick="tab.new(undefined,undefined,'left')" aria-label="新しいタブを開く">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </div>
     </div>
-    <div class="tabs">
-      <div id="tab_left">
-      </div>
-      <div class="tab-right">
-        <button type="submit" id="new_tab" onclick="new_tab();" aria-label="新しいタブを開く">＋</button>
+    <div class="contents-size-change-bar">
+      <!-- 左右のコンテンツの幅を変えるバー -->
+    </div>
+    <div id="tabsRight">
+      <div id="rightTabs"></div>
+      <div class="new-tab-button">
+        <button class="reset" onclick="tab.new(undefined,undefined,'right')" aria-label="新しいタブを開く">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </div>
     </div>
-  </header>
-  <!--/header=======================-->
-  <!--メイン画面=======================-->
-  <div class="main" id="main_contents" ondragover="f1(event);" ondrop="f2(event)">></div>
-  <div id="loader_main">
-    <h1>和訳表示サイト</h1>
-    <h2>現在読み込み中です</h2>
-    <p>
-      もしこの画面が続くようでしたら、<spen id="loader_js_message">javascriptを無効にしていないか、対応ブラウザで開いているか(現在はchromeのみ対応)、</spen>
-      インターネットが繋がっているか(
-      <a href="https://google.com" target="_target">試しにこちらからgoogleにアクセスしてみてください</a>
-      )を確認してください。
-    </p>
   </div>
-  <!--アナウンス画面=======================-->
-  <div id='announces'></div>
-  <!--/アナウンス画面=======================-->
-  <!--toolsbarのファイルのところにおいたときに表示用=======================-->
-  <div id="file_contents">
-    <ul>
-      <li onclick="new_file()">新しいファイル</li>
-      <li onclick="open_files_from_input()">開く</li>
-      <li onclick="edit_file()">編集</li>
-      <li onclick="save_file()">保存</li>
-      <li onclick="save_file_as_newfile()">名前をつけて保存</li>
-      <li onclick="view_histories()">履歴表示</li>
-      <li onclick="open_settings()">設定</li>
-      <li onclick="start_cards()">フラッシュカードをスタート</li>
-      <li onclick="open_help()">ヘルプ</li>
-      <li><a href="https://my-site.chakkun1121haru.repl.co/form/" target="_target">お問い合わせ</a></li>
-      <li onclick="updata()">アプリを更新</li>
-    </ul>
+  <div id="mainContents">
+    <div id="mainContentsLeft">
+      タブが開かれていません。
+    </div>
+    <div id="ContentsSizeChangeBar" class="contents-size-change-bar"></div>
+    <div id="mainContentsRight">
+    </div>
   </div>
-  <!--スマホ用のメニュー画面-->
-  <div id="mobile_menu" class="pc-hide">
-    <ul>
-      <li onclick="view_mobile_menu();new_file()">新しいファイル</li>
-      <li onclick="view_mobile_menu();open_files_from_input()">開く</li>
-      <li onclick="view_mobile_menu();edit_file()">編集</li>
-      <li onclick="view_mobile_menu();save_file_as_newfile()">名前をつけて保存</li>
-      <li onclick="view_mobile_menu();view_histories()">履歴表示</li>
-      <li onclick="view_mobile_menu();open_settings()">設定</li>
-      <li onclick="view_mobile_menu();start_cards()">フラッシュカードをスタート</li>
-      <li onclick="view_mobile_menu();open_help()">ヘルプ</li>
-      <li onclick="view_mobile_menu();print()">印刷</li>
-      <li onclick="view_mobile_menu();updata()">アプリを更新</li>
-    </ul>
-  </div>
-  <div id="send_to_cards_window" style="display:none!important"></div>
-
-  <!--jsファイルの読み込み-->
-  <script src="../library/hotkeys.js" defer></script>
-  <script src="../library/shortcut.js" defer></script>
-  <script src="script/tab.js" defer></script>
-  <script src="script/file.js" defer></script>
-  <script src="script/header.js" defer></script>
-  <script src="script/my-library.js" defer></script>
-  <script src="script/announce.js" defer></script>
-  <script src="script/setting.js" defer></script>
-  <script src="script/help.js" defer></script>
-  <script src="script/card.js" defer></script>
-  <script src="script/history.js" defer></script>
-  <script src="script/mobile.js" defer></script>
+  <div id="appEvent" style="display:none!important;"></div>
+  <script src="https://www.openjs.com/scripts/events/keyboard_shortcuts/shortcut.js" defer></script>
   <script src="script/script.js" defer></script>
-  <script src="script/key_shortcut.js" defer></script>
-  <!--sw.js登録=======================-->
-  <!--<script>
-    document.getElementById('loader_js_message').innerText = "";
-  </script>-->
+  <script src="https://kit.fontawesome.com/5f89789935.js" crossorigin="anonymous" defer></script>
+  <!-- sw.jsの登録 -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').then(function (registration) {
@@ -186,7 +75,6 @@
       view_announce("サービスワーカー非対応ブラウザです。")
     }
   </script>
-
 </body>
 
 </html>

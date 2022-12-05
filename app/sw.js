@@ -1,10 +1,19 @@
-const CACHE_VERSION = 'v3.5.0-08';//現在バージョンを入れる
+const CACHE_VERSION = 'v4.0.0';//現在バージョンを入れる
 const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
   '.',
-  'index.html'
+  'index.html',
+  'style/startload.css',
+  'style/style.css',
+  'script/script.js',
+  '../cards/card.html',
+  '../cards/card.css',
+  '../cards/darkmode.css',
+  '../cards/script.js',
+  '../cards/key_shortcut.js',
+  'manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -63,7 +72,6 @@ self.addEventListener('fetch', (event) => {
               .then((cache) => {
                 cache.put(event.request, responseToCache);
               });
-
             return response;
           });
       })
