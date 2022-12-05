@@ -5,7 +5,7 @@ let mode = ""
 function init() {
   // changeColorMode()
   const file = getParam('file')
-  if (!file) {
+  if (!file || file == "undefined") {
     alert('もう一度フラッシュカードを開いてください。')
     window.close()
     return;
@@ -155,4 +155,13 @@ function getParam(name, url) {
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+function arrayShuffle(array) {
+  for (var i = (array.length - 1); 0 < i; i--) {
+    var r = Math.floor(Math.random() * (i + 1));
+    var tmp = array[i];
+    array[i] = array[r];
+    array[r] = tmp;
+  }
+  return array;
 }
