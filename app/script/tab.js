@@ -77,7 +77,7 @@ const tab = {
     right: [],
     lastTabID: 0
   },
-  view: function (tabID = tab.openedTab()) {
+  view: function (tabID = tab.openedTab(), isViewFrontTab) {
     if (tabID == null) return;
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
@@ -87,6 +87,7 @@ const tab = {
         tab.tabInfo.left[i].viewed = true
         document.getElementById('mainContentsLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
         tab.saveTabInfo()
+        tab.changeTaborder()
         return;
       }
     }
@@ -96,6 +97,7 @@ const tab = {
         tab.tabInfo.left[i].viewed = true
         document.getElementById('mainContentsRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
         tab.saveTabInfo()
+        tab.changeTaborder()
         return;
       }
     }
