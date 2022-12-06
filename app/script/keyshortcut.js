@@ -38,7 +38,7 @@ const shortcutList = [
     key: "ctrl+o",
     function: "ファイルを開きます",
     callback: function () { }
-  }
+  },
   {
     key: "ctrl+r",
     function: "最新の状態に更新",
@@ -66,7 +66,9 @@ const shortcutList = [
     callback: function () { cards.start() }
   }
 ]
-for (let i = 0; i < shortcutList.length; i++) {
-  shortcut.add(shortcutList[i].key, shortcutList[i].callback)
-}
+appEvent.addEventListener('init', function () {
+  for (let i = 0; i < shortcutList.length; i++) {
+    shortcut.add(shortcutList[i].key, shortcutList[i].callback)
+  }
+})
 finishedScriptNumber++
