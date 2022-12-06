@@ -1,5 +1,5 @@
 const appEvent = document.getElementById('appEvent');
-const appVersion = "4.0.0"
+const appVersion = "4.0.1"
 window.onload = function () {
   //表示の準備をする
   const setStart = setInterval(function () {
@@ -34,10 +34,10 @@ window.onload = function () {
       scriptSetLoopNumber = 0
     }
   }, 100)
-
 }
 const librariesURL = [
   // index.htmlからのパスを書く
+  "script/keyshortcut.js",
   "script/tab.js",
   "script/header.js",
   "script/wayaku.js",
@@ -48,8 +48,7 @@ const librariesURL = [
   "script/editWayaku.js",
   "script/settings.js",
   "script/saveWayakuFile.js",
-  "script/print.js",
-  "script/keyshortcut.js"
+  "script/print.js"
 ]
 let finishedScriptNumber = 0;
 let resentScriptNumber = -1

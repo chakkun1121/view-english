@@ -141,7 +141,6 @@ const tab = {
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       if (tab.tabInfo.right[i].tabID == tabID) {
         return tab.tabInfo.right[i].HTMLdata
-
       }
     }
   },
@@ -153,7 +152,6 @@ const tab = {
       for (let i = 0; i < tab.tabInfo.right.length; i++) {
         if (tab.tabInfo.right[i].viewed) {
           return tab.tabInfo.right[i].tabID
-
         }
       }
     }
@@ -178,12 +176,8 @@ const tab = {
         return;
       }
     }
-
-
   }
 }
-
-
 if (localStorage.getItem("tabInfo")) {
   tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
   tab.changeTaborder(tab.tabInfo)
