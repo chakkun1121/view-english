@@ -22,7 +22,7 @@ const tab = {
         tab.changeTaborder(tab.tabInfo)
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(i)
+          tab.view(i, true)
           return;
         }
         document.getElementById('mainContentsLeft').innerText = "タブが開かれていません。"
@@ -37,11 +37,11 @@ const tab = {
         // 変更後、それで並び替えさせる
         tab.changeTaborder(tab.tabInfo)
         // その後、前のタブを表示する
-        tab.view(i)
+        tab.view(i, true)
         return;
       }
     }
-    console.error('指定されたIDのタブは存在しません。もう閉じられたのかもしれません。')
+    console.error(tabID + 'のタブは存在しません。もう閉じられたのかもしれません。')
   },
   getTabInfo: function () {
     return tab.tabInfo;
@@ -101,6 +101,11 @@ const tab = {
         return;
       }
     }
+    if (isViewFrontTab) {
+      console.error(`tabID:${tabID}のタブは存在しません。強制的に前のタブを表示します。`)
+      tab.view(tab.tabID - 1)
+    }
+    console.error(`tabID:${tabID}のタブは存在しません。`)
   },
   getNewTabHTMLdata: function () {
     return `
