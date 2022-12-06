@@ -1,0 +1,10 @@
+[33me873637[m[33m ([m[1;36mHEAD -> [m[1;32mv4.0.1[m[33m, [m[1;31morigin/v4.0.1[m[33m)[m HEAD@{0}: commit: タブを閉じたのに前のタブの内容が自動的に表示されない #10 の訂正中だが面倒
+[33m268ab2c[m HEAD@{1}: commit: タブを閉じたのに前のタブの内容が自動的に表示されない #10の対処中
+[33md214cd1[m HEAD@{2}: commit: 和訳ファイルのh1の見た目が悪い #12 の対処
+[33ma8abf73[m HEAD@{3}: commit: 少し変更
+[33mcf73d8e[m HEAD@{4}: commit: バージョン更新準備
+[33m7f72ae7[m HEAD@{5}: commit: フラッシュカードのバグの訂正 (#18,#19)
+[33me8a469a[m HEAD@{6}: checkout: moving from version4.0.0 to v4.0.1
+[33m0c8cc8b[m[33m ([m[1;31morigin/version4.0.0[m[33m, [m[1;32mversion4.0.0[m[33m)[m HEAD@{7}: commit (merge): 競合を解決
+[33m642edf4[m HEAD@{8}: checkout: moving from version4.0.0 to version4.0.0
+[33m642edf4[m HEAD@{9}: clone: from https://github.com/chakkun1121/view-english
