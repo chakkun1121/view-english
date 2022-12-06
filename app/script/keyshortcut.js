@@ -22,7 +22,7 @@ const shortcutList = [
   {
     key: "ctrl+2",
     function: "2番目のタブを表示します。",
-    callback:function(){tab.view(2)}
+    callback: function () { tab.view(2) }
   },
   {
     key: "ctrl+e",
@@ -30,15 +30,21 @@ const shortcutList = [
     callback: function () { editFile() }
   },
   {
-    key: "ctrl+r",
-    function: "最新の状態に更新",
-    callback: function () { tab.changeTaborder() }
-  },
-  {
     key: "ctrl+n",
     function: "新しいタブファイルの作成",
     callback: function () { newFile() }
   },
+  {
+    key: "ctrl+o",
+    function: "ファイルを開きます",
+    callback: function () { }
+  }
+  {
+    key: "ctrl+r",
+    function: "最新の状態に更新",
+    callback: function () { tab.changeTaborder() }
+  },
+
   {
     key: "ctrl+s",
     function: "保存",
