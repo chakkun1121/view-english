@@ -1,5 +1,5 @@
 const appEvent = document.getElementById('appEvent');
-const appVersion = "4.0.1"
+const appVersion = "4.0.2"
 window.onload = function () {
   //表示の準備をする
   const setStart = setInterval(function () {
