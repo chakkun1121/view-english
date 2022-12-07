@@ -64,6 +64,10 @@ header h1 {
 }
 
 /*最初の設定画面*/
+#start_settings {
+  padding: 5px;
+}
+
 /*フラッシュカード本体*/
 #view_cards {
   display: none;
