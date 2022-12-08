@@ -6,7 +6,7 @@
 ### tabメゾット
 |関数、変数|内容|return|
 |:--|:--|:--|
-|new(title,HTMLdata,purpose,position)|新しいタブを開きます|number(新しいタブのID)|
+|new(title,HTMLdata,position,purpose)|新しいタブを開きます|number(新しいタブのID)|
 |close(tabID)|指定されたタブを閉じます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
 |HTMLcontent.change(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
