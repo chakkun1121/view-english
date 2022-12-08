@@ -51,10 +51,8 @@ const tab = {
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       tab.tabInfo.left[i].viewed = false
-
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        document.getElementById('mainContentsLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
         tab.save()
         return;
       }
@@ -63,7 +61,6 @@ const tab = {
       tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        document.getElementById('mainContentsRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
         tab.save()
         return;
       }
@@ -187,6 +184,9 @@ const tab = {
   adaptationTabInfoToHTML: function () {
     document.getElementById('leftTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].viewed) {
+        document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
+      }
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
@@ -198,6 +198,9 @@ const tab = {
     }
     document.getElementById('rightTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      if (tab.tabInfo.right[i].viewed) {
+        document.getElementById('mainContentRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
+      }
       document.getElementById('rightTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.right[i].tabID})">${tab.tabInfo.right[i].title}</button>
