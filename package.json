@@ -1,0 +1,19 @@
+{
+  "name": "view-english",
+  "version": "1.0.0",
+  "description": "https://view-english.chakkun1121haru.repl.co からhttps://chakkun1121.github.io/view-english/ に移植完了",
+  "main": "js-cookie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chakkun1121/view-english.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chakkun1121/view-english/issues"
+  },
+  "homepage": "https://github.com/chakkun1121/view-english#readme"
+}
