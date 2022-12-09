@@ -16,10 +16,9 @@ const tab = {
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left.splice(i, 1)
-        // 変更後、それで並び替えさせる
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(i - 1)
+          tab.view(tab.tabInfo.left[i - 1].tabID)
           tab.save()
         }
         tab.save()
@@ -32,7 +31,7 @@ const tab = {
         tab.tabInfo.right.splice(i, 1)
         // 変更後、それで並び替えさせる
         // その後、前のタブを表示する
-        tab.view(i - 1)
+        tab.view(tab.tabInfo.right[i - 1].tabID)
         tab.save()
         return;
       }
