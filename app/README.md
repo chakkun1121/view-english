@@ -6,7 +6,7 @@
 ### tabメゾット
 |関数、変数|内容|return|
 |:--|:--|:--|
-|new(title,HTMLdata,position,purpose)|新しいタブを開きます|number(新しいタブのID)|
+|new(title,HTMLdata,position,purpose,)|新しいタブを開きます|number(新しいタブのID)|
 |close(tabID)|指定されたタブを閉じます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
 |HTMLcontent.change(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
@@ -16,9 +16,10 @@
 |title.get(tabID)|
 |title.change(tabID,newTitle)|
 |openedTab(position(初期はleft))|今開いているtabIDを表示します。|
-|save()|
+|save(isNotAdapt[^2])|
 |adaptationTabInfoToHTML()|tabInfoの内容をHTMLに適応します。(これ以外のやつは自動変更なし)|
 [^1]newTab,wayakuContent,settingなどのタブの使われ方
+[^2]これは基本的にfalseでどうしても変更してはいけないときにtrueにすることでtabInfoのみ書き換えられる
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|

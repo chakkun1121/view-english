@@ -12,19 +12,17 @@ const tab = {
     return tab.tabInfo.lastTabID;
   },
   close: function (tabID = tab.openedTab()) {
-    let closedTab;
     // 閉じるタブを探してtabInfoから消去する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left.splice(i, 1)
-        tab.save()
         // 変更後、それで並び替えさせる
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(i)
-          return;
+          tab.view(i - 1)
+          tab.save()
         }
-        document.getElementById('mainContentsLeft').innerText = "タブが開かれていません。"
+        tab.save()
         return;
       }
     }
@@ -32,10 +30,10 @@ const tab = {
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.right.splice(i, 1)
-        tab.save()
         // 変更後、それで並び替えさせる
         // その後、前のタブを表示する
-        tab.view(i)
+        tab.view(i - 1)
+        tab.save()
         return;
       }
     }
@@ -74,8 +72,9 @@ const tab = {
       </div>
   `
   },
-  save: function () {
+  save: function (isNotAdapt) {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+    if (!isNotAdapt) tab.adaptationTabInfoToHTML()
   },
   HTMLcontent: {
     get: function (tabID = tab.openedTab()) {
@@ -154,14 +153,14 @@ const tab = {
       for (let i = 0; i < tab.tabInfo.left.length; i++) {
         if (tab.tabInfo.left[i].tabID == tabID) {
           tab.tabInfo.left[i].purpose = purpose
-          tab.save()
+          tab.save(true)
           return;
         }
       }
       for (let i = 0; i < tab.tabInfo.right.length; i++) {
         if (tab.tabInfo.right[i].tabID == tabID) {
           tab.tabInfo.right[i].purpose = purpose
-          tab.save()
+          tab.save(ture)
           return;
         }
       }
@@ -182,10 +181,12 @@ const tab = {
     }
   },
   adaptationTabInfoToHTML: function () {
+    let isFindViewed = [false, false]
     document.getElementById('leftTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].viewed) {
         document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
+        isFindViewed[0] = true
       }
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
@@ -195,6 +196,10 @@ const tab = {
           </button>
         </div>
       `
+    }
+    if (!isFindViewed[0]) {
+      document.getElementById('mainContentLeft').innerHTML = "タブが開かれていません。"
+
     }
     document.getElementById('rightTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
@@ -214,6 +219,7 @@ const tab = {
 }
 if (localStorage.getItem("tabInfo")) {
   tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
+  tab.adaptationTabInfoToHTML()
 }
 // 読み込み時の処理
 finishedScriptNumber++
