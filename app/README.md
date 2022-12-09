@@ -6,15 +6,20 @@
 ### tabメゾット
 |関数、変数|内容|return|
 |:--|:--|:--|
-|new(title,HTMLdata,position)|新しいタブを開きます|number(新しいタブのID)|
-|close(tabID)|指定されたタブを閉じます。|undefined| 
-|changeTaborder(TabInfoArrey)|指定された並び順にタブを並び替えます。|undefined|
+|new(title,HTMLdata,position,purpose,)|新しいタブを開きます|number(新しいタブのID)|
+|close(tabID)|指定されたタブを閉じます。|undefined|
 |view(TabID)|指定されたタブを表示します。|undefined|
-|viewHTMLcontent(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
-|getHTMLcontent(tabID)|今表示中のhtmlコンテンツを取得します。|
-|openedTab(position(初期はleft))|今開いているtabIDを表示します。
-|saveTabInfo()|
-|changeHTMLcontentOnlyTabInfo(tabID,data)|tabInfoの中のHTMLcontentのみを書き換えます。|
+|HTMLcontent.change(tabID,HTMLcontent,title)|htmlコンテンツを変更します。|undefined|
+|HTMLcontent.get(tabID)|今表示中のhtmlコンテンツを取得します。|
+|purpose.change(tabID,newPurpose),|タブの目的[^1]の変更|
+|purpose.get(tabID)|指定されたIDのタブの目的を取得|purpose|
+|title.get(tabID)|
+|title.change(tabID,newTitle)|
+|openedTab(position(初期はleft))|今開いているtabIDを表示します。|
+|save(isNotAdapt[^2])|
+|adaptationTabInfoToHTML()|tabInfoの内容をHTMLに適応します。(これ以外のやつは自動変更なし)|
+[^1]newTab,wayakuContent,settingなどのタブの使われ方
+[^2]これは基本的にfalseでどうしても変更してはいけないときにtrueにすることでtabInfoのみ書き換えられる
 ### wayakuファイル操作関連
 wayakuメゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 |関数、変数|内容|return|
