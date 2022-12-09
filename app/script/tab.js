@@ -1,27 +1,31 @@
 const tab = {
-  new: function (title = "新しいタブ", HTMLdata = tab.getNewTabHTMLdata(), position = "left", purpose = "newtab") {
+  new: function (title = "新しいタブ", HTMLdata = tab.getNewTabHTMLdata(), position = "left") {
     tab.tabInfo[position].push({
       tabID: tab.tabInfo.lastTabID + 1,
       HTMLdata,
-      title,
-      purpose
+      title
     });
+    tab.changeTaborder(tab.tabInfo)
     tab.view(tab.tabInfo.lastTabID + 1)
     tab.tabInfo.lastTabID++
-    tab.save()
+    tab.saveTabInfo()
     return tab.tabInfo.lastTabID;
   },
   close: function (tabID = tab.openedTab()) {
+    let closedTab;
     // 閉じるタブを探してtabInfoから消去する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left.splice(i, 1)
+        tab.saveTabInfo()
+        // 変更後、それで並び替えさせる
+        tab.changeTaborder(tab.tabInfo)
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(tab.tabInfo.left[i - 1].tabID)
-          tab.save()
+          tab.view(i)
+          return;
         }
-        tab.save()
+        document.getElementById('mainContentsLeft').innerText = "タブが開かれていません。"
         return;
       }
     }
@@ -29,14 +33,44 @@ const tab = {
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.right.splice(i, 1)
+        tab.saveTabInfo()
         // 変更後、それで並び替えさせる
+        tab.changeTaborder(tab.tabInfo)
         // その後、前のタブを表示する
-        tab.view(tab.tabInfo.right[i - 1].tabID)
-        tab.save()
+        tab.view(i)
         return;
       }
     }
     console.error('指定されたIDのタブは存在しません。もう閉じられたのかもしれません。')
+  },
+  getTabInfo: function () {
+    return tab.tabInfo;
+  },
+  changeTaborder(newTabOrderIdArrey) {
+    if (!newTabOrderIdArrey) return;
+    document.getElementById('leftTabs').innerHTML = ""
+    for (let i = 0; i < newTabOrderIdArrey.left.length; i++) {
+      document.getElementById('leftTabs').innerHTML += `
+        <div class="tab">
+          <button class="celect-view-tab-button reset" onclick="tab.view(${newTabOrderIdArrey.left[i].tabID})">${newTabOrderIdArrey.left[i].title}</button>
+          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.left[i].tabID})">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      `
+    }
+    document.getElementById('rightTabs').innerHTML = ""
+    for (let i = 0; i < newTabOrderIdArrey.right.length; i++) {
+      document.getElementById('rightTabs').innerHTML += `
+        <div class="tab">
+          <button class="celect-view-tab-button reset" onclick="tab.view(${newTabOrderIdArrey.right[i].tabID})">${newTabOrderIdArrey.right[i].title}</button>
+          <button class="tab-close-button reset" onclick="tab.close(${newTabOrderIdArrey.right[i].tabID})">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      `
+    }
+    tab.saveTabInfo()
   },
   tabInfo: {
     left: [],
@@ -48,9 +82,11 @@ const tab = {
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       tab.tabInfo.left[i].viewed = false
+
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
+        document.getElementById('mainContentsLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
+        tab.saveTabInfo()
         return;
       }
     }
@@ -58,7 +94,8 @@ const tab = {
       tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
+        document.getElementById('mainContentsRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
+        tab.saveTabInfo()
         return;
       }
     }
@@ -71,99 +108,44 @@ const tab = {
       </div>
   `
   },
-  save: function (isNotAdapt) {
+  saveTabInfo: function () {
     localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
-    if (!isNotAdapt) tab.adaptationTabInfoToHTML()
   },
-  HTMLcontent: {
-    get: function (tabID = tab.openedTab()) {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          return tab.tabInfo.left[i].HTMLdata
-        }
+  viewHTMLcontent: function (tabID = tab.openedTab(), HTMLcontent, title) {
+    for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].tabID == tabID) {
+        tab.tabInfo.left[i].HTMLdata = HTMLcontent
+        tab.tabInfo.left[i].title = title
+        tab.changeTaborder(tab.tabInfo)
+        tab.saveTabInfo()
+        return;
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].HTMLdata
-        }
-      }
-    },
-    change: function (tabID = tab.openedTab(), HTMLcontent) {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          tab.tabInfo.left[i].HTMLdata = HTMLcontent
-          tab.save()
-          return;
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].HTMLdata = HTMLcontent
-          tab.save()
-          return;
-        }
+    }
+    for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      if (tab.tabInfo.right[i].tabID == tabID) {
+        tab.tabInfo.right[i].HTMLdata = HTMLcontent
+        tab.tabInfo.right[i].title = title
+        tab.changeTaborder(tab.tabInfo)
+        tab.saveTabInfo()
+
+        return;
       }
     }
   },
-  title: {
-    get: function (tabID = tab.openedTab()) {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          return tab.tabInfo.left[i].title
-        }
+  getHTMLcontent: function (tabID = tab.openedTab()) {
+    for (let i = 0; i < tab.tabInfo.left.length; i++) {
+      if (tab.tabInfo.left[i].tabID == tabID) {
+        return tab.tabInfo.left[i].HTMLdata
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].title
-        }
-      }
-    },
-    change: function (tabID = tab.openedTab(), title = "新しいタブ") {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          tab.tabInfo.left[i].title = title
-          tab.save()
-          return;
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].title = title
-          tab.save()
-          return;
-        }
+    }
+    for (let i = 0; i < tab.tabInfo.right.length; i++) {
+      if (tab.tabInfo.right[i].tabID == tabID) {
+        return tab.tabInfo.right[i].HTMLdata
       }
     }
   },
-  purpose: {
-    get: function (tabID = tab.openedTab()) {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          return tab.tabInfo.left[i].purpose
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].purpose
-        }
-      }
-    },
-    change: function (tabID = tab.openedTab(), purpose = "新しいタブ") {
-      for (let i = 0; i < tab.tabInfo.left.length; i++) {
-        if (tab.tabInfo.left[i].tabID == tabID) {
-          tab.tabInfo.left[i].purpose = purpose
-          tab.save(true)
-          return;
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].purpose = purpose
-          tab.save(ture)
-          return;
-        }
-      }
-    }
+  changeTabName: function (tabID = tab.openedTab(), newName) {
+
   },
   openedTab: function (position = "left") {
     if (position = "right") {
@@ -179,46 +161,26 @@ const tab = {
       }
     }
   },
-  adaptationTabInfoToHTML: function () {
-    let isFindViewed = [false, false]
-    document.getElementById('leftTabs').innerHTML = ""
+  changeHTMLcontentOnlyTabInfo: function (tabID = tab.openedTab(), data) {
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
-      if (tab.tabInfo.left[i].viewed) {
-        document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
-        isFindViewed[0] = true
+      if (tab.tabInfo.left[i].tabID == tabID) {
+        tab.tabInfo.left[i].HTMLdata = data;
+        tab.saveTabInfo()
+        return;
       }
-      document.getElementById('leftTabs').innerHTML += `
-        <div class="tab">
-          <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      `
     }
-    if (!isFindViewed[0]) {
-      document.getElementById('mainContentLeft').innerHTML = "タブが開かれていません。"
-
-    }
-    document.getElementById('rightTabs').innerHTML = ""
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
-      if (tab.tabInfo.right[i].viewed) {
-        document.getElementById('mainContentRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
+      if (tab.tabInfo.right[i].tabID == tabID) {
+        tab.tabInfo.right[i].HTMLdata = data;
+        tab.saveTabInfo()
+        return;
       }
-      document.getElementById('rightTabs').innerHTML += `
-        <div class="tab">
-          <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.right[i].tabID})">${tab.tabInfo.right[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.right[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      `
     }
   }
 }
 if (localStorage.getItem("tabInfo")) {
   tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
-  tab.adaptationTabInfoToHTML()
+  tab.changeTaborder(tab.tabInfo)
 }
 // 読み込み時の処理
 finishedScriptNumber++
