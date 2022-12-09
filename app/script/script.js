@@ -1,5 +1,5 @@
 const appEvent = document.getElementById('appEvent');
-const appVersion = "4.0.2"
+const appVersion = "4.0.1"
 window.onload = function () {
   //表示の準備をする
   const setStart = setInterval(function () {
@@ -26,14 +26,14 @@ window.onload = function () {
       return;
     }
     if (finishedScriptNumber != resentScriptNumber) {
-      console.log(`${librariesURL[finishedScriptNumber - 1]}の読み込み時間:約${scriptSetLoopNumber / 1000}秒`)
+      console.log(`${librariesURL[finishedScriptNumber - 1]}の読み込み時間:約${scriptSetLoopNumber / 10}秒`)
       const script = document.createElement('script');
       script.setAttribute('src', librariesURL[finishedScriptNumber]);
       document.head.appendChild(script);
       resentScriptNumber++
       scriptSetLoopNumber = 0
     }
-  }, 1)
+  }, 100)
 }
 const librariesURL = [
   // index.htmlからのパスを書く

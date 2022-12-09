@@ -16,7 +16,6 @@ body {
 }
 
 body {
-  margin: 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -25,17 +24,15 @@ a {
   text-decoration: underline
 }
 
-p {
-  margin: 0;
-}
-
 body::-webkit-scrollbar {
   display: none;
 }
 
 /*header*/
 header {
-  height: 33px;
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+  height: env(titlebar-area-height, 33px);
   background: var(--main-color);
   user-select: none;
   display: flex;
@@ -44,12 +41,19 @@ header {
   justify-content: space-between;
 }
 
+header a {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
+
 header h1 {
   font-size: x-large;
   user-select: none;
 }
 
 #header_right {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
   height: 100%;
 }
 
@@ -64,10 +68,6 @@ header h1 {
 }
 
 /*最初の設定画面*/
-#start_settings {
-  padding: 5px;
-}
-
 /*フラッシュカード本体*/
 #view_cards {
   display: none;
@@ -96,7 +96,6 @@ header h1 {
 }
 
 .next-problem {
-  all: unset;
   display: block;
   min-width: 48px;
   height: 100%;
