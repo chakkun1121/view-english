@@ -119,6 +119,7 @@ body {
 
 .celect-view-tab-button {
   height: 100%;
+  width: max-content;
 }
 
 #tabs div>button:hover {
