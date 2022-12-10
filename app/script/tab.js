@@ -50,18 +50,16 @@ const tab = {
       tab.tabInfo.left[i].viewed = false
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
-        return;
       }
     }
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
-        return;
       }
     }
+    tab.save()
+    tab.adaptationTabInfoToHTML()
   },
   getNewTabHTMLdata: function () {
     return `
