@@ -38,7 +38,7 @@ async function openViewWayaku(tabID) {
         tab.new(fileName, fileData)
         return;
       }
-      tab.viewHTMLcontent(tabID, fileData, fileName)
+      tab.HTMLcontent.change(tabID, fileData, fileName)
       tab.view(tabID)
     }
   }

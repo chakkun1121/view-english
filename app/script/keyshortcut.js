@@ -42,7 +42,7 @@ const shortcutList = [
   {
     key: "ctrl+r",
     function: "最新の状態に更新",
-    callback: function () { tab.changeTaborder() }
+    callback: function () { tab.adaptationTabInfoToHTML() }
   },
 
   {
