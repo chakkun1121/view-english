@@ -43,25 +43,23 @@ const tab = {
     right: [],
     lastTabID: 0
   },
-  view: function (tabID = tab.openedTab()) {
+  view: function (tabID) {
     if (tabID == null) return;
     //表示するIDのタブが右に置くか左に置くかと表示するHTMLdataを取得する
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       tab.tabInfo.left[i].viewed = false
       if (tab.tabInfo.left[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
-        return;
       }
     }
     for (let i = 0; i < tab.tabInfo.right.length; i++) {
       tab.tabInfo.right[i].viewed = false
       if (tab.tabInfo.right[i].tabID == tabID) {
         tab.tabInfo.left[i].viewed = true
-        tab.save()
-        return;
       }
     }
+    tab.save()
+    tab.adaptationTabInfoToHTML()
   },
   getNewTabHTMLdata: function () {
     return `
@@ -88,7 +86,8 @@ const tab = {
         }
       }
     },
-    change: function (tabID = tab.openedTab(), HTMLcontent) {
+    change: function (tabID = tab.openedTab(), HTMLcontent, title) {
+      if (title) tab.title.change(tabID, title)
       for (let i = 0; i < tab.tabInfo.left.length; i++) {
         if (tab.tabInfo.left[i].tabID == tabID) {
           tab.tabInfo.left[i].HTMLdata = HTMLcontent
