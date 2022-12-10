@@ -1,6 +1,6 @@
 function saveWayaku(tabID = tab.openedTab()) {
-  const wayakuArrary = viewHTMLtoArray(tab.getHTMLcontent(tabID))
-  const title = arrayToText(viewHTMLtoArray(tab.getHTMLcontent(tabID)))[0] + ".wayaku"
+  const wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID))
+  const title = arrayToText(viewHTMLtoArray(tab.HTMLcontent.get(tabID)))[0] + ".wayaku"
   const wayakuData = arrayToWayaku(wayakuArrary)
   downloadWayaku(title, wayakuData)
 }
