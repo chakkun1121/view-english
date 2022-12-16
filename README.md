@@ -1,2 +1,5 @@
 # 和訳表示サイト
-https://view-english.chakkun1121haru.repl.co からhttps://chakkun1121.github.io/view-english/ に移植完了
+## アプリについて
+このアプリは端末に保存した和訳ファイル(.wayaku)を表示、編集、利用するアプリです。
+## 和訳ファイルの形式
+### 古いやつ(必ず互換性を保たせること)
