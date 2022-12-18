@@ -1,6 +1,7 @@
 :root {
   --tab-color: #ccc;
   --tab-hoverd-color: #bbb;
+  --opened-tab-color: #aaa;
   --header-button-color: var(--main-color);
   --content-size: 1fr 0px 0px;
   --contents-size-change-bar-color: #bdbdbd;
@@ -11,6 +12,7 @@
 .reset {
   all: unset;
   margin: 0;
+  padding: 0 5px;
 }
 
 body,
@@ -88,13 +90,13 @@ body {
   gap: 0px 0px;
   grid-template-areas:
     ". . .";
-  padding: 5px;
+  height: 35px;
 }
 
 #tabsLeft,
 #tabsRight {
   overflow-y: scroll;
-  height: 25px;
+  height: 100%;
   font-size: 14px;
   display: flex;
   align-items: center
@@ -120,6 +122,7 @@ body {
 .celect-view-tab-button {
   height: 100%;
   width: max-content;
+  padding: 0 5px;
 }
 
 #tabs div>button:hover {
@@ -130,7 +133,11 @@ body {
 .tab {
   display: flex;
   height: 100%;
-  padding: 0 5px;
+  padding: 10px 5px;
+}
+
+.tab .opened {
+  background-color: var(--opened-tab-color);
 }
 
 /* 左右のコンテンツの大きさを変えるバー */
@@ -161,6 +168,11 @@ body {
 /* wayakuファイルコンテンツ */
 .wayaku-content {
   padding: 5px;
+}
+
+.wayaku-content h1,
+.wayaku-content p {
+  user-select: text;
 }
 
 p.ja {
