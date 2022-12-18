@@ -70,7 +70,11 @@ const tab = {
   `
   },
   save: function (isNotAdapt) {
-    localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+    requestIdleCallback(function () {
+      localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+    }, {
+      timeout: 10000
+    })
     if (!isNotAdapt) tab.adaptationTabInfoToHTML()
   },
   HTMLcontent: {

@@ -12,7 +12,7 @@
 .reset {
   all: unset;
   margin: 0;
-  padding: 0 5px;
+  padding: 0 3px;
 }
 
 body,
@@ -122,7 +122,7 @@ body {
 .celect-view-tab-button {
   height: 100%;
   width: max-content;
-  padding: 0 5px;
+  padding: 0 3px;
 }
 
 #tabs div>button:hover {
