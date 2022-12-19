@@ -116,6 +116,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-x: scroll;
+  overflow-y: hidden;
   align-items: center
 }
 
@@ -140,7 +141,7 @@ body {
 .tab {
   display: flex;
   height: 100%;
-  padding: 10px 5px;
+  padding: 0 5px;
 }
 
 .tab .opened {
