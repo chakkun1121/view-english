@@ -47,6 +47,10 @@ HTMLrequestメゾット内
 |changeStyleAsColor(enColor,jaColor)|指定した色に変更します。|undefined|
 ### その他イベント関連
 ターゲットは \<div id="appEvent">
+|関数|内容|return|
+|:--|:--|:--|
+|creatEvent(type)|イベントを作成し、発火させます|
+|creatEventListener(type,callback)|イベントリスナーを作成します
 |イベント名|内容|
 |:--|:--|
 |init|すべての拡張機能が準備完了したときに発火します。|

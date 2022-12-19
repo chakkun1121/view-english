@@ -10,7 +10,7 @@ window.onload = function () {
     }
     if (librariesURL.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
-      appEvent.dispatchEvent(new Event('init'))
+      creatEvent('init')
       if ('launchQueue' in window && 'files' in LaunchParams.prototype) {
         launchQueue.setConsumer((launchParams) => {
           // Nothing to do when the queue is empty.
@@ -19,7 +19,8 @@ window.onload = function () {
           }
           startOpenFilesFromFileAPI(launchParams.files)
         });
-      }      //いつでも使用可能になったらローミング画面を消す
+      }
+      //いつでも使用可能になったらローミング画面を消す
       document.getElementById('loading').classList.add('loaded');
       clearInterval(setStart)
       scriptSetLoopNumber = 0
@@ -53,3 +54,25 @@ const librariesURL = [
 let finishedScriptNumber = 0;
 let resentScriptNumber = -1
 let scriptSetLoopNumber = 0
+/**
+ * イベントを作成して発火させます。
+ * @param {String} type 
+ * @returns 成功時にtrue、失敗時にfalseを返します。
+ */
+function creatEvent(type) {
+  if (!type) return false;
+  appEvent.dispatchEvent(new Event(type))
+  return true;
+}
+/**
+ * イベントリスナーを追加します。(appEventに追加します)
+ * @param {String} type 
+ * @param {callback} callback 
+ * @param {*} isDeleate 
+ * @returns 成功時にtrue、失敗時にfalseを返します。
+ */
+function creatEventListener(type, callback, isDeleate = false) {
+  if (!type) return false;
+  appEvent.addEventListener(type, callback)
+  return true;
+}
