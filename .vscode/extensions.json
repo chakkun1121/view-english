@@ -3,6 +3,7 @@
     "ms-ceintl.vscode-language-pack-ja",
     "ritwickdey.liveserver",
     "xabikos.javascriptsnippets",
-    "bierner.markdown-footnotes"
+    "bierner.markdown-footnotes",
+    "esbenp.prettier-vscode"
   ]
 }
