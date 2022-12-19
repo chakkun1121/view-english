@@ -193,7 +193,7 @@ const tab = {
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">✕/button>
+          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">✕</button>
         </div>
       `
     }
