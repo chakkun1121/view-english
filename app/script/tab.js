@@ -193,9 +193,7 @@ const tab = {
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">✕/button>
         </div>
       `
     }
@@ -211,9 +209,7 @@ const tab = {
       document.getElementById('rightTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.right[i].tabID})">${tab.tabInfo.right[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.right[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.right[i].tabID})">✕</button>
         </div>
       `
     }
