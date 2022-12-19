@@ -31,6 +31,14 @@ body {
   visibility: hidden;
 }
 
+.close-icon {
+  font-size: 1.2em;
+}
+
+.text-icon {
+  font-size: 1.5em;
+}
+
 /* headerのツールバーのボタン */
 #headerButtons {
   app-region: drag;
@@ -86,11 +94,10 @@ body {
   background: var(--tab-color);
   display: grid;
   grid-template-columns: var(--content-size);
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 35px 1fr;
   gap: 0px 0px;
   grid-template-areas:
     ". . .";
-  height: 35px;
 }
 
 #tabsLeft,
