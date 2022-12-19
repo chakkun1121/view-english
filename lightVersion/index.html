@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="和訳表示サイトの軽量版です。chrome50以上、IE11も対応しています。">
+  <meta name="application-name" content="和訳表示サイト軽量版">
+  <meta name="keywords" content="和訳表示サイト,和訳表示サイト軽量版">
+  <meta name="theme-color" content="#7aa1d6">
+  <meta name="color-scheme" content="#7aa1d6">
+  <title>和訳表示サイト軽量版 1.0.0</title>
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+  <link rel="manifest" href="manifest.json" defer>
+</head>
+
+<body>
+  <header>
+    <h1 class="reader-only">和訳表示サイト軽量版</h1>
+    <nav class="header-left">
+      <button class="tool-bar-button" onclick="document.getElementById('file').click()">
+        表示するファイルを選択
+      </button>
+      <label style="display: none;">
+        <input type="file" onchange="loadFile()" id="file" value="表示するファイルを選択">
+      </label>
+      <button onclick="changeStyle()" class="tool-bar-button">スタイル変更</button>
+      <button onclick="updata()" class="tool-bar-button">更新</button>
+    </nav>
+  </header>
+  <main>
+    <p>ファイルを選択してください</p>
+  </main>
+  <script src="script.js" defer></script>
+  <script defer>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(function (registration) {
+        // 登録成功
+        console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+      }).catch(function (err) {
+        // 登録失敗
+        console.log('ServiceWorker の登録に失敗しました。', err);
+      });
+    } else {
+      view_announce("サービスワーカー非対応ブラウザです。")
+    }
+  </script>
+</body>
+
+</html>
