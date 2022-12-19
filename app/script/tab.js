@@ -18,7 +18,7 @@ const tab = {
         tab.tabInfo.left.splice(i, 1)
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(tab.tabInfo.left[i - 1].tabID)
+          tab.view(tab.tabInfo.left[1 == 0 ? i : i - 1].tabID)
           tab.save()
         }
         tab.save()
@@ -31,7 +31,7 @@ const tab = {
         tab.tabInfo.right.splice(i, 1)
         // 変更後、それで並び替えさせる
         // その後、前のタブを表示する
-        tab.view(tab.tabInfo.right[i - 1].tabID)
+        tab.view(tab.tabInfo.right[1 == 0 ? i : i - 1].tabID)
         tab.save()
         return;
       }
@@ -70,7 +70,11 @@ const tab = {
   `
   },
   save: function (isNotAdapt) {
-    localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+    requestIdleCallback(function () {
+      localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
+    }, {
+      timeout: 10000
+    })
     if (!isNotAdapt) tab.adaptationTabInfoToHTML()
   },
   HTMLcontent: {
@@ -189,9 +193,7 @@ const tab = {
       document.getElementById('leftTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.left[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <button class="tab-close-button reset text-icon close-icon" onclick="tab.close(${tab.tabInfo.left[i].tabID})">×</button>
         </div>
       `
     }
@@ -207,9 +209,7 @@ const tab = {
       document.getElementById('rightTabs').innerHTML += `
         <div class="tab">
           <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.right[i].tabID})">${tab.tabInfo.right[i].title}</button>
-          <button class="tab-close-button reset" onclick="tab.close(${tab.tabInfo.right[i].tabID})">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <button class="tab-close-button reset text-icon close-icon" onclick="tab.close(${tab.tabInfo.right[i].tabID})">×</button>
         </div>
       `
     }

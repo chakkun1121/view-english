@@ -1,0 +1,18 @@
+{
+  "name": "和訳表示サイト軽量版",
+  "short_name": "和訳表示サイト light",
+  "description": "和訳表示サイトの軽量版です。chrome50以上、IE10でもサポートしています。",
+  "icons": [
+    {
+      "src": "../img/icon.png",
+      "sizes": "195x195",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": "/lightVersion/1.0.0/index.html",
+  "display": "fullscreen",
+  "theme_color": "#7aa1d6",
+  "background_color": "#7aa1d6",
+  "orientation": "any"
+}

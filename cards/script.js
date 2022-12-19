@@ -4,11 +4,14 @@ let mode = ""
 //読み込み時
 function init() {
   // changeColorMode()
-  const file = getParam('file')
+  let file = getParam('file')
   if (!file || file == "undefined") {
-    alert('もう一度フラッシュカードを開いてください。')
-    window.close()
-    return;
+    if (!localStorage.getItem('cards')) {
+      alert('もう一度フラッシュカードを開いてください。')
+      window.close()
+      return;
+    }
+    file = localStorage.getItem('cards')
   }
   cardsArrary = JSON.parse(file)
   cardsArrary = cardsArrary.filter(function (s) { return s !== ''; })
