@@ -8,10 +8,6 @@ const cards = {
   start: function (tabID = tab.openedTab()) {
     const wayakuArrary = (viewHTMLtoArray(tab.HTMLcontent.get(tabID)))
     localStorage.setItem('cards', JSON.stringify(wayakuArrary))
-    if (JSON.stringify(wayakuArrary).length < 500) {
-      window.open("../cards/card.html?file=" + encodeURIComponent(JSON.stringify(wayakuArrary)))
-      return;
-    }
     window.open('../cards/card.html')
   }
 }
