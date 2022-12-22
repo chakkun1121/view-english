@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/chakkun1121/view-english/issues"
   },
-  "homepage": "https://github.com/chakkun1121/view-english#readme"
+  "homepage": "https://github.com/chakkun1121/view-english#readme",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }
