@@ -1,8 +1,11 @@
-window.onload = function () {
-  
+const app = document.querySelector('main');
+function Main() {
+  return <h2>設定一覧</h2>
 }
-function Viewsettings() {
-  return <p>読み込み中</p> 
+function settingsHeader() {
+  return <>
+    <h2>設定一覧</h2>
+    <p>下から変更したい設定を指定してください</p>
+  </>
 }
-const settings = document.getElementById('settings');
-ReactDOM.render(<Viewsettings/>, settings);
+ReactDOM.render(<Main/>, app)
