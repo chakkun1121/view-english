@@ -1,22 +1,22 @@
-window.onload = function() {
+window.onload = function () {
   if (getParam('file')) {
-    const defaltFile = getParam('file')
+    var defaltFile = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。
     document.querySelector('main').innerHTML = defaltFile
   }
 }
 function loadFile() {
   var file = document.getElementById("file");
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
     console.log(e.target.result);
     document.querySelector('main').innerHTML = e.target.result;
   }
   reader.readAsText(file.files[0]);
 }
-let style = 0;
+var style = 0;
 function changeStyle() {
-  const root = document.querySelector(':root');
+  var root = document.querySelector(':root');
   if (style == 0) {
     //英文を隠す
     root.style.setProperty("--en-color", 'white');
@@ -24,8 +24,8 @@ function changeStyle() {
     style = 1;
   } else if (style == 1) {
     //カスタム表示
-    let settings_json = JSON.parse(localStorage.getItem('settings'))
-    let en_color, ja_color
+    var settings_json = JSON.parse(localStorage.getItem('settings'))
+    var en_color, ja_color
     if (settings_json) {
       ja_color = settings_json.ja_color
       en_color = settings_json.en_color
@@ -45,18 +45,18 @@ function changeStyle() {
 //ライブラリ的なもの
 //アップデート用
 function updata() {
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
     // 登録されているworkerを全て削除する
-    for (let registration of registrations) {
+    for (var registration of registrations) {
       registration.unregister();
     }
   });
-  caches.keys().then(function(keys) {
+  caches.keys().then(function (keys) {
     var promises = [];
     // キャッシュストレージを全て削除する
-    keys.forEach(function(cacheName) {
+    keys.forEach(function (cacheName) {
       if (cacheName) {
-        promises.push(caches.delete(cacheName));
+        promises.push(caches.devare(cacheName));
       }
     });
   });
@@ -66,7 +66,7 @@ function updata() {
 function getParam(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
-  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
     results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
