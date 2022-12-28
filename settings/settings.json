@@ -4,20 +4,23 @@
     "savedName": "darkmode",
     "settingType": "boolean",
     "settingInputType": "checkbox",
-    "Initial": false
+    "initial": false,
+    "flag": true
   },
   {
     "name": "カスタム表示時の日本語の色",
     "savedName": "jacolor",
-    "Initial": "#000000",
+    "initial": "#000000",
     "settingType": "string",
-    "settingInputType": "color"
+    "settingInputType": "color",
+    "flag": false
   },
   {
     "name": "カスタム表示時の英語の色",
     "savedName": "encolor",
-    "Initial": "##ffa500",
+    "initial": "#ffa500",
     "settingType": "string",
-    "settingInputType": "color"
+    "settingInputType": "color",
+    "flag": false
   }
 ]
