@@ -14,26 +14,47 @@
   <meta name="theme-color" content="#7aa1d6">
   <meta name="color-scheme" content="#7aa1d6">
 </head>
-<div style="background:var(--main-color);position:absolute;right:0;left:0;top:0;z-index:10000000000">
-  現在サイトを改修中です。
-  <a href="app/">和訳表示サイト(webアプリ)へはこちらから</a>
-</div>
 
 <body>
+  <div style="background:var(--main-color);position:sticky;right:0;left:0;top:0;z-index:10000000000">
+    現在サイトを改修中です。
+    <a href="app/">和訳表示サイト(webアプリ)へはこちらから</a>
+  </div>
+
   <header>
     <h1>和訳表示サイト</h1>
   </header>
   <main>
-    <settion id="top">
-      <h2>和訳表示サイト</h2>
-    </settion>
-    <settion class="main-content">
-
-    </settion>
+    <section id="top">
+      <h2>アプリへのリンク</h2>
+      <div class="top-link">
+        <a class="top-link" href="./app">和訳表示サイト(通常版)(対応ブラウザ:chrome110以上)</a>
+      </div>
+      <div class="top-link">
+        <a class="top-link" href="./lightVersion">和訳表示サイト軽量版(対応ブラウザ:IE11を含めたほとんどのブラウザ)</a>
+      </div>
+    </section>
+    <section class="what-this-app">
+      <h2>和訳表示サイトとは</h2>
+      <p>和訳表示サイトはパソコンやスマートフォンに保存されている和訳ファイル(.wayaku)を開いたり、編集したりするアプリです。詳しくは
+        <a href="https://chakkun1121.github.io/help/view-english/about/">こちら</a>
+      </p>
+    </section>
+    <section>
+      <h2>使い方は?</h2>
+      <p><a href="./app">アプリへのリンク</a>をクリックするだけで簡単にご利用いただけます。基本的にインストールは不要ですが、インストールすることでより快適にご利用いただけます。</p>
+    </section>
   </main>
   <footer>
     <div class="footer-left">
       和訳表示サイト
+    </div>
+    <div class="footer-links">
+      <div class="footer-link">
+        <a href="./app/">和訳表示サイトアプリへ</a>
+        <a href=" ./settings/">アプリの設定へ</a>
+        <a href="../help/view-english">和訳表示サイトヘルプへ</a>
+      </div>
     </div>
   </footer>
 </body>

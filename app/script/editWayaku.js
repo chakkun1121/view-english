@@ -10,15 +10,27 @@ function editFile(tabID = tab.openedTab()) {
     title = '新しいファイル'
     main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)'
   }
-  const editHTML =
-    `<div class="edit-file"><div class="edit-header"><input value="${title}" class="edit-title" onchange="editChangeHTML()" id="editTitle"><button class="edit-filish" onclick="finishEdit()">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${main}</textarea></div>`
-  tab.HTMLcontent.change(tab.openedTab(), editHTML, title)
+  tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title)
   tab.view()
 }
 function editChangeHTML() {
   tab.HTMLcontent.change(tab.openedTab(), `
     <div class="edit-file"><div class="edit-header"><input value="${document.getElementById('editTitle').value}" class="edit-title" id="editTitle" onchange="editChangeHTML()"><button class="edit-filish" onclick="finishEdit()">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${document.getElementById('editMain').value}</textarea></div>
   `, true)
+}
+editWayakuTabData = `
+<div class="edit-file">
+  <div class="edit-header">
+    <input value="<title/>" class="edit-title" id="editTitle" onchange="editChangeHTML()">
+    <button class="edit-filish" onclick="finishEdit()">完了</button>
+  </div>
+  <textarea id="editMain" onchange="editChangeHTML()" class="edit-main">
+    <editMain/>
+  </textarea>
+</div>
+`
+function getEditWayakuTabData(title, main) {
+  return editWayakuTabData.replace(/<title\/>/g,title).replace(/<editMain\/>/g,main)
 }
 function finishEdit(tabID = tab.openedTab()) {
   const title = document.getElementById('editTitle').value;

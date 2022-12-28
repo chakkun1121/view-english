@@ -62,13 +62,14 @@ const tab = {
     tab.adaptationTabInfoToHTML()
   },
   getNewTabHTMLdata: function () {
-    return `
+    return this.newTabData.replace(/<tabID\/>/g,this.tabInfo.lastTabID + 1)
+  },
+  newTabData: `
       <div class="new-tab">
         <h1>和訳表示サイト${appVersion}</h1>
-        <button onclick="openViewWayaku(${tab.tabInfo.lastTabID + 1})">和訳ファイルを開く</button>
-      </div>
-  `
-  },
+        <button onclick="openViewWayaku(<tabID/>)">和訳ファイルを開く</button>
+      </div>`
+  ,
   save: function (isNotAdapt) {
     requestIdleCallback(function () {
       localStorage.setItem('tabInfo', JSON.stringify(tab.tabInfo))
