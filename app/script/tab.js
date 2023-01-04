@@ -1,15 +1,16 @@
 const tab = {
-  new: function (title = "新しいタブ", HTMLdata = tab.getNewTabHTMLdata(), position = "left", purpose = "newtab") {
+  new: function (title = "新しいタブ", HTMLdata = this.newTabData, position = "left", purpose = "newtab") {
+    const newTabID = `tab-${UUID.generate()}`;
+    HTMLdata = HTMLdata.replace(/<tabID\/>/g, `"${newTabID}"`)
     tab.tabInfo[position].push({
-      tabID: tab.tabInfo.lastTabID + 1,
+      tabID: newTabID,
       HTMLdata,
       title,
       purpose
     });
-    tab.view(tab.tabInfo.lastTabID + 1)
-    tab.tabInfo.lastTabID++
+    tab.view(newTabID)
     tab.save()
-    return tab.tabInfo.lastTabID;
+    return newTabID;
   },
   close: function (tabID = tab.openedTab()) {
     // 閉じるタブを探してtabInfoから消去する
@@ -18,7 +19,7 @@ const tab = {
         tab.tabInfo.left.splice(i, 1)
         // その後、前のタブを表示する
         if (tab.tabInfo.left.length) {
-          tab.view(tab.tabInfo.left[1 == 0 ? i : i - 1].tabID)
+          tab.view(tab.tabInfo.left[i == 0 ? i : i - 1].tabID)
           tab.save()
         }
         tab.save()
@@ -41,7 +42,7 @@ const tab = {
   tabInfo: {
     left: [],
     right: [],
-    lastTabID: 0
+    version: appVersion
   },
   view: function (tabID) {
     if (tabID == null) return;
@@ -61,13 +62,10 @@ const tab = {
     tab.save()
     tab.adaptationTabInfoToHTML()
   },
-  getNewTabHTMLdata: function () {
-    return this.newTabData.replace(/<tabID\/>/g,this.tabInfo.lastTabID + 1)
-  },
   newTabData: `
       <div class="new-tab">
         <h1>和訳表示サイト${appVersion}</h1>
-        <button onclick="openViewWayaku(<tabID/>)">和訳ファイルを開く</button>
+        <button onclick='openViewWayaku(<tabID/>)'>和訳ファイルを開く</button>
       </div>`
   ,
   save: function (isNotAdapt) {
@@ -107,6 +105,7 @@ const tab = {
           return;
         }
       }
+      console.error(`指定されたタブID(${tabID})のタブが見つかりませんでした。`)
     }
   },
   title: {
@@ -183,6 +182,12 @@ const tab = {
       }
     }
   },
+  tabHTMLdata: `
+    <div class="tab">
+      <button class="celect-view-tab-button reset" onclick='tab.view(<tabID/>)'><title/></button>
+      <button class="tab-close-button reset text-icon close-icon" onclick='tab.close(<tabID/>)'>×</button>
+    </div>
+  `,
   adaptationTabInfoToHTML: function () {
     let isFindViewed = [false, false]
     document.getElementById('leftTabs').innerHTML = ""
@@ -191,12 +196,7 @@ const tab = {
         document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
         isFindViewed[0] = true
       }
-      document.getElementById('leftTabs').innerHTML += `
-        <div class="tab">
-          <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.left[i].tabID})">${tab.tabInfo.left[i].title}</button>
-          <button class="tab-close-button reset text-icon close-icon" onclick="tab.close(${tab.tabInfo.left[i].tabID})">×</button>
-        </div>
-      `
+      document.getElementById('leftTabs').innerHTML += this.tabHTMLdata.replace(/<tabID\/>/g, `"${this.tabInfo.left[i].tabID}"`).replace(/<title\/>/g, this.tabInfo.left[i].title)
     }
     if (!isFindViewed[0]) {
       document.getElementById('mainContentLeft').innerHTML = "タブが開かれていません。"
@@ -217,8 +217,12 @@ const tab = {
   }
 }
 if (localStorage.getItem("tabInfo")) {
-  tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
-  tab.adaptationTabInfoToHTML()
+  if (JSON.parse(localStorage.getItem('tabInfo')).version == appVersion) {
+    tab.tabInfo = JSON.parse(localStorage.getItem('tabInfo'))
+    tab.adaptationTabInfoToHTML()
+  } else {
+    localStorage.removeItem("tabInfo")
+  }
 }
 // 読み込み時の処理
 finishedScriptNumber++
