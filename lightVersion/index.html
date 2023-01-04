@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="和訳表示サイトの軽量版です。chrome50以上、IE11も対応しています。">
+  <meta name="description" content="和訳表示サイトの軽量版です。chrome50以上に対応しています。">
   <meta name="application-name" content="和訳表示サイト軽量版">
   <meta name="keywords" content="和訳表示サイト,和訳表示サイト軽量版">
   <meta name="theme-color" content="#7aa1d6">
@@ -32,8 +32,83 @@
   <main>
     <p>ファイルを選択してください</p>
   </main>
-  <script src="script.js" defer></script>
-  <script defer>
+  <script>
+    if (getParam('file')) {
+      var defaltFile = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。
+      document.querySelector('main').innerHTML = defaltFile
+    }
+    var style = 0;
+    function changeStyle() {
+      var root = document.querySelector(':root');
+      if (style == 0) {
+        //英文を隠す
+        root.style.setProperty("--en-color", 'white');
+        root.style.setProperty("--ja-color", "black")
+        style = 1;
+      } else if (style == 1) {
+        //カスタム表示
+        var settings_json = JSON.parse(localStorage.getItem('settings'))
+        var en_color, ja_color
+        if (settings_json) {
+          ja_color = settings_json.ja_color
+          en_color = settings_json.en_color
+        } else {
+          ja_color = 'black'
+          en_color = '#ffa500'
+        }
+        root.style.setProperty("--en-color", en_color);
+        root.style.setProperty("--ja-color", ja_color)
+        style = 2;
+      } else {
+        root.style.setProperty("--en-color", 'black');
+        root.style.setProperty("--ja-color", "black")
+        style = 0;
+      }
+    }
+
+    function loadFile() {
+      var file = document.getElementById("file");
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        console.log(e.target.result);
+        document.querySelector('main').innerHTML = e.target.result;
+      }
+      reader.readAsText(file.files[0]);
+    }
+    //アップデート用
+    function updata() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+          // 登録されているworkerを全て削除する
+          for (var registration of registrations) {
+            registration.unregister();
+          }
+        });
+        caches.keys().then(function (keys) {
+          var promises = [];
+          // キャッシュストレージを全て削除する
+          keys.forEach(function (cacheName) {
+            if (cacheName) {
+              promises.push(caches.devare(cacheName));
+            }
+          });
+        });
+      }
+      window.location.reload();
+    }
+    /*指定したkeyに対応したvalueを返します。*/
+    function getParam(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+  </script>
+  <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').then(function (registration) {
         // 登録成功
