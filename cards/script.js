@@ -14,6 +14,10 @@ function init() {
       return;
     }
     file = localStorage.getItem('cards')
+    if (!file || file == "undefined") {
+      viewErrorAndClose()
+      return;
+    }
   }
   cardsArrary = JSON.parse(file).filter(function (s) { return s !== ''; })
   if (cardsArrary.length == 0) {
@@ -194,4 +198,20 @@ function arrayShuffle(array) {
  */
 function viewErrorAndClose() {
   window.history.length == 1 ? window.close() : alert('問題が発生しました。もう一度タブを開きなおしてください。')
+}
+function speech(position = "answer") {
+  //読み上げる文字列を取得
+  const speechText = document.getElementById(position).innerText
+  const uttr = new SpeechSynthesisUtterance()
+  uttr.text = speechText
+  uttr.lang = 'en-US'
+  // 英語に対応しているvoiceを設定
+  const voices = speechSynthesis.getVoices()
+  for (let i = 0; i < voices.length; i++) {
+    if (voices[i].lang === 'en-US') {
+      uttr.voice = voices[i]
+    }
+  }
+  // 発言を再生
+  window.speechSynthesis.speak(uttr)
 }
