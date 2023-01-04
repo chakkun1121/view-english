@@ -34,7 +34,7 @@
   </main>
   <script>
     if (getParam('file')) {
-      var defaltFile = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。
+      var defaltFile = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。<-IEを切り捨てたがその名残
       document.querySelector('main').innerHTML = defaltFile
     }
     var style = 0;
@@ -47,11 +47,11 @@
         style = 1;
       } else if (style == 1) {
         //カスタム表示
-        var settings_json = JSON.parse(localStorage.getItem('settings'))
+        var settings_json = JSON.parse(localStorage.getItem('wayakuSettings'))
         var en_color, ja_color
         if (settings_json) {
-          ja_color = settings_json.ja_color
-          en_color = settings_json.en_color
+          ja_color = settings_json.jacolor
+          en_color = settings_json.encolor
         } else {
           ja_color = 'black'
           en_color = '#ffa500'
