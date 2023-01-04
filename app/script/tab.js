@@ -207,12 +207,7 @@ const tab = {
       if (tab.tabInfo.right[i].viewed) {
         document.getElementById('mainContentRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
       }
-      document.getElementById('rightTabs').innerHTML += `
-        <div class="tab">
-          <button class="celect-view-tab-button reset" onclick="tab.view(${tab.tabInfo.right[i].tabID})">${tab.tabInfo.right[i].title}</button>
-          <button class="tab-close-button reset text-icon close-icon" onclick="tab.close(${tab.tabInfo.right[i].tabID})">×</button>
-        </div>
-      `
+      document.getElementById('rightTabs').innerHTML += this.tabHTMLdata.replace(/<tabID\/>/g, `"${this.tabInfo.left[i].tabID}"`).replace(/<title\/>/g, this.tabInfo.left[i].title)
     }
   }
 }
