@@ -9,7 +9,7 @@ window.onload = (() => {
 })
 let settingsJson = {};
 function viewSettings() {
-  const nowSettingsJson = JSON.parse(localStorage.getItem('settings')) || {}
+  const nowSettingsJson = JSON.parse(localStorage.getItem('wayakuSettings')) || {}
   settingsJson.map(function (value, indexNumber) {
     document.getElementById('settingsMain').innerHTML += `
     <div class="setting">
@@ -30,9 +30,8 @@ function viewSettings() {
   })
 }
 function saveSetting(itemNumber) {
-  const nowSettingsJson = JSON.parse(localStorage.getItem('settings')) || {}
-  //↓clickedで処理する者らの処理が不調
+  const nowSettingsJson = JSON.parse(localStorage.getItem('wayakuSettings')) || {}
   const value = settingsJson[itemNumber].settingInputType == "checkbox" ? document.getElementById("settingInput_" + settingsJson[itemNumber].savedName).checked : document.getElementById("settingInput_" + settingsJson[itemNumber].savedName).value
   nowSettingsJson[settingsJson[itemNumber].savedName] = value
-  localStorage.setItem('settings', JSON.stringify(nowSettingsJson))
+  localStorage.setItem('wayakuSettings', JSON.stringify(nowSettingsJson))
 }
