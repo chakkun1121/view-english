@@ -1,28 +1,29 @@
 window.onload = init;
-let finishedScriptNumber
+let resentObject = 0;
 let mode = ""
-//読み込み時
+/**
+ * 読み込み時に初期設定をします。
+ * @returns 
+ */
 function init() {
-  // changeColorMode()
+  changeColorMode()
   let file = getParam('file')
   if (!file || file == "undefined") {
     if (!localStorage.getItem('cards')) {
-      alert('もう一度フラッシュカードを開いてください。')
-      window.close()
+      viewErrorAndClose()
       return;
     }
     file = localStorage.getItem('cards')
   }
-  cardsArrary = JSON.parse(file)
-  cardsArrary = cardsArrary.filter(function (s) { return s !== ''; })
+  cardsArrary = JSON.parse(file).filter(function (s) { return s !== ''; })
   if (cardsArrary.length == 0) {
-    window.close()
+    viewErrorAndClose()
     return;
   }
   let title = cardsArrary[0]
   document.getElementById('title').innerHTML = title
+  document.title = title + " | フラッシュカード | 和訳表示サイト"
   cardsArrary.shift()
-  //for文を回して英文と日本語がセットのオブジェクト型に変更
   cardsObject = []
   for (let i = 0; i <= cardsArrary.length - 2; i += 2) {
     cardsObject.push({ 'en': cardsArrary[i], 'ja': cardsArrary[i + 1] })
@@ -30,68 +31,86 @@ function init() {
   console.log(cardsObject)
   mode = "home"
 }
-function start_cards() {
-  setSwipe("#body")
+/**
+ * フラッシュカードをスタートさせる準備をして、viewCardを呼び出します。
+ */
+function startCards() {
+  setSwipe("body")
   mode = "cards"
   //設定読み込み
-  document.getElementById('start_settings').style.display = "none";
-  document.getElementById('view_cards').style.display = "block";
-  document.getElementById('header_right').innerHTML = `
-    <button onclick="next_problem()" class="next-problem">次へ</button>
+  startSettings.style.display = "none";
+  viewCards.style.display = "block";
+  headerRight.innerHTML = `
+    <button onclick="nextProblem()" class="next-problem">次へ</button>
   `
-  document.getElementById('header_left').innerHTML += `
-      <h1><spen  id="now_problem_number">1</spen>/<spen id="all_problem_number"></spen></h1>
-`
+  headerLeft.innerHTML += `
+    <h1><spen id="nowProblemNumber">1</spen>/<spen id="allProblemNumber"></spen></h1>
+  `
   document.documentElement.requestFullscreen();
-  //実際に出す順番にしたobject配列をセット
-  problem_sequence = []
-  for (let i = 0; i < cardsObject.length; i++) {
-    problem_sequence.push(i)
+  problemSequence = [...Array(cardsObject.length)].map((_, i) => i)
+  if (setRondom.checked) {
+    problemSequence = arrayShuffle(problemSequence)
   }
-  if (document.getElementById('set_rondom').checked) {
-    problem_sequence = arrayShuffle(problem_sequence)
-  }
-  resent_object = 0
-  document.getElementById('all_problem_number').innerText = cardsObject.length;
-  // 1問目をview_cardに投げ飛ばす
-  view_card(cardsObject[problem_sequence[0]])
+  allProblemNumber.innerText = cardsObject.length;
+  viewCard(cardsObject[problemSequence[0]])
 }
-function view_card(input_object) {
-  console.log(input_object)
-  document.getElementById('answer').style.color = 'white';
-  document.getElementById('answer').innerText = input_object.en
-  document.getElementById('problem').innerText = input_object.ja
+/**
+ * 指定されたobjectのカードを表示します。
+ * @param {*} inputObject 
+ */
+function viewCard(inputObject) {
+  console.log(inputObject)
+  answer.innerText = inputObject.en
+  problem.innerText = inputObject.ja
+  document.getElementById('hideAnswer').style.display = "block"
 }
-function next_problem() {
-  //次に問題を出すか出さないか判断
-  resent_object++
-  if (cardsObject[problem_sequence[resent_object]]) {
-    //出すならview_cardに投げ飛ばす
-    document.getElementById('now_problem_number').innerText = resent_object + 1
-    view_card(cardsObject[problem_sequence[resent_object]])
+/**
+ * 解答を表示します。
+ * @returns 
+ */
+function showAnswer() {
+  document.getElementById('hideAnswer').style.display = "none";
+}
+/**
+ * 次の問題を出すかを判断し、出す必要があればviewCardを呼び出します。
+ * @returns 
+ */
+function nextProblem() {
+  resentObject++
+  if (cardsObject[problemSequence[resentObject]]) {
+    nowProblemNumber.innerText = resentObject + 1
+    viewCard(cardsObject[problemSequence[resentObject]])
     return;
   } else {
-    //出さないなら結果表示
-    view_result()
+    viewResult()
     return;
   }
 }
-let before_code = ""
-function stop_card() {
-  before_code = document.getElementById('view_cards').innerHTML
-  document.getElementById('view_cards').innerHTML = `
-  <p>フラッシュカードは全画面表示でしか表示できません。もしこのまま続ける場合は<a onclick="resume_cards()">こちら</a>を押してください。</p>`
+let beforeCode = ""
+/**
+ * フラッシュカードを中断する
+ */
+function stopCard() {
+  beforeCode = viewCards.innerHTML
+  viewCards.innerHTML = `
+  <p>フラッシュカードは全画面表示でしか表示できません。もしこのまま続ける場合は<a onclick="resumeCards()">こちら</a>を押してください。</p>`
 }
-function resume_cards() {
+/**
+ * フラッシュカードを再開する
+ */
+function resumeCards() {
   document.documentElement.requestFullscreen();
-  document.getElementById('view_cards').innerHTML = before_code
+  viewCards.innerHTML = beforeCode
 }
-function view_result() {
+/**
+ * 結果を表示する
+ */
+function viewResult() {
   mode = "result"
   document.exitFullscreen();
-  document.getElementById('view_cards').style.display = "none";
-  document.getElementById('view_result').style.display = "block"
-  document.getElementById('header_right').innerHTML = ""
+  viewCards.style.display = "none";
+  document.getElementById('viewResult').style.display = "block"
+  headerRight.innerHTML = ""
 }
 document.addEventListener("fullscreenchange", () => {
   if (window.document.fullscreenElement) {
@@ -100,7 +119,7 @@ document.addEventListener("fullscreenchange", () => {
   else {
     console.log("フルスクリーン終了");
     if (mode == "cards") {
-      stop_card()
+      stopCard()
     }
   }
 });
@@ -114,42 +133,39 @@ function setSwipe(elem) {
   let moveX;	// スワイプ中の x座標
   let moveY;	// スワイプ中の y座標
   let dist = 100;	// スワイプを感知する最低距離（ピクセル単位）
-
-  // タッチ開始時： xy座標を取得
   t.addEventListener("touchstart", function (e) {
     e.preventDefault();
     startX = e.touches[0].pageX;
     startY = e.touches[0].pageY;
   });
-
-  // スワイプ中： xy座標を取得
   t.addEventListener("touchmove", function (e) {
     e.preventDefault();
     moveX = e.changedTouches[0].pageX;
     moveY = e.changedTouches[0].pageY;
   });
-
-  // タッチ終了時： スワイプした距離から左右どちらにスワイプしたかを判定する/距離が短い場合何もしない
   t.addEventListener("touchend", function (e) {
     if (startX > moveX && startX > moveX + dist) {		// 右から左にスワイプ
-      next_problem();
-
-    }
-    else if (startX < moveX && startX + dist < moveX) {	// 左から右にスワイプ
+      nextProblem();
     }
   });
 }
-function changeColorMode(color) {
-  if (!color) {
-    color = JSON.parse(localStorage.getItem('settings')).darkmode
-  }
-  if (color == "black" || color === true) {
-    document.getElementById("darkModeCss").href = "cards/darkmode.css"
-  } else {
-    document.getElementById("darkModeCss").href = "404.css"//←見つからないが、問題なし
+/**
+ * ダークモード、ライトモードを切り替えます。
+ * @returns 
+ */
+function changeColorMode() {
+  if (!localStorage.getItem('wayakuSettings')) return;
+  const color = JSON.parse(localStorage.getItem('wayakuSettings')).darkmode || false
+  if (color) {
+    darkModeCss.href = "cards/darkmode.css"
   }
 }
-/*指定したkeyに対応したvalueを返します。*/
+/**
+ * URLパロメーターでの指定されたkeyに対応するvalueを返します。
+ * @param {*} name 
+ * @param {*} url 
+ * @returns 
+ */
 function getParam(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -159,6 +175,11 @@ function getParam(name, url) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+/**
+ * 指定された配列をシャッフルします。
+ * @param {Array} array 
+ * @returns {Array}
+ */
 function arrayShuffle(array) {
   for (var i = (array.length - 1); 0 < i; i--) {
     var r = Math.floor(Math.random() * (i + 1));
@@ -167,4 +188,10 @@ function arrayShuffle(array) {
     array[r] = tmp;
   }
   return array;
+}
+/**
+ * タブを閉じれるときは閉じ、できないときはエラーを表示します。
+ */
+function viewErrorAndClose() {
+  window.history.length == 1 ? window.close() : alert('問題が発生しました。もう一度タブを開きなおしてください。')
 }

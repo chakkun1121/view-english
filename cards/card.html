@@ -1,46 +1,49 @@
-<!--フラッシュカード用-->
 <!DOCTYPE html>
 <html lang="ja" style="height: 100vh;">
 
 <head>
   <meta charset="utf-8" />
-  <title>和訳表示サイト/フラッシュカード</title>
+  <title>フラッシュカード | 和訳表示サイト</title>
   <link href="card.css" rel="stylesheet">
   <link href="" id="darkModeCss" rel="stylesheet">
-  <script src="script.js"></script>
-  <script src="../app/script/wayaku.js"></script>
   <link rel="icon" href="../favicon.ico" id="favicon" async>
 </head>
 
 <body oncontextmenu="return false;" id='body'>
   <header id="header">
-    <div id="header_left">
+    <div id="headerLeft">
       <h1 id="title"></h1>
     </div>
-    <div id="header_right">
+    <div id="headerRight">
     </div>
   </header>
   <main>
-    <div id="start_settings">
-      <label><input type="checkbox" value="" id="set_rondom">ランダム表示を使用する</label>
-      <button onclick="start_cards()">フラッシュカードを開始する</button>
+    <div id="startSettings">
+      <label><input type="checkbox" id="setRondom">ランダム表示を使用する</label>
+      <button onclick="startCards()">フラッシュカードを開始する</button>
     </div>
-    <div id="view_cards">
-      <div class="view-card">
+    <div id="viewCards" class="view-card">
+      <div class="problem">
         <p id="problem">問題が表示されます(これが表示されている場合はうまく動いていないので再度読み込んでください。)</p>
-        <p>↓解答(クリックで表示)</p>
-        <p id="answer" onclick="document.getElementById('answer').style.color='black';">解答が表示されます</p>
+        <button class="audio" onclick="speech('problem')">再生</button>
+      </div>
+      <div class="answer">
+        <div id="hideAnswer" onclick="showAnswer()">解答(クリックで表示)</div>
+        <p id="answer">解答が表示されます</p>
+        <button class="audio" onclick="speech('answer')">再生</button>
       </div>
     </div>
-    <div id="view_result">
-      <!-- <p>結果</p> -->
-      <button onclick="window.close();alert('タブを閉じるのに失敗しました。')">タブを閉じる</button>
+    <div id="viewResult">
+      <button onclick="window.history.length==1?window.close():alert('タブを閉じるのに失敗しました。')">タブを閉じる</button>
     </div>
   </main>
   <!--js読み込み-->
-  <script src="../library/shortcut.js"></script>
+  <script>let finishedScriptNumber</script>
+  <script src="../app/script/wayaku.js" defer></script>
+  <script src="./script.js" defer></script>
+  <script src="../library/shortcut.js" defer></script>
   <script src="../library/hotkeys.js"></script>
-  <script src="key_shortcut.js"></script>
+  <script src="./keyShortcut.js" defer></script>
 </body>
 
 </html>
