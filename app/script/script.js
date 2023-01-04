@@ -43,13 +43,14 @@ const librariesURL = [
   "script/header.js",
   "script/wayaku.js",
   "script/wayakuStyle.js",
-  "script/updata.js",
   "script/wayakuOperation.js",
   "script/cards.js",
   "script/editWayaku.js",
   "script/settings.js",
   "script/saveWayakuFile.js",
-  "script/print.js"
+  "script/print.js",
+  "script/updata.js",
+  "script/resetApp.js"
 ]
 let finishedScriptNumber = 0;
 let resentScriptNumber = -1
