@@ -1,0 +1,28 @@
+body {
+  display: grid;
+  grid-auto-rows: auto 1fr auto;
+  margin: 0;
+  height: 100vh;
+}
+
+header,
+main,
+footer {
+  margin: 8px;
+}
+
+header p {
+  margin: 0;
+}
+
+.header-buttom {
+  display: flex;
+}
+
+#saveButton {
+  display: none;
+}
+
+main {
+  border: solid 1px;
+}

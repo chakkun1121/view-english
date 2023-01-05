@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拡張機能設定|和訳表示サイト</title>
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+  <header>
+    <h1>拡張機能の設定ページ</h1>
+    <div class="header-buttom">
+      <p>
+        下に拡張機能のjsをデータURLに変換したものを一つずつ改行して入れてください。データURL生成は
+        <a href="https://chakkun1121.github.io/dataURL/">こちら</a>
+        をご利用ください。
+      </p>
+      <button onclick="save()" id="saveButton">保存</button>
+    </div>
+  </header>
+  <main id="main" contentEditable="true" input="console.log(document.querySelector('main').innerText)">
+  </main>
+  <footer>
+    <ul>
+      <li><a href="../">和訳表示サイトホームページ</a></li>
+    </ul>
+  </footer>
+  <script src="../../library/shortcut.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>

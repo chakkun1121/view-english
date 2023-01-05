@@ -1,6 +1,8 @@
 const appEvent = document.getElementById('appEvent');
 const appVersion = "4.0.7"
 window.onload = function () {
+  const useLibraryURLs = librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions')))
+  console.log(useLibraryURLs)
   //表示の準備をする
   const setStart = setInterval(function () {
     scriptSetLoopNumber++
@@ -8,7 +10,7 @@ window.onload = function () {
       document.getElementById('loadErrorMessage').innerHTML = `
         読み込みに問題がありますか？もし、ネットが遅いようでしたら和訳表示サイト軽量版をご利用ください。`
     }
-    if (librariesURL.length == finishedScriptNumber) {
+    if (useLibraryURLs.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火
       creatEvent('init')
       if ('launchQueue' in window && 'files' in LaunchParams.prototype) {
@@ -27,9 +29,9 @@ window.onload = function () {
       return;
     }
     if (finishedScriptNumber != resentScriptNumber) {
-      console.log(`${librariesURL[finishedScriptNumber - 1]}の読み込み時間:約${scriptSetLoopNumber / 1000}秒`)
+      console.log(`${useLibraryURLs[finishedScriptNumber - 1]}の読み込み時間:約${scriptSetLoopNumber / 1000}秒`)
       const script = document.createElement('script');
-      script.setAttribute('src', librariesURL[finishedScriptNumber]);
+      script.setAttribute('src', useLibraryURLs[finishedScriptNumber]);
       document.head.appendChild(script);
       resentScriptNumber++
       scriptSetLoopNumber = 0
