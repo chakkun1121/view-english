@@ -1,7 +1,7 @@
 const appEvent = document.getElementById('appEvent');
 const appVersion = "4.0.7"
 window.onload = function () {
-  const useLibraryURLs = localStorage.getItem('wayakuExtensions')?librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions'))):libraryURL
+  const useLibraryURLs = localStorage.getItem('wayakuExtensions')?librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions'))):librariesURL
   console.log(useLibraryURLs)
   //表示の準備をする
   const setStart = setInterval(function () {
