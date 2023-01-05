@@ -1,5 +1,12 @@
 async function openViewWayaku(tabID) {
   //ファイルを開く
+  if (!window.showOpenFilePicker) {
+    console.error('showOpenFilePickerが利用できません。和訳表示サイト軽量版をご利用ください。')
+    tab.HTMLcontent.change(tabID, `
+      <p class="error red">申し訳ございませんがこのブラウザはサポート対象外となっております。<a href="../lightVersion">和訳表示サイト軽量版</a>をご利用ください。</p>
+    `, "エラー")
+    return;
+  }
   const fhList = await window.showOpenFilePicker({
     types: [{
       description: 'wayakuファイル',

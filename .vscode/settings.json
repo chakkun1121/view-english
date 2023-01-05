@@ -1,4 +1,8 @@
 {
   "liveServer.settings.port": 5500,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#7aa1d6", // 上のバーの背景色
+    "titleBar.activeForeground": "#000000", // 上のバーのテキストの色
+  }
 }

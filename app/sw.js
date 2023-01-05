@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v4.0.6';//現在バージョンを入れる
+const CACHE_VERSION = 'v4.0.7';//現在バージョンを入れる
 const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 // キャッシュするファイルをセットする
@@ -12,8 +12,11 @@ const urlsToCache = [
   '../cards/card.css',
   '../cards/darkmode.css',
   '../cards/script.js',
-  '../cards/key_shortcut.js',
-  'manifest.json'
+  '../cards/keyShortcut.js',
+  '../library/shortcut.js',
+  '../library/hotkeys.js',
+  'manifest.json',
+  '../favicon.ico'
 ];
 
 self.addEventListener('install', (event) => {

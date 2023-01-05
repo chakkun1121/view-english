@@ -45,7 +45,7 @@ body {
   display: flex;
   background: var(--header-button-color);
   width: env(titlebar-area-width, 100%);
-  height: env(titlebar-area-height, 40px);
+  height: 40px;
   font-size: 20px;
 }
 
@@ -228,5 +228,25 @@ p.en {
 @media (width<450px) {
   .tool-bar-button:not(#fileButton) {
     display: none !important;
+  }
+
+  .header-file-menu-button {
+    height: 48px;
+  }
+
+  #tabs,
+  #tabsLeft,
+  #tabsRight {
+    height: 48px;
+  }
+
+  .text-icon {
+    width: 48px;
+    text-align: center;
+  }
+
+  button {
+    min-width: 48px;
+    min-height: 48px;
   }
 }

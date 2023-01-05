@@ -13,7 +13,7 @@
     "initial": "#000000",
     "settingType": "string",
     "settingInputType": "color",
-    "flag": true
+    "flag": false
   },
   {
     "name": "カスタム表示時の英語の色",
@@ -21,6 +21,6 @@
     "initial": "#ffa500",
     "settingType": "string",
     "settingInputType": "color",
-    "flag": true
+    "flag": false
   }
 ]
