@@ -13,6 +13,7 @@ function save() {
   saveButton.innerText = "保存中"
   if (!checkFile(main.innerText)) {
     alert('何か問題があるようです。')
+    saveButton.innerText = "保存"
     return;
   }
   const mainArrary = main.innerText.split('\n').filter(Boolean)
