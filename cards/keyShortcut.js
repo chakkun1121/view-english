@@ -8,7 +8,7 @@ hotkeys('space,right', function (e, handler) {
   e.preventDefault()
   switch (handler.key) {
     case 'space':
-      answer.style.color = 'black';
+      showAnswer()
       break;
     case 'right':
       nextProblem()
