@@ -5,6 +5,7 @@ async function openViewWayaku(tabID) {
     tab.HTMLcontent.change(tabID, `
       <p class="error red">申し訳ございませんがこのブラウザはサポート対象外となっております。<a href="../lightVersion">和訳表示サイト軽量版</a>をご利用ください。</p>
     `, "エラー")
+    tab.purpose.change(tabID, "error")
     return;
   }
   const fhList = await window.showOpenFilePicker({
@@ -29,9 +30,10 @@ async function openViewWayaku(tabID) {
     reader.readAsText(file);
     reader.onload = () => {
       let fileType = fileName.split('.').pop(); //拡張子取得
+      let fileData;
       if (fileType == 'html') {
         fileData = htmlToWayaku(reader.result)
-        var pos = fileName.lastIndexOf(".");
+        const pos = fileName.lastIndexOf(".");
         fileName = fileName.substr(0, pos < 0 ? file.length : pos) + ".wayaku";
       } else if (fileType == 'wayaku') {
         fileData = reader.result;
@@ -39,6 +41,7 @@ async function openViewWayaku(tabID) {
         console.error('拡張子が違います。')
         return;
       }
+      tab.purpose.change(tabID, "wayakuContent")
       fileData = arrayToViewHTML(wayakuToArray(fileData))
       if (i != 0) {
         // 新しいタブを開き、そこに投げ込む

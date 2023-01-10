@@ -4,7 +4,6 @@
 function editFile(tabID = tab.openedTab()) {
   let title, main
   let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID))
-  console.log(wayakuArrary)
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary)
   } else {

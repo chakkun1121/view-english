@@ -20,15 +20,15 @@ function htmlToWayaku(HTMLdata) {
  */
 function wayakuToArray(stringWayakuData) {
   if (!stringWayakuData) return;
-  if (tab.purpose.get() != "wayakuCnontent") return;
+  if (tab.purpose.get() != "wayakuContent") return;
   const XMLwayakuData = new DOMParser().parseFromString('<wayaku>' + stringWayakuData + '</wayaku>', "text/xml")
   //titleを取得
   const title = XMLwayakuData.getElementsByClassName('title')[0].innerHTML
   //本体をfor文で回しながら配列にinする
   let wayakuArrangement = [title]
   for (let i = 0; i < XMLwayakuData.getElementsByClassName('en').length; i++) {
-    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('en')[i].innerHTML || null)
-    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('ja')[i].innerHTML || null)
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('en')[i].innerHTML)
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('ja')[i].innerHTML)
   }
   wayakuArrangement = wayakuArrangement.filter(function (s) {
     return s !== '';
