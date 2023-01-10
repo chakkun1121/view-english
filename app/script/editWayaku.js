@@ -4,6 +4,7 @@
 function editFile(tabID = tab.openedTab()) {
   let title, main
   let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID))
+  console.log(wayakuArrary)
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary)
   } else {
@@ -18,7 +19,7 @@ function editChangeHTML() {
     <div class="edit-file"><div class="edit-header"><input value="${document.getElementById('editTitle').value}" class="edit-title" id="editTitle" onchange="editChangeHTML()"><button class="edit-filish" onclick="finishEdit()">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${document.getElementById('editMain').value}</textarea></div>
   `, true)
 }
-editWayakuTabData = `
+let editWayakuTabData = `
 <div class="edit-file">
   <div class="edit-header">
     <input value="<title/>" class="edit-title" id="editTitle" onchange="editChangeHTML()">
@@ -30,7 +31,7 @@ editWayakuTabData = `
 </div>
 `
 function getEditWayakuTabData(title, main) {
-  return editWayakuTabData.replace(/<title\/>/g,title).replace(/<editMain\/>/g,main)
+  return editWayakuTabData.replace(/<title\/>/g, title).replace(/<editMain\/>/g, main)
 }
 function finishEdit(tabID = tab.openedTab()) {
   const title = document.getElementById('editTitle').value;
@@ -45,6 +46,7 @@ function newFile() {
   tab.view()
   editFile()
 }
+
 document.getElementById('headerFileMenu').innerHTML += `
   <button class="header-file-menu-button" onclick="editFile()">編集</button>
 `

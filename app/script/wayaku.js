@@ -20,42 +20,20 @@ function htmlToWayaku(HTMLdata) {
  */
 function wayakuToArray(stringWayakuData) {
   if (!stringWayakuData) return;
-  //改行を消す
-  stringWayakuData = stringWayakuData.replace(/\r?\n/g, '');
+  if (tab.purpose.get() != "wayakuCnontent") return;
+  const XMLwayakuData = new DOMParser().parseFromString('<wayaku>' + stringWayakuData + '</wayaku>', "text/xml")
   //titleを取得
-  let titleStart = stringWayakuData.indexOf('<h1 class="title">') + 18
-  let title = stringWayakuData.slice(titleStart)
-  let titleBack = title.indexOf('</h1>')
-  title = title.slice(0, -1 * (title.length - titleBack))
+  const title = XMLwayakuData.getElementsByClassName('title')[0].innerHTML
   //本体をfor文で回しながら配列にinする
-  let wayakuMainStart = stringWayakuData.indexOf('<p class="en">')
-  let wayakuMain = stringWayakuData.slice(wayakuMainStart)
-  wayaku_arrangement = []
-  for (let i = 0; ; i++) {
-    let en_start = wayakuMain.indexOf('<p class="en">') + 14;
-    if (en_start == 13) {
-      break;
-    }
-    wayakuMain = wayakuMain.slice(en_start);
-    let en_end = wayakuMain.indexOf('</p>')
-    en = wayakuMain.slice(0, -1 * (wayakuMain.length - en_end))
-    wayaku_arrangement.push(en)
-    i++
-    //日本語訳
-    let jaStart = wayakuMain.indexOf('<p class="ja">') + 14;
-    if (jaStart == 13) {
-      break;
-    }
-    wayakuMain = wayakuMain.slice(jaStart);
-    let jaEnd = wayakuMain.indexOf('</p>')
-    ja = wayakuMain.slice(0, -1 * (wayakuMain.length - jaEnd))
-    wayaku_arrangement.push(ja)
+  let wayakuArrangement = [title]
+  for (let i = 0; i < XMLwayakuData.getElementsByClassName('en').length; i++) {
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('en')[i].innerHTML)
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('ja')[i].innerHTML)
   }
-  wayaku_arrangement = wayaku_arrangement.filter(function (s) {
+  wayakuArrangement = wayakuArrangement.filter(function (s) {
     return s !== '';
   });
-  wayaku_arrangement.unshift(title);
-  return wayaku_arrangement;
+  return wayakuArrangement;
 }
 /**
  * 配列から和訳ファイルに変換
@@ -96,7 +74,7 @@ function arrayToViewHTML(arrayWayakuData) {
  */
 function viewHTMLtoArray(viewHTMLwayakuData) {
   if (!viewHTMLwayakuData) return;
-  return wayakuToArray(viewHTMLwayakuData.slice(28).slice(0, -6))
+  return wayakuToArray(viewHTMLwayakuData)
 }
 /**
  * タイトルと改行、タブで別れているtextをArrayへ変換します。
