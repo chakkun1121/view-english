@@ -20,7 +20,6 @@ body {
   flex-direction: column;
   margin: 0;
   height: 100vh;
-  margin: 0;
 }
 
 header h1 {
@@ -30,7 +29,6 @@ header h1 {
 
 header {
   position: sticky;
-  background: var(--main-color);
   top: 0;
   left: 0;
   right: 0;
@@ -41,7 +39,6 @@ header {
   z-index: 1;
   background-color: #0287cfcc;
   backdrop-filter: blur(2px);
-  transition: 0.5s;
 }
 
 header a {
@@ -89,4 +86,3 @@ footer {
     padding: 0;
   }
 }
-
