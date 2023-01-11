@@ -4,19 +4,19 @@
 function editFile(tabID = tab.openedTab()) {
   let title, main
   let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID))
+  console.log(wayakuArrary)
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary)
   } else {
     title = '新しいファイル'
     main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)'
   }
+  console.log(main)
   tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title)
   tab.view()
 }
 function editChangeHTML() {
-  tab.HTMLcontent.change(tab.openedTab(), `
-    <div class="edit-file"><div class="edit-header"><input value="${document.getElementById('editTitle').value}" class="edit-title" id="editTitle" onchange="editChangeHTML()"><button class="edit-filish" onclick="finishEdit()">完了</button></div><textarea id="editMain" onchange="editChangeHTML()" class="edit-main">${document.getElementById('editMain').value}</textarea></div>
-  `, true)
+  tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(editTitle.value, editMain.value), true)
 }
 let editWayakuTabData = `
 <div class="edit-file">
@@ -24,9 +24,7 @@ let editWayakuTabData = `
     <input value="<title/>" class="edit-title" id="editTitle" onchange="editChangeHTML()">
     <button class="edit-filish" onclick="finishEdit()">完了</button>
   </div>
-  <textarea id="editMain" onchange="editChangeHTML()" class="edit-main">
-    <editMain/>
-  </textarea>
+  <textarea id="editMain" onchange="editChangeHTML()" class="edit-main"><editMain/></textarea>
 </div>
 `
 function getEditWayakuTabData(title, main) {

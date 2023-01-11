@@ -27,8 +27,8 @@ function wayakuToArray(stringWayakuData) {
   //本体をfor文で回しながら配列にinする
   let wayakuArrangement = [title]
   for (let i = 0; i < XMLwayakuData.getElementsByClassName('en').length; i++) {
-    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('en')[i].innerHTML)
-    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('ja')[i].innerHTML)
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('en')[i].innerHTML.trim())
+    wayakuArrangement.push(XMLwayakuData.getElementsByClassName('ja')[i].innerHTML.trim())
   }
   wayakuArrangement = wayakuArrangement.filter(function (s) {
     return s !== '';
