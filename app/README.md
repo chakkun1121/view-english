@@ -25,7 +25,7 @@
 | tabHTMLdata                                 | タブ部分のhtmlです。(`<tabID/>`はタブIDに`<title/>`はタイトルに変換されます。)(上と同様)                                      |
 | adaptationTabInfoToHTML()                   | tabInfo の内容を HTML に適応します。(これ以外のやつは自動変更なし)                                                            |                         |
 
-[^1]newTab,wayakuContent,setting などのタブの使われ方
+[^1]newTab,wayakuContent,setting,editWayaku などのタブの使われ方
 [^2]これは基本的に false でどうしても変更してはいけないときに true にすることで tabInfo のみ書き換えられる
 
 ### wayaku ファイル操作関連(wayaku.js)

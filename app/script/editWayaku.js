@@ -13,6 +13,7 @@ function editFile(tabID = tab.openedTab()) {
   }
   console.log(main)
   tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title)
+  tab.purpose.change(tabID, "editWayaku")
   tab.view()
 }
 function editChangeHTML() {
@@ -34,6 +35,7 @@ function finishEdit(tabID = tab.openedTab()) {
   const title = document.getElementById('editTitle').value;
   const data = document.getElementById('editMain').value;
   const wayakuData = arrayToViewHTML(textToArray(title, data))
+  tab.purpose.change(tabID, "wayakuContent")
   tab.HTMLcontent.change(tabID, wayakuData, title)
   tab.save();
   tab.view(tabID)

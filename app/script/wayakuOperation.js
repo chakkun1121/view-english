@@ -46,9 +46,11 @@ async function openViewWayaku(tabID) {
       if (i != 0) {
         // 新しいタブを開き、そこに投げ込む
         tab.new(fileName, fileData)
+        tab.purpose.change(tabID, "wayakuContent")
         return;
       }
       tab.HTMLcontent.change(tabID, fileData, fileName)
+      tab.purpose.change(tabID, "wayakuContent")
       tab.view(tabID)
     }
   }
