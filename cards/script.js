@@ -45,7 +45,7 @@ function startCards() {
   startSettings.style.display = "none";
   viewCards.style.display = "block";
   headerRight.innerHTML = `
-    <button onclick="nextProblem()" class="next-problem">次へ</button>
+    <button onclick="nextProblem()" class="next-problem" id="nextProblemButton">次へ</button>
   `
   headerLeft.innerHTML += `
     <h1><spen id="nowProblemNumber">1</spen>/<spen id="allProblemNumber"></spen></h1>
@@ -63,6 +63,7 @@ function startCards() {
  * @param {*} inputObject 
  */
 function viewCard(inputObject) {
+  if (mode != "cards") return;
   console.log(inputObject)
   answer.innerText = inputObject.en
   problem.innerText = inputObject.ja
@@ -73,6 +74,7 @@ function viewCard(inputObject) {
  * @returns 
  */
 function showAnswer() {
+  if (mode != "cards") return;
   document.getElementById('hideAnswer').style.display = "none";
 }
 /**
@@ -80,6 +82,7 @@ function showAnswer() {
  * @returns 
  */
 function nextProblem() {
+  if (mode != "cards") return;
   resentObject++
   if (cardsObject[problemSequence[resentObject]]) {
     nowProblemNumber.innerText = resentObject + 1
@@ -95,6 +98,8 @@ let beforeCode = ""
  * フラッシュカードを中断する
  */
 function stopCard() {
+  mode = "stopCards"
+  nextProblemButton.style.display = "none"
   beforeCode = viewCards.innerHTML
   viewCards.innerHTML = `
   <p>フラッシュカードは全画面表示でしか表示できません。もしこのまま続ける場合は<a onclick="resumeCards()">こちら</a>を押してください。</p>`
@@ -103,6 +108,8 @@ function stopCard() {
  * フラッシュカードを再開する
  */
 function resumeCards() {
+  nextProblemButton.style.display = "block"
+  mode = "cards"
   document.documentElement.requestFullscreen();
   viewCards.innerHTML = beforeCode
 }
@@ -202,16 +209,10 @@ function viewErrorAndClose() {
 function speech(position = "answer") {
   //読み上げる文字列を取得
   const speechText = document.getElementById(position).innerText
+  console.log(speechText)
   const uttr = new SpeechSynthesisUtterance()
   uttr.text = speechText
   uttr.lang = 'en-US'
-  // 英語に対応しているvoiceを設定
-  const voices = speechSynthesis.getVoices()
-  for (let i = 0; i < voices.length; i++) {
-    if (voices[i].lang === 'en-US') {
-      uttr.voice = voices[i]
-    }
-  }
   // 発言を再生
   window.speechSynthesis.speak(uttr)
 }

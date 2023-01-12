@@ -1,14 +1,14 @@
 const appEvent = document.getElementById('appEvent');
-const appVersion = "4.0.7"
+const appVersion = "4.0.8"
 window.onload = function () {
-  const useLibraryURLs = localStorage.getItem('wayakuExtensions')?librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions'))):librariesURL
+  const useLibraryURLs = localStorage.getItem('wayakuExtensions') ? librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions'))) : librariesURL
   console.log(useLibraryURLs)
   //表示の準備をする
   const setStart = setInterval(function () {
     scriptSetLoopNumber++
     if (scriptSetLoopNumber >= 50) {
       document.getElementById('loadErrorMessage').innerHTML = `
-        読み込みに問題がありますか？もし、ネットが遅いようでしたら和訳表示サイト軽量版をご利用ください。`
+        読み込みに問題がありますか？もし、ネットが遅いようでしたら<a href="../lightVersion">和訳表示サイト軽量版</a>をご利用ください。もし、ネット状態が良くても起動しない際は<a href="#" onclick="resetApp()"こちら</a>からアプリをリセットしてみてください。`
     }
     if (useLibraryURLs.length == finishedScriptNumber) {
       // 拡張機能の準備のイベント発火

@@ -1,4 +1,4 @@
-# 和訳表示サイト 4.0.7
+# 和訳表示サイト 4.0.8
 
 ## 仕様
 
@@ -19,16 +19,16 @@
 | purpose.get(tabID)                          | 指定された ID のタブの目的を取得                                                                                              | purpose                 |
 | title.get(tabID)                            |                                                                                                                               |                         |
 | title.change(tabID,newTitle)                |                                                                                                                               |                         |
-| openedTab(position="left")                  | 今開いている tabID を表示します。                                                                                             |tabID|                         |
+| openedTab(position="left")                  | 今開いている tabID を表示します。                                                                                             | tabID                   |  |
 | save(isNotAdapt[^2])                        |                                                                                                                               |                         |
-| newTabData                                  | 新しいタブ用のデータを入れます(tabID は`<tabID/>`としておけば勝手に変換されます)(init をはたかれてから拡張機能で変更できます) | 
-|tabHTMLdata|タブ部分のhtmlです。(`<tabID/>`はタブIDに`<title/>`はタイトルに変換されます。)(上と同様)
+| newTabData                                  | 新しいタブ用のデータを入れます(tabID は`<tabID/>`としておけば勝手に変換されます)(init をはたかれてから拡張機能で変更できます) |
+| tabHTMLdata                                 | タブ部分のhtmlです。(`<tabID/>`はタブIDに`<title/>`はタイトルに変換されます。)(上と同様)                                      |
 | adaptationTabInfoToHTML()                   | tabInfo の内容を HTML に適応します。(これ以外のやつは自動変更なし)                                                            |                         |
 
 [^1]newTab,wayakuContent,setting などのタブの使われ方
 [^2]これは基本的に false でどうしても変更してはいけないときに true にすることで tabInfo のみ書き換えられる
 
-### wayaku ファイル操作関連
+### wayaku ファイル操作関連(wayaku.js)
 
 wayaku メゾット内の関数、変数(和訳ファイル操作拡張機能(デフォルト(ないと大変なので最初に入れておく))内に内蔵)
 
