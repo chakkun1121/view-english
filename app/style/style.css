@@ -3,6 +3,7 @@
   --tab-hoverd-color: #bbb;
   --opened-tab-color: #aaa;
   --header-button-color: var(--main-color);
+  --header-file-menu-hover-colorr: var(--main-color);
   --content-size: 1fr 0px 0px;
   --contents-size-change-bar-color: #bdbdbd;
   --ja-color: #000000;
@@ -23,7 +24,7 @@ div {
 body {
   display: grid;
   grid-template-rows: auto auto 1fr;
-  height: 100vh
+  height: 100vh;
 }
 
 .loaded {
@@ -71,7 +72,7 @@ body {
   width: auto;
   height: auto;
   z-index: 20;
-  background-color: #0287cfcc;
+  background-color: rgba(122, 161, 214, 0.8);
   backdrop-filter: blur(2px);
   padding: 1px;
   left: 0;
@@ -79,15 +80,18 @@ body {
 }
 
 .header-file-manu-opened {
-  top: env(titlebar-area-height, 33px) !important;
+  top: 40px !important;
 }
 
 #headerFileMenu button {
   all: unset;
   display: block;
   padding: 5px;
+  width: -webkit-fill-available;
 }
-
+#headerFileMenu button:hover {
+  background-color: var(--header-file-menu-hover-color);
+}
 /* tabのスタイル */
 #tabs {
   background: var(--tab-color);
@@ -95,8 +99,7 @@ body {
   grid-template-columns: var(--content-size);
   grid-template-rows: 35px 1fr;
   gap: 0px 0px;
-  grid-template-areas:
-    ". . .";
+  grid-template-areas: '. . .';
 }
 
 #tabsLeft,
@@ -105,7 +108,7 @@ body {
   height: 100%;
   font-size: 14px;
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 #leftTabs,
@@ -116,7 +119,7 @@ body {
   scrollbar-width: none;
   overflow-x: scroll;
   overflow-y: hidden;
-  align-items: center
+  align-items: center;
 }
 
 #leftTabs::-webkit-scrollbar,
@@ -132,10 +135,9 @@ body {
   padding: 0 3px;
 }
 
-#tabs div>button:hover {
-  background: var(--tab-hoverd-color)
+#tabs div > button:hover {
+  background: var(--tab-hoverd-color);
 }
-
 
 .tab {
   display: flex;
@@ -162,8 +164,7 @@ body {
   grid-template-columns: var(--content-size);
   grid-template-rows: auto 1f;
   gap: 0px 0px;
-  grid-template-areas:
-    ". . .";
+  grid-template-areas: '. . .';
   overflow-x: scroll;
 }
 
@@ -203,6 +204,10 @@ p.en {
   display: grid;
   grid-auto-rows: auto 1fr;
 }
+#editTitle {
+  height: calc(100% - 4px);
+  padding: 0;
+}
 
 .edit-main {
   resize: none;
@@ -211,7 +216,6 @@ p.en {
 /* 印刷用 */
 
 @media print {
-
   #loading,
   #headerButtons,
   #headerFileMenu,
@@ -221,31 +225,5 @@ p.en {
 
   .wayaku-content {
     display: block;
-  }
-}
-
-@media (width<450px) {
-  .tool-bar-button:not(#fileButton) {
-    display: none !important;
-  }
-
-  .header-file-menu-button {
-    height: 48px;
-  }
-
-  #tabs,
-  #tabsLeft,
-  #tabsRight {
-    height: 48px;
-  }
-
-  .text-icon {
-    width: 48px;
-    text-align: center;
-  }
-
-  button {
-    min-width: 48px;
-    min-height: 48px;
   }
 }

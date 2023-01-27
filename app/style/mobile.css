@@ -1,0 +1,39 @@
+@media (width<450px) {
+  .tool-bar-button:not(#fileButton) {
+    display: none !important;
+  }
+
+  .header-file-menu-button {
+    height: 48px;
+  }
+  .header-file-manu-opened {
+    top: 40px !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #tabs,
+  #tabsLeft,
+  #tabsRight {
+    font-size: 1.1em;
+    height: 48px;
+  }
+
+  .text-icon {
+    width: 48px;
+    text-align: center;
+  }
+
+  button {
+    min-width: 48px;
+    min-height: 48px;
+  }
+  .edit-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .edit-title {
+    width: -webkit-fill-available;
+  }
+}

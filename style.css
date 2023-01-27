@@ -61,6 +61,9 @@ main {
   justify-content: center;
   margin: 5px;
 }
+.top-image {
+  max-width: 100%;
+}
 
 footer {
   margin-top: auto;
@@ -69,15 +72,15 @@ footer {
 @media (max-width: 600px) {
   header {
     display: block;
-    padding: 5px
+    padding: 5px;
   }
 
   header h1 {
-    margin: 0
+    margin: 0;
   }
 }
 
-@media (max-width:500px) {
+@media (max-width: 500px) {
   .header-right ul {
     display: block;
   }
