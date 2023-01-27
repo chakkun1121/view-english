@@ -22,7 +22,7 @@ body {
 }
 
 a {
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 p {
@@ -83,7 +83,13 @@ header h1 {
   align-items: center;
   padding: 10px 0;
 }
-
+.audio {
+  width: 20px;
+  padding: initial;
+  margin: 0;
+  border: 0;
+  background-color: unset;
+}
 /*答えを隠すやつ*/
 #hideAnswer {
   position: absolute;
