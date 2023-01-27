@@ -3,7 +3,7 @@
   <button class="header-file-menu-button" onclick="updata()">アプリの手動更新</button>
 `;
 })();
-(function updata() {
+function updata() {
   if (navigator.serviceWorker) {
     navigator.serviceWorker.getRegistrations().then(function (registrations) {
       // 登録されているworkerを全て削除する
@@ -22,5 +22,5 @@
     });
   });
   window.location.reload();
-});
-// finishedScriptNumber++
+}
+finishedScriptNumber++
