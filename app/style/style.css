@@ -3,6 +3,7 @@
   --tab-hoverd-color: #bbb;
   --opened-tab-color: #aaa;
   --header-button-color: var(--main-color);
+  --header-file-menu-hover-colorr: var(--main-color);
   --content-size: 1fr 0px 0px;
   --contents-size-change-bar-color: #bdbdbd;
   --ja-color: #000000;
@@ -71,7 +72,7 @@ body {
   width: auto;
   height: auto;
   z-index: 20;
-  background-color: rgba(122, 161, 214, 0.7);
+  background-color: rgba(122, 161, 214, 0.8);
   backdrop-filter: blur(2px);
   padding: 1px;
   left: 0;
@@ -89,7 +90,7 @@ body {
   width: -webkit-fill-available;
 }
 #headerFileMenu button:hover {
-  background-color: rgba(122, 161, 214, 1);
+  background-color: var(--header-file-menu-hover-color);
 }
 /* tabのスタイル */
 #tabs {
@@ -202,6 +203,10 @@ p.en {
   height: 100%;
   display: grid;
   grid-auto-rows: auto 1fr;
+}
+#editTitle {
+  height: calc(100% - 4px);
+  padding: 0;
 }
 
 .edit-main {
