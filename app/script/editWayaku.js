@@ -2,22 +2,27 @@
  * ファイルを編集します。
  */
 function editFile(tabID = tab.openedTab()) {
-  let title, main
-  let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID))
-  console.log(wayakuArrary)
+  let title, main;
+  let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID));
+  console.log(wayakuArrary);
   if (wayakuArrary) {
-    [title, main] = arrayToText(wayakuArrary)
+    [title, main] = arrayToText(wayakuArrary);
   } else {
-    title = '新しいファイル'
-    main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)'
+    title = '新しいファイル';
+    main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)';
   }
-  console.log(main)
-  tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title)
-  tab.purpose.change(tabID, "editWayaku")
-  tab.view()
+  console.log(main);
+  tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title);
+  tab.purpose.change(tabID, 'editWayaku');
+  tab.view();
 }
 function editChangeHTML() {
-  tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(editTitle.value, editMain.value), true)
+  tab.HTMLcontent.change(
+    tab.openedTab(),
+    getEditWayakuTabData(editTitle.value, editMain.value),
+    editTitle.value,
+    true
+  );
 }
 let editWayakuTabData = `
 <div class="edit-file">
@@ -27,26 +32,26 @@ let editWayakuTabData = `
   </div>
   <textarea id="editMain" onchange="editChangeHTML()" class="edit-main"><editMain/></textarea>
 </div>
-`
+`;
 function getEditWayakuTabData(title, main) {
-  return editWayakuTabData.replace(/<title\/>/g, title).replace(/<editMain\/>/g, main)
+  return editWayakuTabData.replace(/<title\/>/g, title).replace(/<editMain\/>/g, main);
 }
 function finishEdit(tabID = tab.openedTab()) {
   const title = document.getElementById('editTitle').value;
   const data = document.getElementById('editMain').value;
-  const wayakuData = arrayToViewHTML(textToArray(title, data))
-  tab.purpose.change(tabID, "wayakuContent")
-  tab.HTMLcontent.change(tabID, wayakuData, title)
+  const wayakuData = arrayToViewHTML(textToArray(title, data));
+  tab.purpose.change(tabID, 'wayakuContent');
+  tab.HTMLcontent.change(tabID, wayakuData, title);
   tab.save();
-  tab.view(tabID)
+  tab.view(tabID);
 }
 function newFile() {
-  tab.new()
-  tab.view()
-  editFile()
+  tab.new();
+  tab.view();
+  editFile();
 }
 
 document.getElementById('headerFileMenu').innerHTML += `
   <button class="header-file-menu-button" onclick="editFile()">編集</button>
-`
-finishedScriptNumber++
+`;
+finishedScriptNumber++;
