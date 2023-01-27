@@ -13,7 +13,7 @@
 | new(title,HTMLdata,position,purpose)        | 新しいタブを開きます                                                                                                          | number(新しいタブの ID) |
 | close(tabID)                                | 指定されたタブを閉じます。                                                                                                    | undefined               |
 | view(TabID)                                 | 指定されたタブを表示します。                                                                                                  | undefined               |
-| HTMLcontent.change(tabID,HTMLcontent,title) | html コンテンツを変更します。                                                                                                 | undefined               |
+| HTMLcontent.change(tabID,HTMLcontent,title,purpose) | html コンテンツを変更します。                                                                                                 | undefined               |
 | HTMLcontent.get(tabID)                      | 今表示中の html コンテンツを取得します。                                                                                      |
 | purpose.change(tabID,newPurpose),           | タブの目的[^1]の変更                                                                                                          |
 | purpose.get(tabID)                          | 指定された ID のタブの目的を取得                                                                                              | purpose                 |

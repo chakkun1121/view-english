@@ -89,8 +89,9 @@ const tab = {
         }
       }
     },
-    change: function (tabID = tab.openedTab(), HTMLcontent, title) {
+    change: function (tabID = tab.openedTab(), HTMLcontent, title,purpose) {
       if (title) tab.title.change(tabID, title)
+      if(purpose) tab.purpose.change(tabID,purpose)
       for (let i = 0; i < tab.tabInfo.left.length; i++) {
         if (tab.tabInfo.left[i].tabID == tabID) {
           tab.tabInfo.left[i].HTMLdata = HTMLcontent
