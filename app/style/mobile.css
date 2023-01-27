@@ -29,4 +29,11 @@
     min-width: 48px;
     min-height: 48px;
   }
+  .edit-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .edit-title {
+    width: -webkit-fill-available;
+  }
 }
