@@ -27,7 +27,7 @@ function init() {
     return;
   }
   let title = cardsArrary[0];
-  document.getElementById('title').innerHTML = title;
+  document.getElementById('title').innerText = title;
   document.title = title + ' | フラッシュカード | 和訳表示サイト';
   cardsArrary.shift();
   cardsObject = [];
