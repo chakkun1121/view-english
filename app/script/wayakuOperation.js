@@ -74,4 +74,4 @@ async function startOpenFilesFromFileAPI(files) {
   }
 }
 
-finishedScriptNumber++;
+finishedScriptNumber++; 

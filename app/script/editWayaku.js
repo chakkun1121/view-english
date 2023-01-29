@@ -2,16 +2,13 @@
  * ファイルを編集します。
  */
 function editFile(tabID = tab.openedTab()) {
-  let title, main;
+  let title = '',
+    main = '';
   let wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID));
   console.log(wayakuArrary);
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary);
-  } else {
-    title = '新しいファイル';
-    main = '英文、日本語の順に改行して入力してください。(これは必ず消してください。)';
   }
-  console.log(main);
   tab.HTMLcontent.change(tab.openedTab(), getEditWayakuTabData(title, main), title);
   tab.purpose.change(tabID, 'editWayaku');
   tab.view();
@@ -27,10 +24,10 @@ function editChangeHTML() {
 let editWayakuTabData = `
 <div class="edit-file">
   <div class="edit-header">
-    <input value="<title/>" class="edit-title" id="editTitle" onchange="editChangeHTML()">
+    <input value="<title/>" class="edit-title" id="editTitle" onchange="editChangeHTML()" placeholder="タイトルを入力">
     <button class="edit-filish" onclick="finishEdit()">完了</button>
   </div>
-  <textarea id="editMain" onchange="editChangeHTML()" class="edit-main"><editMain/></textarea>
+  <textarea id="editMain" onchange="editChangeHTML()" class="edit-main" placeholder="英文、日本語の順に改行して入力してください。"><editMain/></textarea>
 </div>
 `;
 function getEditWayakuTabData(title, main) {
