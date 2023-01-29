@@ -52,7 +52,7 @@ async function openViewWayaku(tabID) {
       fileData = arrayToViewHTML(wayakuToArray(fileData));
       if (i != 0) {
         // 新しいタブを開き、そこに投げ込む
-        tab.new(fileName, fileData, null, 'wayakuContent');
+        tab.new(fileName, fileData, undefined, 'wayakuContent');
         return;
       }
       tab.HTMLcontent.change(tabID, fileData, fileName, 'wayakuContent');
@@ -74,4 +74,4 @@ async function startOpenFilesFromFileAPI(files) {
   }
 }
 
-finishedScriptNumber++; 
+finishedScriptNumber++;
