@@ -47,21 +47,26 @@ body {
   background: var(--header-button-color);
   height: 40px;
   font-size: 20px;
+  align-items: center;
 }
 
 #headerButtons button {
   all: unset;
+  display: flex;
   text-align: center;
   cursor: pointer;
-  padding: 2px 19px;
-  height: 100%;
+  padding: 0 19px;
   app-region: no-drag;
   color: #000;
   background-color: var(--main-color);
-  height: 100%;
-  width: auto;
   user-select: none;
   border: 0;
+  height: -webkit-fill-available;
+  align-items: center;
+}
+#headerButtons button:focus {
+  border: solid 1px;
+  padding: 0 19px;
 }
 
 /* headerのファイルメニュー */
