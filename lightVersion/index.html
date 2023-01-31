@@ -23,7 +23,7 @@
         表示するファイルを選択
       </button>
       <label style="display: none;">
-        <input type="file" onchange="loadFile()" id="file" value="表示するファイルを選択">
+        <input type="file" onchange="loadFile()" id="file" value="表示するファイルを選択" accept=".wayaku">
       </label>
       <button onclick="changeStyle()" class="tool-bar-button">スタイル変更</button>
       <button onclick="updata()" class="tool-bar-button">更新</button>
@@ -75,23 +75,6 @@
       reader.readAsText(file.files[0]);
     }
     function updata() {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function (registrations) {
-          // 登録されているworkerを全て削除する
-          for (var registration of registrations) {
-            registration.unregister();
-          }
-        });
-        caches.keys().then(function (keys) {
-          var promises = [];
-          // キャッシュストレージを全て削除する
-          keys.forEach(function (cacheName) {
-            if (cacheName) {
-              promises.push(caches.devare(cacheName));
-            }
-          });
-        });
-      }
       window.location.reload();
     }
     /*指定したkeyに対応したvalueを返します。*/
@@ -103,19 +86,6 @@
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(function (registration) {
-        // 登録成功
-        console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
-      }).catch(function (err) {
-        // 登録失敗
-        console.error('ServiceWorker の登録に失敗しました。', err);
-      });
-    } else {
-      console.error("サービスワーカー非対応ブラウザです。")
     }
   </script>
 </body>
