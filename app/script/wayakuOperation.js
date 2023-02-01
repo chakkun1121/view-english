@@ -4,9 +4,7 @@ async function openViewWayaku(tabID) {
     console.error('showOpenFilePickerが利用できません。和訳表示サイト軽量版をご利用ください。');
     tab.HTMLcontent.change(
       tabID,
-      `
-      <p class="error red">申し訳ございませんがこのブラウザはサポート対象外となっております。<a href="../lightVersion">和訳表示サイト軽量版</a>をご利用ください。</p>
-    `,
+      `<p class="error red">申し訳ございませんがこのブラウザはサポート対象外となっております。<a href="../lightVersion">和訳表示サイト軽量版</a>をご利用ください。</p>`,
       'エラー'
     );
     tab.purpose.change(tabID, 'error');
