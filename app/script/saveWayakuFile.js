@@ -5,12 +5,10 @@ function saveWayaku(tabID = tab.openedTab()) {
   downloadWayaku(title, wayakuData);
 }
 async function saveWayakuFile(fileHandle, contents) {
-  console.log(contents);
   // writable作成
   const writable = await fileHandle.createWritable();
   // コンテンツを書き込む
   await writable.write(contents);
-
   // ファイル閉じる
   await writable.close();
 }
