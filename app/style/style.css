@@ -9,217 +9,30 @@
   --ja-color: #000000;
   --en-color: #000000;
 }
-
 .reset {
   all: unset;
   margin: 0;
   padding: 0 3px;
 }
-
 body,
 div {
   margin: 0;
 }
-
 body {
   display: grid;
   grid-template-rows: auto auto 1fr;
   height: 100vh;
 }
-
 .loaded {
   opacity: 0;
   visibility: hidden;
 }
-
 .close-icon {
   font-size: 1em;
 }
-
 .text-icon {
   font-size: 1.5em;
-}
-
-/* headerのツールバーのボタン */
-#headerButtons {
-  app-region: drag;
-  display: flex;
-  background: var(--header-button-color);
-  height: 40px;
-  font-size: 20px;
-  align-items: center;
-}
-
-#headerButtons button {
-  all: unset;
-  display: flex;
-  text-align: center;
-  cursor: pointer;
-  padding: 0 19px;
-  app-region: no-drag;
-  color: #000;
-  background-color: var(--main-color);
-  user-select: none;
-  border: 0;
-  height: -webkit-fill-available;
-  align-items: center;
-}
-#headerButtons button:focus {
-  border: solid 1px;
-  padding: 0 19px;
-}
-
-/* headerのファイルメニュー */
-#headerFileMenu {
-  position: fixed;
-  left: 0px;
-  top: -1000px;
-  width: auto;
-  height: auto;
-  z-index: 20;
-  background-color: rgba(122, 161, 214, 0.8);
-  backdrop-filter: blur(2px);
-  padding: 1px;
-  left: 0;
-  z-index: 1000000000;
-}
-
-.header-file-manu-opened {
-  top: 40px !important;
-}
-
-#headerFileMenu button {
-  all: unset;
-  display: block;
-  padding: 5px;
-  width: -webkit-fill-available;
-}
-#headerFileMenu button:hover {
-  background-color: var(--header-file-menu-hover-color);
-}
-/* tabのスタイル */
-#tabs {
-  background: var(--tab-color);
-  display: grid;
-  grid-template-columns: var(--content-size);
-  grid-template-rows: 35px 1fr;
-  gap: 0px 0px;
-  grid-template-areas: '. . .';
-}
-
-#tabsLeft,
-#tabsRight {
-  overflow-y: scroll;
-  height: 100%;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-
-#leftTabs,
-#rightTabs {
-  display: flex;
-  height: 100%;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  align-items: center;
-}
-
-#leftTabs::-webkit-scrollbar,
-#rightTabs::-webkit-scrollbar {
-  display: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.celect-view-tab-button {
-  height: 100%;
-  width: max-content;
-  padding: 0 3px;
-}
-
-#tabs div > button:hover {
-  background: var(--tab-hoverd-color);
-}
-
-.tab {
-  display: flex;
-  height: 100%;
-  padding: 0 5px;
-}
-
-.tab .opened {
-  background-color: var(--opened-tab-color);
-}
-
-/* 左右のコンテンツの大きさを変えるバー */
-.contents-size-change-bar {
-  background: var(--contents-size-change-bar-color);
-}
-
-#ContentsSizeChangeBar {
-  cursor: col-resize;
-}
-
-/* mainコンテンツ */
-#mainContents {
-  display: grid;
-  grid-template-columns: var(--content-size);
-  grid-template-rows: auto 1f;
-  gap: 0px 0px;
-  grid-template-areas: '. . .';
-  overflow-x: scroll;
-}
-
-/* 新しいタブ */
-.new-tab {
-  padding: 5px;
-}
-
-/* wayakuファイルコンテンツ */
-.wayaku-content {
-  padding: 5px;
-}
-
-.wayaku-content h1,
-.wayaku-content p {
-  user-select: text;
-}
-
-p.ja {
-  color: var(--ja-color);
-  margin: 0px;
-}
-
-p.en {
-  color: var(--en-color);
-  margin: 0px;
-  padding-top: 10px;
-}
-
-.wayaku-content h1 {
-  margin-bottom: 0;
-}
-
-/* 和訳ファイルの編集時 */
-.edit-file {
-  height: 100%;
-  display: grid;
-  grid-auto-rows: auto 1fr;
-}
-#editTitle {
-  height: calc(100% - 4px);
-  padding: 0;
-}
-
-.edit-main {
-  resize: none;
-}
-
-/* 印刷用 */
-
+} /* 印刷用 */
 @media print {
   #loading,
   #headerButtons,
@@ -227,7 +40,6 @@ p.en {
   #tabs {
     display: none;
   }
-
   .wayaku-content {
     display: block;
   }

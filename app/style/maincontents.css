@@ -1,0 +1,22 @@
+/* 左右のコンテンツの大きさを変えるバー */
+.contents-size-change-bar {
+  background: var(--contents-size-change-bar-color);
+}
+
+#ContentsSizeChangeBar {
+  cursor: col-resize;
+}
+
+/* 新しいタブ */
+.new-tab {
+  padding: 5px;
+}
+/* mainコンテンツ */
+#mainContents {
+  display: grid;
+  grid-template-columns: var(--content-size);
+  grid-template-rows: auto 1f;
+  gap: 0px 0px;
+  grid-template-areas: '. . .';
+  overflow-x: scroll;
+}

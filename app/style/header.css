@@ -1,0 +1,58 @@
+
+/* headerのツールバーのボタン */
+#headerButtons {
+  app-region: drag;
+  display: flex;
+  background: var(--header-button-color);
+  height: 40px;
+  font-size: 20px;
+  align-items: center;
+}
+
+#headerButtons button {
+  all: unset;
+  display: flex;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 19px;
+  app-region: no-drag;
+  color: #000;
+  background-color: var(--main-color);
+  user-select: none;
+  border: 0;
+  height: -webkit-fill-available;
+  align-items: center;
+}
+#headerButtons button:focus {
+  border: solid 1px;
+  padding: 0 19px;
+}
+
+/* headerのファイルメニュー */
+#headerFileMenu {
+  position: fixed;
+  left: 0px;
+  top: -1000px;
+  width: auto;
+  height: auto;
+  z-index: 20;
+  background-color: rgba(122, 161, 214, 0.8);
+  backdrop-filter: blur(2px);
+  padding: 1px;
+  left: 0;
+  z-index: 1000000000;
+}
+
+.header-file-manu-opened {
+  top: 40px !important;
+}
+
+#headerFileMenu button {
+  all: unset;
+  display: block;
+  padding: 5px;
+  width: -webkit-fill-available;
+}
+#headerFileMenu button:hover {
+  background-color: var(--header-file-menu-hover-color);
+}

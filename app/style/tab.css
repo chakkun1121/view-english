@@ -1,0 +1,56 @@
+/* tabのスタイル */
+#tabs {
+  background: var(--tab-color);
+  display: grid;
+  grid-template-columns: var(--content-size);
+  grid-template-rows: 35px 1fr;
+  gap: 0px 0px;
+  grid-template-areas: '. . .';
+}
+
+#tabsLeft,
+#tabsRight {
+  overflow-y: scroll;
+  height: 100%;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+#leftTabs,
+#rightTabs {
+  display: flex;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  align-items: center;
+}
+
+#leftTabs::-webkit-scrollbar,
+#rightTabs::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.celect-view-tab-button {
+  height: 100%;
+  width: max-content;
+  padding: 0 3px;
+}
+
+#tabs div > button:hover {
+  background: var(--tab-hoverd-color);
+}
+
+.tab {
+  display: flex;
+  height: 100%;
+  padding: 0 5px;
+}
+
+.tab .opened {
+  background-color: var(--opened-tab-color);
+}

@@ -1,0 +1,39 @@
+/* wayakuファイルコンテンツ */
+.wayaku-content {
+  padding: 5px;
+}
+
+.wayaku-content h1,
+.wayaku-content p {
+  user-select: text;
+}
+
+p.ja {
+  color: var(--ja-color);
+  margin: 0px;
+}
+
+p.en {
+  color: var(--en-color);
+  margin: 0px;
+  padding-top: 10px;
+}
+
+.wayaku-content h1 {
+  margin-bottom: 0;
+}
+
+/* 和訳ファイルの編集時 */
+.edit-file {
+  height: 100%;
+  display: grid;
+  grid-auto-rows: auto 1fr;
+}
+#editTitle {
+  height: calc(100% - 4px);
+  padding: 0;
+}
+
+.edit-main {
+  resize: none;
+}

@@ -191,7 +191,7 @@ const tab = {
     }
   },
   tabHTMLdata: `
-    <div class="tab">
+    <div class="tab" id= <tabID/> >
       <button class="celect-view-tab-button reset" onclick='tab.view(<tabID/>)'><title/></button>
       <button class="tab-close-button reset text-icon close-icon" onclick='tab.close(<tabID/>)'>×</button>
     </div>
@@ -200,13 +200,16 @@ const tab = {
     let isFindViewed = [false, false];
     document.getElementById('leftTabs').innerHTML = '';
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
-      if (tab.tabInfo.left[i].viewed) {
-        document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
-        isFindViewed[0] = true;
-      }
+      const tabID = this.tabInfo.left[i].tabID;
       document.getElementById('leftTabs').innerHTML += this.tabHTMLdata
         .replace(/<tabID\/>/g, `"${this.tabInfo.left[i].tabID}"`)
         .replace(/<title\/>/g, this.tabInfo.left[i].title);
+      document.getElementById(tabID).classList.remove('opened-tab');
+      if (tab.tabInfo.left[i].viewed) {
+        document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
+        document.getElementById(tabID).classList.add('opened-tab');
+        isFindViewed[0] = true;
+      }
     }
     if (!isFindViewed[0]) {
       document.getElementById('mainContentLeft').innerHTML = 'タブが開かれていません。';
