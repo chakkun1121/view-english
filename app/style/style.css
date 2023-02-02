@@ -2,6 +2,7 @@
   --tab-color: #ccc;
   --tab-hoverd-color: #bbb;
   --opened-tab-color: #aaa;
+  --tab-border-color: black;
   --header-button-color: var(--main-color);
   --header-file-menu-hover-color: var(--main-color);
   --content-size: 1fr 0px 0px;

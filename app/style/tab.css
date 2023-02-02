@@ -47,10 +47,20 @@
 
 .tab {
   display: flex;
-  height: 100%;
+  height: calc(100% - 1px);
   padding: 0 5px;
 }
 
 .tab .opened {
   background-color: var(--opened-tab-color);
+}
+
+.tab:not(.opened-tab) {
+  border-bottom: solid var(--tab-border-color) 1px;
+}
+.opened-tab {
+  background-color: var(--opened-tab-color);
+  border-left: solid var(--tab-border-color) 1px;
+  border-top: solid var(--tab-border-color) 1px;
+  border-right: solid var(--tab-border-color) 1px;
 }
