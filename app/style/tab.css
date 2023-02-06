@@ -1,15 +1,12 @@
+:root {
+  --tab-close-button-hoverd-color: red;
+}
 /* tabのスタイル */
 #tabs {
   background: var(--tab-color);
-  display: grid;
-  grid-template-columns: var(--content-size);
-  grid-template-rows: 35px 1fr;
-  gap: 0px 0px;
-  grid-template-areas: '. . .';
 }
 
-#tabsLeft,
-#tabsRight {
+#tabsLeft {
   overflow-y: scroll;
   height: 100%;
   font-size: 14px;
@@ -17,8 +14,7 @@
   align-items: center;
 }
 
-#leftTabs,
-#rightTabs {
+#leftTabs {
   display: flex;
   height: 100%;
   -ms-overflow-style: none;
@@ -28,8 +24,7 @@
   align-items: center;
 }
 
-#leftTabs::-webkit-scrollbar,
-#rightTabs::-webkit-scrollbar {
+#leftTabs::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -38,17 +33,25 @@
 .celect-view-tab-button {
   height: 100%;
   width: max-content;
-  padding: 0 3px;
+  padding: 0 5px;
 }
 
-#tabs div > button:hover {
+#tabs div > button:hover,
+#tabs div > button:focus {
   background: var(--tab-hoverd-color);
+}
+.tab-close-button {
+  padding: 0 5px;
+}
+.tab-close-button:hover,
+.tab-close-button:focus {
+  background: var(--tab-close-button-hoverd-color) !important;
+  color: white;
 }
 
 .tab {
   display: flex;
   height: calc(100% - 1px);
-  padding: 0 5px;
 }
 
 .tab .opened {
@@ -63,4 +66,11 @@
   border-left: solid var(--tab-border-color) 1px;
   border-top: solid var(--tab-border-color) 1px;
   border-right: solid var(--tab-border-color) 1px;
+}
+.new-tab-button {
+  height: -webkit-fill-available;
+}
+
+.new-tab-button > button {
+  padding: 0 5px;
 }
