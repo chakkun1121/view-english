@@ -31,17 +31,6 @@ const tab = {
         return;
       }
     }
-    document.getElementById('rightTabs').innerHTML = '';
-    for (let i = 0; i < tab.tabInfo.right.length; i++) {
-      if (tab.tabInfo.right[i].tabID == tabID) {
-        tab.tabInfo.right.splice(i, 1);
-        // 変更後、それで並び替えさせる
-        // その後、前のタブを表示する
-        tab.view(tab.tabInfo.right[1 == 0 ? i : i - 1].tabID);
-        tab.save();
-        return;
-      }
-    }
     console.error('指定されたIDのタブは存在しません。もう閉じられたのかもしれません。');
   },
   tabInfo: {
@@ -58,20 +47,14 @@ const tab = {
         tab.tabInfo.left[i].viewed = true;
       }
     }
-    for (let i = 0; i < tab.tabInfo.right.length; i++) {
-      tab.tabInfo.right[i].viewed = false;
-      if (tab.tabInfo.right[i].tabID == tabID) {
-        tab.tabInfo.left[i].viewed = true;
-      }
-    }
     tab.save();
     tab.adaptationTabInfoToHTML();
   },
   newTabData: `
-      <div class="new-tab">
-        <h1>和訳表示サイト${appVersion}</h1>
-        <button onclick='openViewWayaku(<tabID/>)'>和訳ファイルを開く</button>
-      </div>`,
+    <div class="new-tab">
+      <h1>和訳表示サイト${appVersion}</h1>
+      <button onclick='openViewWayaku(<tabID/>)'>和訳ファイルを開く</button>
+    </div>`,
   save: function (isNotAdapt) {
     requestIdleCallback(
       function () {
@@ -90,11 +73,6 @@ const tab = {
           return tab.tabInfo.left[i].HTMLdata;
         }
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].HTMLdata;
-        }
-      }
     },
     change: function (tabID = tab.openedTab(), HTMLcontent, title, purpose) {
       if (title) tab.title.change(tabID, title);
@@ -106,14 +84,7 @@ const tab = {
           return;
         }
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].HTMLdata = HTMLcontent;
-          tab.save();
-          return;
-        }
-      }
-      console.error(`指定されたタブID(${tabID})のタブが見つかりませんでした。`);
+      throw `指定されたタブID(${tabID})のタブが見つかりませんでした。`;
     },
   },
   title: {
@@ -121,11 +92,6 @@ const tab = {
       for (let i = 0; i < tab.tabInfo.left.length; i++) {
         if (tab.tabInfo.left[i].tabID == tabID) {
           return tab.tabInfo.left[i].title;
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].title;
         }
       }
     },
@@ -137,13 +103,7 @@ const tab = {
           return;
         }
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].title = title;
-          tab.save();
-          return;
-        }
-      }
+      throw `指定されたタブID(${tabID})のタブが見つかりませんでした。`;
     },
   },
   purpose: {
@@ -151,11 +111,6 @@ const tab = {
       for (let i = 0; i < tab.tabInfo.left.length; i++) {
         if (tab.tabInfo.left[i].tabID == tabID) {
           return tab.tabInfo.left[i].purpose;
-        }
-      }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          return tab.tabInfo.right[i].purpose;
         }
       }
     },
@@ -167,23 +122,9 @@ const tab = {
           return;
         }
       }
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].tabID == tabID) {
-          tab.tabInfo.right[i].purpose = purpose;
-          tab.save(ture);
-          return;
-        }
-      }
     },
   },
   openedTab: function (position = 'left') {
-    if ((position = 'right')) {
-      for (let i = 0; i < tab.tabInfo.right.length; i++) {
-        if (tab.tabInfo.right[i].viewed) {
-          return tab.tabInfo.right[i].tabID;
-        }
-      }
-    }
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       if (tab.tabInfo.left[i].viewed) {
         return tab.tabInfo.left[i].tabID;
@@ -197,7 +138,7 @@ const tab = {
     </div>
   `,
   adaptationTabInfoToHTML: function () {
-    let isFindViewed = [false, false];
+    let isFindViewed = false;
     document.getElementById('leftTabs').innerHTML = '';
     for (let i = 0; i < tab.tabInfo.left.length; i++) {
       const tabID = this.tabInfo.left[i].tabID;
@@ -208,20 +149,11 @@ const tab = {
       if (tab.tabInfo.left[i].viewed) {
         document.getElementById('mainContentLeft').innerHTML = tab.tabInfo.left[i].HTMLdata;
         document.getElementById(tabID).classList.add('opened-tab');
-        isFindViewed[0] = true;
+        isFindViewed = true;
       }
     }
-    if (!isFindViewed[0]) {
+    if (!isFindViewed) {
       document.getElementById('mainContentLeft').innerHTML = 'タブが開かれていません。';
-    }
-    document.getElementById('rightTabs').innerHTML = '';
-    for (let i = 0; i < tab.tabInfo.right.length; i++) {
-      if (tab.tabInfo.right[i].viewed) {
-        document.getElementById('mainContentRight').innerHTML = tab.tabInfo.right[i].HTMLdata;
-      }
-      document.getElementById('rightTabs').innerHTML += this.tabHTMLdata
-        .replace(/<tabID\/>/g, `"${this.tabInfo.left[i].tabID}"`)
-        .replace(/<title\/>/g, this.tabInfo.left[i].title);
     }
   },
 };
