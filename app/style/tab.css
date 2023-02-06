@@ -5,6 +5,11 @@
 #tabs {
   background: var(--tab-color);
 }
+#tabsLeft::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 #tabsLeft {
   overflow-y: scroll;
