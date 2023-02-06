@@ -1,34 +1,29 @@
-shortcut.add('space', function () {
-  if (mode == "cards") {
-    showAnswer()
-  }
-})
 shortcut.add('enter', function () {
   switch (mode) {
-    case "home":
-      startCards()
+    case 'home':
+      startCards();
       break;
-    case "cards":
-      nextProblem()
+    case 'cards':
+      nextProblem();
       break;
-    case "result":
-      window.history.length == 1 ? window.close() : alert('タブを閉じるのに失敗しました。')
+    case 'result':
+      viewErrorAndClose();
       break;
   }
-})
+});
 hotkeys('space,right', function (e, handler) {
-  e.preventDefault()
-  if (mode == "cards") {
+  e.preventDefault();
+  if (mode == 'cards') {
     switch (handler.key) {
       case 'space':
-        showAnswer()
+        showAnswer();
         break;
       case 'right':
-        nextProblem()
+        nextProblem();
         break;
       default:
-        console.error('hotkeys.jsがバグりました。')
+        console.error('hotkeys.jsがバグりました。');
         break;
     }
   }
-})
+});
