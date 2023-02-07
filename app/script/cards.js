@@ -9,7 +9,7 @@ const cards = {
     const wayakuArrary = viewHTMLtoArray(tab.HTMLcontent.get(tabID));
     localStorage.setItem('cards', JSON.stringify(wayakuArrary));
     const subwindow = window.open(
-      '../cards/card.html',
+      './cards/card.html',
       'window_name',
       'width=1000,height=800,scrollbars=yes'
     );

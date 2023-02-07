@@ -40,14 +40,11 @@ function init() {
  * フラッシュカードをスタートさせる準備をして、viewCardを呼び出します。
  */
 function startCards() {
-  setSwipe('body');
   mode = 'cards';
   startSettings.style.display = 'none';
   viewCards.style.display = 'block';
-  headerRight.innerHTML = 
-  `<button onclick="nextProblem()" class="next-problem" id="nextProblemButton">次へ</button>`;
-  headerLeft.innerHTML += 
-  `<h1><spen id="nowProblemNumber">1</spen>/<spen id="allProblemNumber"></spen></h1>`;
+  headerRight.innerHTML = `<button onclick="nextProblem()" class="next-problem" id="nextProblemButton">次へ</button>`;
+  headerLeft.innerHTML += `<h1><spen id="nowProblemNumber">1</spen>/<spen id="allProblemNumber"></spen></h1>`;
   problemSequence = [...Array(cardsObject.length)].map((_, i) => i);
   if (setRondom.checked) {
     problemSequence = arrayShuffle(problemSequence);
@@ -79,6 +76,14 @@ function showAnswer() {
  * @returns
  */
 function nextProblem() {
+  if (mode == 'home') {
+    startCards();
+    return;
+  }
+  if (mode == 'result') {
+    viewErrorAndClose();
+    return;
+  }
   if (mode != 'cards') return;
   resentObject++;
   if (cardsObject[problemSequence[resentObject]]) {
@@ -98,8 +103,7 @@ function stopCard() {
   mode = 'stopCards';
   nextProblemButton.style.display = 'none';
   beforeCode = viewCards.innerHTML;
-  viewCards.innerHTML =
-    `<p>フラッシュカードは全画面表示でしか表示できません。もしこのまま続ける場合は<a onclick="resumeCards()">こちら</a>を押してください。</p>`;
+  viewCards.innerHTML = `<p>フラッシュカードは全画面表示でしか表示できません。もしこのまま続ける場合は<a onclick="resumeCards()">こちら</a>を押してください。</p>`;
 }
 /**
  * フラッシュカードを再開する
@@ -155,7 +159,7 @@ function arrayShuffle(array) {
 function viewErrorAndClose() {
   window.history.length == 1
     ? window.close()
-    : alert('問題が発生しました。もう一度タブを開きなおしてください。');
+    : alert('問題が発生しました。ブラウザのバツボタンで閉じてください。');
 }
 function speech(position = 'answer') {
   const speechText = document.getElementById(position).innerText;

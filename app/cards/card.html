@@ -6,7 +6,7 @@
   <title>フラッシュカード | 和訳表示サイト</title>
   <link href="card.css" rel="stylesheet">
   <link href="" id="darkModeCss" rel="stylesheet">
-  <link rel="icon" href="../favicon.ico" id="favicon" async>
+  <link rel="icon" href="../../favicon.ico" id="favicon" async>
 </head>
 
 <body oncontextmenu="return false;" id='body'>
@@ -110,13 +110,24 @@
     <div id="viewResult">
       <button onclick="window.history.length==1?window.close():alert('タブを閉じるのに失敗しました。')">タブを閉じる</button>
     </div>
+    <div class="access-buttons">
+      <button onclick="nextProblem()"><svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve">
+          <g>
+            <polygon class="st0"
+              points="163.916,0 92.084,71.822 276.258,255.996 92.084,440.178 163.916,512 419.916,255.996 	"
+              style="fill: rgb(75, 75, 75);"></polygon>
+          </g>
+        </svg>
+      </button>
+    </div>
   </main>
   <!--js読み込み-->
   <script>let finishedScriptNumber</script>
-  <script src="../app/script/wayaku.js" defer></script>
+  <script src="../script/wayaku.js" defer></script>
   <script src="./script.js" defer></script>
-  <script src="../library/shortcut.js" defer></script>
-  <script src="../library/hotkeys.js" defer></script>
+  <script src="../../library/shortcut.js" defer></script>
+  <script src="../../library/hotkeys.js" defer></script>
   <script src="./keyShortcut.js" defer></script>
 </body>
 

@@ -133,3 +133,16 @@ header h1 {
 label {
   display: block;
 }
+.access-buttons {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.access-buttons > button {
+  border: unset;
+  background-color: unset;
+}
+.access-buttons > button > svg {
+  width: 30px;
+  height: 30px;
+}
