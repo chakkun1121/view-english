@@ -137,6 +137,18 @@ label {
   position: absolute;
   right: 10px;
   bottom: 10px;
+  animation: up-and-down 0.5s ease 0s infinite alternate;
+}
+@keyframes up-and-down {
+  from {
+    /*ここに開始のCSSを記述*/
+    bottom: 10px;
+  }
+
+  to {
+    /*ここに終了のCSSを記述*/
+    bottom: 20px;
+  }
 }
 .access-buttons > button {
   border: unset;
@@ -145,4 +157,11 @@ label {
 .access-buttons > button > svg {
   width: 30px;
   height: 30px;
+}
+/* 「視差効果を減らす」がオンならアニメーションしない */
+@media (prefers-reduced-motion: reduce) {
+  animation-delay: 0s !important;
+  animation-duration: 1ms !important;
+  transition-delay: 0s !important;
+  transition-duration: 1ms !important;
 }
