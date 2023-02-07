@@ -53,15 +53,16 @@ function arrayToWayaku(arrayWayakuData) {
   });
   let i = 0;
   let title = arrayWayakuData[i];
-  let wayaku = '<h1 class="title">' + title + '</h1>';
+  let wayaku = '<wayaku><h1 class="title">' + title + '</h1>';
   i++;
   for (; i <= arrayWayakuData.length - 2; i++) {
     let en = arrayWayakuData[i];
-    wayaku = wayaku + '<p class="en">' + en + '</p>';
+    wayaku = wayaku + '<section><p class="en">' + en + '</p>';
     i++;
     let ja = arrayWayakuData[i];
-    wayaku = wayaku + '<p class="ja">' + ja + '</p>';
+    wayaku = wayaku + '<p class="ja">' + ja + '</p></section>';
   }
+  wayaku += '</wayaku>';
   return wayaku;
 }
 /**
@@ -71,7 +72,7 @@ function arrayToWayaku(arrayWayakuData) {
  */
 function arrayToViewHTML(arrayWayakuData) {
   if (!arrayWayakuData) return;
-  return `<div class="wayaku-content">${arrayToWayaku(arrayWayakuData)}</div>`;
+  return arrayToWayaku(arrayWayakuData);
 }
 /**
  * 表示用のHTMLから配列に変換
