@@ -170,6 +170,10 @@ function speech(position = 'answer') {
   // 発言を再生
   window.speechSynthesis.speak(uttr);
 }
-function editFileFromCards() {
-  alert('フラッシュカードから編集する機能を実装中です。もうしばらくお待ちください。');
+function editFileFromCards(position = 'problem') {
+  alert(
+    'フラッシュカードから編集する機能を実装中です。もうしばらくお待ちください。一応編集はできますが、保存されません。'
+  );
+  console.log(position);
+  document.getElementById(position).contentEditable = true;
 }
