@@ -15,7 +15,7 @@
 var UUID;
 
 UUID = (function (overwrittenUUID) {
-  "use strict";
+  'use strict';
 
   // Core Component {{{
 
@@ -24,16 +24,19 @@ UUID = (function (overwrittenUUID) {
    * @returns {string} Hexadecimal UUID string.
    */
   UUID.generate = function () {
-    var rand = UUID._getRandomInt, hex = UUID._hexAligner;
-    return hex(rand(32), 8)          // time_low
-      + "-"
-      + hex(rand(16), 4)          // time_mid
-      + "-"
-      + hex(0x4000 | rand(12), 4) // time_hi_and_version
-      + "-"
-      + hex(0x8000 | rand(14), 4) // clock_seq_hi_and_reserved clock_seq_low
-      + "-"
-      + hex(rand(48), 12);        // node
+    var rand = UUID._getRandomInt,
+      hex = UUID._hexAligner;
+    return (
+      hex(rand(32), 8) + // time_low
+      '-' +
+      hex(rand(16), 4) + // time_mid
+      '-' +
+      hex(0x4000 | rand(12), 4) + // time_hi_and_version
+      '-' +
+      hex(0x8000 | rand(14), 4) + // clock_seq_hi_and_reserved clock_seq_low
+      '-' +
+      hex(rand(48), 12)
+    ); // node
   };
 
   /**
@@ -43,9 +46,11 @@ UUID = (function (overwrittenUUID) {
    * @returns {number} Unsigned x-bit random integer (0 <= f(x) < 2^x).
    */
   UUID._getRandomInt = function (x) {
-    if (x < 0 || x > 53) { return NaN; }
-    var n = 0 | Math.random() * 0x40000000; // 1 << 30
-    return x > 30 ? n + (0 | Math.random() * (1 << x - 30)) * 0x40000000 : n >>> 30 - x;
+    if (x < 0 || x > 53) {
+      return NaN;
+    }
+    var n = 0 | (Math.random() * 0x40000000); // 1 << 30
+    return x > 30 ? n + (0 | (Math.random() * (1 << (x - 30)))) * 0x40000000 : n >>> (30 - x);
   };
 
   /**
@@ -56,8 +61,14 @@ UUID = (function (overwrittenUUID) {
    * @returns {string}
    */
   UUID._hexAligner = function (num, length) {
-    var str = num.toString(16), i = length - str.length, z = "0";
-    for (; i > 0; i >>>= 1, z += z) { if (i & 1) { str = z + str; } }
+    var str = num.toString(16),
+      i = length - str.length,
+      z = '0';
+    for (; i > 0; i >>>= 1, z += z) {
+      if (i & 1) {
+        str = z + str;
+      }
+    }
     return str;
   };
 
@@ -73,7 +84,6 @@ UUID = (function (overwrittenUUID) {
   // Advanced Random Number Generator Component {{{
 
   (function () {
-
     var mathPRNG = UUID._getRandomInt;
 
     /**
@@ -85,29 +95,34 @@ UUID = (function (overwrittenUUID) {
       UUID._getRandomInt = mathPRNG;
     };
 
-    var crypto = null, cryptoPRNG = mathPRNG;
-    if (typeof window !== "undefined" && (crypto = window.crypto || window.msCrypto)) {
-      if (crypto.getRandomValues && typeof Uint32Array !== "undefined") {
+    var crypto = null,
+      cryptoPRNG = mathPRNG;
+    if (typeof window !== 'undefined' && (crypto = window.crypto || window.msCrypto)) {
+      if (crypto.getRandomValues && typeof Uint32Array !== 'undefined') {
         // Web Cryptography API
         cryptoPRNG = function (x) {
-          if (x < 0 || x > 53) { return NaN; }
+          if (x < 0 || x > 53) {
+            return NaN;
+          }
           var ns = new Uint32Array(x > 32 ? 2 : 1);
           ns = crypto.getRandomValues(ns) || ns;
-          return x > 32 ? ns[0] + (ns[1] >>> 64 - x) * 0x100000000 : ns[0] >>> 32 - x;
+          return x > 32 ? ns[0] + (ns[1] >>> (64 - x)) * 0x100000000 : ns[0] >>> (32 - x);
         };
       }
-    } else if (typeof require !== "undefined" && (crypto = require("crypto"))) {
+    } else if (typeof require !== 'undefined' && (crypto = require('crypto'))) {
       if (crypto.randomBytes) {
         // nodejs
         cryptoPRNG = function (x) {
-          if (x < 0 || x > 53) { return NaN; }
-          var buf = crypto.randomBytes(x > 32 ? 8 : 4), n = buf.readUInt32BE(0);
-          return x > 32 ? n + (buf.readUInt32BE(4) >>> 64 - x) * 0x100000000 : n >>> 32 - x;
+          if (x < 0 || x > 53) {
+            return NaN;
+          }
+          var buf = crypto.randomBytes(x > 32 ? 8 : 4),
+            n = buf.readUInt32BE(0);
+          return x > 32 ? n + (buf.readUInt32BE(4) >>> (64 - x)) * 0x100000000 : n >>> (32 - x);
         };
       }
     }
     UUID._getRandomInt = cryptoPRNG;
-
   })();
 
   // }}}
@@ -120,8 +135,14 @@ UUID = (function (overwrittenUUID) {
    * @constant
    * @since 3.0
    */
-  UUID.FIELD_NAMES = ["timeLow", "timeMid", "timeHiAndVersion",
-    "clockSeqHiAndReserved", "clockSeqLow", "node"];
+  UUID.FIELD_NAMES = [
+    'timeLow',
+    'timeMid',
+    'timeHiAndVersion',
+    'clockSeqHiAndReserved',
+    'clockSeqLow',
+    'node',
+  ];
 
   /**
    * Sizes of UUID internal fields.
@@ -138,10 +159,14 @@ UUID = (function (overwrittenUUID) {
    */
   UUID.genV4 = function () {
     var rand = UUID._getRandomInt;
-    return new UUID()._init(rand(32), rand(16), // time_low time_mid
-      0x4000 | rand(12),  // time_hi_and_version
-      0x80 | rand(6),   // clock_seq_hi_and_reserved
-      rand(8), rand(48)); // clock_seq_low node
+    return new UUID()._init(
+      rand(32),
+      rand(16), // time_low time_mid
+      0x4000 | rand(12), // time_hi_and_version
+      0x80 | rand(6), // clock_seq_hi_and_reserved
+      rand(8),
+      rand(48)
+    ); // clock_seq_low node
   };
 
   /**
@@ -151,15 +176,25 @@ UUID = (function (overwrittenUUID) {
    * @since 3.0
    */
   UUID.parse = function (strId) {
-    var r, p = /^\s*(urn:uuid:|\{)?([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})(\})?\s*$/i;
-    if (r = p.exec(strId)) {
-      var l = r[1] || "", t = r[8] || "";
-      if (((l + t) === "") ||
-        (l === "{" && t === "}") ||
-        (l.toLowerCase() === "urn:uuid:" && t === "")) {
-        return new UUID()._init(parseInt(r[2], 16), parseInt(r[3], 16),
-          parseInt(r[4], 16), parseInt(r[5], 16),
-          parseInt(r[6], 16), parseInt(r[7], 16));
+    var r,
+      p =
+        /^\s*(urn:uuid:|\{)?([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})(\})?\s*$/i;
+    if ((r = p.exec(strId))) {
+      var l = r[1] || '',
+        t = r[8] || '';
+      if (
+        l + t === '' ||
+        (l === '{' && t === '}') ||
+        (l.toLowerCase() === 'urn:uuid:' && t === '')
+      ) {
+        return new UUID()._init(
+          parseInt(r[2], 16),
+          parseInt(r[3], 16),
+          parseInt(r[4], 16),
+          parseInt(r[5], 16),
+          parseInt(r[6], 16),
+          parseInt(r[7], 16)
+        );
       }
     }
     return null;
@@ -178,8 +213,10 @@ UUID = (function (overwrittenUUID) {
    * @returns {UUID} this.
    */
   UUID.prototype._init = function () {
-    var names = UUID.FIELD_NAMES, sizes = UUID.FIELD_SIZES;
-    var bin = UUID._binAligner, hex = UUID._hexAligner;
+    var names = UUID.FIELD_NAMES,
+      sizes = UUID.FIELD_SIZES;
+    var bin = UUID._binAligner,
+      hex = UUID._hexAligner;
 
     /**
      * UUID internal field values as an array of integers.
@@ -210,33 +247,42 @@ UUID = (function (overwrittenUUID) {
      * UUID version number.
      * @type {number}
      */
-    this.version = (this.intFields.timeHiAndVersion >>> 12) & 0xF;
+    this.version = (this.intFields.timeHiAndVersion >>> 12) & 0xf;
 
     /**
      * 128-bit binary string representation.
      * @type {string}
      */
-    this.bitString = this.bitFields.join("");
+    this.bitString = this.bitFields.join('');
 
     /**
      * Non-delimited hexadecimal string representation ("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").
      * @type {string}
      * @since v3.3.0
      */
-    this.hexNoDelim = this.hexFields.join("");
+    this.hexNoDelim = this.hexFields.join('');
 
     /**
      * Hexadecimal string representation ("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx").
      * @type {string}
      */
-    this.hexString = this.hexFields[0] + "-" + this.hexFields[1] + "-" + this.hexFields[2]
-      + "-" + this.hexFields[3] + this.hexFields[4] + "-" + this.hexFields[5];
+    this.hexString =
+      this.hexFields[0] +
+      '-' +
+      this.hexFields[1] +
+      '-' +
+      this.hexFields[2] +
+      '-' +
+      this.hexFields[3] +
+      this.hexFields[4] +
+      '-' +
+      this.hexFields[5];
 
     /**
      * URN string representation ("urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx").
      * @type {string}
      */
-    this.urn = "urn:uuid:" + this.hexString;
+    this.urn = 'urn:uuid:' + this.hexString;
 
     return this;
   };
@@ -249,8 +295,14 @@ UUID = (function (overwrittenUUID) {
    * @returns {string}
    */
   UUID._binAligner = function (num, length) {
-    var str = num.toString(2), i = length - str.length, z = "0";
-    for (; i > 0; i >>>= 1, z += z) { if (i & 1) { str = z + str; } }
+    var str = num.toString(2),
+      i = length - str.length,
+      z = '0';
+    for (; i > 0; i >>>= 1, z += z) {
+      if (i & 1) {
+        str = z + str;
+      }
+    }
     return str;
   };
 
@@ -258,7 +310,9 @@ UUID = (function (overwrittenUUID) {
    * Returns the hexadecimal string representation.
    * @returns {string} {@link UUID#hexString}.
    */
-  UUID.prototype.toString = function () { return this.hexString; };
+  UUID.prototype.toString = function () {
+    return this.hexString;
+  };
 
   /**
    * Tests if two {@link UUID} objects are equal.
@@ -266,9 +320,13 @@ UUID = (function (overwrittenUUID) {
    * @returns {boolean} True if two {@link UUID} objects are equal.
    */
   UUID.prototype.equals = function (uuid) {
-    if (!(uuid instanceof UUID)) { return false; }
+    if (!(uuid instanceof UUID)) {
+      return false;
+    }
     for (var i = 0; i < 6; i++) {
-      if (this.intFields[i] !== uuid.intFields[i]) { return false; }
+      if (this.intFields[i] !== uuid.intFields[i]) {
+        return false;
+      }
     }
     return true;
   };
@@ -291,10 +349,15 @@ UUID = (function (overwrittenUUID) {
    * @since 3.0
    */
   UUID.genV1 = function () {
-    if (UUID._state == null) { UUID.resetState(); }
-    var now = new Date().getTime(), st = UUID._state;
+    if (UUID._state == null) {
+      UUID.resetState();
+    }
+    var now = new Date().getTime(),
+      st = UUID._state;
     if (now != st.timestamp) {
-      if (now < st.timestamp) { st.sequence++; }
+      if (now < st.timestamp) {
+        st.sequence++;
+      }
       st.timestamp = now;
       st.tick = UUID._getRandomInt(12); // up to 4095, allowing 5904 tick per msec
     } else if (st.tick < 9992) {
@@ -308,12 +371,12 @@ UUID = (function (overwrittenUUID) {
     // format time fields
     var tf = UUID._getTimeFieldValues(st.timestamp);
     var tl = tf.low + st.tick;
-    var thav = (tf.hi & 0xFFF) | 0x1000;  // set version '0001'
+    var thav = (tf.hi & 0xfff) | 0x1000; // set version '0001'
 
     // format clock sequence
-    st.sequence &= 0x3FFF;
+    st.sequence &= 0x3fff;
     var cshar = (st.sequence >>> 8) | 0x80; // set variant '10'
-    var csl = st.sequence & 0xFF;
+    var csl = st.sequence & 0xff;
 
     return new UUID()._init(tl, tf.mid, thav, cshar, csl, st.node);
   };
@@ -356,25 +419,26 @@ UUID = (function (overwrittenUUID) {
    */
   UUID._getTimeFieldValues = function (time) {
     var ts = time - Date.UTC(1582, 9, 15);
-    var hm = ((ts / 0x100000000) * 10000) & 0xFFFFFFF;
+    var hm = ((ts / 0x100000000) * 10000) & 0xfffffff;
     return {
-      low: ((ts & 0xFFFFFFF) * 10000) % 0x100000000,
-      mid: hm & 0xFFFF, hi: hm >>> 16, timestamp: ts
+      low: ((ts & 0xfffffff) * 10000) % 0x100000000,
+      mid: hm & 0xffff,
+      hi: hm >>> 16,
+      timestamp: ts,
     };
   };
 
   // }}}
 
   // create local namespace
-  function UUID() { }
+  function UUID() {}
 
   // for nodejs
-  if (typeof module === "object" && typeof module.exports === "object") {
+  if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = UUID;
   }
 
   return UUID;
-
 })(UUID);
 
 // vim: fdm=marker fmr&

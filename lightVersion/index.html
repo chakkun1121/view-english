@@ -12,6 +12,7 @@
   <meta name="color-scheme" content="#7aa1d6">
   <title>和訳表示サイト軽量版 1.0.0</title>
   <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+  <link rel="icon" href="./favicon.ico" id="favicon" async>
   <link rel="manifest" href="manifest.json" defer>
 </head>
 
@@ -23,7 +24,7 @@
         表示するファイルを選択
       </button>
       <label style="display: none;">
-        <input type="file" onchange="loadFile()" id="file" value="表示するファイルを選択">
+        <input type="file" onchange="loadFile()" id="file" value="表示するファイルを選択" accept=".wayaku">
       </label>
       <button onclick="changeStyle()" class="tool-bar-button">スタイル変更</button>
       <button onclick="updata()" class="tool-bar-button">更新</button>
@@ -34,8 +35,7 @@
   </main>
   <script>
     if (getParam('file')) {
-      var defaltFile = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。<-IEを切り捨てたがその名残
-      document.querySelector('main').innerHTML = defaltFile
+      document.querySelector('main').innerHTML = getParam('file')//IE11対策のために今は非推奨となったvarを使用せざる負えません。<-IEを切り捨てたがその名残
     }
     var style = 0;
     function changeStyle() {
@@ -46,7 +46,6 @@
         root.style.setProperty("--ja-color", "black")
         style = 1;
       } else if (style == 1) {
-        //カスタム表示
         var settings_json = JSON.parse(localStorage.getItem('wayakuSettings'))
         var en_color, ja_color
         if (settings_json) {
@@ -76,25 +75,7 @@
       }
       reader.readAsText(file.files[0]);
     }
-    //アップデート用
     function updata() {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function (registrations) {
-          // 登録されているworkerを全て削除する
-          for (var registration of registrations) {
-            registration.unregister();
-          }
-        });
-        caches.keys().then(function (keys) {
-          var promises = [];
-          // キャッシュストレージを全て削除する
-          keys.forEach(function (cacheName) {
-            if (cacheName) {
-              promises.push(caches.devare(cacheName));
-            }
-          });
-        });
-      }
       window.location.reload();
     }
     /*指定したkeyに対応したvalueを返します。*/
@@ -106,19 +87,6 @@
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-  </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(function (registration) {
-        // 登録成功
-        console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
-      }).catch(function (err) {
-        // 登録失敗
-        console.log('ServiceWorker の登録に失敗しました。', err);
-      });
-    } else {
-      console.error("サービスワーカー非対応ブラウザです。")
     }
   </script>
 </body>

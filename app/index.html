@@ -4,22 +4,29 @@
 <head>
   <meta charset="utf-8" />
   <title>和訳表示サイト</title>
-  <link rel="stylesheet" href="style/style.css" media="print" onload="this.media='all'">
-  <link rel="apple-touch-icon" href="/apple.png" async>
+  <link rel="stylesheet" href="./style/style.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./style/header.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./style/tab.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./style/maincontents.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./style/wayakufile.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./style/mobile.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="style/startload.css" />
+  <link rel="apple-touch-icon" href="/apple.png" async>
   <link rel="icon" href="../favicon.ico" id="favicon" async>
   <link rel="manifest" href="manifest.json" defer>
-  <link rel="stylesheet" href="./style/mobile.css">
   <meta name="theme-color" content="#7aa1d6">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="canonical" content="https://chakkun1121.github.io/view-english/app/">
   <meta name="description" content="和訳表示サイトのアプリ本体です。ローカルに保存されている和訳ファイル(.wayakuなど)を表示、編集できます。">
 </head>
 
 <body>
   <div id="loading">
     <div class="loader"></div>
-    <h1>読み込み中です。しばらくお待ち下さい。万が一このまましばらく起動しなかったら、<a
-        href="https://github.com/chakkun1121/view-english/issues/new">お問い合わせ</a>ください。</h1>
+    <h1>読み込み中です。しばらくお待ち下さい。万が一このまましばらく起動しなかったら、
+      <a href="https://forms.gle/7dTCpKn1NGKahxPR8" target="_blank">お問い合わせ</a>
+      ください。
+    </h1>
     <div id="loadErrorMessage"></div>
   </div>
   <div id="headerButtons">
@@ -33,25 +40,13 @@
     <div id="tabsLeft">
       <div id="leftTabs"></div>
       <div class="new-tab-button">
-        <button class="reset text-icon" onclick="tab.new(undefined,undefined,'left')" aria-label="新しいタブを開く">+</button>
-      </div>
-    </div>
-    <div class="contents-size-change-bar">
-      <!-- 左右のコンテンツの幅を変えるバー -->
-    </div>
-    <div id="tabsRight">
-      <div id="rightTabs"></div>
-      <div class="new-tab-button">
-        <button class="reset text-icon" onclick="tab.new(undefined,undefined,'right')" aria-label="新しいタブを開く">+</button>
+        <button class="reset text-icon" onclick="tab.new()" aria-label="新しいタブを開く">+</button>
       </div>
     </div>
   </div>
   <div id="mainContents">
     <div id="mainContentLeft">
       タブが開かれていません。
-    </div>
-    <div id="ContentsSizeChangeBar" class="contents-size-change-bar"></div>
-    <div id="mainContentRight">
     </div>
   </div>
   <div id="appEvent" style="display:none!important;"></div>

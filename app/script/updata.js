@@ -1,7 +1,8 @@
-document.getElementById('headerFileMenu').innerHTML += `
+(function () {
+  document.getElementById('headerFileMenu').innerHTML += `
   <button class="header-file-menu-button" onclick="updata()">アプリの手動更新</button>
-`
-//アップデート用
+`;
+})();
 function updata() {
   if (navigator.serviceWorker) {
     navigator.serviceWorker.getRegistrations().then(function (registrations) {
