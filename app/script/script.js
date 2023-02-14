@@ -1,5 +1,5 @@
 const appEvent = document.getElementById('appEvent');
-const appVersion = "4.1.0"
+const appVersion = "4.0.10"
 window.onload = function () {
   const useLibraryURLs = localStorage.getItem('wayakuExtensions') ? librariesURL.concat(JSON.parse(localStorage.getItem('wayakuExtensions'))) : librariesURL
   console.log(useLibraryURLs)
