@@ -3,7 +3,13 @@
 }
 /* tabのスタイル */
 #tabs {
+  width: 100vw;
   background: var(--tab-color);
+}
+#tabs::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 #tabsLeft::-webkit-scrollbar {
   display: none;

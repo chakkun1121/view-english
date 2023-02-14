@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v4.1.0'; //現在バージョンを入れる
+const CACHE_VERSION = 'v4.0.10-1'; //現在バージョンを入れる
 const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 // キャッシュするファイルをセットする
@@ -10,7 +10,6 @@ const urlsToCache = [
   'script/script.js',
   'cards/card.html',
   'cards/card.css',
-  'cards/darkmode.css',
   'cards/script.js',
   'cards/keyShortcut.js',
   '../library/shortcut.js',
