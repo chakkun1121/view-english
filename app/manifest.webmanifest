@@ -19,17 +19,13 @@
   "display": "fullscreen",
   "theme_color": "#7aa1d6",
   "background_color": "#7aa1d6",
-  "display_override": [
-    "window-controls-overlay"
-  ],
+  "display_override": ["window-controls-overlay"],
   "orientation": "any",
   "file_handlers": [
     {
       "action": ".",
       "accept": {
-        "application/dxf": [
-          ".wayaku"
-        ]
+        "application/dxf": [".wayaku"]
       },
       "icons": [
         {

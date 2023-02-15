@@ -14,7 +14,7 @@ const urlsToCache = [
   'cards/keyShortcut.js',
   '../library/shortcut.js',
   '../library/hotkeys.js',
-  'manifest.json',
+  'manifest.webmanifest',
   '../favicon.ico',
 ];
 
