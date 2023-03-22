@@ -10,36 +10,56 @@
   --ja-color: #000000;
   --en-color: #000000;
 }
+
+.hidden {
+  display: none;
+}
+
 .reset {
   all: unset;
   margin: 0;
 }
+
 body,
 div {
   margin: 0;
 }
+
 body {
   display: grid;
   grid-template-rows: auto auto 1fr;
   height: 100vh;
 }
+
 .loaded {
   opacity: 0;
   visibility: hidden;
 }
+
 .close-icon {
   font-size: 1em;
 }
+
 .text-icon {
   font-size: 1.5em;
-} /* 印刷用 */
+}
+
+iframe {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  border: none;
+}
+
+/* 印刷用 */
 @media print {
+
   #loading,
   #headerButtons,
   #headerFileMenu,
   #tabs {
     display: none;
   }
+
   .wayaku-content {
     display: block;
   }

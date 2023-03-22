@@ -46,14 +46,14 @@ function wayakuToArray(stringWayakuData) {
  * @param {Array} arrayWayakuData
  * @returns {string} stringWayakuData
  */
-function arrayToWayaku(arrayWayakuData) {
+function arrayToWayaku(arrayWayakuData, fileID = 'wayakuFile-' + UUID.generate()) {
   if (!arrayWayakuData) return;
   arrayWayakuData = arrayWayakuData.filter(function (s) {
     return s !== '';
   });
   let i = 0;
   let title = arrayWayakuData[i];
-  let wayaku = '<wayaku><h1 class="title">' + title + '</h1>';
+  let wayaku = `<wayaku fileID="${fileID}"><h1 class="title">${title}</h1>`;
   i++;
   for (; i <= arrayWayakuData.length - 2; i++) {
     let en = arrayWayakuData[i];
@@ -147,4 +147,3 @@ function isWayakuTitle(fileTitle) {
   if (!fileTitle) return;
   return fileTitle.split('.').pop() == 'wayaku';
 }
-finishedScriptNumber++;

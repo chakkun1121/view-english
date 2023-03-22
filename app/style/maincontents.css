@@ -1,11 +1,15 @@
-/* 新しいタブ */
-.new-tab {
-  padding: 5px;
-}
 /* mainコンテンツ */
-#mainContents {
-  overflow-x: scroll;
+#mainContent {
+  padding: 5px;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-#mainContents::-webkit-scrollbar {
+
+#mainContent:empty {
+  content: "タブが開かれていません。"
+}
+
+#mainContent::-webkit-scrollbar {
   display: none;
 }

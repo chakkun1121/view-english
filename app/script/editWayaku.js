@@ -47,8 +47,3 @@ function newFile() {
   tab.view();
   editFile();
 }
-
-document.getElementById('headerFileMenu').innerHTML += `
-  <button class="header-file-menu-button" onclick="editFile()">編集</button>
-`;
-finishedScriptNumber++;

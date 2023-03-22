@@ -26,8 +26,3 @@ async function downloadWayaku(fileName, data) {
   });
   await saveWayakuFile(handle, data);
 }
-
-document.getElementById('headerFileMenu').innerHTML += `
-  <button class="header-file-menu-button" onclick="saveWayaku()">保存</button>
-`;
-finishedScriptNumber++;

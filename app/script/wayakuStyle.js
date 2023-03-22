@@ -1,9 +1,3 @@
-document.getElementById('headerButtons').innerHTML += `
-  <button class="tool-bar-button" onclick="changeStyle();">表示切替</button>
-`
-document.getElementById('headerFileMenu').innerHTML += `
-  <button class="header-file-menu-button" onclick="changeStyle()">表示切替</button>
-`
 //英文、和訳のスタイルの変更
 let wayakuStyle = 0;
 /**
@@ -12,16 +6,16 @@ let wayakuStyle = 0;
 function changeStyle() {
   switch (wayakuStyle) {
     case 0:
-      changeStyleAsColor("white")
+      changeStyleAsColor('white');
       wayakuStyle = 1;
       break;
     case 1:
       //カスタム表示
       let settingsJson = JSON.parse(localStorage.getItem('wayakuSettings')) || {};
-      console.log(settingsJson)
-      let jaColor = settingsJson.jacolor || "#000000"
-      let enColor = settingsJson.encolor || "#ffa500"
-      changeStyleAsColor(enColor, jaColor)
+      console.log(settingsJson);
+      let jaColor = settingsJson.jacolor || '#000000';
+      let enColor = settingsJson.encolor || '#ffa500';
+      changeStyleAsColor(enColor, jaColor);
       wayakuStyle = 2;
       break;
     case 2:
@@ -32,12 +26,11 @@ function changeStyle() {
 }
 /**
  * 指定した色に変更します。
- * @param {String} enColor 
- * @param {String} jaColor 
+ * @param {String} enColor
+ * @param {String} jaColor
  */
-function changeStyleAsColor(enColor = "#000000", jaColor = "#000000") {
+function changeStyleAsColor(enColor = '#000000', jaColor = '#000000') {
   const root = document.querySelector(':root');
-  root.style.setProperty("--en-color", enColor)
-  root.style.setProperty("--ja-color", jaColor)
+  root.style.setProperty('--en-color', enColor);
+  root.style.setProperty('--ja-color', jaColor);
 }
-finishedScriptNumber++

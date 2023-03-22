@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="./style/header.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./style/tab.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./style/maincontents.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="./style/wayakufile.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./style/mobile.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="style/startload.css" />
   <link rel="apple-touch-icon" href="/apple.png" async>
@@ -31,28 +30,46 @@
   </div>
   <div id="headerButtons">
     <button type="button" class="tool-bar-button" id="fileButton"
-      onclick="document.querySelector('#headerFileMenu').classList.toggle('header-file-manu-opened')">
+      onclick="document.querySelector('#headerFileMenu').classList.toggle('header-file-menu-opened')">
       ファイル
     </button>
+    <button class="tool-bar-button" onclick="changeStyle();">表示切替</button>
+    <button type="button" class="tool-bar-button" onclick="cards.start();">フラッシュカード</button>
   </div>
-  <div id="headerFileMenu"></div>
-  <div id="tabs">
-    <div id="tabsLeft">
-      <div id="leftTabs"></div>
-      <div class="new-tab-button">
-        <button class="reset text-icon" onclick="tab.new()" aria-label="新しいタブを開く">+</button>
-      </div>
+  <div id="headerFileMenu">
+    <button class="header-file-menu-button" onclick="changeStyle()">表示切替</button>
+    <button class="header-file-menu-button" onclick="cards.start();">フラッシュカードをスタート</button>
+    <button class="header-file-menu-button" onclick="editFile()">編集</button>
+    <button class="header-file-menu-button" onclick="window.open('../settings','_target')">設定</button>
+    <button class="header-file-menu-button" onclick="saveWayaku()">保存</button>
+    <button class="header-file-menu-button" onclick="print()">印刷</button>
+    <button class="header-file-menu-button" onclick="updata()">アプリの手動更新</button>
+    <button class="header-file-menu-button" onclick="resetApp()">アプリをリセット</button>
+  </div>
+  <div class="tabs">
+    <div id="tabs"></div>
+    <div class="new-tab-button">
+      <button class="reset text-icon" onclick="tab.new()" aria-label="新しいタブを開く">+</button>
     </div>
   </div>
-  <div id="mainContents">
-    <div id="mainContentLeft">
-      タブが開かれていません。
-    </div>
   </div>
+  <div id="mainContent"></div>
   <div id="appEvent" style="display:none!important;"></div>
   <script src="../library/shortcut.js" defer></script>
   <script src="../library/uuid.js" defer></script>
   <script src="script/script.js" defer></script>
+  <script src="script/keyshortcut.js" defer></script>
+  <script src="script/tab.js" defer></script>
+  <script src="script/header.js" defer></script>
+  <script src="script/wayaku.js" defer></script>
+  <script src="script/wayakuStyle.js" defer></script>
+  <script src="script/cards.js" defer></script>
+  <script src="script/editWayaku.js" defer></script>
+  <script src="script/settings.js" defer></script>
+  <script src="script/saveWayakuFile.js" defer></script>
+  <script src="script/print.js" defer></script>
+  <script src="script/updata.js" defer></script>
+  <script src="script/resetApp.js" defer></script>
   <!-- sw.jsの登録 -->
   <script>
     if ('serviceWorker' in navigator) {

@@ -71,4 +71,3 @@ appEvent.addEventListener('init', function () {
     shortcut.add(shortcutList[i].key, shortcutList[i].callback)
   }
 })
-finishedScriptNumber++

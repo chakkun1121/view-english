@@ -1,0 +1,19 @@
+:root {
+  --theme-color: #7aa1d6;
+  --error-header-color: red;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.error-header {
+  color: var(--error-header-color);
+}

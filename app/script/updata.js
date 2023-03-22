@@ -1,8 +1,3 @@
-(function () {
-  document.getElementById('headerFileMenu').innerHTML += `
-  <button class="header-file-menu-button" onclick="updata()">アプリの手動更新</button>
-`;
-})();
 function updata() {
   if (navigator.serviceWorker) {
     navigator.serviceWorker.getRegistrations().then(function (registrations) {
@@ -23,4 +18,3 @@ function updata() {
   });
   window.location.reload();
 }
-finishedScriptNumber++
