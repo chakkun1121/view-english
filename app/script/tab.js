@@ -48,7 +48,6 @@ window.tab = {
       return tab.tabInfo.tabs.filter((tab) => tab.tabID == tabID)[0].title;
     },
     change: function (tabID = tab.openedTab(), title = '新しいタブ') {
-      console.log(tabID, title);
       for (let i = 0; i < tab.tabInfo.tabs.length; i++) {
         if (tab.tabInfo.tabs[i].tabID == tabID) {
           tab.tabInfo.tabs[i].title = title;
