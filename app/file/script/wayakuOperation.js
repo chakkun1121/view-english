@@ -55,7 +55,7 @@ async function openFile() {
     //タイトルを変更
     changeTitle(fileName);
     //ファイル情報などを保存
-    saveFileInfo(fileName, fileID, fileData, fhList[i], saveFile());
+    saveFileInfo(fileName, fileID, fileData, undefined, saveFile());
     if (i != 0) {
       //本体にタブを開くよう指示してそこにファイルIDを渡す
       const map = new Map();
@@ -90,7 +90,7 @@ async function startOpenFilesFromFileAPI(files) {
  */
 function changeTitle(title) {
   document.title = title + ' | ファイル表示 | 和訳表示サイト | chakkun1121';
-  if (window.parent.window === window) return;  
+  if (window.parent.window === window) return;
   window.parent.tab.title.change(undefined, fileName); //todo:なぜかファイル名が変更されない
 }
 /**

@@ -1,4 +1,5 @@
 function fixWayakuFile(fileData) {
+  if (!fileData) return;
   if (!fileData.match(/^\<wayaku/)) {
     //ファイル形式が破壊しているので手動修正
     fileData = `<wayaku>${fileData}</wayaku>`;
@@ -18,6 +19,7 @@ function fixWayakuFile(fileData) {
   return new XMLSerializer().serializeToString(xmlWayaku);
 }
 function getWayakuFileID(fileData) {
+  if (!fileData) return;
   const xmlWayaku = new DOMParser().parseFromString(fileData, 'text/xml');
   const fileID = xmlWayaku.getElementsByTagName('wayaku')[0].getAttribute('fileID');
   return fileID;

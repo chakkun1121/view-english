@@ -5,7 +5,7 @@ let originalFileID;
 function editFile() {
   document.getElementById('file').classList.add('hidden');
   document.getElementById('edit').classList.remove('hidden');
-  originalFileID = getWayakuFileID(document.getElementById('file').innerHTML);
+  originalFileID = getWayakuFileID(document.getElementById('file').innerHTML || undefined);
   let title = '',
     main = '';
   let wayakuArrary = viewHTMLtoArray(document.getElementById('file').innerHTML);
@@ -19,6 +19,11 @@ function editFile() {
 function finishEdit() {
   const title = document.getElementById('editTitle').value;
   const data = document.getElementById('editMain').value;
+  if (!title || !data) {
+    console.error('タイトルと本文は必須です。');
+    alert('タイトルと本文は必須です。');
+    return;
+  }
   const wayakuData = fixWayakuFile(arrayToViewHTML(textToArray(title, data)));
   document.getElementById('file').innerHTML = wayakuData;
   document.getElementById('file').classList.remove('hidden');
@@ -29,9 +34,21 @@ function finishEdit() {
   //クリエパロメーターにファイルIDを追加
   changeParam('fileId', fileID);
   localforage.getItem('filesData').then(function (value) {
-    const originalFileHandol = value[originalFileID].fileHandle;
+    const originalFileHandol = originalFileID ? value[originalFileID].fileHandle : undefined;
     saveFileInfo(title, fileID, wayakuData, originalFileHandol, function () {
       saveFile();
     });
   });
+}
+function cancelEdit() {
+  document.getElementById('edit').classList.add('hidden');
+  if (!document.getElementById('file').innerText) {
+    document.getElementById('newTab').classList.remove('hidden');
+  } else {
+    document.getElementById('file').classList.remove('hidden');
+  }
+}
+function createFile() {
+  document.getElementById('newTab').classList.add('hidden');
+  editFile();
 }

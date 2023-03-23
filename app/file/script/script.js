@@ -23,7 +23,6 @@ window.onload = function () {
     if (value[fileId]) {
       // ファイルを表示
       const fileData = value[fileId].fileData;
-      console.log(fileData);
       document.getElementById('file').innerHTML = fileData;
       document.getElementById('file').classList.remove('hidden');
     } else {
