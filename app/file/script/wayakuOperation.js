@@ -1,3 +1,7 @@
+/**
+ * ファイルを開く
+ * @returns
+ */
 async function openFile() {
   //ファイルを開く
   if (!window.showOpenFilePicker) {
@@ -43,36 +47,21 @@ async function openFile() {
     fileData = fixWayakuFile(fileData);
     const fileID = getWayakuFileID(fileData);
     //クリエパロメーターにファイルIDを追加
-    const url = new URL(window.location.href);
-    url.searchParams.set('fileId', fileID);
+    changeParam('fileId', fileID);
+    //ファイルの表示
+    document.getElementById('newTab').classList.add('hidden');
+    document.getElementById('file').classList.remove('hidden');
+    document.getElementById('file').innerHTML = fileData;
     //タイトルを変更
-    window.parent.tab.title.change(undefined, fileName); //todo:なぜかファイル名が変更されない
-    window.history.replaceState(null, null, url);
-    //修理後に上書き保存
-    const writable = await fhList[i].createWritable();
-    await writable.write(fileData /*⇦書き込む内容*/);
-    await writable.close();
+    changeTitle(fileName);
     //ファイル情報などを保存
-    localforage.getItem('filesData').then(function (value) {
-      value = value || {};
-      value[fileID] = {
-        fileName: fileName,
-        fileID: fileID,
-        fileData: fileData,
-        fileHandle: fhList[i],
-      };
-      localforage.setItem('filesData', value);
-    });
+    saveFileInfo(fileName, fileID, fileData, fhList[i], saveFile());
     if (i != 0) {
       //本体にタブを開くよう指示してそこにファイルIDを渡す
       const map = new Map();
       map.set('fileID', fileID);
       window.parent.postMessage(map, '*');
     }
-    //ファイルの表示
-    document.getElementById('newTab').classList.add('hidden');
-    document.getElementById('file').classList.remove('hidden');
-    document.getElementById('file').innerHTML = fileData;
   }
 }
 document.addEventListener('drop', (event) => {
@@ -94,4 +83,23 @@ async function startOpenFilesFromFileAPI(files) {
     tab.HTMLcontent.change(tabID, viewHTMLdata);
     tab.view(tab.openedTab());
   }
+}
+/**
+ * 本体のタイトルと埋め込み元のタブのタイトルを変更します
+ * @param {String} title タイトル
+ */
+function changeTitle(title) {
+  document.title = title + ' | ファイル表示 | 和訳表示サイト | chakkun1121';
+  if (window.parent.window === window) return;  
+  window.parent.tab.title.change(undefined, fileName); //todo:なぜかファイル名が変更されない
+}
+/**
+ * クリエパロメーターを変更する
+ * @param {String} key クリエパロメーターのキー
+ * @param {String} value クリエパロメーターの値
+ */
+function changeParam(key, value) {
+  const url = new URL(location.href);
+  url.searchParams.set(key, value);
+  history.replaceState(null, null, url);
 }

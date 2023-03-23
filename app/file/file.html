@@ -28,6 +28,13 @@
     <h1 class="loading-header">読み込み中</h1>
     <p>しばらくお待ちください。</p>
   </div>
+  <div id="edit" class="edit-file hidden">
+    <div class="edit-header">
+      <input class="edit-title" id="editTitle" placeholder="タイトルを入力">
+      <button class="edit-filish" onclick="finishEdit()">完了</button>
+    </div>
+    <textarea id="editMain" class="edit-main" placeholder="英文、日本語の順に改行して入力してください。"></textarea>
+  </div>
   <script src="../../library/localforage.min.js" defer></script>
   <script src="../../library/uuid.js"></script>
   <script src="script/wayakuOperation.js"></script>
@@ -36,7 +43,7 @@
   <script src="script/saveFile.js"></script>
   <script src="script/editWayaku.js" defer></script>
   <script src="script/print.js" defer></script>
-  <!-- <script src="../script/wayaku.js"></script> -->
+  <script src="../script/wayaku.js"></script>
   <script src="script/script.js"></script>
   <!-- sw.jsの登録 -->
   <script>

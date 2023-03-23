@@ -1,8 +1,9 @@
-function saveFile() {
-  const fileData = new DOMParser().parseFromString(
+function saveFile(
+  fileData = new DOMParser().parseFromString(
     fixWayakuFile(document.getElementById('file').innerHTML),
     'text/xml'
-  );
+  )
+) {
   const title = fileData.getElementsByClassName('title')[0].innerHTML;
   downloadWayaku(title, new XMLSerializer().serializeToString(fileData));
 }
@@ -33,10 +34,23 @@ async function downloadWayaku(fileName, data) {
   });
 }
 async function saveWayakuFile(fileHandle, contents) {
+  console.debug(fileHandle, contents);
   // writable作成
   const writable = await fileHandle.createWritable();
   // コンテンツを書き込む
   await writable.write(contents);
   // ファイル閉じる
   await writable.close();
+}
+function saveFileInfo(fileName, fileID, fileData, fileHandle = null, callback = () => {}) {
+  console.debug(fileName, fileID, fileData, fileHandle);
+  localforage.getItem('filesData').then(function (value) {
+    value = value || {};
+    value[fileID] = {
+      fileName: fileName,
+      fileData: fileData,
+      fileHandle: fileHandle,
+    };
+    localforage.setItem('filesData', value, callback);
+  });
 }
