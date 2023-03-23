@@ -2,13 +2,14 @@ const appVersion = '4.1.0';
 document.getElementById('loading').classList.add('hidden');
 window.onload = function () {
   document.getElementById('loading').classList.add('hidden');
-  // //ifreamから開かれていなかったらエラーを吐き終了(デバック用で一時解除)
-  // if (window.self === window.top) {
-  //   document.getElementById('error').classList.remove('hidden');
-  //   alert('このページはiframeで開かれていません。');
-  //   throw new Error('このページはiframeで開かれていません。');
-  // }
+  //ifreamから開かれていなかったらエラーを吐き終了(デバック用で一時解除)
+  if (window.self === window.top) {
+    document.getElementById('error').classList.remove('hidden');
+    alert('このページはiframeで開かれていないか、不正なページから開かれています。');
+    throw new Error('このページはiframeで開かれていません。');
+  }
   document.getElementById('error').classList.add('hidden');
+  //ここまで
   // クリエパロメーターからファイルID取得
   const url = new URL(location.href);
   const fileId = url.searchParams.get('fileId');
@@ -23,6 +24,7 @@ window.onload = function () {
     if (value[fileId]) {
       // ファイルを表示
       const fileData = value[fileId].fileData;
+      changeTitle(value[fileId].fileName);
       document.getElementById('file').innerHTML = fileData;
       document.getElementById('file').classList.remove('hidden');
     } else {

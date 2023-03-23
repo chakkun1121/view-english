@@ -29,7 +29,9 @@ async function openFile() {
     mode: 'readwrite',
   });
   for (let i = 0; i < fhList.length; i++) {
+    //todo:なぜか同じファイルが渡されるのを直す
     let file = await fhList[i].getFile();
+    console.debug(file);
     let fileName = file.name;
     const fileContents = await file.text();
     let fileType = fileName.split('.').pop(); //拡張子取得
@@ -46,22 +48,26 @@ async function openFile() {
     }
     fileData = fixWayakuFile(fileData);
     const fileID = getWayakuFileID(fileData);
-    //クリエパロメーターにファイルIDを追加
-    changeParam('fileId', fileID);
-    //ファイルの表示
-    document.getElementById('newTab').classList.add('hidden');
-    document.getElementById('file').classList.remove('hidden');
-    document.getElementById('file').innerHTML = fileData;
-    //タイトルを変更
-    changeTitle(fileName);
-    //ファイル情報などを保存
-    saveFileInfo(fileName, fileID, fileData, undefined, saveFile());
-    if (i != 0) {
-      //本体にタブを開くよう指示してそこにファイルIDを渡す
-      const map = new Map();
-      map.set('fileID', fileID);
-      window.parent.postMessage(map, '*');
+    if (i == 0) {
+      console.debug('ファイルを開きます');
+      //クリエパロメーターにファイルIDを追加
+      changeParam('fileId', fileID);
+      //ファイルの表示
+      document.getElementById('newTab').classList.add('hidden');
+      document.getElementById('file').classList.remove('hidden');
+      document.getElementById('file').innerHTML = fileData;
+      //タイトルを変更
+      changeTitle(fileName);
     }
+    //ファイル情報などを保存
+    saveFileInfo(fileName, fileID, fileData, undefined, async function () {
+      await saveFile();
+      if (i != 0) {
+        console.debug('メッセージを送りつけました');
+        //本体にタブを開くよう指示してそこにファイルIDを渡す
+        window.parent.postMessage(JSON.stringify({ type: 'fileID', tabID: fileID }), '*');
+      }
+    });
   }
 }
 document.addEventListener('drop', (event) => {
@@ -91,7 +97,7 @@ async function startOpenFilesFromFileAPI(files) {
 function changeTitle(title) {
   document.title = title + ' | ファイル表示 | 和訳表示サイト | chakkun1121';
   if (window.parent.window === window) return;
-  window.parent.tab.title.change(undefined, fileName); //todo:なぜかファイル名が変更されない
+  window.parent.tab.title.change(undefined, title);
 }
 /**
  * クリエパロメーターを変更する

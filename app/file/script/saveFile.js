@@ -1,11 +1,11 @@
-function saveFile(
+async function saveFile(
   fileData = new DOMParser().parseFromString(
     fixWayakuFile(document.getElementById('file').innerHTML),
     'text/xml'
   )
 ) {
   const title = fileData.getElementsByClassName('title')[0].innerHTML;
-  downloadWayaku(title, new XMLSerializer().serializeToString(fileData));
+  await downloadWayaku(title, new XMLSerializer().serializeToString(fileData));
 }
 
 async function downloadWayaku(fileName, data) {
@@ -33,7 +33,7 @@ async function downloadWayaku(fileName, data) {
   });
 }
 async function saveWayakuFile(fileHandle, contents) {
-  console.debug(fileHandle, contents);
+  console.trace(fileHandle, contents);
   if (!fileHandle) {
     fileHandle = await createFileHandle(viewHTMLtoArray(contents)[0] + '.wayaku');
   } else {

@@ -28,7 +28,6 @@ window.tab = {
     //タブを閉じたら、閉じたタブの前のタブを開く
     const tabIDArray = tab.tabInfo.tabs.map((tab) => tab.tabID);
     tab.tabInfo.tabs = tab.tabInfo.tabs.filter((tab) => tab.tabID !== tabID);
-    console.debug(tabIDArray);
     if (tabIDArray.length <= 1) {
       //タブがなくなったら、新しいタブを開く
       tab.new();
@@ -57,8 +56,8 @@ window.tab = {
       return tab.tabInfo.tabs.filter((tab) => tab.tabID == tabID)[0].title;
     },
     change: function (tabID = tab.openedTab(), title = '新しいタブ') {
-      this.tabInfo.tabs.filter((tab) => tab.tabID == tabID)[0].title = title;
-      throw `指定されたタブID(${tabID})のタブが見つかりませんでした。`;
+      tab.tabInfo.tabs.filter((tab) => tab.tabID == tabID)[0].title = title;
+      document.getElementById('showTab' + tabID).innerText = title;
     },
   },
   openedTab: function () {
@@ -67,4 +66,22 @@ window.tab = {
 };
 window.addEventListener('load', function (e) {
   tab.new();
+});
+//タブを開くように要求されたらそれに応じる
+window.addEventListener('message', function (e) {
+  // //安全のためオリジンをチェックする
+  // if (e.origin != 'http://localhost:5500' || 'https://chakkun1121.github.io') {
+  //   throw new Error('オリジンが違います。');
+  // }
+  const data = JSON.parse(e.data);
+  if (data.type == 'openTab') {
+    tab.new(data.title);
+  }
+  if (data.type == 'changeTabTitle') {
+    tab.title.change(data.tabID, data.title);
+  }
+  if (data.type == 'fileID') {
+    const openedTab = tab.new();
+    document.getElementById(openedTab + '-iframe').src = 'file/file.html?fileId=' + data.tabID;
+  }
 });
