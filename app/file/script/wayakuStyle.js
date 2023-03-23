@@ -12,7 +12,6 @@ function changeStyle() {
     case 1:
       //カスタム表示
       let settingsJson = JSON.parse(localStorage.getItem('wayakuSettings')) || {};
-      console.log(settingsJson);
       let jaColor = settingsJson.jacolor || '#000000';
       let enColor = settingsJson.encolor || '#ffa500';
       changeStyleAsColor(enColor, jaColor);
