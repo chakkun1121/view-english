@@ -28,9 +28,11 @@ async function openFile() {
     multiple: true,
     mode: 'readwrite',
   });
-  for (let i = 0; i < fhList.length; i++) {
-    //todo:なぜか同じファイルが渡されるのを直す
-    let file = await fhList[i].getFile();
+  let i = 0;
+  for await (const fileSystemFileHandle of fhList) {
+    console.debug(fileSystemFileHandle);
+    //todo:一応治ったが、2つ目以降の変更の保存に失敗する
+    const file = await fileSystemFileHandle.getFile();
     console.debug(file);
     let fileName = file.name;
     const fileContents = await file.text();
@@ -48,6 +50,8 @@ async function openFile() {
     }
     fileData = fixWayakuFile(fileData);
     const fileID = getWayakuFileID(fileData);
+    //ファイル情報などを保存
+    await saveFileInfo(fileName, fileID, fileData, fileSystemFileHandle);
     if (i == 0) {
       console.debug('ファイルを開きます');
       //クリエパロメーターにファイルIDを追加
@@ -59,15 +63,17 @@ async function openFile() {
       //タイトルを変更
       changeTitle(fileName);
     }
-    //ファイル情報などを保存
-    saveFileInfo(fileName, fileID, fileData, undefined, async function () {
+    try {
       await saveFile();
-      if (i != 0) {
-        console.debug('メッセージを送りつけました');
-        //本体にタブを開くよう指示してそこにファイルIDを渡す
-        window.parent.postMessage(JSON.stringify({ type: 'fileID', tabID: fileID }), '*');
-      }
-    });
+    } catch (e) {
+      console.error('ファイル保存をキャンセルしました。');
+    }
+    if (i != 0) {
+      console.debug('メッセージを送りつけました');
+      //本体にタブを開くよう指示してそこにファイルIDを渡す
+      window.parent.postMessage(JSON.stringify({ type: 'fileID', tabID: fileID }), '*');
+    }
+    i++;
   }
 }
 document.addEventListener('drop', (event) => {

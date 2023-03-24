@@ -9,30 +9,29 @@ async function saveFile(
 }
 
 async function downloadWayaku(fileName, data) {
-  localforage.getItem('filesData').then(async function (value) {
-    const fileID = getWayakuFileID(data);
-    value = value || {};
-    if (value[fileID]) {
-      const handle = value[fileID].fileHandle;
-      await saveWayakuFile(handle, data);
-      return;
-    } else {
-      const handle = await window.showSaveFilePicker({
-        types: [
-          {
-            description: 'wayakuファイル',
-            accept: {
-              'text/wayaku': ['.wayaku'],
-            },
+  const value = (await localforage.getItem('filesData')) || {};
+  const fileID = getWayakuFileID(data);
+  if (value[fileID]) {
+    const handle = value[fileID].fileHandle;
+    await saveWayakuFile(handle, data);
+    return;
+  } else {
+    const handle = await window.showSaveFilePicker({
+      types: [
+        {
+          description: 'wayakuファイル',
+          accept: {
+            'text/wayaku': ['.wayaku'],
           },
-        ],
-        suggestedName: fileName,
-      });
-      await saveWayakuFile(handle, data);
-    }
-  });
+        },
+      ],
+      suggestedName: fileName,
+    });
+    await saveWayakuFile(handle, data);
+  }
 }
 async function saveWayakuFile(fileHandle, contents) {
+  console.info(`${viewHTMLtoArray(contents)[0] + '.wayaku'}というファイルを保存します。`);
   console.trace(fileHandle, contents);
   if (!fileHandle) {
     fileHandle = await createFileHandle(viewHTMLtoArray(contents)[0] + '.wayaku');
@@ -67,15 +66,14 @@ async function createFileHandle(fileName = '') {
  * @param {Object<FileSystemFileHandle>} fileHandle
  * @param {VoidFunction} callback
  */
-function saveFileInfo(fileName, fileID, fileData, fileHandle = null, callback = () => {}) {
+async function saveFileInfo(fileName, fileID, fileData, fileHandle = null, callback = () => {}) {
   console.debug(fileName, fileID, fileData, fileHandle);
-  localforage.getItem('filesData').then(function (value) {
-    value = value || {};
-    value[fileID] = {
-      fileName: fileName,
-      fileData: fileData,
-      fileHandle: fileHandle,
-    };
-    localforage.setItem('filesData', value, callback);
-  });
+  const value = (await localforage.getItem('filesData')) || {};
+  value[fileID] = {
+    fileName: fileName,
+    fileData: fileData,
+    fileHandle: fileHandle,
+  };
+  await localforage.setItem('filesData', value);
+  callback();
 }
