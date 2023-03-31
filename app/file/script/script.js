@@ -8,6 +8,8 @@ window.onload = function () {
     alert('このページはiframeで開かれていないか、不正なページから開かれています。');
     throw new Error('このページはiframeで開かれていません。');
   }
+  window.dispatchEvent(new Event('shortcutInit'));
+
   document.getElementById('error').classList.add('hidden');
   //ここまで
   // クリエパロメーターからファイルID取得
@@ -41,12 +43,9 @@ function receiveMsg(event) {
   if (event.origin != 'http://localhost' || 'https://chakkun1121.github.io') {
     throw new Error('オリジンが違います。');
   }
-  console.log(event.data);
-  console.log(event.data.get('colorJson'));
   if (event.data.get('colorJson')) {
     changeColor(event.data.get('colorJson'));
   }
-  console.log(event.data.get('fileData'));
   if (event.data.get('fileData')) {
   }
 }

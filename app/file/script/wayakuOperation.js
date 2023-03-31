@@ -30,10 +30,7 @@ async function openFile() {
   });
   let i = 0;
   for await (const fileSystemFileHandle of fhList) {
-    console.debug(fileSystemFileHandle);
-    //todo:一応治ったが、2つ目以降の変更の保存に失敗する
     const file = await fileSystemFileHandle.getFile();
-    console.debug(file);
     let fileName = file.name;
     const fileContents = await file.text();
     let fileType = fileName.split('.').pop(); //拡張子取得
@@ -53,7 +50,6 @@ async function openFile() {
     //ファイル情報などを保存
     await saveFileInfo(fileName, fileID, fileData, fileSystemFileHandle);
     if (i == 0) {
-      console.debug('ファイルを開きます');
       //クリエパロメーターにファイルIDを追加
       changeParam('fileId', fileID);
       //ファイルの表示
@@ -71,7 +67,7 @@ async function openFile() {
     if (i != 0) {
       console.debug('メッセージを送りつけました');
       //本体にタブを開くよう指示してそこにファイルIDを渡す
-      window.parent.postMessage(JSON.stringify({ type: 'fileID', tabID: fileID }), '*');
+      window.parent.postMessage(JSON.stringify({ type: 'fileID', fileID }), '*');
     }
     i++;
   }

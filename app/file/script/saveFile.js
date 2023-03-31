@@ -32,7 +32,6 @@ async function downloadWayaku(fileName, data) {
 }
 async function saveWayakuFile(fileHandle, contents) {
   console.info(`${viewHTMLtoArray(contents)[0] + '.wayaku'}というファイルを保存します。`);
-  console.trace(fileHandle, contents);
   if (!fileHandle) {
     fileHandle = await createFileHandle(viewHTMLtoArray(contents)[0] + '.wayaku');
   } else {
@@ -67,7 +66,6 @@ async function createFileHandle(fileName = '') {
  * @param {VoidFunction} callback
  */
 async function saveFileInfo(fileName, fileID, fileData, fileHandle = null, callback = () => {}) {
-  console.debug(fileName, fileID, fileData, fileHandle);
   const value = (await localforage.getItem('filesData')) || {};
   value[fileID] = {
     fileName: fileName,

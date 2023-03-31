@@ -7,7 +7,6 @@ const urlsToCache = [
   'style/style.css',
   'style/wayakufile.css',
   'script/script.js',
-  'script/wayaku.js',
   'script/wayakuOperation.js',
   'script/saveFile.js',
 ];

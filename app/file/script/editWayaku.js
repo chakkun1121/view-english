@@ -3,13 +3,13 @@
  */
 let originalFileID;
 function editFile() {
+  document.getElementById('newTab').classList.add('hidden');
   document.getElementById('file').classList.add('hidden');
   document.getElementById('edit').classList.remove('hidden');
   originalFileID = getWayakuFileID(document.getElementById('file').innerHTML || undefined);
   let title = '',
     main = '';
   let wayakuArrary = viewHTMLtoArray(document.getElementById('file').innerHTML);
-  console.log(wayakuArrary);
   if (wayakuArrary) {
     [title, main] = arrayToText(wayakuArrary);
   }

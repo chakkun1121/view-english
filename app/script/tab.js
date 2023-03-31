@@ -64,13 +64,10 @@ window.tab = {
     return tab.tabInfo.tabs.filter((tab) => tab.viewed)[0].tabID;
   },
 };
-window.addEventListener('load', function (e) {
-  tab.new();
-});
 //タブを開くように要求されたらそれに応じる
 window.addEventListener('message', function (e) {
   // //安全のためオリジンをチェックする
-  // if (e.origin != 'http://localhost:5500' || 'https://chakkun1121.github.io') {
+  // if (e.origin != 'localhost:5500' || 'chakkun1121.github.io') {
   //   throw new Error('オリジンが違います。');
   // }
   const data = JSON.parse(e.data);
@@ -82,6 +79,6 @@ window.addEventListener('message', function (e) {
   }
   if (data.type == 'fileID') {
     const openedTab = tab.new();
-    document.getElementById(openedTab + '-iframe').src = 'file/file.html?fileId=' + data.tabID;
+    document.getElementById(openedTab + '-iframe').src = 'file/file.html?fileId=' + data.fileID;
   }
 });
