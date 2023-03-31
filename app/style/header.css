@@ -1,12 +1,17 @@
+:root {
+  --header-height: 40px;
+}
 
 /* headerのツールバーのボタン */
 #headerButtons {
   app-region: drag;
   display: flex;
   background: var(--header-button-color);
-  height: 40px;
+  height: var(--header-height);
   font-size: 20px;
   align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 
 #headerButtons button {
@@ -23,6 +28,7 @@
   height: -webkit-fill-available;
   align-items: center;
 }
+
 #headerButtons button:focus {
   border: solid 1px;
   padding: 0 19px;
@@ -30,9 +36,10 @@
 
 /* headerのファイルメニュー */
 #headerFileMenu {
+  display: none;
+  top: var(--header-height);
   position: fixed;
   left: 0px;
-  top: -1000px;
   width: auto;
   height: auto;
   z-index: 20;
@@ -40,11 +47,10 @@
   backdrop-filter: blur(2px);
   padding: 1px;
   left: 0;
-  z-index: 1000000000;
 }
 
-.header-file-manu-opened {
-  top: 40px !important;
+.header-file-menu-opened {
+  display: block !important;
 }
 
 #headerFileMenu button {
@@ -53,6 +59,7 @@
   padding: 5px;
   width: -webkit-fill-available;
 }
+
 #headerFileMenu button:hover {
   background-color: var(--header-file-menu-hover-color);
 }

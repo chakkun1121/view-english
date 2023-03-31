@@ -3,25 +3,12 @@ const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 // キャッシュするファイルをセットする
 const urlsToCache = [
-  '.',
-  'index.html',
-  'style/startload.css',
+  'file.html',
   'style/style.css',
+  'style/wayakufile.css',
   'script/script.js',
-  'cards/card.html',
-  'cards/card.css',
-  'cards/script.js',
-  'cards/keyShortcut.js',
-  '../library/shortcut.js',
-  '../library/hotkeys.js',
-  'manifest.webmanifest',
-  '../favicon.ico',
-  'file/file.html',
-  'file/style/style.css',
-  'file/style/wayakufile.css',
-  'file/script/script.js',
-  'file/script/wayakuOperation.js',
-  'file/script/saveFile.js',
+  'script/wayakuOperation.js',
+  'script/saveFile.js',
 ];
 
 self.addEventListener('install', (event) => {

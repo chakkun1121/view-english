@@ -35,7 +35,8 @@ body::-webkit-scrollbar {
 
 /*header*/
 header {
-  height: 33px;
+  app-region: drag;
+  height: 40px;
   background: var(--main-color);
   user-select: none;
   display: flex;

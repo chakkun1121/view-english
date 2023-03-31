@@ -1,4 +1,4 @@
-# 和訳表示サイト 4.0.10
+# 和訳表示サイト 4.1.0
 
 ## 仕様
 
@@ -8,22 +8,22 @@
 
 ### tab メゾット
 
-| 関数,変数                                   | 内容                                                                                                                          | return                  |
-| :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
-| new(title,HTMLdata,position,purpose)        | 新しいタブを開きます                                                                                                          | number(新しいタブの ID) |
-| close(tabID)                                | 指定されたタブを閉じます。                                                                                                    | undefined               |
-| view(TabID)                                 | 指定されたタブを表示します。                                                                                                  | undefined               |
-| HTMLcontent.change(tabID,HTMLcontent,title,purpose) | html コンテンツを変更します。                                                                                                 | undefined               |
-| HTMLcontent.get(tabID)                      | 今表示中の html コンテンツを取得します。                                                                                      |
-| purpose.change(tabID,newPurpose),           | タブの目的[^1]の変更                                                                                                          |
-| purpose.get(tabID)                          | 指定された ID のタブの目的を取得                                                                                              | purpose                 |
-| title.get(tabID)                            |                                                                                                                               |                         |
-| title.change(tabID,newTitle)                |                                                                                                                               |                         |
-| openedTab(position="left")                  | 今開いている tabID を表示します。                                                                                             | tabID                   |  |
-| save(isNotAdapt[^2])                        |                                                                                                                               |                         |
-| newTabData                                  | 新しいタブ用のデータを入れます(tabID は`<tabID/>`としておけば勝手に変換されます)(init をはたかれてから拡張機能で変更できます) |
-| tabHTMLdata                                 | タブ部分のhtmlです。(`<tabID/>`はタブIDに`<title/>`はタイトルに変換されます。)(上と同様)                                      |
-| adaptationTabInfoToHTML()                   | tabInfo の内容を HTML に適応します。(これ以外のやつは自動変更なし)                                                            |                         |
+| 関数,変数                                           | 内容                                                                               | return                  |
+| :-------------------------------------------------- | :--------------------------------------------------------------------------------- | :---------------------- | --- |
+| new(title,HTMLdata,position,purpose)                | 新しいタブを開きます                                                               | number(新しいタブの ID) |
+| close(tabID)                                        | 指定されたタブを閉じます。                                                         | undefined               |
+| view(TabID)                                         | 指定されたタブを表示します。                                                       | undefined               |
+| HTMLcontent.change(tabID,HTMLcontent,title,purpose) | html コンテンツを変更します。                                                      | undefined               |
+| HTMLcontent.get(tabID)                              | 今表示中の html コンテンツを取得します。                                           |
+| purpose.change(tabID,newPurpose),                   | タブの目的[^1]の変更                                                               |
+| purpose.get(tabID)                                  | 指定された ID のタブの目的を取得                                                   | purpose                 |
+| title.get(tabID)                                    |                                                                                    |                         |
+| title.change(tabID,newTitle)                        |                                                                                    |                         |
+| openedTab(position="left")                          | 今開いている tabID を表示します。                                                  | tabID                   |     |
+| save(isNotAdapt[^2])                                |                                                                                    |                         |
+| newTabData                                          | 新しいタブ用のデータを入れます(tabID は`<tabID/>`としておけば勝手に変換されます)   |
+| tabHTMLdata                                         | タブ部分の html です。(`<tabID/>`はタブ ID に`<title/>`はタイトルに変換されます。) |
+| adaptationTabInfoToHTML()                           | tabInfo の内容を HTML に適応します。(これ以外のやつは自動変更なし)                 |                         |
 
 [^1]newTab,wayakuContent,setting,editWayaku などのタブの使われ方
 [^2]これは基本的に false でどうしても変更してはいけないときに true にすることで tabInfo のみ書き換えられる
@@ -60,7 +60,7 @@ wayaku メゾット内の関数、変数(和訳ファイル操作拡張機能(�
 
 ### その他イベント関連
 
-ターゲットは `<div id="appEvent">`
+ターゲットは `window`
 
 | 関数                              | 内容                           | return |
 | :-------------------------------- | :----------------------------- | :----- |
@@ -73,4 +73,4 @@ wayaku メゾット内の関数、変数(和訳ファイル操作拡張機能(�
 
 ### 諸注意
 
-それぞれの script の準備が完了したら、 `finishedScriptNumber` を必ず 1 増やしてください。拡張機能も例外ではありません。忘れると本体が読み込み終わりません。
+~~それぞれの script の準備が完了したら、 `finishedScriptNumber` を必ず 1 増やしてください。拡張機能も例外ではありません。忘れると本体が読み込み終わりません。~~ いらなくなりました。直接 html から読み込んでください。

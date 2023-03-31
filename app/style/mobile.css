@@ -1,11 +1,8 @@
 @media (width<450px) {
-  .tool-bar-button:not(#fileButton) {
-    display: none !important;
-  }
-
   .header-file-menu-button {
     height: 48px;
   }
+
   .header-file-manu-opened {
     top: 40px !important;
     bottom: 0;
@@ -29,10 +26,12 @@
     min-width: 48px;
     min-height: 48px;
   }
+
   .edit-header {
     display: flex;
     justify-content: space-between;
   }
+
   .edit-title {
     width: -webkit-fill-available;
   }

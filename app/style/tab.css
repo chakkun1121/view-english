@@ -1,23 +1,26 @@
 :root {
   --tab-close-button-hoverd-color: red;
 }
+
 /* tabのスタイル */
-#tabs {
+.tabs {
   width: 100vw;
   background: var(--tab-color);
 }
-#tabs::-webkit-scrollbar {
-  display: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-#tabsLeft::-webkit-scrollbar {
+
+.tabs::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-#tabsLeft {
+#tabs::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tabs {
   overflow-y: scroll;
   height: 100%;
   font-size: 14px;
@@ -25,7 +28,7 @@
   align-items: center;
 }
 
-#leftTabs {
+#tabs {
   display: flex;
   height: 100%;
   -ms-overflow-style: none;
@@ -35,7 +38,7 @@
   align-items: center;
 }
 
-#leftTabs::-webkit-scrollbar {
+#tabs::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -47,13 +50,15 @@
   padding: 0 5px;
 }
 
-#tabs div > button:hover,
-#tabs div > button:focus {
+.tab>button:hover,
+.tab>button:focus {
   background: var(--tab-hoverd-color);
 }
+
 .tab-close-button {
   padding: 0 5px;
 }
+
 .tab-close-button:hover,
 .tab-close-button:focus {
   background: var(--tab-close-button-hoverd-color) !important;
@@ -72,16 +77,19 @@
 .tab:not(.opened-tab) {
   border-bottom: solid var(--tab-border-color) 1px;
 }
+
 .opened-tab {
   background-color: var(--opened-tab-color);
   border-left: solid var(--tab-border-color) 1px;
   border-top: solid var(--tab-border-color) 1px;
   border-right: solid var(--tab-border-color) 1px;
 }
+
 .new-tab-button {
   height: -webkit-fill-available;
 }
 
-.new-tab-button > button {
+.new-tab-button>button {
   padding: 0 5px;
+  height: 100%;
 }
