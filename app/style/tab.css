@@ -93,3 +93,9 @@
   padding: 0 5px;
   height: 100%;
 }
+/* 印刷時、タブはすべて非表示 */
+@media print {
+  .tabs {
+    display: none;
+  }
+}

@@ -21,3 +21,14 @@ body {
 .error-header {
   color: var(--error-header-color);
 }
+
+@media print {
+  div:not(#file) {
+    display: none;
+  }
+
+  #file {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+  }
+}

@@ -1,4 +1,4 @@
-const appVersion = '4.1.0';
+const appVersion = `v${window.parent.appVersion}` || '';
 document.getElementById('loading').classList.add('hidden');
 window.onload = function () {
   document.getElementById('loading').classList.add('hidden');
@@ -12,6 +12,7 @@ window.onload = function () {
 
   document.getElementById('error').classList.add('hidden');
   //ここまで
+  document.getElementById('showAppVersison').innerText = appVersion;
   // クリエパロメーターからファイルID取得
   const url = new URL(location.href);
   const fileId = url.searchParams.get('fileId');

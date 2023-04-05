@@ -23,3 +23,7 @@ function newFile() {
   const iframeWindow = document.getElementById(tab.openedTab() + '-iframe').contentWindow;
   iframeWindow.createFile();
 }
+window.print = function () {
+  const iframeWindow = document.getElementById(tab.openedTab() + '-iframe').contentWindow;
+  iframeWindow.print();
+};

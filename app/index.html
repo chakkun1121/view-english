@@ -13,6 +13,8 @@
   <link rel="apple-touch-icon" href="/apple.png" async>
   <link rel="icon" href="../favicon.ico" id="favicon" async>
   <link rel="manifest" href="manifest.webmanifest" defer>
+  <!-- アプリ本体はあまり内容がないためクロール禁止 -->
+  <meta name="robots" content="noindex">
   <meta name="theme-color" content="#7aa1d6">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="canonical" content="https://chakkun1121.github.io/view-english/app/">
@@ -54,7 +56,10 @@
   </div>
   </div>
   <div id="mainContent"></div>
-  <div id="appEvent" style="display:none!important;"></div>
+  <!-- <div id="appEvent" style="display:none!important;"></div> -->
+  <div class="help-button">
+    <a href="/help/view-english/" target="_blank">?</a>
+  </div>
   <script src="../library/shortcut.js" defer></script>
   <script src="../library/uuid.js" defer></script>
   <script src="../library/localforage.min.js"></script>

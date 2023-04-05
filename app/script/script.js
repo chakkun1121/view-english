@@ -1,5 +1,7 @@
+//毎回必ず更新時に変更すること
+appVersion = '4.1.1';
+
 const appEvent = document.getElementById('appEvent');
-const appVersion = '4.1.0';
 window.onload = function () {
   if ('launchQueue' in window && 'files' in LaunchParams.prototype) {
     launchQueue.setConsumer((launchParams) => {

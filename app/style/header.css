@@ -63,3 +63,22 @@
 #headerFileMenu button:hover {
   background-color: var(--header-file-menu-hover-color);
 }
+
+/* 印刷時にheaderはすべて非表示 */
+@media print {
+  #loading {
+    display: none;
+  }
+
+  #headerButtons {
+    display: none;
+  }
+
+  #header {
+    display: none;
+  }
+
+  #headerFileMenu {
+    display: none;
+  }
+}

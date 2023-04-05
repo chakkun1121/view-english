@@ -4,6 +4,7 @@ window.tab = {
     const newTabDOM = document.createElement('iframe');
     newTabDOM.src = 'file/file.html';
     newTabDOM.id = newTabID + '-iframe';
+    newTabDOM.title = '和訳ファイル表示';
     document.getElementById('mainContent').appendChild(newTabDOM);
     const tabDom = document.createElement('div');
     tabDom.id = newTabID + '-tab';
