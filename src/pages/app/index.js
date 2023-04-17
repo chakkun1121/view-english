@@ -4,7 +4,7 @@ async function loadFile() {
   // "Open File" ダイアログを開く
   if (!window.showOpenFilePicker) {
     console.error('showOpenFilePickerが利用できません。和訳表示サイト軽量版をご利用ください。');
-    return;
+    return new Error('showOpenFilePickerが利用できません。和訳表示サイト軽量版をご利用ください。');
   }
   const fhList = await window.showOpenFilePicker({
     types: [
