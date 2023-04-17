@@ -2,7 +2,7 @@
  * ファイルを編集します。
  */
 let originalFileID;
-function editFile() {
+export function editFile() {
   document.getElementById('newTab').classList.add('hidden');
   document.getElementById('file').classList.add('hidden');
   document.getElementById('edit').classList.remove('hidden');
@@ -40,7 +40,7 @@ function finishEdit() {
     });
   });
 }
-function cancelEdit() {
+export function cancelEdit() {
   document.getElementById('edit').classList.add('hidden');
   if (!document.getElementById('file').innerText) {
     document.getElementById('newTab').classList.remove('hidden');
@@ -48,7 +48,7 @@ function cancelEdit() {
     document.getElementById('file').classList.remove('hidden');
   }
 }
-function createFile() {
+export function createFile() {
   document.getElementById('newTab').classList.add('hidden');
   editFile();
 }

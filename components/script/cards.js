@@ -1,4 +1,4 @@
-cards = {
+export cards = {
   start: function () {
     const wayakuArrary = viewHTMLtoArray(document.getElementById('file').innerHTML);
     localStorage.setItem('cards', JSON.stringify(wayakuArrary));

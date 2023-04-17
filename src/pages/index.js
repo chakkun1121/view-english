@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import styles from '../styles/home/home.module.scss';
-import Link from 'next/link';
 export default function Home() {
   return (
     <>

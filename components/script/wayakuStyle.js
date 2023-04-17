@@ -3,7 +3,7 @@ let wayakuStyle = 0;
 /**
  * 和訳ファイルのスタイルを変更します。
  */
-function changeStyle() {
+export function changeStyle() {
   switch (wayakuStyle) {
     case 0:
       changeStyleAsColor('white');
