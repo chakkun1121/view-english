@@ -1,0 +1,26 @@
+[
+  {
+    "name": "ダークモード",
+    "savedName": "darkmode",
+    "settingType": "boolean",
+    "settingInputType": "checkbox",
+    "initial": false,
+    "flag": true
+  },
+  {
+    "name": "カスタム表示時の日本語の色",
+    "savedName": "jacolor",
+    "initial": "#000000",
+    "settingType": "string",
+    "settingInputType": "color",
+    "flag": false
+  },
+  {
+    "name": "カスタム表示時の英語の色",
+    "savedName": "encolor",
+    "initial": "#ffa500",
+    "settingType": "string",
+    "settingInputType": "color",
+    "flag": false
+  }
+]
