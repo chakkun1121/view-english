@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from './page.module.scss';
 export default function Home() {
   return (
@@ -54,9 +55,9 @@ export default function Home() {
           </a>
           <h2>アプリへのリンク</h2>
           <div class="top-link">
-            <a class="top-link" href="./app">
+            <Link class="top-link" href="./app">
               和訳表示サイト(通常版)(対応ブラウザ:chrome100以上)
-            </a>
+            </Link>
           </div>
           <div class="top-link">
             <a class="top-link" href="./lightVersion/index.html">

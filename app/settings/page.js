@@ -1,6 +1,9 @@
+'use client';
+
 export default function SettingsPage() {
   // settings.jsonを読み込む
-  const settings = require('./settings.json');
+  const settings = require('./settings.json')?.settings || [];
+  console.log(settings);
   return (
     <>
       <title>設定|和訳表示サイト</title>
@@ -10,28 +13,30 @@ export default function SettingsPage() {
         </h1>
       </header>
       <main>
-        <div class="settings-header">
+        <div className="settings-header">
           <h2>設定一覧</h2>
           <p>下から変更したい設定を指定してください(設定は自動保存されます)</p>
         </div>
         <div id="settingsMain">
-          {settings.map((setting) => (
-            <Setting
-              title={setting.name}
-              type={setting.settingInputType}
-              value={setting.initial}
-              ID={setting.savedName}
-              isFlag={setting.flag}
-              key={setting.savedName}
-            />
-          ))}
+          {settings?.map((setting) => {
+            return (
+              <Setting
+                title={setting.name}
+                type={setting.settingInputType}
+                value={setting.initial}
+                ID={setting.savedName}
+                isFlag={setting.flag}
+                key={setting.savedName}
+              />
+            );
+          })}
         </div>
       </main>
     </>
   );
 }
 
-function Setting({ title, type, value, ID, isFlag }) {
+function Setting({ title = '', type = '', value = '', ID = '', isFlag = false }) {
   return (
     <div class="setting" key={ID}>
       <label>
