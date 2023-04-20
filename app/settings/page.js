@@ -38,7 +38,7 @@ export default function SettingsPage() {
 
 function Setting({ title = '', type = '', value = '', ID = '', isFlag = false }) {
   return (
-    <div class="setting" key={ID}>
+    <div className="setting" key={ID}>
       <label>
         {isFlag ? 'flag(試験運用版)' : ''}
         {title}

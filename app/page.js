@@ -47,20 +47,20 @@ export default function Home() {
         <section id="top" className={styles.top}>
           <a href="./view-english.pdf" target="_blank">
             <img
-              class="top-image"
+              className="top-image"
               src="./img/view-english.webp"
               loading="lazy"
               alt="和訳表示サイト"
             />
           </a>
           <h2>アプリへのリンク</h2>
-          <div class="top-link">
-            <Link class="top-link" href="./app">
+          <div className="top-link">
+            <Link className="top-link" href="./app">
               和訳表示サイト(通常版)(対応ブラウザ:chrome100以上)
             </Link>
           </div>
-          <div class="top-link">
-            <a class="top-link" href="./lightVersion/index.html">
+          <div className="top-link">
+            <a className="top-link" href="./lightVersion/index.html">
               和訳表示サイト軽量版(対応ブラウザ:IEを含むほとんどのブラウザ(ブラウザによっては機能が制限されます。))
             </a>
           </div>
