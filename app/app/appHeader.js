@@ -1,19 +1,21 @@
 'use client';
-import { Button } from '@mui/material';
+import { AppBar, Button, Toolbar, Box } from '@mui/material';
 
 export default function AppHeader() {
   return (
     <>
-      <HeaderButton text="ファイル" />
-      <HeaderButton text="編集" />
-      <HeaderButton text="表示" />
-      <HeaderButton text="ヘルプ" />
+      <AppBar position="static" sx={{ display: 'flex', flexDirection: 'row' }}>
+        <HeaderButton text="ファイル" />
+        <HeaderButton text="編集" />
+        <HeaderButton text="表示" />
+        <HeaderButton text="ヘルプ" />
+      </AppBar>
     </>
   );
 }
 function HeaderButton({ text, onClick = () => {} }) {
   return (
-    <Button variant="contained" color="primary" onClick={onClick}>
+    <Button variant="text" color="primary" onClick={onClick} sx={{ color: 'white' }}>
       {text}
     </Button>
   );
