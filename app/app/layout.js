@@ -1,3 +1,5 @@
+import AppHeader from './appHeader';
+import AppTabs from './tabs';
 export const metadata = {
   charset: 'UTF-8',
   robots: 'noindex',
@@ -17,6 +19,16 @@ export const metadata = {
   colorScheme: '#7aa1d6',
   viewport: 'width=device-width, initial-scale=1.0',
 };
-export default function AppLayout({ Children }) {
-  return { Children };
+export default function AppLayout({ Children, pageProps }) {
+  return (
+    <>
+      <header>
+        <AppHeader />
+        <AppTabs />
+      </header>
+      <main>
+        <Children {...pageProps} />
+      </main>
+    </>
+  );
 }
