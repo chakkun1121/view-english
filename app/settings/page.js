@@ -1,5 +1,5 @@
-'use client';
-
+import SettingMenu from './settingMenu';
+import styles from './settings.module.scss';
 export default function SettingsPage() {
   // settings.jsonを読み込む
   const settings = require('./settings.json')?.settings || [];
@@ -7,43 +7,20 @@ export default function SettingsPage() {
   return (
     <>
       <title>設定|和訳表示サイト</title>
-      <header>
+      <header className={styles.header}>
         <h1>
           <a href="../">和訳表示サイト</a>の設定
         </h1>
       </header>
-      <main>
-        <div className="settings-header">
+      <main className={styles.main}>
+        <div className={styles['settings-header']}>
           <h2>設定一覧</h2>
           <p>下から変更したい設定を指定してください(設定は自動保存されます)</p>
         </div>
         <div id="settingsMain">
-          {settings?.map((setting) => {
-            return (
-              <Setting
-                title={setting.name}
-                type={setting.settingInputType}
-                value={setting.initial}
-                ID={setting.savedName}
-                isFlag={setting.flag}
-                key={setting.savedName}
-              />
-            );
-          })}
+          <SettingMenu settings={settings} />
         </div>
       </main>
     </>
-  );
-}
-
-function Setting({ title = '', type = '', value = '', ID = '', isFlag = false }) {
-  return (
-    <div className="setting" key={ID}>
-      <label>
-        {isFlag ? 'flag(試験運用版)' : ''}
-        {title}
-        <input type={type} value={value} className="setting-input" id={ID} />
-      </label>
-    </div>
   );
 }

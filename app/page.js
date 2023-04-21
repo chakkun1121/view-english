@@ -1,44 +1,18 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from './page.module.scss';
+export const appVersion = '4.2.0';
 export default function Home() {
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
           和訳表示サイト | 和訳ファイル作成からフラッシュカード機能まで！英語学習に最適 |
           chakkun1121
         </title>
-        <meta
-          name="description"
-          content="和訳表示サイトは、自分だけの和訳ファイルを作成して、英語学習を効率的にサポートするサイトです。フラッシュカード機能を搭載し、日本語表示からクリックで英文表示！読み上げ対応で英語学習がより楽しくなります。外部に情報を送信せず、安全にご利用いただけます。"
-        />
-        <meta name="application-name" content="和訳表示サイト" />
-        <meta
-          name="keywords"
-          content="英語学習,和訳,フラッシュカード,和訳表示サイト,和訳サイト,和訳ファイル"
-        />
-        <meta name="theme-color" content="#7aa1d6" />
-        <meta name="color-scheme" content="#7aa1d6" />
-        <meta property="og:url" content="https://chakkun1121.github.io" />
-        <meta property="og:title" content="和訳表示サイト" />
-        <meta
-          property="og:description"
-          content="和訳表示サイトは、自分だけの和訳ファイルを作成して、英語学習を効率的にサポートするサイトです。フラッシュカード機能を搭載し、日本語表示からクリックで英文表示！読み上げ対応で英語学習がより楽しくなります。外部に情報を送信せず、安全にご利用いただけます。"
-        />
-        <meta property=" og:image" content="./img/view-english.png" />
-        <meta property="og:site_name" content="和訳表示サイト" />
-        <meta property="og:locale" content="ja_JP" />
-        <meta name="format-detection" content="email=no,telephone=no,address=no" />
+        <link rel="canonical" href="https://chakkun1121.github.io/view-english" />
         <meta name="msapplication-TileImage" content="./img/icon-512.png" />
         <meta name="msapplication-TileColor" content="#7aa1d6" />
-        <meta name="language" content="Japanese" />
-        <meta name="copyright" content="chakkun1121" />
-        <meta name="author" content="chakkun1121" />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://chakkun1121.github.io/view-english" />
       </Head>
       <header className={styles.header}>
         <h1 className={styles.title}>和訳表示サイト</h1>
@@ -47,7 +21,7 @@ export default function Home() {
         <section id="top" className={styles.top}>
           <a href="./view-english.pdf" target="_blank">
             <img
-              className="top-image"
+              className={styles['top-image']}
               src="./img/view-english.webp"
               loading="lazy"
               alt="和訳表示サイト"
@@ -77,7 +51,7 @@ export default function Home() {
         <section>
           <h2>使い方は?</h2>
           <p>
-            <a href="./app">アプリへのリンク</a>
+            <Link href="./app">アプリへのリンク</Link>
             をクリックするだけで簡単にご利用いただけます。基本的にインストールは不要ですが、インストールすることでより快適にご利用いただけます。
           </p>
         </section>

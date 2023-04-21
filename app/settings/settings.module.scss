@@ -1,0 +1,17 @@
+$main-color: #7aa1d6;
+
+.main {
+  display: grid;
+  justify-content: center;
+}
+
+.header {
+  background-color: $main-color;
+  position: sticky;
+  top: 0;
+
+  h1 {
+    margin: 0;
+    padding: 16px;
+  }
+}
