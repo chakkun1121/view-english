@@ -1,10 +1,10 @@
 'use client';
 /**
- * 
+ * クエリパラメータを取得する
  * @returns {Object} queryObj
  */
-export function getQuery() {
-  const query = window.location.href.split('?')[1];
+export function getQuery(href) {
+  const query = href?.split('?')[1];
   if (query) {
     const queryObj = {};
     query.split('&').forEach((q) => {

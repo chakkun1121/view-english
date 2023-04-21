@@ -6,7 +6,7 @@ export default function App() {
   console.log(query);
   return (
     <>
-      <MainContent fileID={query.fileID || null} type={query.type || 'newtab'} />
+      <MainContent fileID={query?.fileID || null} type={query?.type || 'newTab'} />
     </>
   );
 }
