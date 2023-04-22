@@ -32,10 +32,8 @@ export default function AppLayout({ children, params }) {
         <meta name="robots" content="noindex" />
         <title>和訳表示サイト | chakkun1121</title>
       </Head>
-      <header>
-        <AppHeader />
-        <AppTabs />
-      </header>
+      <AppHeader />
+      <AppTabs />
       <main>{children}</main>
     </>
   );
