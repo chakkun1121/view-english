@@ -3,7 +3,6 @@ import uuid from 'uuid';
 import { useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
 export default function AppTabs() {
-  console.log(typeof `tab-${uuid.v4()}`);
   const [tabs, setTabs] = useState([
     { title: '新しいタブ', type: 'newTab', tabID: `tab-${uuid.v4()}` },
   ]);
