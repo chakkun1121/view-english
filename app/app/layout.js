@@ -33,7 +33,6 @@ export default function AppLayout({ children, params }) {
         <title>和訳表示サイト | chakkun1121</title>
       </Head>
       <AppHeader />
-      <AppTabs />
       <main>{children}</main>
     </>
   );
