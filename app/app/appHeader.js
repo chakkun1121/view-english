@@ -1,6 +1,6 @@
 'use client';
 import { AppBar, Button } from '@mui/material';
-import { mainColor } from './page';
+import { mainColor } from '../page';
 export default function AppHeader() {
   return (
     <>

@@ -1,5 +1,6 @@
 import AppHeader from './appHeader';
 import Head from 'next/head';
+import Help from './help';
 export const metadata = {
   charset: 'UTF-8',
   robots: 'noindex',
@@ -33,6 +34,7 @@ export default function AppLayout({ children, params }) {
       </Head>
       <AppHeader />
       <main>{children}</main>
+      <Help />
     </>
   );
 }
