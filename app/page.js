@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from './page.module.scss';
 export const appVersion = '4.2.0';
+export const mainColor = '#7aa1d6';
+export const issueURL = 'https://github.com/chakkun1121/view-english/issues/new';
 export default function Home() {
   return (
     <>

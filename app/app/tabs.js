@@ -6,6 +6,8 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box } from '@mui/system';
 import React from 'react';
 import NewTab from './newTab';
+import WayakuContent from './wayaku';
+import { issueURL } from '../page';
 export default function AppTabs() {
   const [tabs, setTabs] = useState([
     { title: '新しいタブ', type: 'newTab', tabID: `tab-${getUUID()}` },
@@ -14,13 +16,13 @@ export default function AppTabs() {
     setTabs([...tabs, { title: '新しいタブ', type: 'newTab', tabID: `tab-${getUUID()}` }]);
   }
   const [value, setValue] = React.useState('0');
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
   return (
     <TabContext
       onChange={handleChange}
-      aria-label="lab API tabs example"
+      aria-label="アプリ本体のタブ部分"
       value={value}
       sx={{ display: 'flex' }}
     >
@@ -34,12 +36,33 @@ export default function AppTabs() {
         <button onClick={newTab}>+</button>
       </Box>
       {tabs.map((tab, index) => {
-        if (tab.type === 'newTab') {
-          return (
-            <TabPanel value={index.toString()} key={tab.tabID}>
-              <NewTab />
-            </TabPanel>
-          );
+        switch (tab.type) {
+          case 'newTab':
+            return (
+              <TabPanel value={index.toString()} key={tab.tabID}>
+                <NewTab />
+              </TabPanel>
+            );
+          case 'wayakuFile':
+            return (
+              <TabPanel value={index.toString()} key={tab.tabID}>
+                <WayakuContent fileID={tab.fileID} />
+              </TabPanel>
+            );
+          default:
+            return (
+              <TabPanel value={index.toString()} key={tab.tabID}>
+                <h1>エラー</h1>
+                <p>不明なタブタイプです</p>
+                <details>
+                  <summary>詳細</summary>
+                  <p>タブタイプ: {tab.type}</p>
+                  <a href={issueURL} target="_target">
+                    バグを報告してください。
+                  </a>
+                </details>
+              </TabPanel>
+            );
         }
       })}
     </TabContext>
