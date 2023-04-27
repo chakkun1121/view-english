@@ -1,5 +1,4 @@
 import AppHeader from './appHeader';
-import AppTabs from './tabs';
 import Head from 'next/head';
 export const metadata = {
   charset: 'UTF-8',

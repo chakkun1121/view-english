@@ -1,3 +1,7 @@
+'use client';
+import { Button } from '@mui/material';
+import { appVersion } from '../page';
+import styles from './newTab.module.scss';
 export default function NewTab() {
   return (
     <div id="newTab">
