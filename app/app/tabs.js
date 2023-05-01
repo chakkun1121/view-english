@@ -1,25 +1,26 @@
 'use client';
 import { useState } from 'react';
-import { Tab, Tabs } from '@mui/material';
-import { Box } from '@mui/system';
 import NewTab from './newTab';
+import { Box, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 export default function AppTabs() {
   const [tabs, setTabs] = useState([]);
-  const [tabIndex, setTabIndex] = useState(0);
-  const handleTabChange = (_, newTabIndex) => {
-    setTabIndex(newTabIndex);
-  };
+
   return (
-    <Box>
-      <Box sx={{ background: '#cccccc' }}>
-        <Tabs value={tabIndex} onChange={handleTabChange} variant="scrollable" scrollButtons="auto">
-          <Tab label="ホーム" />
-          {tabs.map((tab) => {
-            return <Tab label={tab.title} key={tab.tabID} />;
-          })}
-        </Tabs>
-      </Box>
-      {tabIndex === 0 ? <NewTab /> : tabs[tabIndex - 1].contents}
-    </Box>
+    <Tabs variant="enclosed">
+      <TabList>
+        {tabs.map((item, _) => (
+          <Tab>
+            <Flex>
+              <Box>{item.title}</Box>
+            </Flex>
+          </Tab>
+        ))}
+      </TabList>
+      <TabPanels>
+        {tabs.map((item) => (
+          <TabPanel>{item.content}</TabPanel>
+        ))}
+      </TabPanels>
+    </Tabs>
   );
 }

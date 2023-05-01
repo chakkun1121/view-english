@@ -1,6 +1,6 @@
 import AppHeader from './appHeader';
 import Head from 'next/head';
-import Help from './help';
+import { Providers } from './provider';
 export const metadata = {
   charset: 'UTF-8',
   robots: 'noindex',
@@ -32,8 +32,9 @@ export default function AppLayout({ children, params }) {
         <title>和訳表示サイト | chakkun1121</title>
       </Head>
       <AppHeader />
-      <main>{children}</main>
-      <Help />
+      <Providers>
+        <main>{children}</main>
+      </Providers>
     </>
   );
 }

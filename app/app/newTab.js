@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@mui/material';
+import { Button } from '@chakra-ui/react';
 import { appVersion } from '../page';
 import styles from './newTab.module.scss';
 export default function NewTab() {
