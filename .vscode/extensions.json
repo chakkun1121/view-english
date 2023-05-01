@@ -1,8 +1,7 @@
 {
   "recommendations": [
-    "ms-ceintl.vscode-language-pack-ja",
-    "ritwickdey.liveserver",
     "xabikos.javascriptsnippets",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "usernamehw.errorlens"
   ]
 }

@@ -1,0 +1,15 @@
+.file-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+
+  .opened {
+    display: block;
+  }
+
+  .closed {
+    display: none !important;
+  }
+}

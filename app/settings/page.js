@@ -3,7 +3,6 @@ import styles from './settings.module.scss';
 export default function SettingsPage() {
   // settings.jsonを読み込む
   const settings = require('./settings.json')?.settings || [];
-  console.log(settings);
   return (
     <>
       <title>設定|和訳表示サイト</title>
