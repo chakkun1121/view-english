@@ -1,3 +1,7 @@
 {
-  "recommendations": ["ms-ceintl.vscode-language-pack-ja", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "ms-ceintl.vscode-language-pack-ja",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
+  ]
 }
