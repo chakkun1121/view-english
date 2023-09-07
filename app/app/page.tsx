@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { openWayakuFile } from './lib/wayaku';
 import { wayakuObject } from '../../@types/wayakuObjectType';
 import { AppHeader } from './_components/appHeader';
+import { FileHeader } from './_components/FileHeader';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
@@ -17,31 +18,11 @@ export default function app() {
       <main className="">
         {fileContent ? (
           <div className="p-4">
-            <h1 className="">
-              {isEditing ? (
-                <>
-                  <input
-                    className="w-full border"
-                    type="text"
-                    defaultValue={fileContent.wayaku.h1['#text']}
-                    onChange={(e) => {
-                      setFileContent({
-                        ...fileContent,
-                        wayaku: {
-                          ...fileContent.wayaku,
-                          h1: {
-                            ...fileContent.wayaku.h1,
-                            '#text': e.target.value,
-                          },
-                        },
-                      });
-                    }}
-                  />
-                </>
-              ) : (
-                <>{fileContent.wayaku.h1['#text']}</>
-              )}
-            </h1>
+            <FileHeader
+              isEditing={isEditing}
+              fileContent={fileContent}
+              setFileContent={setFileContent}
+            />
             {fileContent.wayaku.section.map((section) => (
               <section key={section['@_sectionID']} className="py-2">
                 <p lang="en">
