@@ -14,7 +14,11 @@ export default function app() {
   }, [fileContent]);
   return (
     <>
-      <AppHeader setFileContent={setFileContent} IsEditing={isEditing} setIsEditing={setIsEditing} />
+      <AppHeader
+        setFileContent={setFileContent}
+        IsEditing={isEditing}
+        setIsEditing={setIsEditing}
+      />
       <main className="">
         {fileContent ? (
           <div className="p-4">
@@ -25,72 +29,72 @@ export default function app() {
             />
             {fileContent.wayaku.section.map((section) => (
               <section key={section['@_sectionID']} className="py-2">
-                <p lang="en">
-                  {isEditing ? (
-                    <input
-                      className="w-full border"
-                      defaultValue={section.p[0]['#text']}
-                      onChange={(e) => {
-                        setFileContent({
-                          ...fileContent,
-                          wayaku: {
-                            ...fileContent.wayaku,
-                            section: fileContent.wayaku.section.map((s) => {
-                              if (s['@_sectionID'] === section['@_sectionID']) {
-                                return {
-                                  ...s,
-                                  p: [
-                                    {
-                                      ...s.p[0],
-                                      '#text': e.target.value,
-                                    },
-                                    s.p[1],
-                                  ],
-                                };
-                              }
-                              return s;
-                            }),
-                          },
-                        });
-                      }}
-                    />
-                  ) : (
-                    <>{section.p[0]['#text']}</>
-                  )}
-                </p>
-                <p lang="en">
-                  {isEditing ? (
-                    <input
-                      className="w-full border"
-                      defaultValue={section.p[1]['#text']}
-                      onChange={(e) => {
-                        setFileContent({
-                          ...fileContent,
-                          wayaku: {
-                            ...fileContent.wayaku,
-                            section: fileContent.wayaku.section.map((s) => {
-                              if (s['@_sectionID'] === section['@_sectionID']) {
-                                return {
-                                  ...s,
-                                  p: [
-                                    s.p[0],
-                                    {
-                                      ...s.p[1],
-                                      '#text': e.target.value,
-                                    },
-                                  ],
-                                };
-                              }
-                              return s;
-                            }),
-                          },
-                        });
-                      }}
-                    />
-                  ) : (
-                    <>{section.p[1]['#text']}</>
-                  )}
-                </p>
+                {isEditing ? (
+                  <input
+                    className="w-full border"
+                    defaultValue={section.p[0]['#text']}
+                    onChange={(e) => {
+                      setFileContent({
+                        ...fileContent,
+                        wayaku: {
+                          ...fileContent.wayaku,
+                          section: fileContent.wayaku.section.map((s) => {
+                            if (s['@_sectionID'] === section['@_sectionID']) {
+                              return {
+                                ...s,
+                                p: [
+                                  {
+                                    ...s.p[0],
+                                    '#text': e.target.value,
+                                  },
+                                  s.p[1],
+                                ],
+                              };
+                            }
+                            return s;
+                          }),
+                        },
+                      });
+                    }}
+                  />
+                ) : (
+                  <p lang="en" className="">
+                    {section.p[0]['#text']}
+                  </p>
+                )}
+                {isEditing ? (
+                  <input
+                    className="w-full border"
+                    defaultValue={section.p[1]['#text']}
+                    onChange={(e) => {
+                      setFileContent({
+                        ...fileContent,
+                        wayaku: {
+                          ...fileContent.wayaku,
+                          section: fileContent.wayaku.section.map((s) => {
+                            if (s['@_sectionID'] === section['@_sectionID']) {
+                              return {
+                                ...s,
+                                p: [
+                                  s.p[0],
+                                  {
+                                    ...s.p[1],
+                                    '#text': e.target.value,
+                                  },
+                                ],
+                              };
+                            }
+                            return s;
+                          }),
+                        },
+                      });
+                    }}
+                  />
+                ) : (
+                  <p lang="ja" className="">
+                    {section.p[1]['#text']}
+                  </p>
+                )}
               </section>
             ))}
           </div>
