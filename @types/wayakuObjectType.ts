@@ -1,6 +1,6 @@
 export interface wayakuObject {
-  ['@_fileID']: string; //wayakuFile-<UUID>
   wayaku: {
+    ['@_fileID']: string; //wayakuFile-<UUID>
     h1: {
       ['#text']: string;
     };

@@ -113,15 +113,14 @@ export function fixWayakuFile(fileData: string): string {
   //1を対処する
   const fixedWayakuObject = {
     ...brokenWayakuObject,
-    ['@_fileID']: brokenWayakuObject['@_fileID'] || createUUID(),
     wayaku: {
+      ['@_fileID']: brokenWayakuObject['@_fileID'] || 'wayakuFile-' + createUUID(),
       ...brokenWayakuObject.wayaku,
       section: brokenWayakuObject.wayaku.section.map((section) => ({
         ...section,
-        ['@_sectionID']: section['@_sectionID'] || createUUID(),
+        ['@_sectionID']: section['@_sectionID'] || 'section-' + createUUID(),
       })),
     },
   };
-  console.log(fixedWayakuObject);
   return builder.build(fixedWayakuObject);
 }
