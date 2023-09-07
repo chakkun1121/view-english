@@ -1,11 +1,15 @@
 'use client';
 import Link from 'next/link';
-import { JSX, ClassAttributes, ButtonHTMLAttributes, useState } from 'react';
+import { JSX, ClassAttributes, ButtonHTMLAttributes, useState, useEffect } from 'react';
 import { openWayakuFile } from './lib/wayaku';
 import { wayakuObject } from '../../@types/wayakuObjectType';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  useEffect(() => {
+    console.debug(fileContent);
+  }, [fileContent]);
   return (
     <>
       <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
@@ -19,6 +23,7 @@ export default function app() {
           >
             開く
           </NabButton>
+          <NabButton onClick={() => setIsEditing(true)}>編集</NabButton>
           <NabButton title="英文、日本語訳の色を変更します">表示変更</NabButton>
           <NabButton>保存</NabButton>
           <NabButton title="フラッシュカードをスタート">フラッシュカード</NabButton>
@@ -28,11 +33,99 @@ export default function app() {
       <main className="">
         {fileContent ? (
           <div className="p-4">
-            <h1 className="">{fileContent.wayaku.h1['#text']}</h1>
+            <h1 className="">
+              {isEditing ? (
+                <>
+                  <input
+                    className="w-full border"
+                    type="text"
+                    defaultValue={fileContent.wayaku.h1['#text']}
+                    onChange={(e) => {
+                      setFileContent({
+                        ...fileContent,
+                        wayaku: {
+                          ...fileContent.wayaku,
+                          h1: {
+                            ...fileContent.wayaku.h1,
+                            '#text': e.target.value,
+                          },
+                        },
+                      });
+                    }}
+                  />
+                </>
+              ) : (
+                <>{fileContent.wayaku.h1['#text']}</>
+              )}
+            </h1>
             {fileContent.wayaku.section.map((section) => (
-              <section key={section['@_id']} className="py-2">
-                <p lang="en">{section.p[0]['#text']}</p>
-                <p lang="ja">{section.p[1]['#text']}</p>
+              <section key={section['@_sectionID']} className="py-2">
+                <p lang="en">
+                  {isEditing ? (
+                    <input
+                      className="w-full border"
+                      defaultValue={section.p[0]['#text']}
+                      onChange={(e) => {
+                        setFileContent({
+                          ...fileContent,
+                          wayaku: {
+                            ...fileContent.wayaku,
+                            section: fileContent.wayaku.section.map((s) => {
+                              if (s['@_sectionID'] === section['@_sectionID']) {
+                                return {
+                                  ...s,
+                                  p: [
+                                    {
+                                      ...s.p[0],
+                                      '#text': e.target.value,
+                                    },
+                                    s.p[1],
+                                  ],
+                                };
+                              }
+                              return s;
+                            }),
+                          },
+                        });
+                      }}
+                    />
+                  ) : (
+                    <>{section.p[0]['#text']}</>
+                  )}
+                </p>
+                <p lang="en">
+                  {isEditing ? (
+                    <input
+                      className="w-full border"
+                      defaultValue={section.p[1]['#text']}
+                      onChange={(e) => {
+                        setFileContent({
+                          ...fileContent,
+                          wayaku: {
+                            ...fileContent.wayaku,
+                            section: fileContent.wayaku.section.map((s) => {
+                              if (s['@_sectionID'] === section['@_sectionID']) {
+                                return {
+                                  ...s,
+                                  p: [
+                                    s.p[0],
+                                    {
+                                      ...s.p[1],
+                                      '#text': e.target.value,
+                                    },
+                                  ],
+                                };
+                              }
+                              return s;
+                            }),
+                          },
+                        });
+                      }}
+                    />
+                  ) : (
+                    <>{section.p[1]['#text']}</>
+                  )}
+                </p>{' '}
               </section>
             ))}
           </div>
