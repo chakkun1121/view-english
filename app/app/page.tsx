@@ -8,7 +8,7 @@ export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   return (
     <>
-      <header className="print-hidden sticky w-full top-0 left-0 z-50">
+      <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
         <nav className="flex bg-main">
           <NabButton
             title="ファイルを開く"
@@ -40,7 +40,7 @@ export default function app() {
           <> </>
         )}
       </main>
-      <div className="fixed bottom-10 right-10 print:hidden">
+      <div className="fixed bottom-10 right-10 print:hidden select-none">
         <div className="p-2 m-2 rounded-full bg-gray-100 hover:bg-gray-200 w-20 h-20 justify-center flex items-center">
           <Link href="../help" className="text-black hover:text-center visited:text-center">
             ?
