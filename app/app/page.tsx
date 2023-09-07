@@ -8,7 +8,7 @@ export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   return (
     <>
-      <header className="print-hidden">
+      <header className="print-hidden sticky w-full top-0 left-0 z-50">
         <nav className="flex bg-main">
           <NabButton
             title="ファイルを開く"
@@ -25,12 +25,12 @@ export default function app() {
           <NabButton>設定</NabButton>
         </nav>
       </header>
-      <main>
+      <main className="">
         {fileContent ? (
           <div className="p-4">
-            <h1 className="text-2xl font-bold">{fileContent.wayaku.h1['#text']}</h1>
+            <h1 className="">{fileContent.wayaku.h1['#text']}</h1>
             {fileContent.wayaku.section.map((section) => (
-              <section key={section['@_id']}>
+              <section key={section['@_id']} className="py-2">
                 <p lang="en">{section.p[0]['#text']}</p>
                 <p lang="ja">{section.p[1]['#text']}</p>
               </section>
@@ -40,7 +40,7 @@ export default function app() {
           <> </>
         )}
       </main>
-      <div className="absolute bottom-10 right-10 print:hidden">
+      <div className="fixed bottom-10 right-10 print:hidden">
         <div className="p-2 m-2 rounded-full bg-gray-100 hover:bg-gray-200 w-20 h-20 justify-center flex items-center">
           <Link href="../help" className="text-black hover:text-center visited:text-center">
             ?
