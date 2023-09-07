@@ -14,7 +14,7 @@ export default function app() {
   }, [fileContent]);
   return (
     <>
-      <AppHeader setFileContent={setFileContent} setIsEditing={setIsEditing} />
+      <AppHeader setFileContent={setFileContent} IsEditing={isEditing} setIsEditing={setIsEditing} />
       <main className="">
         {fileContent ? (
           <div className="p-4">

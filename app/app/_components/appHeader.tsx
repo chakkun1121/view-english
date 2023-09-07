@@ -2,7 +2,7 @@
 import { ClassAttributes, ButtonHTMLAttributes } from 'react';
 import { openWayakuFile } from '../lib/wayaku';
 
-export function AppHeader(setFileContent: any, setIsEditing: (arg0: boolean) => void) {
+export function AppHeader({ setFileContent, IsEditing, setIsEditing }) {
   return (
     <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
       <nav className="flex bg-main">
@@ -15,7 +15,9 @@ export function AppHeader(setFileContent: any, setIsEditing: (arg0: boolean) => 
         >
           開く
         </NabButton>
-        <NabButton onClick={() => setIsEditing(true)}>編集</NabButton>
+        <NabButton onClick={() => setIsEditing(!IsEditing)}>
+          {IsEditing ? '完了' : '編集'}
+        </NabButton>
         <NabButton title="英文、日本語訳の色を変更します">表示変更</NabButton>
         <NabButton>保存</NabButton>
         <NabButton title="フラッシュカードをスタート">フラッシュカード</NabButton>
