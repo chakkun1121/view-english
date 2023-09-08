@@ -15,7 +15,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/app",
+  "start_url": "./app",
   "display": "fullscreen",
   "theme_color": "#7aa1d6",
   "background_color": "#7aa1d6",
@@ -23,7 +23,7 @@
   "orientation": "any",
   "file_handlers": [
     {
-      "action": ".",
+      "action": "./app",
       "accept": {
         "application/dxf": [".wayaku"]
       },
@@ -39,7 +39,8 @@
           "type": "image/png",
           "purpose": "any maskable"
         }
-      ]
+      ],
+      "launch_type": "multiple-clients"
     }
   ]
 }
