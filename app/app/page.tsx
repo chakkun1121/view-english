@@ -9,6 +9,8 @@ import { saveWayakuFile } from './lib/saveWayakuFile';
 import { FileContent } from './_components/fileContent';
 import { useLeavePageConfirmation } from './lib/useLeavePageConfirmation';
 import { FlashCards } from './_components/flashCards';
+import { stringToObject } from './lib/stringToObject';
+import { fixWayakuFile } from './lib/fixWayakuFile';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -39,6 +41,28 @@ export default function app() {
       console.error(e);
     }
   }
+  interface WindowWithLaunchQueue extends Window {
+    launchQueue?: {
+      setConsumer: (callback: ({ files }: { files: FileSystemFileHandle[] }) => void) => void;
+    };
+  }
+  useEffect(() => {
+    const windowWithLaunchQueue = window as WindowWithLaunchQueue;
+    windowWithLaunchQueue?.launchQueue?.setConsumer(
+      async ({ files }: { files: FileSystemFileHandle[] }) => {
+        if (files.length === 1 && files[0].kind === 'file') {
+          const fileHandle = files[0];
+          let file = await fileHandle.getFile();
+          let reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = () => {
+            setFileContent(stringToObject(fixWayakuFile(reader.result as string)));
+            setFileHandle(fileHandle);
+          };
+        }
+      }
+    );
+  }, []);
   return (
     <>
       <AppHeader
