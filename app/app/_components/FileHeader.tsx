@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
 import { wayakuObject } from '../../../@types/wayakuObjectType';
-
+/**
+ * 和訳ファイルのh1部分
+ */
 export function FileHeader({
   isEditing,
   fileContent,
@@ -9,7 +11,7 @@ export function FileHeader({
 }: {
   isEditing: boolean;
   fileContent: wayakuObject;
-  setFileContent: (arg0: wayakuObject) => void;
+  setFileContent: (wayakuObject: wayakuObject) => void;
 }): React.ReactNode {
   return (
     <>
