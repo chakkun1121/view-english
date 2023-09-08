@@ -5,20 +5,29 @@ import { AppHeader } from './_components/appHeader';
 import { FileHeader } from './_components/FileHeader';
 import { Fav } from './_components/fav';
 import { HomeMenu } from './_components/homeMenu';
+import { openWayakuFile, saveWayakuFile } from './lib/openWayakuFile';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
+  const [isSaved, setIsSaved] = useState<boolean>(true);
   useEffect(() => {
     console.debug(fileContent);
+    if (fileHandle) {
+      saveWayakuFile(fileContent, fileHandle);
+    } else {
+      setIsSaved(false);
+    }
   }, [fileContent]);
+  async function openFile() {
+    const { wayakuObject, fileHandle } = await openWayakuFile();
+    setFileContent(wayakuObject);
+    setFileHandle(fileHandle);
+  }
   return (
     <>
-      <AppHeader
-        setFileContent={setFileContent}
-        IsEditing={isEditing}
-        setIsEditing={setIsEditing}
-      />
+      <AppHeader openFile={openFile} IsEditing={isEditing} setIsEditing={setIsEditing} />
       <main className="">
         {fileContent ? (
           <div className="p-4">
@@ -99,7 +108,7 @@ export default function app() {
             ))}
           </div>
         ) : (
-          <HomeMenu setFileContent={setFileContent} />
+          <HomeMenu openFile={openFile} />
         )}
       </main>
       <Fav />

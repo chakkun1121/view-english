@@ -1,18 +1,19 @@
 'use client';
 import { ClassAttributes, ButtonHTMLAttributes } from 'react';
-import { openWayakuFile } from '../lib/openWayakuFile';
 
-export function AppHeader({ setFileContent, IsEditing, setIsEditing }) {
+export function AppHeader({
+  openFile,
+  IsEditing,
+  setIsEditing,
+}: {
+  openFile: () => void;
+  IsEditing: boolean;
+  setIsEditing: (IsEditing: boolean) => void;
+}) {
   return (
     <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
       <nav className="flex bg-main">
-        <NabButton
-          title="ファイルを開く"
-          onClick={async () => {
-            const file = await openWayakuFile();
-            setFileContent(file);
-          }}
-        >
+        <NabButton title="ファイルを開く" onClick={openFile}>
           開く
         </NabButton>
         <NabButton onClick={() => setIsEditing(!IsEditing)}>

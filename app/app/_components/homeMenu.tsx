@@ -1,19 +1,9 @@
 'use client';
-
-import { openWayakuFile } from '../lib/openWayakuFile';
-
-export function HomeMenu({ setFileContent }) {
+export function HomeMenu({ openFile }: { openFile: () => void }) {
   return (
     <>
       <section>
-        <button
-          onClick={async () => {
-            const file = await openWayakuFile();
-            setFileContent(file);
-          }}
-        >
-          ファイルを開く
-        </button>
+        <button onClick={openFile}>ファイルを開く</button>
       </section>
     </>
   );
