@@ -5,7 +5,7 @@ import { AppHeader } from './_components/appHeader';
 import { Fav } from './_components/fav';
 import { HomeMenu } from './_components/homeMenu';
 import { openWayakuFile, saveWayakuFile } from './lib/openWayakuFile';
-import { FileContent } from './fileContent';
+import { FileContent } from './_components/fileContent';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();

@@ -4,18 +4,19 @@ export interface wayakuObject {
     h1: {
       ['#text']: string;
     };
-    section: {
-      ['@_sectionID']: string; //section-<UUID>
-      p: [
-        {
-          ['#text']: string;
-          ['@_class']: 'en';
-        },
-        {
-          ['#text']: string;
-          ['@_class']: 'ja';
-        }
-      ];
-    }[];
+    section: sectionType[];
   };
+}
+export interface sectionType {
+  ['@_sectionID']: string; //section-<UUID>
+  p: [
+    {
+      ['#text']: string;
+      ['@_class']: 'en';
+    },
+    {
+      ['#text']: string;
+      ['@_class']: 'ja';
+    }
+  ];
 }
