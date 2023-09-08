@@ -60,7 +60,11 @@ export default function app() {
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
-      <FlashCards isShowFlashCards={isShowFlashCards} setIsShowFlashCards={setIsShowFlashCards} />
+      <FlashCards
+        isShowFlashCards={isShowFlashCards}
+        setIsShowFlashCards={setIsShowFlashCards}
+        wayakuObject={fileContent}
+      />
       <Fav />
     </>
   );
