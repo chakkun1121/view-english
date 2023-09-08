@@ -5,10 +5,12 @@ export function AppHeader({
   openFile,
   IsEditing,
   setIsEditing,
+  save,
 }: {
   openFile: () => void;
   IsEditing: boolean;
   setIsEditing: (IsEditing: boolean) => void;
+  save: () => Promise<void>;
 }) {
   return (
     <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
@@ -20,7 +22,7 @@ export function AppHeader({
           {IsEditing ? '完了' : '編集'}
         </NabButton>
         <NabButton title="英文、日本語訳の色を変更します">表示変更</NabButton>
-        <NabButton>保存</NabButton>
+        <NabButton onClick={save}>保存</NabButton>
         <NabButton title="フラッシュカードをスタート">フラッシュカード</NabButton>
         <NabButton>設定</NabButton>
       </nav>

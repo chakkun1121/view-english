@@ -3,6 +3,8 @@ import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FileHeader } from './FileHeader';
 import { BsPlusLg, BsTrash, BsClipboard } from 'react-icons/bs';
 import { createSection } from '../lib/createSection';
+import { useEffect } from 'react';
+import { v4 as createUUID } from 'uuid';
 
 export function FileContent({
   isEditing,
@@ -15,6 +17,19 @@ export function FileContent({
   setFileContent: (wayakuObject: wayakuObject) => void;
   editMode: 'default' | 'old' | 'table';
 }) {
+  useEffect(() => {
+    if (!fileContent) {
+      setFileContent({
+        wayaku: {
+          '@_fileID': 'wayakuFile-' + createUUID(),
+          h1: {
+            '#text': '',
+          },
+          section: [createSection()],
+        },
+      });
+    }
+  }, [isEditing]);
   return (
     <div className="p-4">
       <FileHeader isEditing={isEditing} fileContent={fileContent} setFileContent={setFileContent} />
@@ -65,7 +80,7 @@ export function FileContent({
           ) : (
             <></>
           )}
-          {fileContent.wayaku.section.map((section) => (
+          {fileContent?.wayaku.section.map((section) => (
             <section key={section['@_sectionID']} className="py-2 flex w-full">
               <div className="flex-1">
                 {isEditing ? (

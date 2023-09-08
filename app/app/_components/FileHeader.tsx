@@ -21,7 +21,7 @@ export function FileHeader({
             <input
               className="w-full border"
               type="text"
-              defaultValue={fileContent.wayaku.h1['#text']}
+              defaultValue={fileContent?.wayaku.h1['#text']}
               onChange={(e) => {
                 setFileContent({
                   ...fileContent,
