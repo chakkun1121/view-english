@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     '和訳ファイル',
     'wayaku',
   ],
+  manifest: './manifest.json',
   openGraph: {
     url: siteURL,
     title: '和訳表示サイト',

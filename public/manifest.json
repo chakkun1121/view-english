@@ -1,0 +1,45 @@
+{
+  "name": "和訳表示サイト v5.0.1",
+  "short_name": "和訳表示サイト",
+  "description": "ローカルに保存してある和訳ファイルの表示、編集を行います。ファイルは端末内のみで処理するのでセキュリティが安心です。",
+  "icons": [
+    {
+      "src": "img/icon.png",
+      "sizes": "195x195",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/app",
+  "display": "fullscreen",
+  "theme_color": "#7aa1d6",
+  "background_color": "#7aa1d6",
+  "display_override": ["window-controls-overlay"],
+  "orientation": "any",
+  "file_handlers": [
+    {
+      "action": ".",
+      "accept": {
+        "application/dxf": [".wayaku"]
+      },
+      "icons": [
+        {
+          "src": "img/icon.png",
+          "sizes": "195x195",
+          "type": "image/png"
+        },
+        {
+          "src": "img/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    }
+  ]
+}
