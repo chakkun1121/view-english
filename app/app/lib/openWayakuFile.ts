@@ -1,7 +1,6 @@
 import { wayakuObject } from '../../../@types/wayakuObjectType';
 import { stringToObject } from './stringToObject';
 import { fixWayakuFile } from './fixWayakuFile';
-import { objectToString } from './objectToString';
 
 export async function openWayakuFile(): Promise<{
   wayakuObject: wayakuObject;
@@ -39,19 +38,4 @@ export async function openWayakuFile(): Promise<{
       reader.onerror = reject;
     }
   );
-}
-export async function saveWayakuFile(
-  wayakuObject: wayakuObject,
-  fileHandle: FileSystemFileHandle
-): Promise<void> {
-  return new Promise<void>(async (resolve, reject) => {
-    try {
-      const writable = await fileHandle.createWritable();
-      await writable.write(objectToString(wayakuObject));
-      await writable.close();
-      resolve();
-    } catch (e) {
-      reject(e);
-    }
-  });
 }

@@ -4,8 +4,10 @@ import { wayakuObject } from '../../@types/wayakuObjectType';
 import { AppHeader } from './_components/appHeader';
 import { Fav } from './_components/fav';
 import { HomeMenu } from './_components/homeMenu';
-import { openWayakuFile, saveWayakuFile } from './lib/openWayakuFile';
+import { openWayakuFile } from './lib/openWayakuFile';
+import { saveWayakuFile } from './lib/saveWayakuFile';
 import { FileContent } from './_components/fileContent';
+import { useLeavePageConfirmation } from './lib/useLeavePageConfirmation';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
@@ -13,6 +15,7 @@ export default function app() {
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isSaved, setIsSaved] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<'default' | 'old' | 'table'>('default');
+  useLeavePageConfirmation(!isSaved);
   useEffect(() => {
     console.debug(fileContent);
     if (fileHandle) {
@@ -26,9 +29,23 @@ export default function app() {
     setFileContent(wayakuObject);
     setFileHandle(fileHandle);
   }
+  async function save() {
+    try {
+      const newFileHandle = await saveWayakuFile(fileContent, fileHandle);
+      setFileHandle(newFileHandle);
+      setIsSaved(true);
+    } catch (e) {
+      console.error(e);
+    }
+  }
   return (
     <>
-      <AppHeader openFile={openFile} IsEditing={isEditing} setIsEditing={setIsEditing} />
+      <AppHeader
+        openFile={openFile}
+        IsEditing={isEditing}
+        setIsEditing={setIsEditing}
+        save={save}
+      />
       <main className="">
         {fileContent || isEditing ? (
           <FileContent
