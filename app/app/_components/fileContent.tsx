@@ -1,7 +1,7 @@
 'use client';
 import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FileHeader } from './FileHeader';
-import { BsPlusLg, BsTrash } from 'react-icons/bs';
+import { BsPlusLg, BsTrash, BsClipboard } from 'react-icons/bs';
 import { createSection } from '../lib/createSection';
 
 export function FileContent({
@@ -21,20 +21,47 @@ export function FileContent({
       {!isEditing || editMode === 'default' ? (
         <>
           {isEditing ? (
-            <button
-              aria-label="追加"
-              onClick={() => {
-                setFileContent({
-                  ...fileContent,
-                  wayaku: {
-                    ...fileContent.wayaku,
-                    section: [createSection(), ...fileContent.wayaku.section],
-                  },
-                });
-              }}
-            >
-              <BsPlusLg />
-            </button>
+            <div className="flex">
+              <button
+                className="p-2 border bg-gray-100 hover:bg-slate-200"
+                aria-label="追加"
+                onClick={() => {
+                  setFileContent({
+                    ...fileContent,
+                    wayaku: {
+                      ...fileContent.wayaku,
+                      section: [createSection(), ...fileContent.wayaku.section],
+                    },
+                  });
+                }}
+              >
+                <BsPlusLg />
+              </button>
+              <button
+                className="p-2 border bg-gray-100 hover:bg-gray-200"
+                onClick={async () => {
+                  // クリップボードから読み込み
+                  const text: string = await window.navigator.clipboard.readText();
+                  console.log(text);
+                  const wayakuArray: string[] = text.split(/[\n\t]/g).filter((s) => s !== '');
+                  console.log(wayakuArray);
+                  const sections: sectionType[] = [];
+                  for (let i = 0; i < wayakuArray.length; i += 2) {
+                    sections.push(createSection(wayakuArray[i], wayakuArray[i + 1]));
+                  }
+                  setFileContent({
+                    ...fileContent,
+                    wayaku: {
+                      ...fileContent.wayaku,
+                      section: [...sections, ...fileContent.wayaku.section],
+                    },
+                  });
+                }}
+              >
+                <BsClipboard />
+                クリップボードからインポート
+              </button>
+            </div>
           ) : (
             <></>
           )}

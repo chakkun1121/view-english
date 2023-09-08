@@ -2,16 +2,16 @@
 import { sectionType } from '../../../@types/wayakuObjectType';
 import { v4 as createUUID } from 'uuid';
 
-export function createSection(): sectionType {
+export function createSection(enText?: string, jaText?: string): sectionType {
   return {
     '@_sectionID': ('section' + createUUID()) as string,
     p: [
       {
-        '#text': '',
+        '#text': enText || '',
         '@_class': 'en',
       },
       {
-        '#text': '',
+        '#text': jaText || '',
         '@_class': 'ja',
       },
     ],
