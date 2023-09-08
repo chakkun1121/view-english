@@ -11,6 +11,7 @@ import { useLeavePageConfirmation } from './lib/useLeavePageConfirmation';
 import { FlashCards } from './_components/flashCards';
 import { stringToObject } from './lib/stringToObject';
 import { fixWayakuFile } from './lib/fixWayakuFile';
+import { useHotkeys } from 'react-hotkeys-hook';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -63,6 +64,37 @@ export default function app() {
       }
     );
   }, []);
+  useHotkeys('ctrl+s', save, {
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
+  useHotkeys(
+    'ctrl+e',
+    () => {
+      setIsEditing(!isEditing);
+    },
+    {
+      enableOnFormTags: true,
+      preventDefault: true,
+    }
+  );
+  useHotkeys('ctrl+o', openFile, {
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
+  useHotkeys(
+    'alt+f',
+    () => {
+      setIsShowFlashCards(true);
+    },
+    {
+      preventDefault: true,
+    }
+  );
+  useHotkeys('f1,ctrl+/', () => open('./help', '_blank'), {
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
   return (
     <>
       <AppHeader
