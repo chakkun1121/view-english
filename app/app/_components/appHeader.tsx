@@ -1,6 +1,6 @@
 'use client';
 import { ClassAttributes, ButtonHTMLAttributes } from 'react';
-import { openWayakuFile } from '../lib/wayaku';
+import { openWayakuFile } from '../lib/openWayakuFile';
 
 export function AppHeader({ setFileContent, IsEditing, setIsEditing }) {
   return (

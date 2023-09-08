@@ -1,6 +1,6 @@
 'use client';
 
-import { openWayakuFile } from '../lib/wayaku';
+import { openWayakuFile } from '../lib/openWayakuFile';
 
 export function HomeMenu({ setFileContent }) {
   return (
