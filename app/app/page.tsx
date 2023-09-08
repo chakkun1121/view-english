@@ -8,13 +8,14 @@ import { openWayakuFile } from './lib/openWayakuFile';
 import { saveWayakuFile } from './lib/saveWayakuFile';
 import { FileContent } from './_components/fileContent';
 import { useLeavePageConfirmation } from './lib/useLeavePageConfirmation';
-
+import { FlashCards } from './_components/flashCards';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isSaved, setIsSaved] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<'default' | 'old' | 'table'>('default');
+  const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   useLeavePageConfirmation(!isSaved);
   useEffect(() => {
     console.debug(fileContent);
@@ -45,6 +46,7 @@ export default function app() {
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
         save={save}
+        setIsShowFlashCards={setIsShowFlashCards}
       />
       <main className="">
         {fileContent || isEditing ? (
@@ -58,6 +60,7 @@ export default function app() {
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
+      <FlashCards isShowFlashCards={isShowFlashCards} setIsShowFlashCards={setIsShowFlashCards} />
       <Fav />
     </>
   );
