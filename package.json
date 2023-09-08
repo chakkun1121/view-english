@@ -1,22 +1,43 @@
 {
   "name": "view-english",
-  "version": "1.0.0",
-  "description": "https://view-english.chakkun1121haru.repl.co からhttps://chakkun1121.github.io/view-english/ に移植完了",
-  "main": "js-cookie.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "5.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chakkun1121/view-english.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/chakkun1121/view-english/issues"
   },
   "homepage": "https://github.com/chakkun1121/view-english#readme",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "chakkun1121",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "core-js": "^3.32.2",
+    "fast-xml-parser": "^4.2.7",
+    "gray-matter": "^4.0.3",
+    "next": "^13.4.19",
+    "next-pwa": "^5.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "react-markdown": "^8.0.7",
+    "react-use": "^17.4.0",
+    "tailwind": "^4.0.0",
+    "typescript": "^5.2.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.5.9",
+    "@types/react": "18.2.21",
+    "@types/uuid": "^9.0.3",
+    "@types/wicg-file-system-access": "^2020.9.6",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.29",
+    "tailwindcss": "^3.3.3"
   }
 }

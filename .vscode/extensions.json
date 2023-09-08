@@ -1,9 +1,6 @@
 {
   "recommendations": [
-    "ms-ceintl.vscode-language-pack-ja",
-    "ritwickdey.liveserver",
-    "xabikos.javascriptsnippets",
-    "bierner.markdown-footnotes",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
   ]
 }
