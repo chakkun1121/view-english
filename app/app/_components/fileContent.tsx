@@ -45,7 +45,7 @@ export function FileContent({
                     ...fileContent,
                     wayaku: {
                       ...fileContent.wayaku,
-                      section: [createSection(), ...fileContent.wayaku.section],
+                      section: [...fileContent.wayaku.section, createSection()],
                     },
                   });
                 }}
