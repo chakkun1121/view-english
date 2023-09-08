@@ -2,8 +2,9 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import style from './flashCards.module.css';
 import { useEffect, useState } from 'react';
-import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
+import { wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
+import { useHotkeys } from 'react-hotkeys-hook';
 export function FlashCards({
   isShowFlashCards,
   setIsShowFlashCards,
@@ -19,6 +20,30 @@ export function FlashCards({
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false);
+  useHotkeys(
+    'esc',
+    () => {
+      setIsShowFlashCards(false);
+    },
+    {
+      enabled: !wayakuObject,
+      preventDefault: true,
+    }
+  );
+  useHotkeys('right', next, {
+    enabled: mode === 'cards' && isShowAnswer,
+    preventDefault: true,
+  });
+  useHotkeys(
+    'space',
+    () => {
+      setIsShowAnswer(true);
+    },
+    {
+      enabled: mode === 'cards' && !isShowAnswer,
+      preventDefault: true,
+    }
+  );
   function startCards() {
     const sectionList = wayakuObject.wayaku.section.map((section) => section['@_sectionID']);
     if (isRandom) {
@@ -33,6 +58,14 @@ export function FlashCards({
   useEffect(() => {
     setQuestionCount(wayakuObject?.wayaku.section.length || 0);
   }, [wayakuObject]);
+  function next() {
+    if (questionIndex === questionList.length - 1) {
+      setMode('result');
+    } else {
+      setQuestionIndex(questionIndex + 1);
+      setIsShowAnswer(false);
+    }
+  }
   return (
     <div
       className={
@@ -89,14 +122,7 @@ export function FlashCards({
                             }
                           </p>
                           <button
-                            onClick={() => {
-                              if (questionIndex === questionList.length - 1) {
-                                setMode('result');
-                              } else {
-                                setQuestionIndex(questionIndex + 1);
-                                setIsShowAnswer(false);
-                              }
-                            }}
+                            onClick={next}
                             className="block select-auto p-2 m-2 border rounded"
                           >
                             次へ
