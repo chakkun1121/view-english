@@ -1,0 +1,20 @@
+.flashCards {
+  animation: hidden 1s ease 0s normal;
+}
+
+.show {
+  animation: show 1s ease 0s normal;
+}
+@keyframes show {
+  0% {
+    top: 100vh;
+  }
+  100% {
+    top: 2.5em;
+  }
+}
+@keyframes hidden {
+  100% {
+    top: 100vh;
+  }
+}

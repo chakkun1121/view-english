@@ -6,14 +6,16 @@ export function AppHeader({
   IsEditing,
   setIsEditing,
   save,
+  setIsShowFlashCards,
 }: {
   openFile: () => void;
   IsEditing: boolean;
   setIsEditing: (IsEditing: boolean) => void;
   save: () => Promise<void>;
+  setIsShowFlashCards: (isShowFlashCards: boolean) => void;
 }) {
   return (
-    <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
+    <header className="print-hidden sticky w-full top-0 left-0 z-30 select-none">
       <nav className="flex bg-main">
         <NabButton title="ファイルを開く" onClick={openFile}>
           開く
@@ -23,7 +25,14 @@ export function AppHeader({
         </NabButton>
         <NabButton title="英文、日本語訳の色を変更します">表示変更</NabButton>
         <NabButton onClick={save}>保存</NabButton>
-        <NabButton title="フラッシュカードをスタート">フラッシュカード</NabButton>
+        <NabButton
+          title="フラッシュカードをスタート"
+          onClick={() => {
+            setIsShowFlashCards(true);
+          }}
+        >
+          フラッシュカード
+        </NabButton>
         <NabButton>設定</NabButton>
       </nav>
     </header>
