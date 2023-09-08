@@ -30,7 +30,7 @@ export default function app() {
     <>
       <AppHeader openFile={openFile} IsEditing={isEditing} setIsEditing={setIsEditing} />
       <main className="">
-        {fileContent ? (
+        {fileContent || isEditing ? (
           <FileContent
             isEditing={isEditing}
             fileContent={fileContent}
@@ -38,7 +38,7 @@ export default function app() {
             editMode={editMode}
           />
         ) : (
-          <HomeMenu openFile={openFile} />
+          <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
       <Fav />
