@@ -1,59 +1,47 @@
 'use client';
-import Link from 'next/link';
-import { JSX, ClassAttributes, ButtonHTMLAttributes, useState } from 'react';
-import { openWayakuFile } from './lib/wayaku';
+import { useState, useEffect } from 'react';
 import { wayakuObject } from '../../@types/wayakuObjectType';
+import { AppHeader } from './_components/appHeader';
+import { Fav } from './_components/fav';
+import { HomeMenu } from './_components/homeMenu';
+import { openWayakuFile, saveWayakuFile } from './lib/openWayakuFile';
+import { FileContent } from './_components/fileContent';
 
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject>();
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
+  const [isSaved, setIsSaved] = useState<boolean>(true);
+  const [editMode, setEditMode] = useState<'default' | 'old' | 'table'>('default');
+  useEffect(() => {
+    console.debug(fileContent);
+    if (fileHandle) {
+      saveWayakuFile(fileContent, fileHandle);
+    } else {
+      setIsSaved(false);
+    }
+  }, [fileContent]);
+  async function openFile() {
+    const { wayakuObject, fileHandle } = await openWayakuFile();
+    setFileContent(wayakuObject);
+    setFileHandle(fileHandle);
+  }
   return (
     <>
-      <header className="print-hidden sticky w-full top-0 left-0 z-50 select-none">
-        <nav className="flex bg-main">
-          <NabButton
-            title="ファイルを開く"
-            onClick={async () => {
-              const file = await openWayakuFile();
-              setFileContent(file);
-            }}
-          >
-            開く
-          </NabButton>
-          <NabButton title="英文、日本語訳の色を変更します">表示変更</NabButton>
-          <NabButton>保存</NabButton>
-          <NabButton title="フラッシュカードをスタート">フラッシュカード</NabButton>
-          <NabButton>設定</NabButton>
-        </nav>
-      </header>
+      <AppHeader openFile={openFile} IsEditing={isEditing} setIsEditing={setIsEditing} />
       <main className="">
         {fileContent ? (
-          <div className="p-4">
-            <h1 className="">{fileContent.wayaku.h1['#text']}</h1>
-            {fileContent.wayaku.section.map((section) => (
-              <section key={section['@_id']} className="py-2">
-                <p lang="en">{section.p[0]['#text']}</p>
-                <p lang="ja">{section.p[1]['#text']}</p>
-              </section>
-            ))}
-          </div>
+          <FileContent
+            isEditing={isEditing}
+            fileContent={fileContent}
+            setFileContent={setFileContent}
+            editMode={editMode}
+          />
         ) : (
-          <> </>
+          <HomeMenu openFile={openFile} />
         )}
       </main>
-      <div className="fixed bottom-10 right-10 print:hidden select-none">
-        <div className="p-2 m-2 rounded-full bg-gray-100 hover:bg-gray-200 w-20 h-20 justify-center flex items-center">
-          <Link href="../help" className="text-black hover:text-center visited:text-center">
-            ?
-          </Link>
-        </div>
-      </div>
+      <Fav />
     </>
   );
-}
-function NabButton(
-  props: JSX.IntrinsicAttributes &
-    ClassAttributes<HTMLButtonElement> &
-    ButtonHTMLAttributes<HTMLButtonElement>
-) {
-  return <button {...props} className="p-4 rounded hover:bg-main-hover" />;
 }
