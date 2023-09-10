@@ -23,6 +23,7 @@ export function FileContent({
         wayaku: {
           '@_fileID': 'wayakuFile-' + createUUID(),
           h1: {
+            class: 'title',
             '#text': '',
           },
           section: [createSection()],
