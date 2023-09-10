@@ -2,6 +2,7 @@ export interface wayakuObject {
   wayaku: {
     ['@_fileID']: string; //wayakuFile-<UUID>
     h1: {
+      class: 'title';
       ['#text']: string;
     };
     section: sectionType[];
