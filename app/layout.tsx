@@ -13,14 +13,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 export const siteURL = 'https://chakkun1121.github.io/view-english';
 export const description =
-  '和訳表示サイトは、自分だけの和訳ファイルを作成して、英語学習を効率的にサポートするサイトです。フラッシュカード機能を搭載し、日本語表示からクリックで英文表示！読み上げ対応で英語学習がより楽しくなります。外部に情報を送信せず、安全にご利用いただけます。';
+  '和訳表示サイトは、web上で自分だけの和訳ファイルを作成して、英語学習を効率的にサポートするサイトです。フラッシュカード(単語帳)機能を搭載し、日本語表示からクリックで英文表示。外部に情報を送信しないので、著作権やプライバシーを気にせず安全にご利用いただけます。';
 export const themeColor = '#7aa1d6';
 export const metadata: Metadata = {
   metadataBase: new URL('https://chakkun1121.github.io/view-english'),
   title: {
     template: '%s | 和訳表示サイト | chakkun1121',
     default:
-      '和訳表示サイト | 和訳ファイル作成からフラッシュカード機能まで！英語学習に最適 | chakkun1121',
+      '和訳表示サイト | web上で和訳ファイル作成からフラッシュカード機能まで！英語学習に最適 | chakkun1121',
   },
   description,
   themeColor,
