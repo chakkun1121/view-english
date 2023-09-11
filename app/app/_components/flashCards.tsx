@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import { wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { FaRegWindowMinimize } from 'react-icons/fa';
-import { VscChromeMaximize } from 'react-icons/vsc';
+import { VscChromeMaximize, VscChromeMinimize } from 'react-icons/vsc';
 export function FlashCards({
   wayakuObject,
   close,
@@ -75,7 +74,7 @@ export function FlashCards({
           onClick={() => setIsMinimize(!isMinimize)}
           className=" hover:bg-gray-300 border rounded p-2 flex-none"
         >
-          {!isMinimize ? <FaRegWindowMinimize /> : <VscChromeMaximize />}
+          {!isMinimize ? <VscChromeMinimize /> : <VscChromeMaximize />}
         </button>
         <button onClick={close} className=" hover:bg-red-300 border rounded p-2 flex-none">
           <AiOutlineClose />
