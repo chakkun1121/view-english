@@ -1,9 +1,9 @@
 .flashCards {
-  animation: hidden 1s ease 0s normal;
+  animation: show 1s ease 0s normal;
 }
 
-.show {
-  animation: show 1s ease 0s normal;
+.hidden {
+  animation: hidden 1s ease 0s normal;
 }
 @keyframes show {
   0% {
