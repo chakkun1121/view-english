@@ -5,6 +5,10 @@
 .hidden {
   animation: hidden 1s ease 0s normal;
 }
+.minimize {
+  animation: minimize 1s ease 0s normal;
+}
+
 @keyframes show {
   0% {
     top: 100vh;
@@ -16,5 +20,9 @@
 @keyframes hidden {
   100% {
     top: 100vh;
+  }
+}
+@keyframes minimize {
+  to {
   }
 }
