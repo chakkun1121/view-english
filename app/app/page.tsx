@@ -95,6 +95,9 @@ export default function app() {
     enableOnFormTags: true,
     preventDefault: true,
   });
+  function closeFlashCards() {
+    setIsShowFlashCards(false);
+  }
   return (
     <>
       <AppHeader
@@ -116,11 +119,7 @@ export default function app() {
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
-      <FlashCards
-        isShowFlashCards={isShowFlashCards}
-        setIsShowFlashCards={setIsShowFlashCards}
-        wayakuObject={fileContent}
-      />
+      {isShowFlashCards && <FlashCards wayakuObject={fileContent} close={closeFlashCards}/>}
       <Fav />
     </>
   );

@@ -5,14 +5,13 @@ import { useEffect, useState } from 'react';
 import { wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { VscChromeMaximize, VscChromeMinimize } from 'react-icons/vsc';
 export function FlashCards({
-  isShowFlashCards,
-  setIsShowFlashCards,
   wayakuObject,
+  close,
 }: {
-  isShowFlashCards: boolean;
-  setIsShowFlashCards: (isShowFlashCards: boolean) => void;
   wayakuObject: wayakuObject;
+  close: () => void;
 }) {
   const [mode, setMode] = useState<'home' | 'cards' | 'result'>('home');
   const [isRandom, setIsRandom] = useState<boolean>(false);
@@ -20,16 +19,11 @@ export function FlashCards({
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false);
-  useHotkeys(
-    'esc',
-    () => {
-      setIsShowFlashCards(false);
-    },
-    {
-      enabled: !wayakuObject,
-      preventDefault: true,
-    }
-  );
+  const [isMinimize, setIsMinimize] = useState<boolean>(false);
+  useHotkeys('esc', close, {
+    enabled: !wayakuObject,
+    preventDefault: true,
+  });
   useHotkeys('right', next, {
     enabled: mode === 'cards' && isShowAnswer,
     preventDefault: true,
@@ -70,20 +64,23 @@ export function FlashCards({
     <div
       className={
         style.flashCards +
-        ' fixed bottom-0 right-2 left-2 z-40 bg-white border rounded p-2 select-none ' +
-        (isShowFlashCards ? style.show + ' top-10' : 'top-full')
+        ' fixed right-2 left-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        (isMinimize ? style.minimize : ' top-10')
       }
     >
       <nav className="flex">
         <h2 className="flex-1">フラッシュカード</h2>
         <button
-          onClick={() => setIsShowFlashCards(false)}
-          className=" hover:bg-red-300 border rounded p-2 flex-none"
+          onClick={() => setIsMinimize(!isMinimize)}
+          className=" hover:bg-gray-300 border rounded p-2 flex-none"
         >
+          {!isMinimize ? <VscChromeMinimize /> : <VscChromeMaximize />}
+        </button>
+        <button onClick={close} className=" hover:bg-red-300 border rounded p-2 flex-none">
           <AiOutlineClose />
         </button>
       </nav>
-      {wayakuObject ? (
+      {!isMinimize && wayakuObject ? (
         <section className="">
           {mode === 'home' ? (
             <FlashCardHome
@@ -140,19 +137,13 @@ export function FlashCards({
                   </div>
                 </>
               ) : (
-                <>
-                  <button onClick={() => setIsShowFlashCards(false)}>
-                    フラッシュカードを閉じる
-                  </button>
-                </>
+                <button onClick={close}>フラッシュカードを閉じる</button>
               )}
             </>
           )}
         </section>
       ) : (
-        <>
-          <p>ファイルを開くか作成してください。</p>
-        </>
+        <>{!wayakuObject && <p>ファイルを開くか作成してください。</p>}</>
       )}
     </div>
   );
