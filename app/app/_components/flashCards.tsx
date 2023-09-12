@@ -24,12 +24,16 @@ export function FlashCards({
     enabled: !wayakuObject,
     preventDefault: true,
   });
-  useHotkeys('right', next, {
+  useHotkeys('right,enter', next, {
+    enabled: mode === 'cards' && isShowAnswer,
+    preventDefault: true,
+  });
+  useHotkeys('left', back, {
     enabled: mode === 'cards' && isShowAnswer,
     preventDefault: true,
   });
   useHotkeys(
-    'space',
+    'space,enter',
     () => {
       setIsShowAnswer(true);
     },
@@ -57,6 +61,14 @@ export function FlashCards({
       setMode('result');
     } else {
       setQuestionIndex(questionIndex + 1);
+      setIsShowAnswer(false);
+    }
+  }
+  function back() {
+    if (questionIndex === 0) {
+      console.error('戻れません');
+    } else {
+      setQuestionIndex(questionIndex - 1);
       setIsShowAnswer(false);
     }
   }
@@ -118,12 +130,21 @@ export function FlashCards({
                               ).p[0]['#text']
                             }
                           </p>
-                          <button
-                            onClick={next}
-                            className="block select-auto p-2 m-2 border rounded"
-                          >
-                            次へ
-                          </button>
+                          <div className="flex">
+                            <button
+                              onClick={back}
+                              className="block flex-none p-2 m-2 border rounded px-4"
+                              disabled={questionIndex === 0}
+                            >
+                              戻る
+                            </button>
+                            <button
+                              onClick={next}
+                              className="block select-auto p-2 m-2 border rounded flex-1"
+                            >
+                              次へ
+                            </button>
+                          </div>
                         </>
                       ) : (
                         <button
