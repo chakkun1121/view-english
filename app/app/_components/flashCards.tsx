@@ -9,9 +9,14 @@ import { Card } from './Card';
 export function FlashCards({
   wayakuObject,
   close,
+  fileContent,
+  setFileContent,
 }: {
   wayakuObject: wayakuObject | undefined;
   close: () => void;
+
+  fileContent: wayakuObject;
+  setFileContent: (wayakuObject: wayakuObject) => void;
 }) {
   const [mode, setMode] = useState<'home' | 'cards' | 'result'>('home');
   const [isRandom, setIsRandom] = useState<boolean>(false);
@@ -55,6 +60,21 @@ export function FlashCards({
   const currentSection: sectionType = wayakuObject?.wayaku.section.find(
     (section) => section['@_sectionID'] === questionList[questionIndex]
   );
+  function setCurrentSection(section: sectionType) {
+    setFileContent({
+      ...fileContent,
+      wayaku: {
+        ...fileContent.wayaku,
+        section: fileContent.wayaku.section.map((s) => {
+          if (s['@_sectionID'] === section['@_sectionID']) {
+            return section;
+          } else {
+            return s;
+          }
+        }),
+      },
+    });
+  }
   return (
     <div
       className={
@@ -79,6 +99,7 @@ export function FlashCards({
             <>
               {mode === 'cards' ? (
                 <Card
+                  setCurrentSection={setCurrentSection}
                   questionIndex={questionIndex}
                   questionList={questionList}
                   currentSection={currentSection}

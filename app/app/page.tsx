@@ -117,7 +117,14 @@ export default function app() {
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
-      {isShowFlashCards && <FlashCards wayakuObject={fileContent} close={closeFlashCards} />}
+      {isShowFlashCards && (
+        <FlashCards
+          wayakuObject={fileContent}
+          close={closeFlashCards}
+          fileContent={fileContent}
+          setFileContent={setFileContent}
+        />
+      )}
       <Fav />
     </>
   );

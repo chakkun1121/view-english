@@ -3,23 +3,29 @@ import { useEffect, useState } from 'react';
 import { sectionType } from '../../../@types/wayakuObjectType';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { SpeechButton } from './SpeechButton';
+import { FiEdit2 } from 'react-icons/fi';
+import { AiOutlineCheck } from 'react-icons/ai';
 
 export function Card({
   questionIndex,
   questionList,
   currentSection,
+  setCurrentSection,
   back,
   next,
 }: {
   questionIndex: number | undefined;
   questionList: string[];
   currentSection: sectionType;
+  setCurrentSection: (section: sectionType) => void;
   back: () => void;
   next: () => void;
 }) {
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   useEffect(() => {
     setIsShowAnswer(false);
+    setIsEditing(false);
   }, [questionIndex]);
   useHotkeys('right,enter', next, {
     enabled: isShowAnswer,
@@ -29,6 +35,17 @@ export function Card({
     enabled: isShowAnswer,
     preventDefault: true,
   });
+  useHotkeys(
+    'ctrl+enter',
+    () => {
+      setIsEditing(!isEditing);
+    },
+    {
+      preventDefault: true,
+      enableOnFormTags: true,
+    }
+  );
+
   useHotkeys(
     'space,enter',
     () => {
@@ -46,19 +63,63 @@ export function Card({
       </div>
       <div>
         <div className="flex items-center">
-          <p className="block select-auto p-2 m-2 border rounded flex-1">
-            {currentSection.p[1]['#text']}
-          </p>
+          {isEditing ? (
+            <input
+              className="block select-auto p-2 m-2 border rounded flex-1 text-L"
+              defaultValue={currentSection.p[1]['#text']}
+              onChange={(e) =>
+                setCurrentSection({
+                  ...currentSection,
+                  p: [
+                    currentSection.p[0],
+                    {
+                      ...currentSection.p[1],
+                      '#text': e.target.value,
+                    },
+                  ],
+                })
+              }
+            />
+          ) : (
+            <p className="block select-auto p-2 m-2 border rounded flex-1">
+              {currentSection.p[1]['#text']}
+            </p>
+          )}
           <div className="flex-none">
-            <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" />
+            <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
+          </div>
+          <div className="flex-none">
+            <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" aria-label="読み上げ" />
           </div>
         </div>
         <div>
           <div className="flex items-center">
             {isShowAnswer ? (
-              <p className="block select-auto p-2 m-2 border rounded flex-1">
-                {currentSection.p[0]['#text']}
-              </p>
+              <>
+                {isEditing ? (
+                  <input
+                    className="block select-auto p-2 m-2 border rounded flex-1 text-L"
+                    lang="en"
+                    defaultValue={currentSection.p[0]['#text']}
+                    onChange={(e) =>
+                      setCurrentSection({
+                        ...currentSection,
+                        p: [
+                          {
+                            ...currentSection.p[0],
+                            '#text': e.target.value,
+                          },
+                          currentSection.p[1],
+                        ],
+                      })
+                    }
+                  />
+                ) : (
+                  <p className="block select-auto p-2 m-2 border rounded flex-1" lang="en">
+                    {currentSection.p[0]['#text']}
+                  </p>
+                )}
+              </>
             ) : (
               <button
                 onClick={() => setIsShowAnswer(true)}
@@ -68,7 +129,14 @@ export function Card({
               </button>
             )}
             <div className="flex-none">
-              <SpeechButton text={currentSection.p[0]['#text']} />
+              <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
+            </div>
+            <div className="flex-none">
+              <SpeechButton
+                text={currentSection.p[1]['#text']}
+                lang="ja-JP"
+                aria-label="読み上げ"
+              />
             </div>
           </div>
           {isShowAnswer && (
@@ -88,5 +156,16 @@ export function Card({
         </div>
       </div>
     </>
+  );
+}
+function EditButton({ isEditing, setIsEditing }: { isEditing: boolean; setIsEditing: any }) {
+  return (
+    <button
+      onClick={() => setIsEditing(!isEditing)}
+      className="block select-auto p-2 m-2 border rounded"
+      aria-label="編集"
+    >
+      {isEditing ? <AiOutlineCheck /> : <FiEdit2 />}
+    </button>
   );
 }
