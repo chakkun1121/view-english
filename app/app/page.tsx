@@ -13,11 +13,10 @@ import { stringToObject } from './lib/stringToObject';
 import { fixWayakuFile } from './lib/fixWayakuFile';
 import { useHotkeys } from 'react-hotkeys-hook';
 export default function app() {
-  const [fileContent, setFileContent] = useState<wayakuObject>();
+  const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isSaved, setIsSaved] = useState<boolean>(true);
-  const [editMode, setEditMode] = useState<'default' | 'old' | 'table'>('default');
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   useLeavePageConfirmation(!isSaved);
   useEffect(() => {
@@ -95,6 +94,9 @@ export default function app() {
     enableOnFormTags: true,
     preventDefault: true,
   });
+  function closeFlashCards() {
+    setIsShowFlashCards(false);
+  }
   return (
     <>
       <AppHeader
@@ -110,17 +112,19 @@ export default function app() {
             isEditing={isEditing}
             fileContent={fileContent}
             setFileContent={setFileContent}
-            editMode={editMode}
           />
         ) : (
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
-      <FlashCards
-        isShowFlashCards={isShowFlashCards}
-        setIsShowFlashCards={setIsShowFlashCards}
-        wayakuObject={fileContent}
-      />
+      {isShowFlashCards && (
+        <FlashCards
+          wayakuObject={fileContent}
+          close={closeFlashCards}
+          fileContent={fileContent}
+          setFileContent={setFileContent}
+        />
+      )}
       <Fav />
     </>
   );

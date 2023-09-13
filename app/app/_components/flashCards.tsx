@@ -1,49 +1,34 @@
 'use client';
-import { AiOutlineClose } from 'react-icons/ai';
 import style from './flashCards.module.css';
 import { useEffect, useState } from 'react';
-import { wayakuObject } from '../../../@types/wayakuObjectType';
+import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { FlashCardHeader } from './FlashCardHeader';
+import { Card } from './Card';
 export function FlashCards({
-  isShowFlashCards,
-  setIsShowFlashCards,
   wayakuObject,
+  close,
+  fileContent,
+  setFileContent,
 }: {
-  isShowFlashCards: boolean;
-  setIsShowFlashCards: (isShowFlashCards: boolean) => void;
-  wayakuObject: wayakuObject;
+  wayakuObject: wayakuObject | undefined;
+  close: () => void;
+
+  fileContent: wayakuObject;
+  setFileContent: (wayakuObject: wayakuObject) => void;
 }) {
   const [mode, setMode] = useState<'home' | 'cards' | 'result'>('home');
   const [isRandom, setIsRandom] = useState<boolean>(false);
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
-  const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false);
-  useHotkeys(
-    'esc',
-    () => {
-      setIsShowFlashCards(false);
-    },
-    {
-      enabled: !wayakuObject,
-      preventDefault: true,
-    }
-  );
-  useHotkeys('right', next, {
-    enabled: mode === 'cards' && isShowAnswer,
+  const [isMinimize, setIsMinimize] = useState<boolean>(false);
+  useHotkeys('esc', close, {
+    enabled: !wayakuObject,
     preventDefault: true,
   });
-  useHotkeys(
-    'space',
-    () => {
-      setIsShowAnswer(true);
-    },
-    {
-      enabled: mode === 'cards' && !isShowAnswer,
-      preventDefault: true,
-    }
-  );
+
   function startCards() {
     const sectionList = wayakuObject.wayaku.section.map((section) => section['@_sectionID']);
     if (isRandom) {
@@ -63,27 +48,43 @@ export function FlashCards({
       setMode('result');
     } else {
       setQuestionIndex(questionIndex + 1);
-      setIsShowAnswer(false);
     }
+  }
+  function back() {
+    if (questionIndex === 0) {
+      console.error('戻れません');
+    } else {
+      setQuestionIndex(questionIndex - 1);
+    }
+  }
+  const currentSection: sectionType = wayakuObject?.wayaku.section.find(
+    (section) => section['@_sectionID'] === questionList[questionIndex]
+  );
+  function setCurrentSection(section: sectionType) {
+    setFileContent({
+      ...fileContent,
+      wayaku: {
+        ...fileContent.wayaku,
+        section: fileContent.wayaku.section.map((s) => {
+          if (s['@_sectionID'] === section['@_sectionID']) {
+            return section;
+          } else {
+            return s;
+          }
+        }),
+      },
+    });
   }
   return (
     <div
       className={
         style.flashCards +
-        ' fixed bottom-0 right-2 left-2 z-40 bg-white border rounded p-2 select-none ' +
-        (isShowFlashCards ? style.show + ' top-10' : 'top-full')
+        ' fixed right-2 left-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        (isMinimize ? style.minimize : ' top-10')
       }
     >
-      <nav className="flex">
-        <h2 className="flex-1">フラッシュカード</h2>
-        <button
-          onClick={() => setIsShowFlashCards(false)}
-          className=" hover:bg-red-300 border rounded p-2 flex-none"
-        >
-          <AiOutlineClose />
-        </button>
-      </nav>
-      {wayakuObject ? (
+      <FlashCardHeader setIsMinimize={setIsMinimize} isMinimize={isMinimize} close={close} />
+      {!isMinimize && wayakuObject ? (
         <section className="">
           {mode === 'home' ? (
             <FlashCardHome
@@ -97,62 +98,22 @@ export function FlashCards({
           ) : (
             <>
               {mode === 'cards' ? (
-                <>
-                  <div>
-                    {questionIndex + 1} / {questionList.length}
-                  </div>
-                  <div>
-                    <div>
-                      <p className="block select-auto p-2 m-2 border rounded">
-                        {
-                          wayakuObject.wayaku.section.find(
-                            (section) => section['@_sectionID'] === questionList[questionIndex]
-                          ).p[1]['#text']
-                        }
-                      </p>
-                    </div>
-                    <div>
-                      {isShowAnswer ? (
-                        <>
-                          <p className="block select-auto p-2 m-2 border rounded">
-                            {
-                              wayakuObject.wayaku.section.find(
-                                (section) => section['@_sectionID'] === questionList[questionIndex]
-                              ).p[0]['#text']
-                            }
-                          </p>
-                          <button
-                            onClick={next}
-                            className="block select-auto p-2 m-2 border rounded"
-                          >
-                            次へ
-                          </button>
-                        </>
-                      ) : (
-                        <button
-                          onClick={() => setIsShowAnswer(true)}
-                          className="block select-auto p-2 m-2 border rounded w-full"
-                        >
-                          答えを見る
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </>
+                <Card
+                  setCurrentSection={setCurrentSection}
+                  questionIndex={questionIndex}
+                  questionList={questionList}
+                  currentSection={currentSection}
+                  back={back}
+                  next={next}
+                />
               ) : (
-                <>
-                  <button onClick={() => setIsShowFlashCards(false)}>
-                    フラッシュカードを閉じる
-                  </button>
-                </>
+                <button onClick={close}>フラッシュカードを閉じる</button>
               )}
             </>
           )}
         </section>
       ) : (
-        <>
-          <p>ファイルを開くか作成してください。</p>
-        </>
+        <>{!wayakuObject && <p>ファイルを開くか作成してください。</p>}</>
       )}
     </div>
   );
