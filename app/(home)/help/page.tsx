@@ -3,7 +3,11 @@ import { getHelpFileData } from './lib/getHelpFileData';
 import { getHelpPageTitles } from './lib/getHelpPageTitles';
 import Link from 'next/link';
 import { helpFileDataType } from '../../../@types/helpFileDataType';
-
+export const metadata={
+    alternates: {
+    canonical: '/help',
+  },
+}
 export default async function Help() {
   const helpPageTitles: string[] = await getHelpPageTitles();
   console.debug(helpPageTitles);
