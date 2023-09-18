@@ -14,7 +14,6 @@ export function FlashCards({
 }: {
   wayakuObject: wayakuObject | undefined;
   close: () => void;
-
   fileContent: wayakuObject;
   setFileContent: (wayakuObject: wayakuObject) => void;
 }) {
@@ -25,10 +24,9 @@ export function FlashCards({
   const [questionIndex, setQuestionIndex] = useState<number>();
   const [isMinimize, setIsMinimize] = useState<boolean>(false);
   useHotkeys('esc', close, {
-    enabled: !wayakuObject,
+    enabled: !wayakuObject || mode === 'result',
     preventDefault: true,
   });
-
   function startCards() {
     const sectionList = wayakuObject.wayaku.section.map((section) => section['@_sectionID']);
     if (isRandom) {
