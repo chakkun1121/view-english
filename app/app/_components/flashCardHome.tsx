@@ -18,7 +18,12 @@ export function FlashCardHome({
 }) {
   return (
     <>
-      <button onClick={startCards} className="bg-gray-200 hover:bg-gray-300 rounded border p-2">
+      <button
+        onClick={startCards}
+        className="bg-gray-200 hover:bg-gray-300 rounded border p-2 disabled:bg-gray-400"
+        disabled={isRandom && !questionCount}
+        title={isRandom && !questionCount ? '出題数を入力してください' : ''}
+      >
         フラッシュカードをスタート
       </button>
       <div className="my-4">

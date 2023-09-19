@@ -141,13 +141,11 @@ export function Card({
           </div>
           {isShowAnswer && (
             <nav className="flex">
-              <button
-                onClick={back}
-                className="block flex-none p-2 m-2 border rounded px-4"
-                disabled={questionIndex === 0}
-              >
-                戻る
-              </button>
+              {questionIndex ? (
+                <button onClick={back} className="block flex-none p-2 m-2 border rounded px-4">
+                  戻る
+                </button>
+              ):(<></>)}
               <button onClick={next} className="block select-auto p-2 m-2 border rounded flex-1">
                 次へ
               </button>

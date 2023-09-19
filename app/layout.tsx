@@ -4,9 +4,9 @@ import './globals.css';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="h-full">
       <StrictMode>
-        <body className="flex min-h-screen flex-col">{children}</body>
+        <body className="flex h-full flex-col">{children}</body>
       </StrictMode>
     </html>
   );

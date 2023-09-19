@@ -98,7 +98,7 @@ export default function app() {
     setIsShowFlashCards(false);
   }
   return (
-    <>
+    <div className="flex md:flex-col flex-col-reverse h-full flex-1">
       <AppHeader
         openFile={openFile}
         IsEditing={isEditing}
@@ -106,7 +106,7 @@ export default function app() {
         save={save}
         setIsShowFlashCards={setIsShowFlashCards}
       />
-      <main className="">
+      <main className="flex-1 overflow-scroll">
         {fileContent || isEditing ? (
           <FileContent
             isEditing={isEditing}
@@ -126,6 +126,6 @@ export default function app() {
         />
       )}
       <Fav />
-    </>
+    </div>
   );
 }
