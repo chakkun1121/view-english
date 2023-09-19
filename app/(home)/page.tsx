@@ -29,12 +29,7 @@ export default function Home() {
         <h2>アプリへのリンク</h2>
         <ul>
           <li>
-            <Link href="./app">通常版(対応ブラウザ:PC版GoogleChrome最新版)</Link>
-          </li>
-          <li>
-            <a href="./lightVersion/index.html">
-              軽量版(通常版が動かない端末ではこちらをご利用ください。)
-            </a>
+            <Link href="./app">通常版</Link>
           </li>
         </ul>
       </section>
