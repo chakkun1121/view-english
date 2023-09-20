@@ -1,5 +1,4 @@
 'use client';
-import style from './flashCards.module.css';
 import { useEffect, useState } from 'react';
 import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
@@ -76,9 +75,8 @@ export function FlashCards({
   return (
     <div
       className={
-        style.flashCards +
-        ' fixed right-2 left-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
-        (isMinimize ? style.minimize : ' top-10')
+        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        (!isMinimize && ' top-0 md:top-10')
       }
     >
       <FlashCardHeader setIsMinimize={setIsMinimize} isMinimize={isMinimize} close={close} />
