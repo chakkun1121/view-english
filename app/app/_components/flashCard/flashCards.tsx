@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { FlashCardHeader } from './FlashCardHeader';
+import { FlashCardHeader } from './flashCardHeader';
 import { Card } from './Card';
 export function FlashCards({
   wayakuObject,
