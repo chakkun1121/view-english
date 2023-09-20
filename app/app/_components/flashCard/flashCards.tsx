@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
+import { sectionType, wayakuObject } from '../../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { FlashCardHeader } from './FlashCardHeader';
+import { FlashCardHeader } from './flashCardHeader';
 import { Card } from './Card';
 export function FlashCards({
   wayakuObject,
@@ -22,6 +22,8 @@ export function FlashCards({
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
   const [isMinimize, setIsMinimize] = useState<boolean>(false);
+  const [isAnswerWithKeyboard, setIsAnswerWithKeyboard] = useState<boolean>(false);
+
   useHotkeys('esc', close, {
     enabled: !wayakuObject || mode === 'result',
     preventDefault: true,
@@ -90,6 +92,8 @@ export function FlashCards({
               questionCount={questionCount}
               wayakuObject={wayakuObject}
               setQuestionCount={setQuestionCount}
+              isAnswerWithKeyboard={isAnswerWithKeyboard}
+              setIsAnswerWithKeyboard={setIsAnswerWithKeyboard}
             />
           ) : (
             <>
@@ -99,6 +103,7 @@ export function FlashCards({
                   questionIndex={questionIndex}
                   questionList={questionList}
                   currentSection={currentSection}
+                  isAnswerWithKeyboard={isAnswerWithKeyboard}
                   back={back}
                   next={next}
                 />

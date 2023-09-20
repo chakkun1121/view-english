@@ -8,10 +8,10 @@ import { openWayakuFile } from './lib/openWayakuFile';
 import { saveWayakuFile } from './lib/saveWayakuFile';
 import { FileContent } from './_components/fileContent';
 import { useLeavePageConfirmation } from './lib/useLeavePageConfirmation';
-import { FlashCards } from './_components/flashCards';
 import { stringToObject } from './lib/stringToObject';
 import { fixWayakuFile } from './lib/fixWayakuFile';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { FlashCards } from './_components/flashCard/flashCards';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [isEditing, setIsEditing] = useState<boolean>(false);

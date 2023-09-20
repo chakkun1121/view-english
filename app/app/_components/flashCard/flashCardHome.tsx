@@ -1,5 +1,5 @@
 'use client';
-import { wayakuObject } from '../../../@types/wayakuObjectType';
+import { wayakuObject } from '../../../../@types/wayakuObjectType';
 
 export function FlashCardHome({
   startCards,
@@ -8,6 +8,8 @@ export function FlashCardHome({
   questionCount,
   wayakuObject,
   setQuestionCount,
+  isAnswerWithKeyboard,
+  setIsAnswerWithKeyboard,
 }: {
   startCards: () => void;
   isRandom: boolean;
@@ -15,6 +17,8 @@ export function FlashCardHome({
   questionCount: number;
   wayakuObject: wayakuObject;
   setQuestionCount: (questionCount: number) => void;
+  isAnswerWithKeyboard: boolean;
+  setIsAnswerWithKeyboard: (isAnswerWithKeyboard: boolean) => void;
 }) {
   return (
     <>
@@ -22,7 +26,7 @@ export function FlashCardHome({
         onClick={startCards}
         className="bg-gray-200 hover:bg-gray-300 rounded border p-2 disabled:bg-gray-400"
         disabled={isRandom && !questionCount}
-        title={isRandom && !questionCount ? '出題数を入力してください' : ''}
+        title={isRandom && !questionCount && '出題数を入力してください'}
       >
         フラッシュカードをスタート
       </button>
@@ -38,6 +42,15 @@ export function FlashCardHome({
           ランダムに出題する
         </label>
         <label className="block m-2">
+          <input
+            type="checkbox"
+            className="p-2 w-4 h-4"
+            defaultChecked={isAnswerWithKeyboard}
+            onChange={(e) => setIsAnswerWithKeyboard(e.target.checked)}
+          />
+          キーボードで解答する
+        </label>
+        <label className="block m-2">
           出題数:
           <input
             className="p-2 disabled:bg-gray-300 rounded border w-20"
@@ -51,6 +64,7 @@ export function FlashCardHome({
           問/全{wayakuObject.wayaku.section.length}問{' '}
           {!isRandom &&
             '※この機能はランダム出題時のみしか利用できません。ランダム出題機能をオフにした場合はすべての問題が順に出題されます。'}
+          i
         </label>
       </div>
     </>

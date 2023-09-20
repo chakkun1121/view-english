@@ -1,16 +1,19 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { sectionType } from '../../../@types/wayakuObjectType';
+import { sectionType } from '../../../../@types/wayakuObjectType';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { SpeechButton } from './SpeechButton';
+import { SpeechButton } from '../SpeechButton';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { BsCircle } from 'react-icons/bs';
+import { HiXMark } from 'react-icons/hi2';
 
 export function Card({
   questionIndex,
   questionList,
   currentSection,
   setCurrentSection,
+  isAnswerWithKeyboard,
   back,
   next,
 }: {
@@ -18,11 +21,16 @@ export function Card({
   questionList: string[];
   currentSection: sectionType;
   setCurrentSection: (section: sectionType) => void;
+  isAnswerWithKeyboard: boolean;
   back: () => void;
   next: () => void;
 }) {
   const [isShowAnswer, setIsShowAnswer] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [currentAnswer, setCurrentAnswer] = useState<string>('');
+  useEffect(() => {
+    setCurrentAnswer('');
+  }, [questionIndex]);
   useEffect(() => {
     setIsShowAnswer(false);
     setIsEditing(false);
@@ -45,7 +53,6 @@ export function Card({
       enableOnFormTags: true,
     }
   );
-
   useHotkeys(
     'space,enter',
     () => {
@@ -100,6 +107,34 @@ export function Card({
             <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" aria-label="読み上げ" />
           </div>
         </div>
+        {isAnswerWithKeyboard && (
+          <div className="flex items-center">
+            <input
+              type="text"
+              value={currentAnswer}
+              onChange={(e) => setCurrentAnswer(e.target.value)}
+              spellCheck={false}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
+              placeholder="解答欄"
+              disabled={isShowAnswer}
+            />
+            {isShowAnswer ? (
+              <div className="flex-none p-2 m-2">
+                {currentAnswer === currentSection.p[0]['#text'] ? <BsCircle /> : <HiXMark />}
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsShowAnswer(true)}
+                className="block select-auto p-2 m-2 border rounded"
+              >
+                解答する
+              </button>
+            )}
+          </div>
+        )}
         <div>
           <div className="flex items-center">
             {isShowAnswer ? (
