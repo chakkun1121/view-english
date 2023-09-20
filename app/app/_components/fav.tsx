@@ -4,7 +4,7 @@ import { BsQuestion } from 'react-icons/bs';
 
 export function Fav() {
   return (
-    <div className="fixed bottom-10 right-10 print:hidden select-none w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-200 z-50 hidden md:block">
+    <div className="fixed bottom-10 right-10 print:hidden select-none w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-200 z-50">
       <Link
         href="./help"
         target="_blank"
