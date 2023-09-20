@@ -1,8 +1,8 @@
 'use client';
 import { AiOutlineCheck, AiOutlineDownload, AiOutlineEdit, AiOutlineUpload } from 'react-icons/ai';
-import { PiCardsThin } from 'react-icons/pi';
-import { FiSettings } from 'react-icons/fi';
+import { PiCards } from 'react-icons/pi';
 import { BiQuestionMark } from 'react-icons/bi';
+import { IoSettingsOutline } from 'react-icons/io5';
 
 export function AppHeader({
   openFile,
@@ -39,9 +39,9 @@ export function AppHeader({
             setIsShowFlashCards(true);
           }}
           text="フラッシュカード"
-          icon={<PiCardsThin />}
+          icon={<PiCards />}
         />
-        <NabButton title="設定" text="設定" icon={<FiSettings />} />
+        <NabButton title="設定" text="設定" icon={<IoSettingsOutline />} />
         <NabButton
           title="ヘルプ"
           onClick={() => window.open('./help', '_blank')}
