@@ -65,7 +65,7 @@ export function Card({
         <div className="flex items-center">
           {isEditing ? (
             <input
-              className="block select-auto p-2 m-2 border rounded flex-1 text-L"
+              className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
               defaultValue={currentSection.p[1]['#text']}
               onChange={(e) =>
                 setCurrentSection({
@@ -81,14 +81,22 @@ export function Card({
               }
             />
           ) : (
-            <p className="block select-auto p-2 m-2 border rounded flex-1">
+            <p
+              className="block select-auto p-2 m-2 rounded flex-1"
+              onDoubleClick={() => setIsEditing(true)}
+            >
               {currentSection.p[1]['#text']}
             </p>
           )}
-          <div className="flex-none">
+          <div className="flex-none hidden md:block">
             <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
           </div>
-          <div className="flex-none">
+          {isEditing && (
+            <div className="flex-none md:none">
+              <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
+            </div>
+          )}
+          <div className="flex-none hidden md:block">
             <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" aria-label="読み上げ" />
           </div>
         </div>
@@ -98,7 +106,7 @@ export function Card({
               <>
                 {isEditing ? (
                   <input
-                    className="block select-auto p-2 m-2 border rounded flex-1 text-L"
+                    className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
                     lang="en"
                     defaultValue={currentSection.p[0]['#text']}
                     onChange={(e) =>
@@ -115,7 +123,11 @@ export function Card({
                     }
                   />
                 ) : (
-                  <p className="block select-auto p-2 m-2 border rounded flex-1" lang="en">
+                  <p
+                    className="block select-auto p-2 m-2 flex-1"
+                    lang="en"
+                    onDoubleClick={() => setIsEditing(true)}
+                  >
                     {currentSection.p[0]['#text']}
                   </p>
                 )}
@@ -128,10 +140,15 @@ export function Card({
                 答えを見る
               </button>
             )}
-            <div className="flex-none">
+            <div className="flex-none hidden md:block">
               <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
             </div>
-            <div className="flex-none">
+            {isEditing && (
+              <div className="flex-none md:hidden">
+                <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
+              </div>
+            )}
+            <div className="flex-none hidden md:block">
               <SpeechButton
                 text={currentSection.p[1]['#text']}
                 lang="ja-JP"
@@ -145,7 +162,9 @@ export function Card({
                 <button onClick={back} className="block flex-none p-2 m-2 border rounded px-4">
                   戻る
                 </button>
-              ):(<></>)}
+              ) : (
+                <></>
+              )}
               <button onClick={next} className="block select-auto p-2 m-2 border rounded flex-1">
                 次へ
               </button>
