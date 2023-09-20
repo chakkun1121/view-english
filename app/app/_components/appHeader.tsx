@@ -3,6 +3,7 @@ import { ClassAttributes, ButtonHTMLAttributes } from 'react';
 import { AiOutlineCheck, AiOutlineDownload, AiOutlineEdit, AiOutlineUpload } from 'react-icons/ai';
 import { PiCardsThin } from 'react-icons/pi';
 import { FiSettings } from 'react-icons/fi';
+import { BsQuestion } from 'react-icons/bs';
 
 export function AppHeader({
   openFile,
@@ -45,6 +46,10 @@ export function AppHeader({
         <NabButton>
           <span className="md:block hidden">設定</span>
           <FiSettings className="md:hidden" />
+        </NabButton>
+        <NabButton onClick={() => window.open('./help', '_blank')}>
+          <span className="md:block hidden">ヘルプ</span>
+          <BsQuestion className="md:hidden" />
         </NabButton>
       </nav>
     </header>
