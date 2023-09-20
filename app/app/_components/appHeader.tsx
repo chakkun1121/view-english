@@ -10,12 +10,14 @@ export function AppHeader({
   setIsEditing,
   save,
   setIsShowFlashCards,
+  isSaved,
 }: {
   openFile: () => void;
   IsEditing: boolean;
   setIsEditing: (IsEditing: boolean) => void;
   save: () => Promise<void>;
   setIsShowFlashCards: (isShowFlashCards: boolean) => void;
+  isSaved: boolean;
 }) {
   return (
     <header className="print-hidden w-full z-30 select-none flex-none ">
@@ -32,7 +34,12 @@ export function AppHeader({
           text={IsEditing ? '完了' : '編集'}
           icon={IsEditing ? <AiOutlineCheck /> : <AiOutlineEdit />}
         />
-        <NabButton title="保存" onClick={save} text="保存" icon={<AiOutlineDownload />} />
+        <NabButton
+          title="保存"
+          onClick={save}
+          text={`保存${isSaved ? '済' : ''}`}
+          icon={<AiOutlineDownload />}
+        />
         <NabButton
           title="フラッシュカードをスタート"
           onClick={() => {

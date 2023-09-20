@@ -100,6 +100,7 @@ export default function app() {
   return (
     <div className="flex md:flex-col flex-col-reverse h-full flex-1">
       <AppHeader
+        isSaved={isSaved}
         openFile={openFile}
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
