@@ -1,8 +1,8 @@
 'use client';
-import { ClassAttributes, ButtonHTMLAttributes } from 'react';
 import { AiOutlineCheck, AiOutlineDownload, AiOutlineEdit, AiOutlineUpload } from 'react-icons/ai';
-import { PiCardsThin } from 'react-icons/pi';
-import { FiSettings } from 'react-icons/fi';
+import { PiCards } from 'react-icons/pi';
+import { BiQuestionMark } from 'react-icons/bi';
+import { IoSettingsOutline } from 'react-icons/io5';
 
 export function AppHeader({
   openFile,
@@ -45,22 +45,39 @@ export function AppHeader({
           onClick={() => {
             setIsShowFlashCards(true);
           }}
-        >
-          <span className="md:block hidden">フラッシュカード</span>
-          <PiCardsThin className="md:hidden" />
-        </NabButton>
-        <NabButton>
-          <span className="md:block hidden">設定</span>
-          <FiSettings className="md:hidden" />
-        </NabButton>
+          text="フラッシュカード"
+          icon={<PiCards />}
+        />
+        <NabButton title="設定" text="設定" icon={<IoSettingsOutline />} />
+        <NabButton
+          title="ヘルプ"
+          onClick={() => window.open('./help', '_blank')}
+          text="ヘルプ"
+          icon={<BiQuestionMark />}
+        />
       </nav>
     </header>
   );
 }
-function NabButton(
-  props: JSX.IntrinsicAttributes &
-    ClassAttributes<HTMLButtonElement> &
-    ButtonHTMLAttributes<HTMLButtonElement>
-) {
-  return <button {...props} className="p-4 rounded hover:bg-main-hover" />;
+function NabButton({
+  title,
+  onClick,
+  text,
+  icon,
+}: {
+  title?: string;
+  onClick?: () => void;
+  text?: string;
+  icon?: JSX.Element;
+}) {
+  return (
+    <button
+      title={title}
+      onClick={onClick}
+      className="p-4 rounded hover:bg-main-hover flex items-center"
+    >
+      {icon}
+      <span className="md:block hidden px-2">{text}</span>
+    </button>
+  );
 }
