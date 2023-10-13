@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { sectionType } from '../../../../@types/wayakuObjectType';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { SpeechButton } from '../SpeechButton';
+import { SpeechButton } from './SpeechButton';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { BsCircle } from 'react-icons/bs';
