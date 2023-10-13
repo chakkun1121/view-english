@@ -63,6 +63,21 @@ export function Card({
       preventDefault: true,
     }
   );
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>, place: 'en' | 'ja') {
+    setCurrentSection({
+      ...currentSection,
+      p: [
+        {
+          ...currentSection.p[0],
+          '#text': place === 'en' ? e.target.value : currentSection.p[0]['#text'],
+        },
+        {
+          ...currentSection.p[1],
+          '#text': place === 'ja' ? e.target.value : currentSection.p[1]['#text'],
+        },
+      ],
+    } as sectionType);
+  }
   return (
     <>
       <div>
@@ -74,18 +89,7 @@ export function Card({
             <input
               className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
               defaultValue={currentSection.p[1]['#text']}
-              onChange={(e) =>
-                setCurrentSection({
-                  ...currentSection,
-                  p: [
-                    currentSection.p[0],
-                    {
-                      ...currentSection.p[1],
-                      '#text': e.target.value,
-                    },
-                  ],
-                })
-              }
+              onChange={(e) => handleChange(e, 'ja')}
             />
           ) : (
             <p
@@ -95,14 +99,7 @@ export function Card({
               {currentSection.p[1]['#text']}
             </p>
           )}
-          <div className="flex-none hidden md:block">
-            <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
-          </div>
-          {isEditing && (
-            <div className="flex-none md:none">
-              <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
-            </div>
-          )}
+          <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
           <div className="flex-none hidden md:block">
             <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" aria-label="読み上げ" />
           </div>
@@ -144,18 +141,7 @@ export function Card({
                     className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
                     lang="en"
                     defaultValue={currentSection.p[0]['#text']}
-                    onChange={(e) =>
-                      setCurrentSection({
-                        ...currentSection,
-                        p: [
-                          {
-                            ...currentSection.p[0],
-                            '#text': e.target.value,
-                          },
-                          currentSection.p[1],
-                        ],
-                      })
-                    }
+                    onChange={(e) => handleChange(e, 'en')}
                   />
                 ) : (
                   <p
@@ -175,14 +161,7 @@ export function Card({
                 答えを見る
               </button>
             )}
-            <div className="flex-none hidden md:block">
-              <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
-            </div>
-            {isEditing && (
-              <div className="flex-none md:hidden">
-                <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
-              </div>
-            )}
+            <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
             <div className="flex-none hidden md:block">
               <SpeechButton
                 text={currentSection.p[1]['#text']}
@@ -211,13 +190,29 @@ export function Card({
   );
 }
 function EditButton({ isEditing, setIsEditing }: { isEditing: boolean; setIsEditing: any }) {
+  function Button() {
+    return (
+      <button
+        onClick={() => setIsEditing(!isEditing)}
+        className="block select-auto p-2 m-2 border rounded"
+        aria-label="編集"
+      >
+        {isEditing ? <AiOutlineCheck /> : <FiEdit2 />}
+      </button>
+    );
+  }
   return (
-    <button
-      onClick={() => setIsEditing(!isEditing)}
-      className="block select-auto p-2 m-2 border rounded"
-      aria-label="編集"
-    >
-      {isEditing ? <AiOutlineCheck /> : <FiEdit2 />}
-    </button>
+    <>
+      <div className="flex-none hidden md:block">
+        {/* パソコン用 */}
+        <Button />
+      </div>
+      {isEditing && (
+        // スマホ用
+        <div className="flex-none md:hidden">
+          <Button />
+        </div>
+      )}
+    </>
   );
 }
