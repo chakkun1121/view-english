@@ -48,7 +48,7 @@ export function AppHeader({
           text="フラッシュカード"
           icon={<PiCards />}
         />
-        <NabButton title="設定" text="設定" icon={<IoSettingsOutline />} />
+        {/* <NabButton title="設定" text="設定" icon={<IoSettingsOutline />} /> */}
         <NabButton
           title="ヘルプ"
           onClick={() => window.open('./help', '_blank')}
