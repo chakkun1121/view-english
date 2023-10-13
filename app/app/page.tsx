@@ -41,11 +41,6 @@ export default function app() {
       console.error(e);
     }
   }
-  interface WindowWithLaunchQueue extends Window {
-    launchQueue?: {
-      setConsumer: (callback: ({ files }: { files: FileSystemFileHandle[] }) => void) => void;
-    };
-  }
   useEffect(() => {
     const windowWithLaunchQueue = window as WindowWithLaunchQueue;
     windowWithLaunchQueue?.launchQueue?.setConsumer(
@@ -67,36 +62,21 @@ export default function app() {
     enableOnFormTags: true,
     preventDefault: true,
   });
-  useHotkeys(
-    'ctrl+e',
-    () => {
-      setIsEditing(!isEditing);
-    },
-    {
-      enableOnFormTags: true,
-      preventDefault: true,
-    }
-  );
+  useHotkeys('ctrl+e', () => setIsEditing(!isEditing), {
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
   useHotkeys('ctrl+o', openFile, {
     enableOnFormTags: true,
     preventDefault: true,
   });
-  useHotkeys(
-    'alt+f',
-    () => {
-      setIsShowFlashCards(true);
-    },
-    {
-      preventDefault: true,
-    }
-  );
+  useHotkeys('alt+f', () => setIsShowFlashCards(true), {
+    preventDefault: true,
+  });
   useHotkeys('f1,ctrl+/', () => open('./help', '_blank'), {
     enableOnFormTags: true,
     preventDefault: true,
   });
-  function closeFlashCards() {
-    setIsShowFlashCards(false);
-  }
   return (
     <div className="flex md:flex-col flex-col-reverse h-full flex-1">
       <AppHeader
@@ -121,7 +101,7 @@ export default function app() {
       {isShowFlashCards && (
         <FlashCards
           wayakuObject={fileContent}
-          close={closeFlashCards}
+          close={() => setIsShowFlashCards(false)}
           fileContent={fileContent}
           setFileContent={setFileContent}
         />
