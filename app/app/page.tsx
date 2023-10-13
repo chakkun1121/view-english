@@ -14,17 +14,17 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { FlashCards } from './_components/flashCard/flashCards';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
+  const [lastSavedFileContent, setLastSavedFileContent] = useState<wayakuObject | undefined>();
+  const shouldSave = fileContent !== lastSavedFileContent;
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
-  const [isSaved, setIsSaved] = useState<boolean>(true);
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
-  useLeavePageConfirmation(!isSaved);
+  useLeavePageConfirmation(shouldSave);
   useEffect(() => {
     console.debug(fileContent);
     if (fileHandle) {
       saveWayakuFile(fileContent, fileHandle);
-    } else {
-      setIsSaved(false);
+      setLastSavedFileContent(fileContent);
     }
   }, [fileContent]);
   async function openFile() {
@@ -36,7 +36,7 @@ export default function app() {
     try {
       const newFileHandle = await saveWayakuFile(fileContent, fileHandle);
       setFileHandle(newFileHandle);
-      setIsSaved(true);
+      setLastSavedFileContent(fileContent);
     } catch (e) {
       console.error(e);
     }
@@ -100,7 +100,7 @@ export default function app() {
   return (
     <div className="flex md:flex-col flex-col-reverse h-full flex-1">
       <AppHeader
-        isSaved={isSaved}
+        isSaved={!shouldSave}
         openFile={openFile}
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
