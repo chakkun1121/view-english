@@ -85,10 +85,18 @@ export default function app() {
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
         save={save}
+        isShowFlashCards={isShowFlashCards}
         setIsShowFlashCards={setIsShowFlashCards}
       />
       <main className="flex-1 overflow-scroll">
-        {fileContent || isEditing ? (
+        {isShowFlashCards ? (
+          <FlashCards
+            wayakuObject={fileContent}
+            close={() => setIsShowFlashCards(false)}
+            fileContent={fileContent}
+            setFileContent={setFileContent}
+          />
+        ) : fileContent || isEditing ? (
           <FileContent
             isEditing={isEditing}
             fileContent={fileContent}
@@ -98,14 +106,6 @@ export default function app() {
           <HomeMenu openFile={openFile} setIsEditing={setIsEditing} />
         )}
       </main>
-      {isShowFlashCards && (
-        <FlashCards
-          wayakuObject={fileContent}
-          close={() => setIsShowFlashCards(false)}
-          fileContent={fileContent}
-          setFileContent={setFileContent}
-        />
-      )}
       <Fav />
     </div>
   );

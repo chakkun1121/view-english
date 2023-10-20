@@ -64,7 +64,6 @@ export function FlashCardHome({
           問/全{wayakuObject.wayaku.section.length}問{' '}
           {!isRandom &&
             '※この機能はランダム出題時のみしか利用できません。ランダム出題機能をオフにした場合はすべての問題が順に出題されます。'}
-          i
         </label>
       </div>
     </>

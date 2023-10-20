@@ -8,6 +8,7 @@ export function AppHeader({
   IsEditing,
   setIsEditing,
   save,
+  isShowFlashCards,
   setIsShowFlashCards,
   isSaved,
 }: {
@@ -15,6 +16,7 @@ export function AppHeader({
   IsEditing: boolean;
   setIsEditing: (IsEditing: boolean) => void;
   save: () => Promise<void>;
+  isShowFlashCards: boolean;
   setIsShowFlashCards: (isShowFlashCards: boolean) => void;
   isSaved: boolean;
 }) {
@@ -41,11 +43,11 @@ export function AppHeader({
             icon: <AiOutlineDownload />,
           },
           {
-            title: 'フラッシュカードをスタート',
+            title: `フラッシュカードのを${isShowFlashCards ? '閉じる' : '開く'}`,
             onClick: () => {
-              setIsShowFlashCards(true);
+              setIsShowFlashCards(!isShowFlashCards);
             },
-            text: 'フラッシュカード',
+            text: isShowFlashCards ? '閉じる' : '開く',
             icon: <PiCards />,
           },
           {
