@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import React, { StrictMode } from 'react';
 import './globals.css';
 
@@ -23,7 +23,6 @@ export const metadata: Metadata = {
       '和訳表示サイト | web上で和訳ファイル作成からフラッシュカード機能まで！英語学習に最適 | chakkun1121',
   },
   description,
-  themeColor,
   keywords: [
     '英語学習',
     '和訳',
@@ -62,4 +61,7 @@ export const metadata: Metadata = {
     },
   ],
   applicationName: '和訳表示サイト',
+};
+export const viewport: Viewport = {
+  themeColor,
 };
