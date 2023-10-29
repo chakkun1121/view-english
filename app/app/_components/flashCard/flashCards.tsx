@@ -21,6 +21,7 @@ export function FlashCards({
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
+  const [isMinimize, setIsMinimize] = useState<boolean>(false);
   const [isAnswerWithKeyboard, setIsAnswerWithKeyboard] = useState<boolean>(false);
 
   useHotkeys('esc', close, {
@@ -74,9 +75,14 @@ export function FlashCards({
     });
   }
   return (
-    <div className={'p-2 select-none'}>
-      <FlashCardHeader close={close} />
-      {wayakuObject ? (
+    <div
+      className={
+        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        (!isMinimize && ' top-0 md:top-10')
+      }
+    >
+      <FlashCardHeader setIsMinimize={setIsMinimize} isMinimize={isMinimize} close={close} />
+      {!isMinimize && wayakuObject ? (
         <section className="">
           {mode === 'home' ? (
             <FlashCardHome
