@@ -2,19 +2,23 @@
 import React from 'react';
 import { auth } from '../../../firebase/client';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { FiLogIn } from 'react-icons/fi';
 
 export function HeaderUserMenu() {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
   console.log(user?.user);
   return (
-    <div className="flex flex-none items-center gap-2 p-2">
+    <div className="flex flex-none items-center gap-2 p-4">
       {user ? (
         <>
           <img src={user.user.photoURL} className="flex-none w-10 h-10 rounded-full" />
-          <p className="flex-1">{user.user.displayName}</p>
+          <p className="flex-1 hidden md:inline">{user.user.displayName}</p>
         </>
       ) : (
-        <button onClick={() => signInWithGoogle()}>ログイン</button>
+        <button onClick={() => signInWithGoogle()} className="flex items-center">
+          <FiLogIn className="flex-none" />
+          <p className="hidden md:inline flex-1">ログイン</p>
+        </button>
       )}
     </div>
   );
