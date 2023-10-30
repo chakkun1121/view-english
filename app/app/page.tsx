@@ -80,7 +80,7 @@ export default function app() {
     enableOnFormTags: true,
     preventDefault: true,
   });
-  useHotkeys('ctrl+.', () => setIsShowSettings(true), {
+  useHotkeys('ctrl+,', () => setIsShowSettings(true), {
     enableOnFormTags: true,
     preventDefault: true,
   });
