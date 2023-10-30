@@ -15,7 +15,15 @@ export function HeaderUserMenu() {
           <p className="flex-1 hidden md:inline">{user.user.displayName}</p>
         </>
       ) : (
-        <button onClick={() => signInWithGoogle()} className="flex items-center">
+        <button
+          onClick={() =>
+            signInWithGoogle([
+              'https://www.googleapis.com/auth/drive.appdata',
+              'https://www.googleapis.com/auth/drive.file	',
+            ])
+          }
+          className="flex items-center"
+        >
           <FiLogIn className="flex-none" />
           <p className="hidden md:inline flex-1">ログイン</p>
         </button>
