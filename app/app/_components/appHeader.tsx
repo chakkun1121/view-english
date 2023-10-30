@@ -3,6 +3,7 @@ import { AiOutlineCheck, AiOutlineDownload, AiOutlineEdit, AiOutlineUpload } fro
 import { PiCards } from 'react-icons/pi';
 import { BiQuestionMark } from 'react-icons/bi';
 import { HeaderUserMenu } from '../../(home)/_components/headerUserMenu';
+import { CiSettings } from 'react-icons/ci';
 
 export function AppHeader({
   openFile,
@@ -11,6 +12,7 @@ export function AppHeader({
   save,
   setIsShowFlashCards,
   isSaved,
+  setIsShowSettings,
 }: {
   openFile: () => void;
   IsEditing: boolean;
@@ -18,6 +20,7 @@ export function AppHeader({
   save: () => Promise<void>;
   setIsShowFlashCards: (isShowFlashCards: boolean) => void;
   isSaved: boolean;
+  setIsShowSettings: (isShowSettings: boolean) => void;
 }) {
   return (
     <header className="print-hidden w-full z-30 select-none flex-none ">
@@ -49,6 +52,12 @@ export function AppHeader({
               },
               text: 'フラッシュカード',
               icon: <PiCards />,
+            },
+            {
+              title: '設定',
+              onclick: () => setIsShowSettings(true),
+              text: '設定',
+              icon: <CiSettings />,
             },
             {
               title: 'ヘルプ',
