@@ -13,19 +13,6 @@ const nextConfig = withPWA({
   publicRuntimeConfig: {
     basePath: isProd ? SUB_DIRECTORY : '',
   },
-  runtimeCaching: [
-    // すべてのファイルをキャッシュし、オフライン対応させる
-    {
-      urlPattern: /^https?.*/,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'offlineCache',
-        expiration: {
-          maxEntries: 200,
-        },
-      },
-    },
-  ],
 });
 
 module.exports = nextConfig;
