@@ -1,5 +1,5 @@
 'use client';
-import { wayakuObject } from '../../../@types/wayakuObjectType';
+import { sectionType, wayakuObject } from '../../../@types/wayakuObjectType';
 import { FileHeader } from './FileHeader';
 import { BsPlusLg } from 'react-icons/bs';
 import { createSection } from '../lib/createSection';
@@ -31,6 +31,44 @@ export function FileContent({
       });
     }
   }, [isEditing]);
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    place: 'en' | 'ja',
+    sectionID: string
+  ) {
+    setFileContent({
+      ...fileContent,
+      wayaku: {
+        ...fileContent.wayaku,
+        section: fileContent.wayaku.section.map((section) => {
+          if (section['@_sectionID'] === sectionID) {
+            return {
+              ...section,
+              p: section.p.map((p) => {
+                if (p['@_class'] === place) {
+                  return {
+                    ...p,
+                    '#text': e.target.value,
+                  };
+                }
+                return p;
+              }),
+            } as sectionType;
+          }
+          return section;
+        }),
+      },
+    });
+  }
+  function addSection() {
+    setFileContent({
+      ...fileContent,
+      wayaku: {
+        ...fileContent.wayaku,
+        section: [...fileContent.wayaku.section, createSection()],
+      },
+    });
+  }
   return (
     <div className="p-4">
       <FileHeader isEditing={isEditing} fileContent={fileContent} setFileContent={setFileContent} />
@@ -40,31 +78,10 @@ export function FileContent({
           <div className="flex-1">
             {isEditing ? (
               <input
+                placeholder="英文を入力"
                 className="w-full border"
                 defaultValue={section.p[0]['#text']}
-                onChange={(e) => {
-                  setFileContent({
-                    ...fileContent,
-                    wayaku: {
-                      ...fileContent.wayaku,
-                      section: fileContent.wayaku.section.map((s) => {
-                        if (s['@_sectionID'] === section['@_sectionID']) {
-                          return {
-                            ...s,
-                            p: [
-                              {
-                                ...s.p[0],
-                                '#text': e.target.value,
-                              },
-                              s.p[1],
-                            ],
-                          };
-                        }
-                        return s;
-                      }),
-                    },
-                  });
-                }}
+                onChange={(e) => handleChange(e, 'en', section['@_sectionID'])}
               />
             ) : (
               <p lang="en" className="">
@@ -73,31 +90,10 @@ export function FileContent({
             )}
             {isEditing ? (
               <input
+                placeholder="日本語訳を入力"
                 className="w-full border"
                 defaultValue={section.p[1]['#text']}
-                onChange={(e) => {
-                  setFileContent({
-                    ...fileContent,
-                    wayaku: {
-                      ...fileContent.wayaku,
-                      section: fileContent.wayaku.section.map((s) => {
-                        if (s['@_sectionID'] === section['@_sectionID']) {
-                          return {
-                            ...s,
-                            p: [
-                              s.p[0],
-                              {
-                                ...s.p[1],
-                                '#text': e.target.value,
-                              },
-                            ],
-                          };
-                        }
-                        return s;
-                      }),
-                    },
-                  });
-                }}
+                onChange={(e) => handleChange(e, 'ja', section['@_sectionID'])}
               />
             ) : (
               <p lang="ja" className="">
@@ -115,18 +111,7 @@ export function FileContent({
         </section>
       ))}
       {isEditing && (
-        <button
-          aria-label="追加"
-          onClick={() => {
-            setFileContent({
-              ...fileContent,
-              wayaku: {
-                ...fileContent.wayaku,
-                section: [...fileContent.wayaku.section, createSection()],
-              },
-            });
-          }}
-        >
+        <button aria-label="追加" onClick={addSection}>
           <BsPlusLg />
         </button>
       )}

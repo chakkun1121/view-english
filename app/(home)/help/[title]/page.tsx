@@ -1,19 +1,15 @@
-import path from "path";
-import { getHelpPageTitles } from "../lib/getHelpPageTitles";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { getHelpFileData } from "../lib/getHelpFileData";
-import { Metadata } from "next";
-import Link from "next/link";
-export default async function IndividualHelpPage({
-  params,
-}: {
-  params: { title: string };
-}) {
+import path from 'path';
+import { getHelpPageTitles } from '../lib/getHelpPageTitles';
+import { getHelpFileData } from '../lib/getHelpFileData';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+export default async function IndividualHelpPage({ params }: { params: { title: string } }) {
   const { title } = params;
-  const filePath = path.join(process.cwd(), "public", "help", `${title}.md`);
+  const filePath = path.join(process.cwd(), 'public', 'help', `${title}.md`);
   const data = await getHelpFileData(filePath);
   // mdのheader部分を除去したファイルを準備する
-  const renderFile: string = data.file.replace(/^---[\s\S]*?---/, "");
+  const renderFile: string = data.file.replace(/^---[\s\S]*?---/, '');
   return (
     <>
       <Link href="./">ヘルプ記事一覧へ戻る</Link>
@@ -30,7 +26,7 @@ export async function generateMetadata({
   params: { title: string };
 }): Promise<Metadata> {
   const { title } = params;
-  const filePath = path.join(process.cwd(), "public", "help", `${title}.md`);
+  const filePath = path.join(process.cwd(), 'public', 'help', `${title}.md`);
   const data = await getHelpFileData(filePath);
   return {
     title: data.title,

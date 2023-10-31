@@ -53,7 +53,7 @@ export function FlashCardHome({
         <label className="block m-2">
           出題数:
           <input
-            className="p-2 disabled:bg-gray-300 rounded border w-20"
+            className="p-2 disabled:bg-gray-300   dark:disabled:border-none dark:bg-gray-800 rounded border w-20"
             disabled={!isRandom}
             type="number"
             value={questionCount}

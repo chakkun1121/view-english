@@ -4,10 +4,11 @@ import React from 'react';
 export default function Home() {
   return (
     <>
-      <section className="grid justify-center">
+      <section className="grid justify-items-center ">
         <Link href="./view-english.pdf" target="_blank">
           <img src="./img/view-english.webp" alt="和訳表示サイト" />
         </Link>
+        <TryButton />
       </section>
       <section className="p-2">
         <h2>和訳表示サイトとは</h2>
@@ -18,21 +19,26 @@ export default function Home() {
         <ul>
           <li>英語の教科書や参考書の例文を覚えなければいけない人</li>
           <li>
-            教科書や参考書の本文を日本語訳と1対1対応させた状態で音読やリスニングの訓練をしたい人{' '}
+            教科書や参考書の本文を日本語訳と1対1対応させた状態で音読やリスニングの訓練をしたい人
           </li>
           <li>
             web上で単語帳(フラッシュカード)を使って勉強したいけれども著作権などの問題からローカル上に保存したい人
           </li>
         </ul>
       </section>
-      <section className="p-2">
-        <h2>アプリへのリンク</h2>
-        <ul>
-          <li>
-            <Link href="./app">通常版</Link>
-          </li>
-        </ul>
+      <section className="p-2 grid justify-items-center">
+        <TryButton />
       </section>
     </>
+  );
+}
+function TryButton({ text = '早速使ってみる' }) {
+  return (
+    <Link
+      href="./app"
+      className="block p-4 m-2 bg-main hover:bg-main-hover text-black visited:text-black hover:text-black rounded-full text-heading-S"
+    >
+      {text}
+    </Link>
   );
 }

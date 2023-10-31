@@ -77,7 +77,7 @@ export function FlashCards({
   return (
     <div
       className={
-        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white dark:bg-gray-900 border rounded p-2 select-none' +
         (!isMinimize && ' top-0 md:top-10')
       }
     >
@@ -114,7 +114,9 @@ export function FlashCards({
           )}
         </section>
       ) : (
-        <>{!wayakuObject && <p>ファイルを開くか作成してください。</p>}</>
+        <section>
+          <p>ファイルを開くか作成してください。</p>
+        </section>
       )}
     </div>
   );
