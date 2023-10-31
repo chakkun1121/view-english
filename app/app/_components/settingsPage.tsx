@@ -17,7 +17,7 @@ export default function SettingsPage({ close }: { close: () => void }) {
       </div>
       <div className="flex flex-col gap-4 p-4">
         {settingsMenu.map((setting) => (
-          <label className="p-2 rounded bg-gray-100 flex items-center">
+          <label className="p-2 rounded dark:bg-gray-800 bg-gray-100 flex items-center">
             <input
               type="checkbox"
               checked={settings[setting.key]}

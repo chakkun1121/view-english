@@ -125,7 +125,7 @@ export function Card({
             ) : (
               <button
                 onClick={() => setIsShowAnswer(true)}
-                className="block select-auto p-2 m-2 border rounded"
+                className="block select-auto p-2 m-2 border rounded dark:text-white"
               >
                 解答する
               </button>
@@ -138,7 +138,7 @@ export function Card({
               <>
                 {isEditing ? (
                   <input
-                    className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
+                    className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300 dark:bg-gray-800"
                     lang="en"
                     defaultValue={currentSection.p[0]['#text']}
                     onChange={(e) => handleChange(e, 'en')}

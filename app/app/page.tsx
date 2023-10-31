@@ -13,6 +13,8 @@ import { fixWayakuFile } from './lib/fixWayakuFile';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { FlashCards } from './_components/flashCard/flashCards';
 import SettingsPage from './_components/settingsPage';
+import { useRecoilValue } from 'recoil';
+import { settingsAtom } from './lib/settings';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [lastSavedFileContent, setLastSavedFileContent] = useState<wayakuObject | undefined>();
@@ -21,8 +23,16 @@ export default function app() {
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   const [isShowSettings, setIsShowSettings] = useState<boolean>(false);
+  const settings = useRecoilValue(settingsAtom);
   console.log(isShowSettings);
   useLeavePageConfirmation(shouldSave);
+  useEffect(() => {
+    if (settings.isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [settings.isDarkMode]);
   useEffect(() => {
     console.debug(fileContent);
     if (fileHandle) {
@@ -85,7 +95,7 @@ export default function app() {
     preventDefault: true,
   });
   return (
-    <div className="flex md:flex-col flex-col-reverse h-full flex-1">
+    <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white dark:bg-black">
       <AppHeader
         isSaved={!shouldSave}
         openFile={openFile}
@@ -115,7 +125,7 @@ export default function app() {
         />
       )}
       {isShowSettings && (
-        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-white border z-50 rounded">
+        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-white dark:bg-black border z-50 rounded">
           <SettingsPage
             close={() => {
               setIsShowSettings(false);

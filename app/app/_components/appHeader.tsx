@@ -23,7 +23,7 @@ export function AppHeader({
   setIsShowSettings: (isShowSettings: boolean) => void;
 }) {
   return (
-    <header className="print-hidden w-full z-30 select-none flex-none ">
+    <header className="print-hidden w-full z-30 select-none flex-none dark:text-black">
       <nav className="flex bg-main flex-auto">
         <div className="flex  justify-between md:justify-start flex-auto  md:flex-1">
           {(

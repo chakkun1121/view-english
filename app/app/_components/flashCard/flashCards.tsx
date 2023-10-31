@@ -77,7 +77,7 @@ export function FlashCards({
   return (
     <div
       className={
-        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white border rounded p-2 select-none' +
+        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white dark:bg-gray-900 border rounded p-2 select-none' +
         (!isMinimize && ' top-0 md:top-10')
       }
     >
