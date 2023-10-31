@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
+import AppProvider from './provider';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <AppProvider>{children}</AppProvider>;
 }
 export const metadata: Metadata = {
   title: 'アプリ',

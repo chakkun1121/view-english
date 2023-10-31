@@ -12,6 +12,7 @@ import { stringToObject } from './lib/stringToObject';
 import { fixWayakuFile } from './lib/fixWayakuFile';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { FlashCards } from './_components/flashCard/flashCards';
+import SettingsPage from './_components/settingsPage';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [lastSavedFileContent, setLastSavedFileContent] = useState<wayakuObject | undefined>();
@@ -19,6 +20,8 @@ export default function app() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
+  const [isShowSettings, setIsShowSettings] = useState<boolean>(false);
+  console.log(isShowSettings);
   useLeavePageConfirmation(shouldSave);
   useEffect(() => {
     console.debug(fileContent);
@@ -77,6 +80,10 @@ export default function app() {
     enableOnFormTags: true,
     preventDefault: true,
   });
+  useHotkeys('ctrl+,', () => setIsShowSettings(true), {
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
   return (
     <div className="flex md:flex-col flex-col-reverse h-full flex-1">
       <AppHeader
@@ -86,6 +93,7 @@ export default function app() {
         setIsEditing={setIsEditing}
         save={save}
         setIsShowFlashCards={setIsShowFlashCards}
+        setIsShowSettings={setIsShowSettings}
       />
       <main className="flex-1 overflow-scroll">
         {fileContent || isEditing ? (
@@ -105,6 +113,15 @@ export default function app() {
           fileContent={fileContent}
           setFileContent={setFileContent}
         />
+      )}
+      {isShowSettings && (
+        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-white border z-50 rounded">
+          <SettingsPage
+            close={() => {
+              setIsShowSettings(false);
+            }}
+          />
+        </div>
       )}
       <Fav />
     </div>

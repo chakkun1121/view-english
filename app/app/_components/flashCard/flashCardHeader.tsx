@@ -1,6 +1,6 @@
 'use client';
-import { AiOutlineClose } from 'react-icons/ai';
 import { VscChromeMaximize, VscChromeMinimize } from 'react-icons/vsc';
+import { CloseButton } from '../CloseButton';
 
 export function FlashCardHeader({
   setIsMinimize,
@@ -20,9 +20,7 @@ export function FlashCardHeader({
       >
         {!isMinimize ? <VscChromeMinimize /> : <VscChromeMaximize />}
       </button>
-      <button onClick={close} className=" hover:bg-red-300 border rounded p-2 flex-none">
-        <AiOutlineClose />
-      </button>
+      <CloseButton close={close} />
     </nav>
   );
 }
