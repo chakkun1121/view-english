@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { v4 as createUUID } from 'uuid';
 import { DelateButton } from './DelateButton';
 import { EditingHeader } from './EditingHeader';
+import EditableText from '../../_components/editableText';
 
 export function FileContent({
   isEditing,
@@ -31,11 +32,7 @@ export function FileContent({
       });
     }
   }, [isEditing]);
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    place: 'en' | 'ja',
-    sectionID: string
-  ) {
+  function handleChange(text: string, place: 'en' | 'ja', sectionID: string) {
     setFileContent({
       ...fileContent,
       wayaku: {
@@ -48,7 +45,7 @@ export function FileContent({
                 if (p['@_class'] === place) {
                   return {
                     ...p,
-                    '#text': e.target.value,
+                    '#text': text,
                   };
                 }
                 return p;
@@ -76,30 +73,20 @@ export function FileContent({
       {fileContent?.wayaku.section.map((section) => (
         <section key={section['@_sectionID']} className="py-2 flex w-full">
           <div className="flex-1">
-            {isEditing ? (
-              <input
-                placeholder="英文を入力"
-                className="w-full border"
-                defaultValue={section.p[0]['#text']}
-                onChange={(e) => handleChange(e, 'en', section['@_sectionID'])}
-              />
-            ) : (
-              <p lang="en" className="">
-                {section.p[0]['#text']}
-              </p>
-            )}
-            {isEditing ? (
-              <input
-                placeholder="日本語訳を入力"
-                className="w-full border"
-                defaultValue={section.p[1]['#text']}
-                onChange={(e) => handleChange(e, 'ja', section['@_sectionID'])}
-              />
-            ) : (
-              <p lang="ja" className="">
-                {section.p[1]['#text']}
-              </p>
-            )}
+            <EditableText
+              text={section.p[0]['#text']}
+              canEdit={isEditing}
+              onChange={(text: string) => handleChange(text, 'en', section['@_sectionID'])}
+              placeHolder="英文を入力"
+              lang="en"
+            />
+            <EditableText
+              text={section.p[1]['#text']}
+              canEdit={isEditing}
+              onChange={(text: string) => handleChange(text, 'ja', section['@_sectionID'])}
+              placeHolder="日本語訳を入力"
+              lang="ja"
+            />
           </div>
           {isEditing && (
             <DelateButton

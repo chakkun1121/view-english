@@ -47,6 +47,11 @@ li {
   @apply list-inside list-disc;
 }
 
+input {
+  @apply dark:bg-gray-900;
+}
+
+
 article h1 {
   @apply pl-0;
 }
