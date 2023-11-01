@@ -78,3 +78,7 @@ article p {
 article ol>li {
   @apply list-decimal;
 }
+
+.bg-primary {
+  @apply bg-white dark:bg-sumi-900;
+}
