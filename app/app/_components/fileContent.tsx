@@ -72,7 +72,7 @@ export function FileContent({
       {isEditing && <EditingHeader setFileContent={setFileContent} fileContent={fileContent} />}
       {fileContent?.wayaku.section.map((section) => (
         <section key={section['@_sectionID']} className="py-2 flex w-full">
-          <div className="flex-1">
+          <div className="flex-1 gap-4">
             <EditableText
               text={section.p[0]['#text']}
               canEdit={isEditing}

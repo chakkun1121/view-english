@@ -1,5 +1,6 @@
 'use client';
 import { wayakuObject } from '../../../../@types/wayakuObjectType';
+import ToggleSwitch from '../../../_components/toggleSwitch';
 
 export function FlashCardHome({
   startCards,

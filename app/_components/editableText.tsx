@@ -17,7 +17,7 @@ export default function EditableText({
   return canEdit ? (
     <input
       placeholder={placeHolder}
-      className={'w-full border' + className}
+      className={'w-full border p-2 rounded ' + className}
       defaultValue={text}
       onChange={(e) => onChange(e.target.value)}
       lang={lang}
