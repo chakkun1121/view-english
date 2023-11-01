@@ -2,13 +2,15 @@ export default function ToggleSwitch({
   isOn,
   handleToggle,
   text,
+  className,
 }: {
   isOn: boolean;
   handleToggle: (isChecked: boolean) => void;
   text?: string;
+  className?: string;
 }) {
   return (
-    <label className="relative inline-flex items-center cursor-pointer">
+    <label className={'relative inline-flex items-center cursor-pointer ' + className}>
       <input
         type="checkbox"
         value=""
