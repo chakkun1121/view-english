@@ -77,8 +77,8 @@ export function FlashCards({
   return (
     <div
       className={
-        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-white dark:bg-gray-900 border rounded p-2 select-none' +
-        (!isMinimize && ' top-0 md:top-10')
+        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-primary border rounded p-2 select-none' +
+        (!isMinimize && ' top-0 md:top-16')
       }
     >
       <FlashCardHeader setIsMinimize={setIsMinimize} isMinimize={isMinimize} close={close} />
@@ -108,7 +108,9 @@ export function FlashCards({
                   next={next}
                 />
               ) : (
-                <button onClick={close}>フラッシュカードを閉じる</button>
+                <button onClick={close} className="dark:text-white">
+                  フラッシュカードを閉じる
+                </button>
               )}
             </>
           )}

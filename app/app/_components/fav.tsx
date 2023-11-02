@@ -8,7 +8,7 @@ export function Fav() {
       <Link
         href="./help"
         target="_blank"
-        className="text-black text-center hover:text-black visited:text-black  w-full h-full"
+        className="!text-black text-center hover:text-black visited:text-black  w-full h-full"
       >
         <BsQuestion className="w-full h-full" aria-label="ヘルプ" />
       </Link>

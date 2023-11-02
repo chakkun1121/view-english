@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { settingsAtom, settingsMenu } from '../lib/settings';
 import { CloseButton } from './CloseButton';
 import { useHotkeys } from 'react-hotkeys-hook';
+import ToggleSwitch from '../../_components/toggleSwitch';
 
 export default function SettingsPage({ close }: { close: () => void }) {
   useHotkeys('esc', close, {
@@ -17,18 +18,11 @@ export default function SettingsPage({ close }: { close: () => void }) {
       </div>
       <div className="flex flex-col gap-4 p-4">
         {settingsMenu.map((setting) => (
-          <label className="p-2 rounded dark:bg-gray-800 bg-gray-100 flex items-center">
-            <input
-              type="checkbox"
-              checked={settings[setting.key]}
-              onChange={(e) => setSettings({ ...settings, [setting.key]: e.target.checked })}
-              className="flex-none"
-            />
-            <span className="flex-1">
-              {setting.title}
-              {setting.isFlag && ' (flag)'}
-            </span>
-          </label>
+          <ToggleSwitch
+            isOn={settings[setting.key]}
+            handleToggle={(isChecked) => setSettings({ ...settings, [setting.key]: isChecked })}
+            text={setting.title + (setting.isFlag && ' (flag)')}
+          />
         ))}
       </div>
     </section>

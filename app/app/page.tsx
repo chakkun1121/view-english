@@ -95,7 +95,7 @@ export default function app() {
     preventDefault: true,
   });
   return (
-    <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white dark:bg-black">
+    <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white bg-primary">
       <AppHeader
         isSaved={!shouldSave}
         openFile={openFile}
@@ -125,7 +125,7 @@ export default function app() {
         />
       )}
       {isShowSettings && (
-        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-white dark:bg-black border z-50 rounded">
+        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-primary border z-50 rounded">
           <SettingsPage
             close={() => {
               setIsShowSettings(false);

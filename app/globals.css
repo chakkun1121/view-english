@@ -47,6 +47,11 @@ li {
   @apply list-inside list-disc;
 }
 
+input {
+  @apply dark:bg-gray-900;
+}
+
+
 article h1 {
   @apply pl-0;
 }
@@ -77,4 +82,8 @@ article p {
 
 article ol>li {
   @apply list-decimal;
+}
+
+.bg-primary {
+  @apply bg-white dark:bg-sumi-900;
 }
