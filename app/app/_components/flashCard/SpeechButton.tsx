@@ -8,11 +8,8 @@ export function SpeechButton({ text, lang = 'en-US' }: { text: string; lang?: st
     speechSynthesis.speak(uttr);
   }
   return (
-    <button
-      onClick={() => speech(text, lang)}
-      className="border rounded m-2 p-2 bg-gray-100 hover:bg-gray-200"
-    >
-      <AiFillSound />
+    <button onClick={() => speech(text, lang)} className="border rounded m-2 p-2 ">
+      <AiFillSound className="dark:text-white" />
     </button>
   );
 }

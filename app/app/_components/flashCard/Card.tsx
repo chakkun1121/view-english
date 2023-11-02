@@ -148,23 +148,21 @@ export function Card({
             <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
             <div className="flex-none hidden md:block">
               <SpeechButton
-                text={currentSection.p[1]['#text']}
-                lang="ja-JP"
+                text={currentSection.p[0]['#text']}
+                lang="en-US"
                 aria-label="読み上げ"
               />
             </div>
           </div>
           {isShowAnswer && (
             <nav className="flex">
-              {questionIndex ? (
+              {questionIndex && (
                 <button
                   onClick={back}
                   className="block flex-none p-2 m-2 border rounded px-4 dark:text-white"
                 >
                   戻る
                 </button>
-              ) : (
-                <></>
               )}
               <button
                 onClick={next}

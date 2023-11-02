@@ -10,7 +10,11 @@ export function EditButton({ isEditing, setIsEditing }: { isEditing: boolean; se
         className="block select-auto p-2 m-2 border rounded"
         aria-label="編集"
       >
-        {isEditing ? <AiOutlineCheck /> : <FiEdit2 />}
+        {isEditing ? (
+          <AiOutlineCheck className="dark:text-white" />
+        ) : (
+          <FiEdit2 className="dark:text-white" />
+        )}
       </button>
     );
   }
