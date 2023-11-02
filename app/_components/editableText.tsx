@@ -5,6 +5,7 @@ export default function EditableText({
   placeHolder,
   lang,
   className,
+  onDoubleClick,
   ...props
 }: {
   text: string;
@@ -13,6 +14,7 @@ export default function EditableText({
   placeHolder?: string;
   className?: string;
   lang?: string;
+  onDoubleClick?: (e) => void;
 }) {
   return canEdit ? (
     <input
@@ -24,7 +26,7 @@ export default function EditableText({
       {...props}
     />
   ) : (
-    <p {...props} lang={lang} className={className}>
+    <p {...props} lang={lang} className={className} onDoubleClick={onDoubleClick}>
       {text}
     </p>
   );

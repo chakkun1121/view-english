@@ -92,6 +92,7 @@ export function Card({
             placeHolder="日本語訳を入力"
             lang="ja"
             className="block select-auto p-2 m-2 border rounded flex-1 text-L "
+            onDoubleClick={!isEditing && (() => setIsEditing(true))}
           />
           <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
           <div className="flex-none hidden md:block">
@@ -136,6 +137,7 @@ export function Card({
                 placeHolder="英語を入力"
                 lang="en"
                 className="block select-auto p-2 m-2 border rounded flex-1 text-L "
+                onDoubleClick={!isEditing && (() => setIsEditing(true))}
               />
             ) : (
               <button
