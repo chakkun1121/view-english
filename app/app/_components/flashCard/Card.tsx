@@ -158,7 +158,7 @@ export function Card({
           </div>
           {isShowAnswer && (
             <nav className="flex">
-              {questionIndex && (
+              {questionIndex !== 0 && (
                 <button
                   onClick={back}
                   className="block flex-none p-2 m-2 border rounded px-4 dark:text-white"
