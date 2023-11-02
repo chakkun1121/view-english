@@ -3,16 +3,30 @@ const withPWA = require('next-pwa')({
 });
 const SUB_DIRECTORY = process.env.SUB_DIRECTORY || '';
 const isProd = process.env.NODE_ENV == 'production';
-
-/** @type {import('next').NextConfig} */
-const nextConfig = withPWA({
-  /* config options here */
-  basePath: isProd ? SUB_DIRECTORY : '',
-  output: 'export',
-  assetPrefix: isProd ? SUB_DIRECTORY : '',
-  publicRuntimeConfig: {
-    basePath: isProd ? SUB_DIRECTORY : '',
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    // If you use remark-gfm, you'll need to use next.config.mjs
+    // as the package is ESM only
+    // https://github.com/remarkjs/remark-gfm#install
+    remarkPlugins: [],
+    rehypePlugins: [],
+    // If you use `MDXProvider`, uncomment the following line.
+    // providerImportSource: "@mdx-js/react",
   },
 });
+/** @type {import('next').NextConfig} */
+const nextConfig = withMDX(
+  withPWA({
+    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    /* config options here */
+    basePath: isProd ? SUB_DIRECTORY : '',
+    output: 'export',
+    assetPrefix: isProd ? SUB_DIRECTORY : '',
+    publicRuntimeConfig: {
+      basePath: isProd ? SUB_DIRECTORY : '',
+    },
+  })
+);
 
 module.exports = nextConfig;
