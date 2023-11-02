@@ -24,7 +24,6 @@ export default function app() {
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   const [isShowSettings, setIsShowSettings] = useState<boolean>(false);
   const settings = useRecoilValue(settingsAtom);
-  console.log(isShowSettings);
   useLeavePageConfirmation(shouldSave);
   useEffect(() => {
     if (settings.isDarkMode) {
@@ -34,7 +33,6 @@ export default function app() {
     }
   }, [settings.isDarkMode]);
   useEffect(() => {
-    console.debug(fileContent);
     if (fileHandle) {
       saveWayakuFile(fileContent, fileHandle);
       setLastSavedFileContent(fileContent);

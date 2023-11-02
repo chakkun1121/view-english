@@ -10,7 +10,6 @@ export const metadata={
 }
 export default async function Help() {
   const helpPageTitles: string[] = await getHelpPageTitles();
-  console.debug(helpPageTitles);
   const helpPagesData: helpFileDataType[] = await Promise.all(
     helpPageTitles.map(async (title) => {
       const filePath = path.join(process.cwd(), 'public', 'help', `${title}.md`);

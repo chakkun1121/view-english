@@ -32,9 +32,7 @@ export function EditingHeader({
         onClick={async () => {
           // クリップボードから読み込み
           const text: string = await window.navigator.clipboard.readText();
-          console.log(text);
           const wayakuArray: string[] = text.split(/[\n\t]/g).filter((s) => s !== '');
-          console.log(wayakuArray);
           const sections: sectionType[] = [];
           for (let i = 0; i < wayakuArray.length; i += 2) {
             sections.push(createSection(wayakuArray[i], wayakuArray[i + 1]));
