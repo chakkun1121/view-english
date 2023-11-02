@@ -40,6 +40,7 @@
     "react-use": "^17.4.0",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
+    "remark-gfm": "^4.0.0",
     "tailwind": "^4.0.0",
     "typescript": "^5.2.2",
     "uuid": "^9.0.1"
