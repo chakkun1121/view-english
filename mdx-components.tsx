@@ -17,6 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h5: ({ children }) => <h5 className="pl-4">{children}</h5>,
     h6: ({ children }) => <h6 className="pl-5">{children}</h6>,
     p: ({ children }) => <p className="pl-6">{children}</p>,
+    a: (props) => <a target="_blank" {...props} />,
     ...components,
   };
 }
