@@ -52,35 +52,7 @@ input {
 }
 
 
-article h1 {
-  @apply pl-0;
-}
-
-article h2 {
-  @apply pl-1;
-}
-
-article h3 {
-  @apply pl-2;
-}
-
-article h4 {
-  @apply pl-3;
-}
-
-article h5 {
-  @apply pl-4;
-}
-
-article h6 {
-  @apply pl-5;
-}
-
-article p {
-  @apply pl-6;
-}
-
-article ol>li {
+ol>li {
   @apply list-decimal;
 }
 

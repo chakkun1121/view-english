@@ -19,7 +19,11 @@
   },
   "author": "chakkun1121",
   "dependencies": {
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "^14.0.1",
     "@snyk/protect": "^1.1237.0",
+    "@types/mdx": "^2.0.9",
     "fast-xml-parser": "^4.3.2",
     "firebase": "^10.5.2",
     "gray-matter": "^4.0.3",
@@ -36,6 +40,7 @@
     "react-use": "^17.4.0",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
+    "remark-gfm": "^4.0.0",
     "tailwind": "^4.0.0",
     "typescript": "^5.2.2",
     "uuid": "^9.0.1"
