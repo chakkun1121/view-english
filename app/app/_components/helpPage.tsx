@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import { CloseButton } from './CloseButton';
 import { getAllHelpPageMetaApiType } from '../../api/getAllHelpPageMeta/route';
+import path from 'path';
 
 export function HelpPage({
   setIsShowHelpPage,
 }: {
   setIsShowHelpPage: (isShowHelpPage: boolean) => void;
 }) {
-  const [currentPath, setCurrentPath] = useState<string>('/');
+  const [currentPath, setCurrentPath] = useState<string>('');
   const [allHelpPageData, setAllHelpPageData] = useState<getAllHelpPageMetaApiType[] | undefined>();
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +25,7 @@ export function HelpPage({
         <CloseButton close={() => setIsShowHelpPage(false)} />
       </div>
       <div>
-        {currentPath === '/' ? (
+        {currentPath === '' ? (
           <>
             {allHelpPageData ? (
               <ul>
@@ -45,9 +46,21 @@ export function HelpPage({
             )}
           </>
         ) : (
-          <></>
+          <Help path={currentPath} />
         )}
       </div>
     </div>
   );
 }
+function Help({ path }: { path: string }) {
+  const [content, setContent] = useState<string | undefined>();
+  useEffect(() => {
+    async function fetchData() {
+      const result = await fetch(`api/getHelpPage/${path}`);
+      setContent(await result.text());
+    }
+    fetchData();
+  }, [path]);
+  return <>{content}</>;
+}
+
