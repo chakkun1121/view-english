@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { CloseButton } from './CloseButton';
+import { getAllHelpPageMetaApiType } from '../../api/getAllHelpPageMeta/route';
 
 export function HelpPage({
   setIsShowHelpPage,
@@ -8,11 +9,11 @@ export function HelpPage({
   setIsShowHelpPage: (isShowHelpPage: boolean) => void;
 }) {
   const [currentPath, setCurrentPath] = useState<string>('/');
-  const [allHelpPagePaths, setAllHelpPagePaths] = useState<string[]>([]);
+  const [allHelpPageData, setAllHelpPageData] = useState<getAllHelpPageMetaApiType[] | undefined>();
   useEffect(() => {
     async function fetchData() {
-      const result = await fetch('api/getAllHelpPagePaths');
-      setAllHelpPagePaths(await result.json());
+      const result = await fetch('api/getAllHelpPageMeta');
+      setAllHelpPageData(await result.json());
     }
     fetchData();
   }, []);
@@ -25,17 +26,16 @@ export function HelpPage({
       <div>
         {currentPath === '/' ? (
           <>
-            {allHelpPagePaths ? (
+            {allHelpPageData ? (
               <ul>
-                {allHelpPagePaths.map((path) => (
-                  <li key={path}>
+                {allHelpPageData.map((data) => (
+                  <li key={data.path}>
                     <a
-                      href=""
                       onClick={() => {
-                        setCurrentPath(path);
+                        setCurrentPath(data.path);
                       }}
                     >
-                      {path}
+                      {data.title}
                     </a>
                   </li>
                 ))}
