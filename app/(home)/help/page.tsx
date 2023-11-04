@@ -2,10 +2,7 @@ import path from 'path';
 import Link from 'next/link';
 import { promises as fsPromises } from 'fs';
 export default async function Help() {
-  const paths: string[] = await fsPromises
-    .readdir(path.join(process.cwd(), 'app/(home)/help/(pages)'), { withFileTypes: true })
-    .then((paths) => paths.filter((path) => path.isDirectory()))
-    .then((paths) => paths.map((path) => path.name));
+  const paths: string[] = await getAllHelpPagePaths();
   return (
     <>
       <section>
@@ -33,4 +30,10 @@ export default async function Help() {
       </section>
     </>
   );
+}
+export async function getAllHelpPagePaths(): Promise<string[]> {
+  return await fsPromises
+    .readdir(path.join(process.cwd(), 'app/(home)/help/(pages)'), { withFileTypes: true })
+    .then((paths) => paths.filter((path) => path.isDirectory()))
+    .then((paths) => paths.map((path) => path.name));
 }

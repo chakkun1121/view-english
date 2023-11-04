@@ -15,6 +15,7 @@ import { FlashCards } from './_components/flashCard/flashCards';
 import SettingsPage from './_components/settingsPage';
 import { useRecoilValue } from 'recoil';
 import { settingsAtom } from './lib/settings';
+import { HelpPage } from './_components/helpPage';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [lastSavedFileContent, setLastSavedFileContent] = useState<wayakuObject | undefined>();
@@ -23,6 +24,7 @@ export default function app() {
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   const [isShowSettings, setIsShowSettings] = useState<boolean>(false);
+  const [isShowHelpPage, setIsShowHelpPage] = useState<boolean>(false);
   const settings = useRecoilValue(settingsAtom);
   useLeavePageConfirmation(shouldSave);
   useEffect(() => {
@@ -102,6 +104,7 @@ export default function app() {
         save={save}
         setIsShowFlashCards={setIsShowFlashCards}
         setIsShowSettings={setIsShowSettings}
+        setIsShowHelpPage={setIsShowHelpPage}
       />
       <main className="flex-1 overflow-scroll">
         {fileContent || isEditing ? (
@@ -131,6 +134,7 @@ export default function app() {
           />
         </div>
       )}
+      {isShowHelpPage && <HelpPage setIsShowHelpPage={setIsShowHelpPage} />}
       <Fav />
     </div>
   );
