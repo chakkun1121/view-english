@@ -1,17 +1,18 @@
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { getAllHelpPagePaths } from '../../../(home)/help/page';
-export async function GET({ props }: { props: { path: string } }, request: Request) {
-  console.log(props.path); //todo: 何故か事故るので修正
+export async function GET(request: Request, { params }: { params: { path: string } }) {
+  console.log(params.path);
   try {
     const content = await fsPromises.readFile(
-      path.join(process.cwd(), 'app/(home)/help/(pages)', props?.path, 'page.mdx'),
+      path.join(process.cwd(), 'app/(home)/help/(pages)', params?.path, 'page.mdx'),
       'utf-8'
     );
     console.log(content);
     return new Response(content, {
       headers: {
         'content-type': 'text/plain',
+        encoding: 'UTF-8',
       },
     });
   } catch (error) {
