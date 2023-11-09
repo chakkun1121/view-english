@@ -1,5 +1,6 @@
 import { Metadata, Viewport } from 'next';
 import React, { StrictMode } from 'react';
+import 'winbox/dist/css/winbox.min.css'; // required
 import './globals.css';
 
 export default function Layout({ children }: { children: React.ReactNode }) {

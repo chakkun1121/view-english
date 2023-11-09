@@ -2,18 +2,14 @@ import path from 'path';
 import Link from 'next/link';
 import { promises as fsPromises } from 'fs';
 export default async function Help() {
-  const paths: string[] = await fsPromises
-    .readdir(path.join(process.cwd(), 'app/(home)/help/(pages)'), { withFileTypes: true })
-    .then((paths) => paths.filter((path) => path.isDirectory()))
-    .then((paths) => paths.map((path) => path.name));
+  const paths: string[] = await getAllHelpPagePaths();
   return (
     <>
       <section>
         <h1>ヘルプ記事一覧</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paths.map(async (path) => {
-            const { metadata }: { metadata: { title?: string; description?: string } } =
-              await import(`./(pages)/${path}/page.mdx`);
+            const metadata = await getHelpPageMeta(path);
             return (
               <Link
                 key={path}
@@ -33,4 +29,18 @@ export default async function Help() {
       </section>
     </>
   );
+}
+export async function getHelpPageMeta(
+  title: string
+): Promise<{ title?: string; description?: string }> {
+  const { metadata }: { metadata: { title?: string; description?: string } } = await import(
+    `./(pages)/${title}/page.mdx`
+  );
+  return metadata;
+}
+export async function getAllHelpPagePaths(): Promise<string[]> {
+  return await fsPromises
+    .readdir(path.join(process.cwd(), 'app/(home)/help/(pages)'), { withFileTypes: true })
+    .then((paths) => paths.filter((path) => path.isDirectory()))
+    .then((paths) => paths.map((path) => path.name));
 }

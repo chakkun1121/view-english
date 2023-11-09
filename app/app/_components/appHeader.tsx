@@ -13,6 +13,7 @@ export function AppHeader({
   setIsShowFlashCards,
   isSaved,
   setIsShowSettings,
+  setIsShowHelpPage,
 }: {
   openFile: () => void;
   IsEditing: boolean;
@@ -21,6 +22,7 @@ export function AppHeader({
   setIsShowFlashCards: (isShowFlashCards: boolean) => void;
   isSaved: boolean;
   setIsShowSettings: (isShowSettings: boolean) => void;
+  setIsShowHelpPage: (isShowHelpPage: boolean) => void;
 }) {
   return (
     <header className="print-hidden w-full z-30 select-none flex-none dark:text-black">
@@ -60,7 +62,7 @@ export function AppHeader({
               },
               {
                 title: 'ヘルプ',
-                onClick: () => window.open('./help', '_blank'),
+                onClick: () => setIsShowHelpPage(true),
                 text: 'ヘルプ',
                 icon: <BiQuestionMark />,
               },
