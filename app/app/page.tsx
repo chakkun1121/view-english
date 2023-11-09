@@ -125,15 +125,7 @@ export default function app() {
           setFileContent={setFileContent}
         />
       )}
-      {isShowSettings && (
-        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-primary border z-50 rounded">
-          <SettingsPage
-            close={() => {
-              setIsShowSettings(false);
-            }}
-          />
-        </div>
-      )}
+      {isShowSettings && <SettingsPage setIsShowSettings={setIsShowSettings} />}
       {isShowHelpPage && <HelpPage setIsShowHelpPage={setIsShowHelpPage} />}
       <Fav setIsShowHelpPage={setIsShowHelpPage} />
     </div>

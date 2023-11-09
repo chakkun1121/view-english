@@ -1,22 +1,31 @@
 'use client';
 import { useRecoilState } from 'recoil';
 import { settingsAtom, settingsMenu } from '../lib/settings';
-import { CloseButton } from './CloseButton';
-import { useHotkeys } from 'react-hotkeys-hook';
 import ToggleSwitch from '../../_components/toggleSwitch';
+import WinBox from '../../../winbox';
 
-export default function SettingsPage({ close }: { close: () => void }) {
-  useHotkeys('esc', close, {
-    preventDefault: true,
-  });
+export default function SettingsPage({
+  setIsShowSettings,
+}: {
+  setIsShowSettings: (isShow: boolean) => void;
+}) {
   const [settings, setSettings] = useRecoilState(settingsAtom);
   return (
-    <section className="select-none">
-      <div className="flex p-2">
-        <h2 className="flex-1">設定</h2>
-        <CloseButton close={close} />
-      </div>
-      <div className="flex flex-col gap-4 p-4">
+    <WinBox
+      title="設定"
+      onClose={() => setIsShowSettings(false)}
+      noMax={true}
+      noFull={true}
+      top={60}
+      bottom={60}
+      x={document.body.clientWidth - (Math.min(document.body.clientWidth, 360) + 12)}
+      y={60}
+      z={100}
+      width={Math.min(document.body.clientWidth, 360)}
+      height={document.body.clientHeight - 120}
+      className="flex"
+    >
+      <div className="flex-1 flex flex-col gap-4 p-4 bg-primary h-full">
         {settingsMenu.map((setting) => (
           <ToggleSwitch
             isOn={settings[setting.key]}
@@ -25,6 +34,6 @@ export default function SettingsPage({ close }: { close: () => void }) {
           />
         ))}
       </div>
-    </section>
+    </WinBox>
   );
 }
