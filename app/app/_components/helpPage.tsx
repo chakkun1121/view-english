@@ -17,7 +17,7 @@ export function HelpPage({
       z={100}
       width={Math.min(document.body.clientWidth, 360)}
       height={document.body.clientHeight - 120}
-      url="help?header=false"
+      url="embeddedHelpPage"
       themeColor="#7aa1d6"
       noMax={true}
       onClose={() => setIsShowHelpPage(false)}

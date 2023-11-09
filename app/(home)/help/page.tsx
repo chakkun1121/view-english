@@ -1,7 +1,7 @@
 import path from 'path';
 import Link from 'next/link';
 import { promises as fsPromises } from 'fs';
-export default async function Help() {
+export default async function Help({ pagePath = 'help' }) {
   const paths: string[] = await getAllHelpPagePaths();
   return (
     <>
@@ -14,7 +14,7 @@ export default async function Help() {
               <Link
                 key={path}
                 className="bg-main rounded hover:bg-main-hover p-4 text-black hover:text-black visited:text-black"
-                href={`help/${path}`}
+                href={`/${pagePath}/${path}`}
               >
                 <h2 className="line-clamp-2" title={metadata?.title}>
                   {metadata?.title}
