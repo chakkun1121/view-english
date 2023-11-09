@@ -1,17 +1,19 @@
 'use client';
-import Link from 'next/link';
 import { BsQuestion } from 'react-icons/bs';
 
-export function Fav() {
+export function Fav({
+  setIsShowHelpPage,
+}: {
+  setIsShowHelpPage: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <div className="fixed bottom-10 right-10 print:hidden select-none w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-200 z-50 hidden md:block">
-      <Link
-        href="./help"
-        target="_blank"
-        className="!text-black text-center hover:text-black visited:text-black  w-full h-full"
+      <button
+        className="!text-black text-center hover:text-black visited:text-black text-M  w-full h-full"
+        onClick={() => setIsShowHelpPage(true)}
       >
         <BsQuestion className="w-full h-full" aria-label="ヘルプ" />
-      </Link>
+      </button>
     </div>
   );
 }

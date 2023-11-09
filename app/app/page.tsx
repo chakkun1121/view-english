@@ -86,7 +86,7 @@ export default function app() {
   useHotkeys('alt+f', () => setIsShowFlashCards(true), {
     preventDefault: true,
   });
-  useHotkeys('f1,ctrl+/', () => open('./help', '_blank'), {
+  useHotkeys('f1,ctrl+/', () => setIsShowHelpPage(true), {
     enableOnFormTags: true,
     preventDefault: true,
   });
@@ -135,7 +135,7 @@ export default function app() {
         </div>
       )}
       {isShowHelpPage && <HelpPage setIsShowHelpPage={setIsShowHelpPage} />}
-      <Fav />
+      <Fav setIsShowHelpPage={setIsShowHelpPage} />
     </div>
   );
 }
