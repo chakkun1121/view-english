@@ -18,7 +18,7 @@ export default function SettingsPage({
       noFull={true}
       top={60}
       bottom={60}
-      x={document.body.clientWidth - (Math.min(document.body.clientWidth, 360) + 12)}
+      x={document.body.clientWidth - (Math.min(document.body.clientWidth, 360) + 20)}
       y={60}
       z={100}
       width={Math.min(document.body.clientWidth, 360)}
