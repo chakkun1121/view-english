@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { sectionType, wayakuObject } from '../../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { FlashCardHeader } from './flashCardHeader';
 import { Card } from './Card';
+import WinBox from 'react-winbox';
 export function FlashCards({
   wayakuObject,
   close,
@@ -21,7 +21,6 @@ export function FlashCards({
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [questionList, setQuestionList] = useState<string[]>([]); //sectionIDの配列
   const [questionIndex, setQuestionIndex] = useState<number>();
-  const [isMinimize, setIsMinimize] = useState<boolean>(false);
   const [isAnswerWithKeyboard, setIsAnswerWithKeyboard] = useState<boolean>(false);
 
   useHotkeys('esc', close, {
@@ -75,51 +74,48 @@ export function FlashCards({
     });
   }
   return (
-    <div
-      className={
-        ' fixed inset-x-0 md:inset-x-2 bottom-0 z-40 bg-primary border rounded p-2 select-none' +
-        (!isMinimize && ' top-0 md:top-16')
-      }
+    <WinBox
+      title="フラッシュカード"
+      top={document.body.clientWidth < 768 ? 0 : 60}
+      bottom={document.body.clientWidth < 768 ? 60 : 0}
+      y={60}
+      width={document.body.clientWidth}
+      height={document.body.clientHeight - 60}
+      onClose={close}
+      className="rounded"
     >
-      <FlashCardHeader setIsMinimize={setIsMinimize} isMinimize={isMinimize} close={close} />
-      {!isMinimize && wayakuObject ? (
-        <section className="">
-          {mode === 'home' ? (
-            <FlashCardHome
-              startCards={startCards}
-              isRandom={isRandom}
-              setIsRandom={setIsRandom}
-              questionCount={questionCount}
-              wayakuObject={wayakuObject}
-              setQuestionCount={setQuestionCount}
-              isAnswerWithKeyboard={isAnswerWithKeyboard}
-              setIsAnswerWithKeyboard={setIsAnswerWithKeyboard}
-            />
-          ) : (
-            <>
-              {mode === 'cards' ? (
-                <Card
-                  setCurrentSection={setCurrentSection}
-                  questionIndex={questionIndex}
-                  questionList={questionList}
-                  currentSection={currentSection}
-                  isAnswerWithKeyboard={isAnswerWithKeyboard}
-                  back={back}
-                  next={next}
-                />
-              ) : (
-                <button onClick={close} className="dark:text-white">
-                  フラッシュカードを閉じる
-                </button>
-              )}
-            </>
-          )}
-        </section>
-      ) : (
-        <section>
-          <p>ファイルを開くか作成してください。</p>
-        </section>
-      )}
-    </div>
+      <div className="p-2 bg-primary h-full dark:text-white">
+        {mode === 'home' ? (
+          <FlashCardHome
+            startCards={startCards}
+            isRandom={isRandom}
+            setIsRandom={setIsRandom}
+            questionCount={questionCount}
+            wayakuObject={wayakuObject}
+            setQuestionCount={setQuestionCount}
+            isAnswerWithKeyboard={isAnswerWithKeyboard}
+            setIsAnswerWithKeyboard={setIsAnswerWithKeyboard}
+          />
+        ) : (
+          <>
+            {mode === 'cards' ? (
+              <Card
+                setCurrentSection={setCurrentSection}
+                questionIndex={questionIndex}
+                questionList={questionList}
+                currentSection={currentSection}
+                isAnswerWithKeyboard={isAnswerWithKeyboard}
+                back={back}
+                next={next}
+              />
+            ) : (
+              <button onClick={close} className="dark:text-white">
+                フラッシュカードを閉じる
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    </WinBox>
   );
 }

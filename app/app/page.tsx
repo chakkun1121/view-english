@@ -98,6 +98,7 @@ export default function app() {
     <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white bg-primary">
       <AppHeader
         isSaved={!shouldSave}
+        fileContent={fileContent}
         openFile={openFile}
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
