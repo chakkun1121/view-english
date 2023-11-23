@@ -4,7 +4,7 @@ import { sectionType, wayakuObject } from '../../../../@types/wayakuObjectType';
 import { FlashCardHome } from './flashCardHome';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Card } from './Card';
-import WinBox from 'react-winbox';
+import WinBox from '../../../../winbox';
 export function FlashCards({
   wayakuObject,
   close,
