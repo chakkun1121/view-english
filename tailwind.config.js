@@ -1,13 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-
-    // Or if using `src` directory:
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './mdx-components.tsx'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -15,6 +8,19 @@ module.exports = {
         main: {
           DEFAULT: '#7aa1d6',
           hover: '#7a9ac7',
+        },
+        forest: {
+          DEFAULT: '#259D63',
+          50: '#E6F5EC',
+          100: '#C2E5D1',
+          200: '#9BD4B5',
+          300: '#71C598',
+          400: '#51B883',
+          500: '#2CAC6E',
+          600: '#259D63',
+          700: '#1D8B56',
+          800: '#197A4B',
+          900: '#115A36',
         },
         sea: {
           DEFAULT: '#003EE5',
@@ -32,6 +38,45 @@ module.exports = {
             300: '#3F72F6',
             600: '#0030B2',
           },
+        },
+        sumi: {
+          DEFAULT: '#1A1A1C',
+          50: '#F8F8FB',
+          100: '#F1F1F4',
+          200: '#E8E8EB',
+          300: '#D8D8DB',
+          400: '#B4B4B7',
+          500: '#949497',
+          600: '#757578',
+          700: '#626264',
+          800: '#414143',
+          900: '#1A1A1C',
+        },
+        sun: {
+          DEFAULT: '#EC0000',
+          50: '#FFE7E6',
+          100: '#FFC8B8',
+          200: '#FFA28B',
+          300: '#FF7B5C',
+          400: '#FF5838',
+          500: '#FF4B36',
+          600: '#FF220D',
+          700: '#FA1606',
+          800: '#EC0000',
+          900: '#D50000',
+        },
+        wood: {
+          DEFAULT: '#C16800',
+          50: '#F8F1E0',
+          100: '#EFDBB1',
+          200: '#E5C47F',
+          300: '#DCAC4D',
+          400: '#D69C2B',
+          500: '#D18D0F',
+          600: '#CD820A',
+          700: '#C87504',
+          800: '#C16800',
+          900: '#B65200',
         },
       },
       gridTemplateColumns: {
@@ -90,5 +135,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };

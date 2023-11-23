@@ -1,36 +1,39 @@
 'use client';
 import { useRecoilState } from 'recoil';
 import { settingsAtom, settingsMenu } from '../lib/settings';
-import { CloseButton } from './CloseButton';
-import { useHotkeys } from 'react-hotkeys-hook';
+import ToggleSwitch from '../../_components/toggleSwitch';
+import WinBox from '../../../winbox';
 
-export default function SettingsPage({ close }: { close: () => void }) {
-  useHotkeys('esc', close, {
-    preventDefault: true,
-  });
+export default function SettingsPage({
+  setIsShowSettings,
+}: {
+  setIsShowSettings: (isShow: boolean) => void;
+}) {
   const [settings, setSettings] = useRecoilState(settingsAtom);
   return (
-    <section className="select-none">
-      <div className="flex p-2">
-        <h2 className="flex-1">設定</h2>
-        <CloseButton close={close} />
-      </div>
-      <div className="flex flex-col gap-4 p-4">
+    <WinBox
+      title="設定"
+      onClose={() => setIsShowSettings(false)}
+      noMax={true}
+      noFull={true}
+      top={document.body.clientWidth < 768 ? 0 : 60}
+      bottom={document.body.clientWidth < 768 ? 60 : 0}
+      x={document.body.clientWidth - (Math.min(document.body.clientWidth, 360) + 20)}
+      y={60}
+      z={100}
+      width={Math.min(document.body.clientWidth, 360)}
+      height={document.body.clientHeight - 70}
+      className="flex"
+    >
+      <div className="flex-1 flex flex-col gap-4 p-4 bg-primary h-full">
         {settingsMenu.map((setting) => (
-          <label className="p-2 rounded dark:bg-gray-800 bg-gray-100 flex items-center">
-            <input
-              type="checkbox"
-              checked={settings[setting.key]}
-              onChange={(e) => setSettings({ ...settings, [setting.key]: e.target.checked })}
-              className="flex-none"
-            />
-            <span className="flex-1">
-              {setting.title}
-              {setting.isFlag && ' (flag)'}
-            </span>
-          </label>
+          <ToggleSwitch
+            isOn={settings[setting.key]}
+            handleToggle={(isChecked) => setSettings({ ...settings, [setting.key]: isChecked })}
+            text={setting.title + (setting.isFlag && ' (flag)')}
+          />
         ))}
       </div>
-    </section>
+    </WinBox>
   );
 }

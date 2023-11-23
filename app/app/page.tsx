@@ -15,6 +15,7 @@ import { FlashCards } from './_components/flashCard/flashCards';
 import SettingsPage from './_components/settingsPage';
 import { useRecoilValue } from 'recoil';
 import { settingsAtom } from './lib/settings';
+import { HelpPage } from './_components/helpPage';
 export default function app() {
   const [fileContent, setFileContent] = useState<wayakuObject | undefined>();
   const [lastSavedFileContent, setLastSavedFileContent] = useState<wayakuObject | undefined>();
@@ -23,18 +24,19 @@ export default function app() {
   const [fileHandle, setFileHandle] = useState<FileSystemFileHandle | undefined>(undefined);
   const [isShowFlashCards, setIsShowFlashCards] = useState<boolean>(false);
   const [isShowSettings, setIsShowSettings] = useState<boolean>(false);
+  const [isShowHelpPage, setIsShowHelpPage] = useState<boolean>(false);
   const settings = useRecoilValue(settingsAtom);
-  console.log(isShowSettings);
   useLeavePageConfirmation(shouldSave);
   useEffect(() => {
-    if (settings.isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    if (typeof document !== undefined) {
+      if (settings.isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, [settings.isDarkMode]);
   useEffect(() => {
-    console.debug(fileContent);
     if (fileHandle) {
       saveWayakuFile(fileContent, fileHandle);
       setLastSavedFileContent(fileContent);
@@ -86,7 +88,7 @@ export default function app() {
   useHotkeys('alt+f', () => setIsShowFlashCards(true), {
     preventDefault: true,
   });
-  useHotkeys('f1,ctrl+/', () => open('./help', '_blank'), {
+  useHotkeys('f1,ctrl+/', () => setIsShowHelpPage(true), {
     enableOnFormTags: true,
     preventDefault: true,
   });
@@ -95,15 +97,17 @@ export default function app() {
     preventDefault: true,
   });
   return (
-    <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white dark:bg-black">
+    <div className="flex md:flex-col flex-col-reverse h-full flex-1 dark:text-white bg-primary">
       <AppHeader
         isSaved={!shouldSave}
+        fileContent={fileContent}
         openFile={openFile}
         IsEditing={isEditing}
         setIsEditing={setIsEditing}
         save={save}
         setIsShowFlashCards={setIsShowFlashCards}
         setIsShowSettings={setIsShowSettings}
+        setIsShowHelpPage={setIsShowHelpPage}
       />
       <main className="flex-1 overflow-scroll">
         {fileContent || isEditing ? (
@@ -124,16 +128,9 @@ export default function app() {
           setFileContent={setFileContent}
         />
       )}
-      {isShowSettings && (
-        <div className="absolute top-2 md:top-16 md:bottom-0 left-2 right-2 bottom-16 bg-white dark:bg-black border z-50 rounded">
-          <SettingsPage
-            close={() => {
-              setIsShowSettings(false);
-            }}
-          />
-        </div>
-      )}
-      <Fav />
+      {isShowSettings && <SettingsPage setIsShowSettings={setIsShowSettings} />}
+      {isShowHelpPage && <HelpPage setIsShowHelpPage={setIsShowHelpPage} />}
+      <Fav setIsShowHelpPage={setIsShowHelpPage} />
     </div>
   );
 }

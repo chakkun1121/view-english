@@ -18,7 +18,6 @@ export function fixWayakuFile(fileData: string): string {
     attributeNamePrefix: '@_',
   });
   const brokenWayakuObject = parser.parse(fileData);
-  console.log(brokenWayakuObject);
   // 和訳ファイルの破損原因
   // 1. idが付与されていない→適切に付与する
   // 2. sectionがないままpが連続している->pを2つずつsectionでくくる。この際にIDは付与しなくて良い
@@ -32,7 +31,6 @@ export function fixWayakuFile(fileData: string): string {
     }
     delete brokenWayakuObject.wayaku.p;
   }
-  console.log(brokenWayakuObject);
   //1を対処する
   const fixedWayakuObject = {
     ...brokenWayakuObject,

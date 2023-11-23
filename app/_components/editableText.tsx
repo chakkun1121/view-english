@@ -1,0 +1,33 @@
+export default function EditableText({
+  text,
+  canEdit,
+  onChange,
+  placeHolder,
+  lang,
+  className,
+  onDoubleClick,
+  ...props
+}: {
+  text: string;
+  canEdit: boolean;
+  onChange: (text: string) => void;
+  placeHolder?: string;
+  className?: string;
+  lang?: string;
+  onDoubleClick?: (e) => void;
+}) {
+  return canEdit ? (
+    <input
+      placeholder={placeHolder}
+      className={'w-full border p-2 rounded ' + className}
+      defaultValue={text}
+      onChange={(e) => onChange(e.target.value)}
+      lang={lang}
+      {...props}
+    />
+  ) : (
+    <p {...props} lang={lang} className={className} onDoubleClick={onDoubleClick}>
+      {text}
+    </p>
+  );
+}

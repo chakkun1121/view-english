@@ -1,12 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { sectionType } from '../../../../@types/wayakuObjectType';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { SpeechButton } from './SpeechButton';
-import { FiEdit2 } from 'react-icons/fi';
-import { AiOutlineCheck } from 'react-icons/ai';
 import { BsCircle } from 'react-icons/bs';
 import { HiXMark } from 'react-icons/hi2';
+import EditableText from '../../../_components/editableText';
+import { EditButton } from '../../../_components/EditButton';
 
 export function Card({
   questionIndex,
@@ -63,17 +63,17 @@ export function Card({
       preventDefault: true,
     }
   );
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>, place: 'en' | 'ja') {
+  function handleChange(text: string, place: 'en' | 'ja') {
     setCurrentSection({
       ...currentSection,
       p: [
         {
           ...currentSection.p[0],
-          '#text': place === 'en' ? e.target.value : currentSection.p[0]['#text'],
+          '#text': place === 'en' ? text : currentSection.p[0]['#text'],
         },
         {
           ...currentSection.p[1],
-          '#text': place === 'ja' ? e.target.value : currentSection.p[1]['#text'],
+          '#text': place === 'ja' ? text : currentSection.p[1]['#text'],
         },
       ],
     } as sectionType);
@@ -85,20 +85,15 @@ export function Card({
       </div>
       <div>
         <div className="flex items-center">
-          {isEditing ? (
-            <input
-              className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300"
-              defaultValue={currentSection.p[1]['#text']}
-              onChange={(e) => handleChange(e, 'ja')}
-            />
-          ) : (
-            <p
-              className="block select-auto p-2 m-2 rounded flex-1"
-              onDoubleClick={() => setIsEditing(true)}
-            >
-              {currentSection.p[1]['#text']}
-            </p>
-          )}
+          <EditableText
+            text={currentSection.p[1]['#text']}
+            canEdit={isEditing}
+            onChange={(text: string) => handleChange(text, 'ja')}
+            placeHolder="日本語訳を入力"
+            lang="ja"
+            className="block select-auto p-2 m-2 border rounded flex-1 text-L "
+            onDoubleClick={!isEditing && (() => setIsEditing(true))}
+          />
           <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
           <div className="flex-none hidden md:block">
             <SpeechButton text={currentSection.p[1]['#text']} lang="ja-JP" aria-label="読み上げ" />
@@ -135,28 +130,19 @@ export function Card({
         <div>
           <div className="flex items-center">
             {isShowAnswer ? (
-              <>
-                {isEditing ? (
-                  <input
-                    className="block select-auto p-2 m-2 border rounded flex-1 text-L bg-gray-100 focus:bg-gray-300 dark:bg-gray-800"
-                    lang="en"
-                    defaultValue={currentSection.p[0]['#text']}
-                    onChange={(e) => handleChange(e, 'en')}
-                  />
-                ) : (
-                  <p
-                    className="block select-auto p-2 m-2 flex-1"
-                    lang="en"
-                    onDoubleClick={() => setIsEditing(true)}
-                  >
-                    {currentSection.p[0]['#text']}
-                  </p>
-                )}
-              </>
+              <EditableText
+                text={currentSection.p[0]['#text']}
+                canEdit={isEditing}
+                onChange={(text: string) => handleChange(text, 'en')}
+                placeHolder="英語を入力"
+                lang="en"
+                className="block select-auto p-2 m-2 border rounded flex-1 text-L "
+                onDoubleClick={!isEditing && (() => setIsEditing(true))}
+              />
             ) : (
               <button
                 onClick={() => setIsShowAnswer(true)}
-                className="block select-auto p-2 m-2 border rounded w-full flex-1"
+                className="block select-auto p-2 m-2 border rounded w-full flex-1 dark:text-white"
               >
                 答えを見る
               </button>
@@ -164,55 +150,32 @@ export function Card({
             <EditButton isEditing={isEditing} setIsEditing={setIsEditing} />
             <div className="flex-none hidden md:block">
               <SpeechButton
-                text={currentSection.p[1]['#text']}
-                lang="ja-JP"
+                text={currentSection.p[0]['#text']}
+                lang="en-US"
                 aria-label="読み上げ"
               />
             </div>
           </div>
           {isShowAnswer && (
             <nav className="flex">
-              {questionIndex ? (
-                <button onClick={back} className="block flex-none p-2 m-2 border rounded px-4">
+              {questionIndex !== 0 && (
+                <button
+                  onClick={back}
+                  className="block flex-none p-2 m-2 border rounded px-4 dark:text-white"
+                >
                   戻る
                 </button>
-              ) : (
-                <></>
               )}
-              <button onClick={next} className="block select-auto p-2 m-2 border rounded flex-1">
+              <button
+                onClick={next}
+                className="block select-auto p-2 m-2 border rounded flex-1 dark:text-white"
+              >
                 次へ
               </button>
             </nav>
           )}
         </div>
       </div>
-    </>
-  );
-}
-function EditButton({ isEditing, setIsEditing }: { isEditing: boolean; setIsEditing: any }) {
-  function Button() {
-    return (
-      <button
-        onClick={() => setIsEditing(!isEditing)}
-        className="block select-auto p-2 m-2 border rounded"
-        aria-label="編集"
-      >
-        {isEditing ? <AiOutlineCheck /> : <FiEdit2 />}
-      </button>
-    );
-  }
-  return (
-    <>
-      <div className="flex-none hidden md:block">
-        {/* パソコン用 */}
-        <Button />
-      </div>
-      {isEditing && (
-        // スマホ用
-        <div className="flex-none md:hidden">
-          <Button />
-        </div>
-      )}
     </>
   );
 }

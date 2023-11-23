@@ -4,6 +4,7 @@ import { PiCards } from 'react-icons/pi';
 import { BiQuestionMark } from 'react-icons/bi';
 import { HeaderUserMenu } from '../../(home)/_components/headerUserMenu';
 import { CiSettings } from 'react-icons/ci';
+import { wayakuObject } from '../../../@types/wayakuObjectType';
 
 export function AppHeader({
   openFile,
@@ -13,7 +14,10 @@ export function AppHeader({
   setIsShowFlashCards,
   isSaved,
   setIsShowSettings,
+  setIsShowHelpPage,
+  fileContent,
 }: {
+  fileContent: wayakuObject | undefined;
   openFile: () => void;
   IsEditing: boolean;
   setIsEditing: (IsEditing: boolean) => void;
@@ -21,6 +25,7 @@ export function AppHeader({
   setIsShowFlashCards: (isShowFlashCards: boolean) => void;
   isSaved: boolean;
   setIsShowSettings: (isShowSettings: boolean) => void;
+  setIsShowHelpPage: (isShowHelpPage: boolean) => void;
 }) {
   return (
     <header className="print-hidden w-full z-30 select-none flex-none dark:text-black">
@@ -45,12 +50,14 @@ export function AppHeader({
                 onClick: save,
                 text: `保存${isSaved ? '済' : ''}`,
                 icon: <AiOutlineDownload />,
+                disableIfNotFileContent: true,
               },
               {
                 title: 'フラッシュカードをスタート',
                 onClick: () => setIsShowFlashCards(true),
                 text: 'フラッシュカード',
                 icon: <PiCards />,
+                disableIfNotFileContent: true,
               },
               {
                 title: '設定',
@@ -60,7 +67,7 @@ export function AppHeader({
               },
               {
                 title: 'ヘルプ',
-                onClick: () => window.open('./help', '_blank'),
+                onClick: () => setIsShowHelpPage(true),
                 text: 'ヘルプ',
                 icon: <BiQuestionMark />,
               },
@@ -69,8 +76,9 @@ export function AppHeader({
             <button
               title={item.title}
               onClick={item?.onClick}
-              className="p-4 rounded hover:bg-main-hover flex items-center"
+              className="p-4 rounded hover:bg-main-hover flex items-center disabled:text-gray-600 disabled:cursor-not-allowed"
               key={index}
+              disabled={item.disableIfNotFileContent && !fileContent}
             >
               {item.icon}
               <span className="md:block hidden px-2">{item.text}</span>
@@ -87,4 +95,5 @@ interface buttonType {
   onClick: () => void;
   text: string;
   icon: React.ReactNode;
+  disableIfNotFileContent?: boolean;
 }

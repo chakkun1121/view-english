@@ -6,7 +6,6 @@ import { FiLogIn } from 'react-icons/fi';
 
 export function HeaderUserMenu() {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  console.log(user?.user);
   return (
     <div className="flex flex-none items-center gap-2 p-4">
       {user ? (
