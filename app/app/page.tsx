@@ -28,10 +28,12 @@ export default function app() {
   const settings = useRecoilValue(settingsAtom);
   useLeavePageConfirmation(shouldSave);
   useEffect(() => {
-    if (settings.isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    if (typeof document !== undefined) {
+      if (settings.isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, [settings.isDarkMode]);
   useEffect(() => {

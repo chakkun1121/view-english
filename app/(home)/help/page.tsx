@@ -1,6 +1,5 @@
-import path from 'path';
 import Link from 'next/link';
-import { promises as fsPromises } from 'fs';
+import { getAllHelpPagePaths, getHelpPageMeta } from './lib';
 export default async function Help({ pagePath = 'help' }) {
   const paths: string[] = await getAllHelpPagePaths();
   return (
@@ -29,18 +28,4 @@ export default async function Help({ pagePath = 'help' }) {
       </section>
     </>
   );
-}
-export async function getHelpPageMeta(
-  title: string
-): Promise<{ title?: string; description?: string }> {
-  const { metadata }: { metadata: { title?: string; description?: string } } = await import(
-    `./(pages)/${title}/page.mdx`
-  );
-  return metadata;
-}
-export async function getAllHelpPagePaths(): Promise<string[]> {
-  return await fsPromises
-    .readdir(path.join(process.cwd(), 'app/(home)/help/(pages)'), { withFileTypes: true })
-    .then((paths) => paths.filter((path) => path.isDirectory()))
-    .then((paths) => paths.map((path) => path.name));
 }

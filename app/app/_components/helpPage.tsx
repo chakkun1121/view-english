@@ -1,5 +1,6 @@
 'use client';
 import WinBox from '../../../winbox';
+import { themeColor } from '../../meta';
 
 export function HelpPage({
   setIsShowHelpPage,
@@ -18,7 +19,7 @@ export function HelpPage({
       width={Math.min(document.body.clientWidth, 360)}
       height={document.body.clientHeight - 70}
       url="embeddedHelpPage"
-      themeColor="#7aa1d6"
+      themeColor={themeColor}
       noMax={true}
       onClose={() => setIsShowHelpPage(false)}
     />
