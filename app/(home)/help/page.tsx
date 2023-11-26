@@ -1,14 +1,15 @@
 import Link from 'next/link';
-import { getAllHelpPagePaths, getHelpPageMeta } from './lib';
+import { getAllHelpPath } from './lib/getAllHelpPath';
+import { getHelpData } from './lib/getHelpData';
 export default async function Help({ pagePath = 'help' }) {
-  const paths: string[] = await getAllHelpPagePaths();
+  const paths: string[] = await getAllHelpPath();
   return (
     <>
       <section>
         <h1>ヘルプ記事一覧</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paths.map(async (path) => {
-            const metadata = await getHelpPageMeta(path);
+            const metadata = await getHelpData(path);
             return (
               <Link
                 key={path}

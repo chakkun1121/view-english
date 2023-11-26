@@ -1,16 +1,16 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { getArticleData } from '../lib/getArticleData';
-import { getAllArticleData } from '../lib/getAllArticleData';
+import { getHelpData } from '../lib/getHelpData';
 import { Article, WithContext } from 'schema-dts';
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { getAllHelpPath } from '../lib/getAllHelpPath';
 
-export default async function PostPage(props: { params: { title: string } }) {
+export default async function HelpPage({ params: { path } }) {
   const basePath = (publicRuntimeConfig && publicRuntimeConfig.basePath) || '';
   try {
-    const data = await getArticleData(props.params.title);
+    const data = await getHelpData(path);
     // mdのheader部分を除去したファイルを準備する
     const renderFile: string = data.file.replace(/^---[\s\S]*?---/, '');
     const jsonLd: WithContext<Article> = {
@@ -18,7 +18,6 @@ export default async function PostPage(props: { params: { title: string } }) {
       '@type': 'Article',
       headline: data.title,
       description: data.description,
-      datePublished: data.date,
       image: data.image || basePath + '/img/no-image.webp',
       author: {
         '@type': 'Person',
@@ -41,11 +40,7 @@ export default async function PostPage(props: { params: { title: string } }) {
               const { src, ...rest } = p;
               return (
                 <img
-                  src={
-                    src.startsWith('http')
-                      ? src
-                      : './posts/' + props.params.title + src.replace(/^.\//g, '/')
-                  }
+                  src={src.startsWith('http') ? src : './help/' + path + src.replace(/^.\//g, '/')}
                   {...rest}
                 />
               );
@@ -67,19 +62,20 @@ export default async function PostPage(props: { params: { title: string } }) {
       </>
     );
   } catch (e) {
+    console.error(e);
     notFound();
   }
 }
-export async function generateStaticParams() {
-  const recentArticles = await getAllArticleData();
-  return recentArticles.map((article) => ({
-    title: article.link.replace(/\//g, ''),
+export async function generateStaticParams(): Promise<{ path: string }[]> {
+  const recentArticles = await getAllHelpPath();
+  return recentArticles.map((path) => ({
+    path: path.replace(/\//g, ''),
   }));
 }
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params: { path } }) {
   try {
-    const data = await getArticleData(params.title);
-    const currentSiteUrl = `/${params.title}`;
+    const data = await getHelpData(path);
+    const currentSiteUrl = `/help/${path}`;
     return {
       title: data.title,
       description: data.description,
