@@ -6,6 +6,7 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllHelpPath } from '../lib/getAllHelpPath';
+import { siteURL } from '../../../meta';
 
 export default async function HelpPage({ params: { path } }) {
   const basePath = (publicRuntimeConfig && publicRuntimeConfig.basePath) || '';
@@ -40,7 +41,11 @@ export default async function HelpPage({ params: { path } }) {
               const { src, ...rest } = p;
               return (
                 <img
-                  src={src.startsWith('http') ? src : './help/' + path + src.replace(/^.\//g, '/')}
+                  src={
+                    src.startsWith('http')
+                      ? src
+                      : new URL(src, `${siteURL}/help/${path}/`).toString()
+                  }
                   {...rest}
                 />
               );
